@@ -1,4 +1,6 @@
-const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
+// const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
+const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt')
+// const { Strategy: JwtStrategy,  } = require('passport-local')
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
