@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { mongoURI: db } = require('../config/keys.js');
-const User = require('../../models/User.js');
-const Tweet = require('../models/Tweet');
+const User = require('../models/User.js');
+const Tweet = require('../models/Tweet.js');
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
@@ -13,9 +13,9 @@ const users = [];
 
 users.push(
   new User ({
-    username: 'demo-user',
-    email: 'demo-user@appacademy.io',
-    hashedPassword: bcrypt.hashSync('starwars', 10)
+    username: 'demo',
+    email: 'demo@user.io',
+    hashedPassword: bcrypt.hashSync('password', 10)
   })
 )
 

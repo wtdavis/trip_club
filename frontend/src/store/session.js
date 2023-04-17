@@ -54,6 +54,8 @@ export const getCurrentUser = () => async dispatch => {
   return dispatch(receiveCurrentUser(user));
 };
 
+
+
 const nullErrors = null;
 
 export const sessionErrorsReducer = (state = nullErrors, action) => {

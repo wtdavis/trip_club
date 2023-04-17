@@ -1,27 +1,30 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearTweetErrors, fetchTweets } from '../../store/tweets';
-import TweetBox from './TweetBox';
+import { clearTripErrors, fetchTrips } from '../../store/trips';
 
-function Tweets () {
+
+const Trips = () => {
   const dispatch = useDispatch();
-  const tweets = useSelector(state => Object.values(state.tweets.all));
+  const currentUser = useSelector(state => state.session.user);
+  const tripsSelected = useSelector(state => Object.values(state.trips.user));
   
   useEffect(() => {
-    dispatch(fetchTweets());
-    return () => dispatch(clearTweetErrors());
+    dispatch(fetchTrips());
+    return () => dispatch(clearTripErrors());
   }, [dispatch])
 
-  if (tweets.length === 0) return <div>There are no Tweets</div>;
-  
-  return (
-    <>
-      <h2>All Tweets</h2>
-      {tweets.map(tweet => (
-        <TweetBox key={tweet._id} tweet={tweet} />
-      ))}
-    </>
-  );
+  if (tripsSelected.length === 0) {
+    return <div>There are no trips</div>;
+  } else {
+    return (
+      <>
+        <h2>All Trips</h2>
+        {tripsSelected.map(trip => (
+          <TripBox key={trip._id} trip={trip} />
+        ))}
+      </>
+    );
+  };
 }
 
-export default Tweets;
+export default Trips;

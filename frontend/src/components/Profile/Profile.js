@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserTweets, clearTweetErrors } from '../../store/tweets';
 import TweetBox from '../Tweets/TweetBox';
+// import Trips from '../Trips/Trips';
 
 function Profile () {
   const dispatch = useDispatch();
