@@ -38,6 +38,7 @@ function App() {
         <ProtectedRoute exact path="/tweets/new" component={TweetCompose} />
         {/* <ProtectedRoute exact path="/trips/new" component={TripForm} /> */}
         {/* <ProtectedRoute exact path="/trips/show" component={TripShow} /> */}
+        {/* <Route exact path={'/trips/show'}><TripShow /></Route>  */}
       </Switch>
     </>
   );
