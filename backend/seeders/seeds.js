@@ -1,21 +1,23 @@
 const mongoose = require("mongoose");
 const { mongoURI: db } = require('../config/keys.js');
-const User = require('../../models/User.js');
+const User = require('../models/User.js');
 const Tweet = require('../models/Tweet.js');
+const Trip = require('../models/Trip.js')
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
 const NUM_SEED_USERS = 10;
 const NUM_SEED_TWEETS = 30;
+const NUM_SEED_TRIPS = 6;
 
 // Create users
 const users = [];
 
 users.push(
   new User ({
-    username: 'demo-user',
-    email: 'demo-user@appacademy.io',
-    hashedPassword: bcrypt.hashSync('starwars', 10)
+    username: 'demo',
+    email: 'demo@user.io',
+    hashedPassword: bcrypt.hashSync('password', 10)
   })
 )
 
@@ -42,6 +44,24 @@ for (let i = 0; i < NUM_SEED_TWEETS; i++) {
     })
   )
 }
+
+const trips = [];
+
+for (let i = 0; i < NUM_SEED_TRIPS; i++) {
+  let start = faker.date.future()
+  trips.push(
+    new Trip ({
+      author_id: users[Math.floor(Math.random() * NUM_SEED_TRIPS)]._id,
+      title: faker.hacker.phrase(),
+      description: faker.hacker.phrase(),
+      cost: Math.floor(Math.random * 100),
+      startDate: start,
+      endDate: faker.date.future(start)
+    })
+  )
+}
+
+
     
 // Connect to database
 mongoose

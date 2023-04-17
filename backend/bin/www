@@ -51,7 +51,7 @@ const insertSeeds = () => {
                 .then(() => User.insertMany(users))
                 .then(() => Trip.insertMany(trips))
                 .then(() => {
-                  dbLogger('Done!')
+                  dbLogger('Hello from correcct www!')
                   mongoose.disconnect();
                 })
                 .catch(err => {
