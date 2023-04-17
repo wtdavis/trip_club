@@ -2,11 +2,13 @@ const mongoose = require("mongoose");
 const { mongoURI: db } = require('../config/keys.js');
 const User = require('../models/User.js');
 const Tweet = require('../models/Tweet.js');
+const Trip = require('../models/Trip.js')
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
 const NUM_SEED_USERS = 10;
 const NUM_SEED_TWEETS = 30;
+const NUM_SEED_TRIPS = 7;
 
 // Create users
 const users = [];
@@ -42,6 +44,22 @@ for (let i = 0; i < NUM_SEED_TWEETS; i++) {
     })
   )
 }
+
+const trips = [];
+
+for (let i = 0; i < NUM_SEED_TRIPS; i++) {
+  const start = faker.date.future();
+  trips.push(
+    new Trip ({
+      title: faker.hacker.phrase(),
+      author: users[Math.floor(Math.random() * NUM_SEED_TRIPS)]._id,
+      description: faker.hacker.phrase(),
+      startDate: start,
+      endDate: faker.date.future(start) 
+    })
+  )
+}
+
     
 // Connect to database
 mongoose
@@ -57,12 +75,14 @@ mongoose
 
 // Reset and seed db
 const insertSeeds = () => {
-  console.log("Resetting db and seeding users and tweets...");
+  console.log("Resetting db and seeding users, tweets, and trips...");
 
   User.collection.drop()
                  .then(() => Tweet.collection.drop())
+                 .then(() => Trip.collection.drop())
                  .then(() => User.insertMany(users))
                  .then(() => Tweet.insertMany(tweets))
+                 .then(() => Trip.insertMany(trips))
                  .then(() => {
                    console.log("Done!");
                    mongoose.disconnect();
