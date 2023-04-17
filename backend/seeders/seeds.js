@@ -54,14 +54,13 @@ for (let i = 0; i < NUM_SEED_TRIPS; i++) {
       author_id: users[Math.floor(Math.random() * NUM_SEED_TRIPS)]._id,
       title: faker.hacker.phrase(),
       description: faker.hacker.phrase(),
-      cost: Math.floor(Math.random * 100),
+      cost: Math.floor(Math.random() * 100),
       startDate: start,
-      endDate: faker.date.future(start)
+      endDate: start
+      // faker.date.future(start)
     })
   )
 }
-
-
     
 // Connect to database
 mongoose
@@ -77,11 +76,22 @@ mongoose
 
 // Reset and seed db
 const insertSeeds = () => {
-  console.log("Resetting db and seeding users and tweets...");
+  console.log("Resetting db and seeding users and trips...");
 
+  // if (!User.collection) {
+  //   User.insertOne(users)
+  // }
+  // if (!Tweet.collection) {
+  //   Tweet.insertOne(tweets)
+  // }
+  // if (!Trip.collection) {
+  //   Trip.insertOne(trips)
+  // }
   User.collection.drop()
                  .then(() => Tweet.collection.drop())
+                 .then(() => Trip.collection.drop())
                  .then(() => User.insertMany(users))
+                 .then(() => Trip.insertMany(trips))
                  .then(() => Tweet.insertMany(tweets))
                  .then(() => {
                    console.log("Done!");
