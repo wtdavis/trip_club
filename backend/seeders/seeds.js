@@ -21,6 +21,19 @@ users.push(
   })
 )
 
+const user1 = new User ({
+  username: 'peter',
+  email: 'peter@user.io',
+  hashedPassword: bcrypt.hashSync('password', 10)
+});
+
+const user2 = new User ({
+  username: 'olga',
+  email: 'olga@user.io',
+  hashedPassword: bcrypt.hashSync('password', 10)
+});
+
+
 for (let i = 1; i < NUM_SEED_USERS; i++) {
   const firstName = faker.name.firstName();
   const lastName = faker.name.lastName();
@@ -59,6 +72,28 @@ for (let i = 0; i < NUM_SEED_TRIPS; i++) {
     })
   )
 }
+
+trips.push(
+  new Trip ({
+    title: "Colorado",
+    author: users[0]._id,
+    description: "Let's go when we go let's go when we go!",
+    startDate: "03/03/2023",
+    endDate: "03/03/2023" 
+  })
+);
+
+trips.push(
+  new Trip ({
+    title: "Bosnia",
+    author: users[0]._id,
+    description: "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY",
+    startDate: "05/05/2023",
+    endDate: "05/05/2023" 
+  })
+)
+
+
 
     
 // Connect to database
