@@ -2,9 +2,9 @@ const { check } = require('express-validator');
 const handleValidationErrors = require('./handleValidationErrors')
 
 const validateTripInput = [
-    check('author')
-    .exists({ checkFalsy: true})
-    .withMessage('Trip must have an author'),
+    // check('author')
+    // .exists({ checkFalsy: true})
+    // .withMessage('Trip must have an author'),
 
     check('title')
     .exists({ checkFalsy: true })

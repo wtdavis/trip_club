@@ -35,16 +35,19 @@ router.get('/:id', async (req, res, next) => {
 })
 
 router.post('/', requireUser, validateTripInput, async (req, res, next) => {
+    // debugger
+    console.log(req.user._id)
     try {
         const newTrip = new Trip({
-            author: req.user._id,
+            author: req.user,
             title: req.body.title,
             description: req.body.description,
             startDate: req.body.startDate,
             endDate: req.body.endDate,
             collaborators: req.body.collaborators
         });
-        let trip = newTrip.save()
+        let trip = await newTrip.save()
+        // debugger
         trip = await trip.populate('author', '_id username');
         return res.json(trip)
     }
