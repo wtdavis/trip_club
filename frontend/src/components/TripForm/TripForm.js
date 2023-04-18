@@ -12,7 +12,9 @@ function TripForm () {
     const author = currentUser.id
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+        const formData = {
+            
+        }
     }
 return(
     <div className="tripformdiv">
