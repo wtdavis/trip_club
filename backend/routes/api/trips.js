@@ -11,8 +11,8 @@ const validateTripInput = require('../../validation/trips')
 router.get('/', async (req, res) => {
     try {
         const trips = await Trip.find()
-                                //.populate('author','_id username')
-                                //.sort({ createdAt: -1 });
+                                .populate('author','_id username')
+                                .sort({ createdAt: -1 });
         return res.json(trips);
     }
     catch(err) {
