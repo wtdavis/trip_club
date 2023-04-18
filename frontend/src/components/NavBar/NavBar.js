@@ -15,11 +15,13 @@ function NavBar () {
   const getLinks = () => {
     if (loggedIn) {
       return (
+
         <div className="navlinkdiv" >
           {/* <Link className="navlink"  to={'/tweets'}>All Tweets</Link> */}
           <Link className="navlink"  to={'/profile'}>Profile</Link>
           {/* <Link  className="navlink" to={'/tweets/new'}>Write a Tweet</Link> */}
           <Link className="navlink"  to={'/trips/new'}> Create a Trip</Link>
+
           {/* <Link to={'/login'}> <button onClick={logoutUser}>Logout</button></Link> */}
           <div id="logoutbutton" className="navlink" onClick={logoutUser}>Logout</div>
         </div>
