@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const userSchema = require('./User')
 
 const tripSchema = new Schema({
     author: {
@@ -24,10 +25,7 @@ const tripSchema = new Schema({
     // events: {
     //     type: Schema.Types.
     // },
-    collaborators: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
+    collaborators: [userSchema],
     //images: {
         //type: Schema.Types.
     // }
