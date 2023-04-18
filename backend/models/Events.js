@@ -26,6 +26,9 @@ const eventSchema = new Schema({
     },
     description: {
         type: String,
+    },
+    title: {
+        type: String,
         required: true
     }
 }, {timestamps: true}
