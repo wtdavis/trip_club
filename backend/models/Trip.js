@@ -22,9 +22,7 @@ const tripSchema = new Schema({
         type: String,
         required: true
     },
-    // events: {
-    //     type: Schema.Types.
-    // },
+    events: [Schema.Types.ObjectId],
     collaborators: [Schema.Types.ObjectId],
     //images: {
         //type: Schema.Types.

@@ -3,6 +3,7 @@ const { mongoURI: db } = require('../config/keys.js');
 const User = require('../models/User.js');
 const Tweet = require('../models/Tweet.js');
 const Trip = require('../models/Trip.js')
+const Event = require('../models/Event.js')
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
@@ -95,9 +96,76 @@ trips.push(
   })
 )
 
+const events = []
+
+events.push(
+  new Event({
+    author: users[0]._id,
+    trip: trips[0]._id,
+    lat: 1.0547383,
+    lng: -0.547283,
+    startTime: new Date(2023, 12, 1, 6, 30),
+    endTime: new Date(2023, 12, 3, 8, 0),
+    description: 'Lay down at the center of the Earth',
+    title: 'Go to center of the Earth'
+  })
+)
+events.push(
+  new Event({
+    author: users[0]._id,
+    trip: trips[0]._id,
+    lat: 41.0547383,
+    lng: 40.547283,
+    startTime: new Date(2023, 8, 2, 5, 15),
+    endTime: new Date(2023, 8, 3, 7, 45),
+    description: 'Jump off a cliff!',
+    title: 'Paragliding'
+  })
+)
+events.push(
+  new Event({
+    author: users[0]._id,
+    trip: trips[1]._id,
+    lat: 101.0547383,
+    lng: -60.547283,
+    startTime: new Date(2023, 9, 3, 6, 30),
+    endTime: new Date(2023, 9, 7, 2, 10),
+    description: 'Feed the ducks',
+    title: 'Duck Pond'
+  })
+)
+events.push(
+  new Event({
+    author: users[0]._id,
+    trip: trips[1]._id,
+    lat: 132.0547383,
+    lng: -120.547283,
+    startTime: new Date(2024, 4, 15, 6, 30),
+    endTime: new Date(2024, 4, 23, 8, 0),
+    description: 'Going to have a ton of fun on Spring Break',
+    title: 'Spring Break'
+  })
+)
+events.push(
+  new Event({
+    author: users[0]._id,
+    trip: trips[1]._id,
+    lat: -130.0547383,
+    lng: 70.547283,
+    startTime: new Date(2024, 12, 31, 9, 0),
+    endTime: new Date(2025, 1, 1, 2, 0),
+    description: "Party like it's 1999",
+    title: 'New Years Eve'
+  })
+)
+
+trips[0].events.push(events[0])
+trips[0].events.push(events[1])
+trips[1].events.push(events[2])
+trips[1].events.push(events[3])
+trips[1].events.push(events[4])
 
 
-    
 // Connect to database
 mongoose
   .connect(db, { useNewUrlParser: true })
@@ -112,13 +180,15 @@ mongoose
 
 // Reset and seed db
 const insertSeeds = () => {
-  console.log("Resetting db and seeding users, tweets, and trips...");
+  console.log("Resetting db and seeding users, tweets, trips, and events...");
 
   User.collection.drop()
                  .then(() => Tweet.collection.drop())
                  .then(() => Trip.collection.drop())
+                 .then(() => Event.collection.drop())
                  .then(() => User.insertMany(users))
                  .then(() => Tweet.insertMany(tweets))
+                 .then(() => Event.insertMany(events))
                  .then(() => Trip.insertMany(trips))
                  .then(() => {
                    console.log("Done!");
