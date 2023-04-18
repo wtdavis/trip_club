@@ -8,4 +8,22 @@ const { requireUser } = require('../../config/passport');
 const validateEventInput = require('../../validation/events')
 
 
-// create, index(in trip populate), update, delete
+router.get('/:id', async (req, res, next) => {
+    try {
+        const event = await Event.findById(req.params.id)
+                                    
+        return res.json(event)
+    }
+    catch(err) {
+        const error = new Error('Event not found');
+        error.statusCode = 404;
+        error.errors = { message: 'No event found with that id' };
+        return next(error);
+    }
+})
+
+
+
+// show, create, index(in trip populate), update, delete
+
+module.exports = router

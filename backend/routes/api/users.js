@@ -30,6 +30,17 @@ router.get('/current', restoreUser, (req, res) => {
   });
 })
 
+router.get('/', async (req, res) => {
+  try {
+    const users = await User.find()
+                            .sort({username: -1})
+    return res.json(users);
+  }
+  catch(err) {
+    return res.json([])
+  }
+})
+
 // Attach validateRegisterInput as a middleware before the route handler
 router.post('/register', validateRegisterInput, async (req, res, next) => {
   // Check to make sure nobody has already registered with a duplicate email or
