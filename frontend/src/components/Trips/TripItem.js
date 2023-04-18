@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import * as  tripActions from '../../store/trips';
+import GoogleMap from '../GoogleMap'
 import './Trips.css';
 
 const TripItem = ({trip}) => {
@@ -13,8 +14,12 @@ const TripItem = ({trip}) => {
     dispatch(tripActions.fetchTrip(trip._id))
   }
 
+  let lng = -73.99376925185645;
+  let lat = 40.73631643149453;
+
+
   if (trip) return (
-    <Link className="trip-link" to={`trips/show`}>
+    
       <div className="trip-item-container" > 
         <div className='left-column'>
           {/* <div className='trip-div' onClick={handleCLick}>
@@ -84,22 +89,27 @@ const TripItem = ({trip}) => {
             </nav>        
           </div>
         </div>
+
         <div className='right-column' onClick={handleCLick}>
-          <div className='description-container'>
-              <h2 className='trip-title'>{trip.title.length < 25 ? trip.title : `${trip.title.slice(0,25)}...`}</h2>
-              {/* <p className='description-p'>{trip.description.length < 35 ? trip.description : `${trip.description.slice(0,35)}...`}</p> */}
-              {/* <p className='price-p'><span className='price-span'>{`$${<p>{trip.cost}</p>}`}</span> night</p>            */}
-          </div>
-          <ul>
-            <li>Event 1</li>
-            <li>Event 2</li>
-            <li>Event 3</li>
-            <li>Event 4</li>
-          </ul>
+          <Link className="trip-link" to={`trips/show`}>
+            <div className='description-container'>
+                <h2 className='trip-title'>{trip.title.length < 25 ? trip.title : `${trip.title.slice(0,25)}...`}</h2>
+                {/* <p className='description-p'>{trip.description.length < 35 ? trip.description : `${trip.description.slice(0,35)}...`}</p> */}
+                {/* <p className='price-p'><span className='price-span'>{`$${<p>{trip.cost}</p>}`}</span> night</p>            */}
+            </div>
+            <ul>
+              <li>Event 1</li>
+              <li>Event 2</li>
+              <li>Event 3</li>
+              <li>Event 4</li>
+            </ul>
+            <div className='google-map-container'>
+              <GoogleMap lng={lng} lat={lat}/>
+            </div>
+          </Link>
         </div>        
         
       </div>
-    </Link>
   )
 };
 
