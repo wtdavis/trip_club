@@ -68,7 +68,8 @@ for (let i = 0; i < NUM_SEED_TRIPS; i++) {
       author: users[Math.floor(Math.random() * NUM_SEED_TRIPS)]._id,
       description: faker.hacker.phrase(),
       startDate: start,
-      endDate: faker.date.soon(10, start) 
+      endDate: faker.date.soon(10, start),
+      collaborators: users.map((user) => user._id)
     })
   )
 }
