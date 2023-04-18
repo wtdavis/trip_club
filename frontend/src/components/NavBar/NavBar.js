@@ -15,30 +15,34 @@ function NavBar () {
   const getLinks = () => {
     if (loggedIn) {
       return (
-        <div className="links-nav">
-          <Link to={'/tweets'}>All Tweets</Link>
-          <Link to={'/profile'}>Profile</Link>
-          <Link to={'/tweets/new'}>Write a Tweet</Link>
-          <Link to={'/trips/new'}> Create a Trip</Link>
+
+        <div className="navlinkdiv" >
+          {/* <Link className="navlink"  to={'/tweets'}>All Tweets</Link> */}
+          <Link className="navlink"  to={'/profile'}>Profile</Link>
+          {/* <Link  className="navlink" to={'/tweets/new'}>Write a Tweet</Link> */}
+          <Link className="navlink"  to={'/trips/new'}> Create a Trip</Link>
+
           {/* <Link to={'/login'}> <button onClick={logoutUser}>Logout</button></Link> */}
-          <button onClick={logoutUser}>Logout</button>
+          <div id="logoutbutton" className="navlink" onClick={logoutUser}>Logout</div>
         </div>
       );
     } else {
       return (
-        <div className="links-auth">
-          <Link to={'/signup'}>Signup</Link>
-          <Link to={'/login'}>Login</Link>
+        <div className="navlinkdiv" >
+          <Link className="navlink"  to={'/signup'}>Signup</Link>
+          <Link className="navlink"  to={'/login'}>Login</Link>
         </div>
       );
     }
   }
 
   return (
-    <>
-      <h1>NAVIGATION</h1>
+    <div className="NavBar">
+      <div className="navtitlediv">
+      <h1 classname="navtitle">The Trip Club</h1>
+      </div>
       { getLinks() }
-    </>
+    </div>
   );
 }
 

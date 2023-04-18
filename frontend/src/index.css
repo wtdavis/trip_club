@@ -1,3 +1,10 @@
+/* RESET */
+h1, h2, h3, h4, h5, h6, p, div, span, nav, link, body {
+  margin: 0px;
+  padding: 0px;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
 /* TODO Add site wide styles */
 form > .errors {
   color: red;
@@ -6,3 +13,4 @@ form > .errors {
   display: flex;
   align-items: center;
 }
+
