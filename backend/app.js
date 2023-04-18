@@ -8,6 +8,7 @@ const csurf = require('csurf');
 require('./models/User');
 require('./models/Tweet');
 require('./models/Trip')
+require('./models/Event')
 /* ------------------------------------------------------------- */
 require('./config/passport'); // Need to import to configure passport module
 const passport = require('passport');
