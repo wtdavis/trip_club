@@ -23,7 +23,7 @@ return(
             <input type="text" className="tripforminput" value={title} onChange={e => setTitle(e.target.value)}/>
             
             <p className="tripformsubheader">Enter a description:</p>
-            <input type="textarea" className="tripforminput" value={description} onChange={e => setDescription(e.target.value)}/>
+            <textarea className="tripforminput" value={description} onChange={e => setDescription(e.target.value)}/>
             
             <p className="tripformsubheader">Trip Start Date:</p>
             <input type="date" className="tripforminput" value={startDate} onChange={e => setStartDate(e.target.value)}/>
