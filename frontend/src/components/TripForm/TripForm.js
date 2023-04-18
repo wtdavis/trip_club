@@ -1,20 +1,26 @@
-import { useState } from "react"
-import { useSelector } from "react-redux"
+import { useDebugValue, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { composeTrips } from "../../store/trips"
 
 
 function TripForm () {
-    
+    const dispatch = useDispatch()    
     const currentUser = useSelector(state => state.session.user)
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
+
     const author = currentUser.id
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = {
-            
+            title: title,
+            description: description,
+            startDate: startDate,
+            endDate: endDate
         }
+        dispatch(composeTrips(formData))
     }
 return(
     <div className="tripformdiv">
