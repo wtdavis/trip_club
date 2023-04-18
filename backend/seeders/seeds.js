@@ -159,6 +159,12 @@ events.push(
   })
 )
 
+trips[0].events.push(events[0])
+trips[0].events.push(events[1])
+trips[1].events.push(events[2])
+trips[1].events.push(events[3])
+trips[1].events.push(events[4])
+
 
 // Connect to database
 mongoose
@@ -182,8 +188,8 @@ const insertSeeds = () => {
                  .then(() => Event.collection.drop())
                  .then(() => User.insertMany(users))
                  .then(() => Tweet.insertMany(tweets))
-                 .then(() => Trip.insertMany(trips))
                  .then(() => Event.insertMany(events))
+                 .then(() => Trip.insertMany(trips))
                  .then(() => {
                    console.log("Done!");
                    mongoose.disconnect();

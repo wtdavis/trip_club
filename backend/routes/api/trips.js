@@ -13,6 +13,7 @@ router.get('/', async (req, res) => {
     try {
         const trips = await Trip.find()
                                 .populate('author','_id username')
+                                // .populate('events', '_id')
                                 .sort({ createdAt: -1 });
         return res.json(trips);
     }
