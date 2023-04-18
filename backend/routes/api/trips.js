@@ -8,6 +8,7 @@ const { requireUser } = require('../../config/passport');
 const validateTweetInput = require('../../validation/tweets')
 const validateTripInput = require('../../validation/trips')
 
+// Trip Index
 router.get('/', async (req, res) => {
     try {
         const trips = await Trip.find()
@@ -20,6 +21,7 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Trip Show
 router.get('/:id', async (req, res, next) => {
     try {
         const trip = await Trip.findById(req.params.id)
@@ -34,6 +36,7 @@ router.get('/:id', async (req, res, next) => {
     }
 })
 
+// Trip Create
 router.post('/', requireUser, validateTripInput, async (req, res, next) => {
     // debugger
     console.log(req.user._id)
@@ -104,6 +107,7 @@ router.get('/user/:userId', async (req, res, next) => {
     }
 })
 
+// Trip Patch (not tested)
 router.patch('/:id', requireUser, async (req, res, next) => {
     let trip;
     let tripData = {...trip, 
@@ -128,32 +132,31 @@ router.patch('/:id', requireUser, async (req, res, next) => {
     if (req.user._id != trip.author._id) {
         throw new Error('Current user is not the trip author')
     } else {
-            updatedTrip = await Trip.updateOne({trip}, { tripData })
+            updatedTrip = await Trip.updateOne({...trip}, {...tripData })
             return res.json(updatedTrip)       
     }
 })
 
-//   router.get('/:tripId', async (req, res, next) => {
-//     let trip;
-//     try {
-//       trip = await Trip.findById(req.params.tripId);
-//     } catch(err) {
-//       const error = new Error('User not found');
-//       error.statusCode = 404;
-//       error.errors = { message: "No trip found with that id" };
-//       return next(error);
-//     }
-//     try {
-//       const trips = await Trip.find({ author: user._id })
-//                                 .sort({ createdAt: -1 })
-//                                 // .populate("author", "_id username", "title", "description", "startDate", "endDate");
-//                                 .populate("author", "_id username");
-//       return res.json(trips);
-//     }
-//     catch(err) {
-//       return res.json([]);
-//     }
-//   })
+// Trip Delete (not tested)
+router.delete('/:id', requireUser, async (req, res, next) => {
+    let trip;
+    
+    try {
+        trip = await Trip.findById(req.params.id)
+                                        .populate('title');
+    }
+    catch(err) {
+        const error = new Error('Trip not found');
+        error.statusCode = 404;
+        error.errors = { message: "No trip found with that id" };
+        return next(error);    
+    }
 
+    if (req.user._id != trip.author._id) {
+        throw new Error('Current user is not the trip author')
+    } else {
+        await Trip.deleteOne({_id: req.params.id})   
+    }
+})
 
 module.exports = router
