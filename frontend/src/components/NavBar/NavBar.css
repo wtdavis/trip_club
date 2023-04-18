@@ -1,14 +1,31 @@
+:root {
+    --dark-red: #4d1207;
+    --darker-blue: #12033c;  
+    --neutral: rgb(172, 172, 172);
+    --light-blue: #60a0ba;
+    --dark-blue: rgb(4, 38, 82);
+  }
+  
+  /* .container {
+    color: var(--grey-color);
+  } */
+
 .NavBar {
+    position: sticky;
+    top: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    background-color: var(--dark-blue);
+    z-index: 100;
+    width: 100%
 }
 
 .NavBar button {
     height: 20px;
 }
 
-.links-nav {
+/* .links-nav {
     width: 400px;
     display: flex;
     justify-content: space-between;
@@ -18,4 +35,45 @@
     width: 100px;
     display: flex;
     justify-content: space-between;
+} */
+.navlinkdiv {
+    margin: 0px;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.navtitlediv {
+    position: relative;
+    float: left;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    color: var(--light-blue);
+    min-width: 250px
+    /* justify-content: center; */
+    /* align-items: center; */
+
+}
+
+
+.navlink {
+    text-decoration: none;
+    color: var(--light-blue);
+    padding: 12px 15px 5px;
+    margin-bottom: 5px;
+    font-size: smaller;
+    align-items: center;
+
+}
+
+.navlink:hover {
+   border-bottom: 2px solid white
+
+}
+
+#logoutbutton:hover {
+    background-color: var(--dark-red);
+    /* border: 1px solid grey; */
+    /* padding: 5px */
 }
