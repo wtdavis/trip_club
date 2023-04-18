@@ -19,6 +19,7 @@ function NavBar () {
           <Link to={'/tweets'}>All Tweets</Link>
           <Link to={'/profile'}>Profile</Link>
           <Link to={'/tweets/new'}>Write a Tweet</Link>
+          <Link to={'/trips/new'}> Create a Trip</Link>
           <button onClick={logoutUser}>Logout</button>
         </div>
       );
