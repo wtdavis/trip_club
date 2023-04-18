@@ -20,16 +20,17 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', requireUser, validateTripInput, async (req, res, next) => {
     try {
         const newTrip = new Trip({
             author: req.user._id,
+            title: req.body.title,
             description: req.body.description,
             startDate: req.body.startDate,
             endDate: req.body.endDate
         });
         let trip = newTrip.save()
-        trip = await trip.populate('author', '_id username');
+        // trip = await trip.populate('author', '_id username');
         return res.json(trip)
     }
     catch(err){
