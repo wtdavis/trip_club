@@ -5,6 +5,8 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import configureStore from './store/store';
+import {Wrapper} from '@googlemaps/react-wrapper';
+
 
 let store = configureStore({});
 
@@ -20,7 +22,10 @@ function Root() {
 
 ReactDOM.render(
   <React.StrictMode>
-    <Root />
-  </React.StrictMode>,
+      <Wrapper apiKey={process.env.REACT_APP_MAPS_API_KEY}>
+        <Root />
+      </Wrapper>
+    </React.StrictMode>,
   document.getElementById('root')
 );
+
