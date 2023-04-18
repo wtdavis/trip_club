@@ -20,17 +20,35 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/:id', async (req, res, next) => {
+    try {
+        const trip = await Trip.findById(req.params.id)
+                                        .populate('author', '_id username');
+        return res.json(trip)
+    }
+    catch(err) {
+        const error = new Error('Trip not found');
+        error.statusCode = 404;
+        error.errors = { message: "No trip found with that id" };
+        return next(error);    
+    }
+})
+
 router.post('/', requireUser, validateTripInput, async (req, res, next) => {
+    // debugger
+    console.log(req.user._id)
     try {
         const newTrip = new Trip({
-            author: req.user._id,
+            author: req.user,
             title: req.body.title,
             description: req.body.description,
             startDate: req.body.startDate,
-            endDate: req.body.endDate
+            endDate: req.body.endDate,
+            collaborators: req.body.collaborators
         });
-        let trip = newTrip.save()
-        // trip = await trip.populate('author', '_id username');
+        let trip = await newTrip.save()
+        // debugger
+        trip = await trip.populate('author', '_id username');
         return res.json(trip)
     }
     catch(err){
@@ -38,7 +56,10 @@ router.post('/', requireUser, validateTripInput, async (req, res, next) => {
     }
 })
 
-router.get('/user/:userId', async (req, res, next) => {
+
+//Author Show
+router.get('/author/:userId', async (req, res, next) => {
+
     let user;
     try {
       user = await User.findById(req.params.userId);
@@ -59,6 +80,58 @@ router.get('/user/:userId', async (req, res, next) => {
       return res.json([]);
     }
   })
+
+
+// Collaborator Show
+router.get('/user/:userId', async (req, res, next) => {
+    let user;
+    try {
+        user = await User.findById(req.params.userId);
+    } catch(err) {
+        const error = new Error('User not found');
+        error.statusCode = 404;
+        error.errors = { message: 'No user found with that id' };
+        return next(error);
+    }
+    try {
+        const trips = await Trip.find({collaborators: user._id})
+                                .sort({ startDate: -1 })
+                                .populate('title');
+        return res.json(trips);
+    }
+    catch(err) {
+        return res.json([]);
+    }
+})
+
+router.patch('/:id', requireUser, async (req, res, next) => {
+    let trip;
+    let tripData = {...trip, 
+                    title: req.body.title, 
+                    description: req.body.description,
+                    startDate: req.body.startDate,
+                    endDate: req.body.endDate,
+                    collaborators: req.body.collaborators
+                }
+
+    try {
+        trip = await Trip.findById(req.params.id)
+                                        .populate('title');
+    }
+    catch(err) {
+        const error = new Error('Trip not found');
+        error.statusCode = 404;
+        error.errors = { message: "No trip found with that id" };
+        return next(error);    
+    }
+
+    if (req.user._id != trip.author._id) {
+        throw new Error('Current user is not the trip author')
+    } else {
+            updatedTrip = await Trip.updateOne({trip}, { tripData })
+            return res.json(updatedTrip)       
+    }
+})
 
 //   router.get('/:tripId', async (req, res, next) => {
 //     let trip;
@@ -81,5 +154,6 @@ router.get('/user/:userId', async (req, res, next) => {
 //       return res.json([]);
 //     }
 //   })
+
 
 module.exports = router
