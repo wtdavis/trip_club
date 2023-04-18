@@ -33,7 +33,7 @@ export const clearTripErrors = errors => ({
 });
 
 export const getTrips = state => {
-  return state?.trips ? Object.values(state.trips) : [];
+  return state?.trips.all ? Object.values(state.trips.all) : [];
 };
 
 // export const getUserTrips = userId => state => {

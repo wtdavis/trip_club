@@ -20,6 +20,7 @@ function NavBar () {
           <Link to={'/profile'}>Profile</Link>
           <Link to={'/tweets/new'}>Write a Tweet</Link>
           <Link to={'/trips/new'}> Create a Trip</Link>
+          {/* <Link to={'/login'}> <button onClick={logoutUser}>Logout</button></Link> */}
           <button onClick={logoutUser}>Logout</button>
         </div>
       );
