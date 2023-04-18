@@ -38,14 +38,36 @@ router.post('/', requireUser, validateTripInput, async (req, res, next) => {
     }
 })
 
-// router.get('/user/:userId', async (req, res, next) => {
-//     let user;
+router.get('/user/:userId', async (req, res, next) => {
+    let user;
+    try {
+      user = await User.findById(req.params.userId);
+    } catch(err) {
+      const error = new Error('User not found');
+      error.statusCode = 404;
+      error.errors = { message: "No user found with that id" };
+      return next(error);
+    }
+    try {
+      const trips = await Trip.find({ author: user._id })
+                                .sort({ createdAt: -1 })
+                                // .populate("author", "_id username", "title", "description", "startDate", "endDate");
+                                .populate("author", "_id username");
+      return res.json(trips);
+    }
+    catch(err) {
+      return res.json([]);
+    }
+  })
+
+//   router.get('/:tripId', async (req, res, next) => {
+//     let trip;
 //     try {
-//       user = await User.findById(req.params.userId);
+//       trip = await Trip.findById(req.params.tripId);
 //     } catch(err) {
 //       const error = new Error('User not found');
 //       error.statusCode = 404;
-//       error.errors = { message: "No user found with that id" };
+//       error.errors = { message: "No trip found with that id" };
 //       return next(error);
 //     }
 //     try {
