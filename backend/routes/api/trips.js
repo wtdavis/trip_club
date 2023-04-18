@@ -11,8 +11,8 @@ const validateTripInput = require('../../validation/trips')
 router.get('/', async (req, res) => {
     try {
         const trips = await Trip.find()
-                                //.populate('author','_id username')
-                                //.sort({ createdAt: -1 });
+                                .populate('author','_id username')
+                                .sort({ createdAt: -1 });
         return res.json(trips);
     }
     catch(err) {
@@ -56,8 +56,10 @@ router.post('/', requireUser, validateTripInput, async (req, res, next) => {
     }
 })
 
+
 //Author Show
 router.get('/author/:userId', async (req, res, next) => {
+
     let user;
     try {
       user = await User.findById(req.params.userId);
@@ -78,6 +80,7 @@ router.get('/author/:userId', async (req, res, next) => {
       return res.json([]);
     }
   })
+
 
 // Collaborator Show
 router.get('/user/:userId', async (req, res, next) => {
@@ -129,5 +132,28 @@ router.patch('/:id', requireUser, async (req, res, next) => {
             return res.json(updatedTrip)       
     }
 })
+
+//   router.get('/:tripId', async (req, res, next) => {
+//     let trip;
+//     try {
+//       trip = await Trip.findById(req.params.tripId);
+//     } catch(err) {
+//       const error = new Error('User not found');
+//       error.statusCode = 404;
+//       error.errors = { message: "No trip found with that id" };
+//       return next(error);
+//     }
+//     try {
+//       const trips = await Trip.find({ author: user._id })
+//                                 .sort({ createdAt: -1 })
+//                                 // .populate("author", "_id username", "title", "description", "startDate", "endDate");
+//                                 .populate("author", "_id username");
+//       return res.json(trips);
+//     }
+//     catch(err) {
+//       return res.json([]);
+//     }
+//   })
+
 
 module.exports = router
