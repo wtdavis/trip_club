@@ -23,10 +23,10 @@ const TripItem = ({trip}) => {
     e.preventDefault();
     setIsShow(true)
   }
-
+  
   if (isShow)
   {return(
-    <Redirect to={{pathname:`trips/show`, jabroni: true, trip: trip}}/>)
+    <Redirect to={{pathname:`trips/show`, trip: trip}}/>)
     }
   
   if (trip) return (
