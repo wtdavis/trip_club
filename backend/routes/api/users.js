@@ -30,6 +30,8 @@ router.get('/current', restoreUser, (req, res) => {
   });
 })
 
+
+// users Index
 router.get('/', async (req, res) => {
   try {
     const users = await User.find()
@@ -38,6 +40,20 @@ router.get('/', async (req, res) => {
   }
   catch(err) {
     return res.json([])
+  }
+})
+
+// users Show
+router.get('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id)
+    return res.json(user)
+  }
+  catch(err) {
+    const error = new Error('User not found')
+    error.statusCode = 404;
+    error.errors = { message: "No user found with that id" };
+    return next(error);
   }
 })
 

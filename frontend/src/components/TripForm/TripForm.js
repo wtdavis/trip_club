@@ -10,6 +10,7 @@ function TripForm () {
     const [description, setDescription] = useState("")
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
+    const [submit, setSubmit] = useState("Create Trip")
 
     const author = currentUser.id
     const handleSubmit = (e) => {
@@ -22,6 +23,14 @@ function TripForm () {
         }
         dispatch(composeTrips(formData))
     }
+
+    // const changeSubmit = () => {
+    //     if (submit = "Create Trip")
+    //     {setSubmit("Update Trip")
+    //     }else{
+    //     setSubmit("Create Trip")}
+    // }
+
 return(
     <div className="tripformdiv">
         <h3 className="tripformheader">Create a New Trip!</h3>
@@ -39,7 +48,7 @@ return(
             <p className="tripformsubheader">Trip End Date:</p>
             <input type="date" className="tripforminput" value={endDate} onChange={e => setEndDate(e.target.value)}/>
             <br/>
-            <input type="submit" className="tripformsubmit"  value="Create!" onClick={e=> handleSubmit(e)}/>
+            <input type="submit" className="tripformsubmit"  value={submit} onClick={e=> handleSubmit(e)}/>
         </form>
     </div>
 )

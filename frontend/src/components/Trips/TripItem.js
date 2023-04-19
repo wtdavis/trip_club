@@ -1,13 +1,15 @@
-import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import * as  tripActions from '../../store/trips';
 import GoogleMap from '../GoogleMap'
 import './Trips.css';
 
 const TripItem = ({trip}) => {
+
   const dispatch = useDispatch();
   // const history = useHistory;
+  const [isShow, setIsShow] = useState(false)
 
   const handleCLick = (e) => {
     e.preventDefault();
@@ -17,7 +19,16 @@ const TripItem = ({trip}) => {
   let lng = -73.99376925185645;
   let lat = 40.73631643149453;
 
+  const handleShow = (e) => {
+    e.preventDefault();
+    setIsShow(true)
+  }
 
+  if (isShow)
+  {return(
+    <Redirect to={{pathname:`trips/show`, jabroni: true, trip: trip}}/>)
+    }
+  
   if (trip) return (
     
       <div className="trip-item-container" > 
@@ -91,7 +102,7 @@ const TripItem = ({trip}) => {
         </div>
 
         <div className='right-column' onClick={handleCLick}>
-          <Link className="trip-link" to={`trips/show`}>
+          <div className="trip-link" onClick={handleShow} >
             <div className='description-container'>
                 <h2 className='trip-title'>{trip.title.length < 25 ? trip.title : `${trip.title.slice(0,25)}...`}</h2>
                 {/* <p className='description-p'>{trip.description.length < 35 ? trip.description : `${trip.description.slice(0,35)}...`}</p> */}
@@ -107,6 +118,9 @@ const TripItem = ({trip}) => {
             <div className='google-map-container'>
               <GoogleMap lng={lng} lat={lat}/>
             </div>
+
+          </div>
+
         </div>        
         
       </div>
