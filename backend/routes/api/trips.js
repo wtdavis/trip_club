@@ -190,7 +190,7 @@ router.post('/:tripId/events/', requireUser, validateEventInput, async (req, res
     }
 })
 
-// All events for a trip. Not really needed
+// All events for a trip. Not really needed, works
 router.get('/:tripId/events', async (req, res) => {
     try {
         let events;
