@@ -85,6 +85,8 @@ export const fetchUserTrips = id => async dispatch => {
   }
 };
 
+
+
 export const composeTrips = data => async dispatch => {
   try {
     const res = await jwtFetch('/api/trips/', {
