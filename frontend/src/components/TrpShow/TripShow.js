@@ -7,9 +7,10 @@ import * as  tripActions from '../../store/trips';
 import * as  sessionActions from '../../store/session';
 import GoogleMap from '../GoogleMap'
 import './TripShow.css';
+import * as eventActions from "../../store/events"
 
 const TripShow = (props) => {
-  
+  const dispatch = useDispatch()
   const [trip, setTrip] = useState(false)
 
   useEffect(()=>{
@@ -21,16 +22,18 @@ const TripShow = (props) => {
   } else {
     const storageTrip = localStorage.getItem("currentTrip");
     setTrip(JSON.parse(storageTrip))
-  }
+  };
+  // fetchEvents()
+}, [dispatch, trip])
 
-  }, [])
-  
-  // debugger
- 
+// const fetchEvents = () => {
+//   // debugger
+// dispatch(eventActions.fetchTripEvents(trip._id))
+// }
 
+const events = useSelector(state => state.events)
 
   const { tripId } = useParams();
-  const dispatch = useDispatch();
   const history = useHistory;
   // const trip = useSelector(state => Object.values(state.trips.all[tripId]))
 
@@ -42,10 +45,10 @@ const TripShow = (props) => {
 
   const currentUser = useSelector(state => state.session.user);
 
-  const handleCLick = (e) => {
-    e.preventDefault();
-    dispatch(tripActions.fetchTrip(trip._id))
-  }
+  // const handleCLick = (e) => {
+  //   e.preventDefault();
+  //   dispatch(tripActions.fetchTrip(trip._id))
+  // }
 
   let lng = -73.99376925185645;
   let lat = 40.73631643149453;
