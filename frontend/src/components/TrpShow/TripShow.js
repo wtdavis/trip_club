@@ -21,7 +21,6 @@ const TripShow = (props) => {
   } else {
     const storageTrip = localStorage.getItem("currentTrip");
     setTrip(JSON.parse(storageTrip))
-
   }
 
   }, [])
@@ -54,11 +53,13 @@ const TripShow = (props) => {
 
   if (trip) return (
     
-      <>
+      <div className='tripshowtrippanel'>
+        <div className='tripshowinfo'>
         <p>{trip.title}</p>
-        <p>{trip.descrption}</p>
+        <p>{trip.description}</p>
         <p>{trip.collabarotors}</p>
-      </>
+        </div>
+      </div>
   )
 
   // return(<p > trip {title} description {description}</p>)
