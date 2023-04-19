@@ -1,16 +1,25 @@
-import { useDebugValue, useState } from "react"
+import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { composeTrips } from "../../store/trips"
+import { useParams } from "react-router-dom"
+import * as userActions from '../../store/users'
 
 
 function TripForm () {
-    const dispatch = useDispatch()    
+    const dispatch = useDispatch()
+    const { tripId } = useParams()
     const currentUser = useSelector(state => state.session.user)
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
     const [submit, setSubmit] = useState("Create Trip")
+    const [collaborators, setCollaborators] = useState([])
+    const allUsers = Object.values(useSelector(state => state.users))
+
+    useEffect(() => {
+        dispatch(userActions.fetchAllUsers())
+    }, [])
 
     const author = currentUser.id
     const handleSubmit = (e) => {
@@ -19,11 +28,28 @@ function TripForm () {
             title: title,
             description: description,
             startDate: startDate,
-            endDate: endDate
+            endDate: endDate,
+            collaborators: collaborators
         }
         dispatch(composeTrips(formData))
     }
 
+    const userDropDown = () => {
+        return(
+            <select multiple>
+                {allUsers.map(user => {
+                return (
+                    <option value={collaborators} 
+                            onChange={e => setCollaborators(e.target.value)}
+                    >
+                        {user.username}
+                    </option>
+                    )
+                    })
+                }
+            </select>
+        )
+    }
     // const changeSubmit = () => {
     //     if (submit = "Create Trip")
     //     {setSubmit("Update Trip")
@@ -47,6 +73,8 @@ return(
             
             <p className="tripformsubheader">Trip End Date:</p>
             <input type="date" className="tripforminput" value={endDate} onChange={e => setEndDate(e.target.value)}/>
+            <p className="tripformsubheader">Collaborators (hold ctrl or cmd to select multiple):</p>
+            {userDropDown()}
             <br/>
             <input type="submit" className="tripformsubmit"  value={submit} onClick={e=> handleSubmit(e)}/>
         </form>
