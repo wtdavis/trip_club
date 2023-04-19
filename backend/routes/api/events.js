@@ -7,11 +7,11 @@ const Event = mongoose.model('Event');
 const { requireUser } = require('../../config/passport');
 const validateEventInput = require('../../validation/events')
 
-
+// show event, works
 router.get('/:id', async (req, res, next) => {
     try {
         const event = await Event.findById(req.params.id)
-                                    
+                                    .populate("author", "_id username")
         return res.json(event)
     }
     catch(err) {
@@ -22,6 +22,7 @@ router.get('/:id', async (req, res, next) => {
     }
 })
 
+// patch event, works
 router.patch('/:id/edit', requireUser, async (req, res, next) => {
     let event;
     let eventData = {...event,
@@ -30,6 +31,7 @@ router.patch('/:id/edit', requireUser, async (req, res, next) => {
                     startTime: req.body.startTime,
                     endTime: req.body.endTime,
                     description: req.body.description,
+                    attendees: req.body.attendees,
                     title: req.body.title}
     try {
         event = await Event.findById(req.params.id)
@@ -41,7 +43,7 @@ router.patch('/:id/edit', requireUser, async (req, res, next) => {
         error.errors = { message: "No event found with that id" };
         return next(error);
     }
-    if (req.user._id != event.author._id) {
+    if (!req.user._id === event.author._id) {
         throw new Error("Current user is not event's author")
     } else {
         updatedEvent = await Event.updateOne({...event}, {...eventData})
@@ -49,6 +51,7 @@ router.patch('/:id/edit', requireUser, async (req, res, next) => {
     }
 })
 
+// delete event
 router.delete('/:id', requireUser, async (req, res, next) => {
     let event;
     
@@ -63,10 +66,11 @@ router.delete('/:id', requireUser, async (req, res, next) => {
         return next(error);    
     }
 
-    if (req.user._id != event.author._id) {
+    if (!req.user._id === event.author._id) {
         throw new Error('Current user is not the event author')
     } else {
         await Event.deleteOne({_id: req.params.id})   
+        return res.json('Event deleted')
     }
 })
 
