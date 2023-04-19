@@ -10,7 +10,7 @@ const validateTweetInput = require('../../validation/tweets')
 const validateTripInput = require('../../validation/trips')
 const validateEventInput = require('../../validation/events')
 
-// Trip Index
+// Trip Index, works
 router.get('/', async (req, res) => {
     try {
         const trips = await Trip.find()
@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Trip Show
+// Trip Show, works
 router.get('/:id', async (req, res, next) => {
     try {
         const trip = await Trip.findById(req.params.id)
@@ -40,7 +40,7 @@ router.get('/:id', async (req, res, next) => {
     }
 })
 
-// Trip Create
+// Trip Create, works
 router.post('/', requireUser, validateTripInput, async (req, res, next) => {
     // debugger
     // console.log(req.user._id)
@@ -49,8 +49,9 @@ router.post('/', requireUser, validateTripInput, async (req, res, next) => {
             author: req.user,
             title: req.body.title,
             description: req.body.description,
-            startDate: Date(req.body.startDate),
-            endDate: Date(req.body.endDate),
+            startDate: new Date(req.body.startDate),
+            endDate: new Date(req.body.endDate),
+            events: req.body.events,
             collaborators: req.body.collaborators
         });
         let trip = await newTrip.save()
@@ -64,7 +65,7 @@ router.post('/', requireUser, validateTripInput, async (req, res, next) => {
 })
 
 
-//Author Show
+//Author Show, works
 router.get('/author/:userId', async (req, res, next) => {
 
     let user;
@@ -89,7 +90,7 @@ router.get('/author/:userId', async (req, res, next) => {
   })
 
 
-// Collaborator Show
+// Collaborator Show, works
 router.get('/user/:userId', async (req, res, next) => {
     let user;
     try {
@@ -111,14 +112,16 @@ router.get('/user/:userId', async (req, res, next) => {
     }
 })
 
-// Trip Patch (not tested)
+// Trip Patch works
 router.patch('/:id', requireUser, async (req, res, next) => {
     let trip;
+    // console.log(Date(req.body.startDate))
     let tripData = {...trip, 
                     title: req.body.title, 
                     description: req.body.description,
-                    startDate: Date(req.body.startDate),
-                    endDate: Date(req.body.endDate),
+                    startDate: new Date(req.body.startDate),
+                    endDate: new Date(req.body.endDate),
+                    events: req.body.events,
                     collaborators: req.body.collaborators
                 }
 
@@ -142,13 +145,13 @@ router.patch('/:id', requireUser, async (req, res, next) => {
     }
 })
 
-// Trip Delete (not tested)
+// Trip Delete, works
 router.delete('/:id', requireUser, async (req, res, next) => {
     let trip;
     
     try {
         trip = await Trip.findById(req.params.id)
-                                        .populate('title');
+                                        // .populate('title');
     }
     catch(err) {
         const error = new Error('Trip not found');
@@ -156,11 +159,11 @@ router.delete('/:id', requireUser, async (req, res, next) => {
         error.errors = { message: "No trip found with that id" };
         return next(error);    
     }
-
-    if (req.user._id != trip.author._id) {
+    if (!req.user._id === trip.author._id) {
         throw new Error('Current user is not the trip author')
     } else {
         await Trip.deleteOne({_id: req.params.id})   
+        return res.json('Trip deleted')
     }
 })
 
