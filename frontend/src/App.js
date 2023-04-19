@@ -13,10 +13,10 @@ import SignupForm from './components/SessionForms/SignupForm';
 // import Profile from './components/Profile/Profile';
 import ProfilePage from './components/Profile/ProfilePage';
 // import TweetCompose from './components/Tweets/TweetCompose';
-// import TripShow from './components/TripShow/TripShow';
 import TripForm from './components/TripForm/TripForm';
 
 import { getCurrentUser } from './store/session';
+import TripShow from './components/TrpShow/TripShow';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -36,6 +36,9 @@ function App() {
         {/* <ProtectedRoute exact path="/tweets" component={Tweets} /> */}
         {/* <ProtectedRoute exact path="/trips" component={Trips} /> */}
         {/* <ProtectedRoute exact path="/profile" component={Profile} /> */}
+        <ProtectedRoute exact path="/trips/show" component={(props) => <TripShow {...props}/>}/> 
+        {/* <ProtectedRoute exact path="/trips/show" component={TripShow}/>  */}
+
         <ProtectedRoute exact path="/profile"><ProfilePage /></ProtectedRoute>
         {/* <ProtectedRoute exact path="/tweets/new" component={TweetCompose} /> */}
         <ProtectedRoute exact path="/trips/new" component={TripForm} />

@@ -8,24 +8,45 @@ import * as  sessionActions from '../../store/session';
 import GoogleMap from '../GoogleMap'
 import './TripShow.css';
 
-const TripShow = () => {
+const TripShow = (props) => {
+  
+  const [trip, setTrip] = useState(false)
+
+  useEffect(()=>{
+    if (props?.location.trip !== undefined)
+    {
+      const storageTrip = JSON.stringify(props.location.trip);
+      setTrip(props.location.trip);
+    localStorage.setItem("currentTrip", storageTrip);
+  } else {
+    const storageTrip = localStorage.getItem("currentTrip");
+    setTrip(JSON.parse(storageTrip))
+
+  }
+
+  }, [])
+  
+  // debugger
+ 
+
+
   const { tripId } = useParams();
-  // const dispatch = useDispatch();
-  // const history = useHistory;
-  const trip = useSelector(state => Object.values(state.trips.all[tripId]))
+  const dispatch = useDispatch();
+  const history = useHistory;
+  // const trip = useSelector(state => Object.values(state.trips.all[tripId]))
 
   // const userId = listing ? listing.userId : null 
   // const user = useSelector(state => state.users ? state.users[userId] : null);
-  // const users = useSelector(state => state.users);
+  const users = useSelector(state => state.users);
   // const reviews = useSelector(state => Object.values(state.reviews));
   // const reviewsSelected = reviews.filter(review => review.listingId == listingId);
 
-  // const currentUser = useSelector(state => state.session.user);
+  const currentUser = useSelector(state => state.session.user);
 
-  // const handleCLick = (e) => {
-  //   e.preventDefault();
-  //   dispatch(tripActions.fetchTrip(trip._id))
-  // }
+  const handleCLick = (e) => {
+    e.preventDefault();
+    dispatch(tripActions.fetchTrip(trip._id))
+  }
 
   let lng = -73.99376925185645;
   let lat = 40.73631643149453;
@@ -39,6 +60,8 @@ const TripShow = () => {
         <p>{trip.collabarotors}</p>
       </>
   )
+
+  // return(<p > trip {title} description {description}</p>)
 };
 
 export default TripShow;
