@@ -69,6 +69,7 @@ const events = useSelector(state => state.events)
     let year = date.getFullYear();
     let month = date.getMonth() 
     let day = date.getDate();
+    let newDate = new Date(year, month, day)
   }
 
 
