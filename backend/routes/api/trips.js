@@ -29,7 +29,7 @@ router.get('/:id', async (req, res, next) => {
         const trip = await Trip.findById(req.params.id)
                                         .populate('author', '_id username')
 
-                                        .populate('events', 'author trip lat lng startTime endTime descriptioin title')
+                                        // this populate doesn't work --> .populate('events', 'author trip lat lng startTime endTime descriptioin title')
 
         return res.json(trip)
     }
@@ -44,7 +44,7 @@ router.get('/:id', async (req, res, next) => {
 // Trip Create
 router.post('/', requireUser, validateTripInput, async (req, res, next) => {
     // debugger
-    console.log(req.user._id)
+    // console.log(req.user._id)
     try {
         const newTrip = new Trip({
             author: req.user,
@@ -164,4 +164,28 @@ router.delete('/:id', requireUser, async (req, res, next) => {
     }
 })
 
+
+// New event for a trip
+router.post('/:tripId/events/', requireUser, validateEventInput, async (req, res, next) => {
+    try {
+        const newEvent = new Event({
+            author: req.user._id,
+            trip: req.params.tripId,
+            title: req.body.title,
+            lat: req.body.lat,
+            lng: req.body.lng,
+            startTime: req.body.startTime,
+            endTime: req.body.endTime,
+            description: req.body.description
+        })
+        let event = await newEvent.save()
+        event = await event.populate('trip', '_id title')
+        return res.json(event)
+    }
+    catch(err) {
+        next(err)
+    }
+})
+
+// 
 module.exports = router
