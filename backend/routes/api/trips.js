@@ -49,8 +49,8 @@ router.post('/', requireUser, validateTripInput, async (req, res, next) => {
             author: req.user,
             title: req.body.title,
             description: req.body.description,
-            startDate: req.body.startDate,
-            endDate: req.body.endDate,
+            startDate: Date(req.body.startDate),
+            endDate: Date(req.body.endDate),
             collaborators: req.body.collaborators
         });
         let trip = await newTrip.save()
@@ -117,8 +117,8 @@ router.patch('/:id', requireUser, async (req, res, next) => {
     let tripData = {...trip, 
                     title: req.body.title, 
                     description: req.body.description,
-                    startDate: req.body.startDate,
-                    endDate: req.body.endDate,
+                    startDate: Date(req.body.startDate),
+                    endDate: Date(req.body.endDate),
                     collaborators: req.body.collaborators
                 }
 
@@ -133,7 +133,8 @@ router.patch('/:id', requireUser, async (req, res, next) => {
         return next(error);    
     }
 
-    if (req.user._id != trip.author._id) {
+    // return res.json(trip.author._id);
+    if (!req.user._id === trip.author._id) {
         throw new Error('Current user is not the trip author')
     } else {
             updatedTrip = await Trip.updateOne({...trip}, {...tripData })
@@ -183,6 +184,19 @@ router.post('/:tripId/events/', requireUser, validateEventInput, async (req, res
     }
     catch(err) {
         next(err)
+    }
+})
+
+// All events for a trip. Not really needed
+router.get('/:tripId/events', async (req, res) => {
+    try {
+        let events;
+        events = await Event.find({trip: req.params.tripId})
+                            // .populate    
+        return res.json(events)
+    }
+    catch(err) {
+        return res.json([])
     }
 })
 

@@ -30,7 +30,8 @@ const eventSchema = new Schema({
     title: {
         type: String,
         required: true
-    }
+    },
+    attendees: [Schema.Types.ObjectId]
 }, {timestamps: true}
 )
 module.exports = mongoose.model('Event', eventSchema)
