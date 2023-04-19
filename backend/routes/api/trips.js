@@ -169,8 +169,8 @@ router.delete('/:id', requireUser, async (req, res, next) => {
 
 // New event for a trip, works but fails the commented out validations
 router.post('/:tripId/events', requireUser, validateEventInput, async (req, res, next) => {
-    console.log(req.user)
-    console.log(req.params.tripId)
+    // console.log(req.user)
+    // console.log(req.params.tripId)
     try {
         const newEvent = new Event({
             author: req.user,

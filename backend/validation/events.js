@@ -3,7 +3,7 @@ const handleValidationErrors = require('./handleValidationErrors')
 
 const validateEventInput = [
     // check('author')
-    // .isMongoId()
+    // .exists({checkFalsy: true})
     // .withMessage('Event must have an author'),
 
     // check('trip')
