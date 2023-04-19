@@ -1,0 +1,48 @@
+:root {
+  --grey-color: #9da09d;
+  --red-brand-color: #F95E5C;  
+  --font-size: 18px;
+  --brand-color: #383838; 
+}
+
+.trips-container {
+  display: flex; 
+  justify-content: center;
+  align-items: center; 
+}
+
+.trips-div {
+  display: flex;
+  align-items: center;
+  padding-top: 13px;
+  display: grid;
+  gap: 20px;
+  padding-bottom: 20px;
+  display: grid;
+  width: 50%;
+  }
+
+.trip-div {
+	min-height: 358px;
+	/* display: flex;  */
+	/* align-items: center; */
+	/* flex-direction: column; */
+	/* justify-content: flex-end; */
+  color: var(--dark-black-color);
+}
+
+@media (min-width: 0px) {
+  .trips-div {
+      grid-template-columns: 1fr;
+      justify-content: center; 
+      align-items: center;
+
+  }
+}
+
+
+
+
+
+
+
