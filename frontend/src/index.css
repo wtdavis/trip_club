@@ -14,3 +14,7 @@ form > .errors {
   align-items: center;
 }
 
+*, body {
+  font-family: 'Montserrat', sans-serif;
+}
+

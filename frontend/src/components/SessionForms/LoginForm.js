@@ -64,10 +64,10 @@ function LoginForm () {
       />
 
 
-    </form>
       <div id="demo-button-div">
         <button className="demo-button" onClick={handleDemo}>Continue with Demo User</button>
       </div>
+    </form>
 
       {/* <div id="demo-button-div">
         <button className="demo-button" >Continue with Demo User</button>
