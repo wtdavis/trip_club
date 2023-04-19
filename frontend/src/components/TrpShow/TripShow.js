@@ -23,13 +23,12 @@ const TripShow = (props) => {
     const storageTrip = localStorage.getItem("currentTrip");
     setTrip(JSON.parse(storageTrip))
   };
-  // fetchEvents()
+  fetchEvents()
 }, [dispatch, trip])
 
-// const fetchEvents = () => {
-//   // debugger
-// dispatch(eventActions.fetchTripEvents(trip._id))
-// }
+const fetchEvents = () => {
+dispatch(eventActions.fetchTripEvents(trip._id))
+}
 
 const events = useSelector(state => state.events)
 
@@ -50,17 +49,29 @@ const events = useSelector(state => state.events)
   //   dispatch(tripActions.fetchTrip(trip._id))
   // }
 
+  const eventseventsevents = ["bingo", "bango", "stupid", "eventnames!"]
   let lng = -73.99376925185645;
   let lat = 40.73631643149453;
 
+  const startDate = new Date(trip.startDate).toDateString()
+  const endDate = new Date(trip.endDate).toDateString()
 
-  if (trip) return (
-    
-      <div className='tripshowtrippanel'>
-        <div className='tripshowinfo'>
-        <p>{trip.title}</p>
-        <p>{trip.description}</p>
-        <p>{trip.collabarotors}</p>
+   return (
+      <div className='tripshowpage'>
+
+        <div className='tripshowtrippanel'>
+          <div className='tripshowinfo'>
+            
+          <p className='tripshowinfoitem' id='tripshowtriptitle'>{trip.title}</p>
+          <p className='tripshowinfoitem' id='tripshowtripdescription'>{trip.description}</p>
+          <p className='tripshowinfoitem' id='tripshowtripcollaborators'>{trip.collaborators}</p>
+          <p className='tripshowinfoitem' id='tripshowstartdate'>Begins {startDate}</p>
+          <p className='tripshowinfoitem' id='tripshowenddate'>Ends {endDate}</p>
+
+          </div>
+        </div>
+        <div className='tripshoweventslist'>
+        {Object.values(events).map(event => <p>{event}</p>)}
         </div>
       </div>
   )

@@ -1,0 +1,34 @@
+.tripshowpage {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 98%;
+    height: 540px;
+    border: 2px solid white;
+}
+
+.tripshowtrippanel {
+    display: flex;
+    justify-content: center;
+    width: 45%;
+    height: 500px;
+    border: 2px solid grey;   
+}
+
+.tripshoweventslist {
+    display: block;
+    overflow-y: scroll;
+    width: 45%;
+    height: 500px;
+    border: 2px solid grey;   
+}
+
+.tripshowinfoitem {
+    text-align: center;
+}
+
+#tripshowtriptitle {
+    font-size: 40px;
+    font-weight: bold;
+}

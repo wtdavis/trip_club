@@ -10,8 +10,8 @@ const rootReducer = combineReducers({
   tweets,
   trips,
   session,
-  errors
-  // events
+  errors,
+  events
 });
 
 let enhancer;
