@@ -8,6 +8,7 @@ const Event = mongoose.model('Event')
 const { requireUser } = require('../../config/passport');
 const validateTweetInput = require('../../validation/tweets')
 const validateTripInput = require('../../validation/trips')
+const validateEventInput = require('../../validation/events')
 
 // Trip Index
 router.get('/', async (req, res) => {
