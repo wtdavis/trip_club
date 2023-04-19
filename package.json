@@ -25,5 +25,8 @@
   "homepage": "https://github.com/wtdavis/trip_club#readme",
   "engines": {
     "node": "16.x"
+  },
+  "dependencies": {
+    "react-icons": "^4.8.0"
   }
 }
