@@ -49,19 +49,39 @@ const events = useSelector(state => state.events)
   //   dispatch(tripActions.fetchTrip(trip._id))
   // }
 
-  const eventseventsevents = ["bingo", "bango", "stupid", "eventnames!"]
+  // const eventseventsevents = ["bingo", "bango", "stupid", "eventnames!"]
   let lng = -73.99376925185645;
   let lat = 40.73631643149453;
 
   const startDate = new Date(trip.startDate).toDateString()
   const endDate = new Date(trip.endDate).toDateString()
 
+  const eventsList = []
+
+  const dateDiff = (first, second) => {
+    let mili = (1000 * 60 * 60 * 24)
+    let diff = second - first
+    diff = (diff/mili)
+    return diff
+  }
+
+  const increDate = (date) => {
+    let year = date.getFullYear();
+    let month = date.getMonth() 
+    let day = date.getDate();
+  }
+
+
+  for (let i = 0; i < dateDiff(startDate, endDate); i++) {
+
+  }
+
    return (
       <div className='tripshowpage'>
 
         <div className='tripshowtrippanel'>
           <div className='tripshowinfo'>
-            
+
           <p className='tripshowinfoitem' id='tripshowtriptitle'>{trip.title}</p>
           <p className='tripshowinfoitem' id='tripshowtripdescription'>{trip.description}</p>
           <p className='tripshowinfoitem' id='tripshowtripcollaborators'>{trip.collaborators}</p>
