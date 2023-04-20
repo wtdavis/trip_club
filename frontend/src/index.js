@@ -1,22 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import configureStore from './store/store';
+import { ModalProvider } from './context/Modal';
 import {Wrapper} from '@googlemaps/react-wrapper';
+import './reset.css';
+import './index.css';
+import App from './App';
+import configureStore from './store/store';
+
 
 
 let store = configureStore({});
 
+
+
+
+
+
+
+
 function Root() {
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
+    <ModalProvider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </ModalProvider>
   );
 }
 
