@@ -16,6 +16,7 @@ const TripShow = (props) => {
 
   const dispatch = useDispatch()
   const currentTrip = useSelector(state => state.trips.current)
+  const tripEvents = useSelector(state => state.events)
   const [trip, setTrip] = useState(false)
   const [dateList, setDateList] = useState([])
   const [eventList, setEventList] = useState([])
@@ -33,6 +34,7 @@ const TripShow = (props) => {
       const storageTrip = JSON.parse(localStorage.getItem("currentTrip"));
       dispatch(tripActions.setCurrentTrip(storageTrip))
       setTrip(storageTrip)
+      fetchEvents(storageTrip._id)
     }; 
    
   }, [dispatch]
@@ -53,7 +55,7 @@ const fetchEvents = () => {
   dispatch(eventActions.fetchTripEvents(trip._id))}
 }
   
-  const events = useSelector(state => state.events)
+  // const events = useSelector(state => state.events)
 
   
 
@@ -107,16 +109,17 @@ const fetchEvents = () => {
   const compareDates = (a, b) => {
     let ele1;
     let ele2;
+    // debugger
 
-    if (a instanceof Date) {
+    if (a instanceof Object) {
+      ele1 = a.startTime
+    } else {
       ele1 = a
-    } else {
-      ele1 = a.startDate
     }
-    if (b instanceof Date) {
-      ele2 = b
+    if (b instanceof Object) {
+      ele2 = b.startTime
     } else {
-      ele2 = b.startDate
+      ele2 = b
     }
     // debugger
     return ele1 - ele2
@@ -126,8 +129,8 @@ const fetchEvents = () => {
     return a - b
   }
 
-  let arr = [new Date(2023, 12, 12), new Date(2023, 5, 1 ), new Date(2023, 1, 1)]
-  console.log(arr.sort(compareDates))
+  // let arr = [new Date(2023, 10, 12).toISOString(), new Date(2023, 2, 1).toISOString(), new Date(2023, 9, 1).toISOString(), new Date(2023, 1, 23).toISOString()]
+  // console.log(arr.sort(compareDates))
   // debugger
   useEffect( () => {
     dates(startDate, endDate)
@@ -135,11 +138,10 @@ const fetchEvents = () => {
 }, [dispatch])
   // let datess = dateList.map(date => new Date(date).toDateString())
 
-  // const eventsList = () => {
-  //   let list = dateList.map(date =>  {date})
-  //   return list
-  // }
-
+  console.log(tripEvents)
+// debugger
+  let events = Object.values(tripEvents).filter(ele => ele.trip === currentTrip._id)
+// debugger
    if (dateList.length) return (
       <div className='tripshowpage'>
 
@@ -154,7 +156,7 @@ const fetchEvents = () => {
           </div>
         </div>
           <div className='tripshoweventslist'>
-            {dateList.map((ele) => (<EventItem event={ele}/>))}
+            {events.map((ele) => (<EventItem event={ele}/>))}
             {/* {dateList[0].toDateString()} */}
             {/* <p> test</p> */}
           </div>

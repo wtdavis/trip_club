@@ -43,7 +43,7 @@ return(
             
             <p className="eventformsubheader">Event End Date:</p>
             <input type="date" className="eventforminput" value={endDate} onChange={e => setEndDate(e.target.value)}/>
-            <Calendar/>
+            {/* <Calendar/> */}
             <br/>
             <input type="submit" className="eventformsubmit"  value="Create!" onClick={e=> handleSubmit(e)}/>
         </form>

@@ -22,6 +22,7 @@ router.get('/:id', async (req, res, next) => {
     }
 })
 
+
 // patch event, works
 router.patch('/:id/edit', requireUser, async (req, res, next) => {
     let event;
@@ -74,6 +75,20 @@ router.delete('/:id', requireUser, async (req, res, next) => {
     }
 })
 
+
+router.get('/', async (req, res, next) => {
+    try {
+        const events = await Event.find()
+                                .populate('title')
+        return await res.json(events)
+    }
+    catch(err) {
+        const error = new Error('Events not found');
+        error.statusCode = 404;
+        error.errors = { message: 'No events found' };
+        return next(error);
+    }
+})
 
 // show, create, index(in trip populate), update, delete
 

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Link, Redirect, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as  tripActions from '../../store/trips';
 import GoogleMap from '../GoogleMap'
 import './Trips.css';
-
 const TripItem = ({trip}) => {
 
   const dispatch = useDispatch();
@@ -16,6 +15,8 @@ const TripItem = ({trip}) => {
     dispatch(tripActions.fetchTrip(trip._id))
   }
 
+  const events = useSelector(state => state.events)
+  const tripEvents = Object.values(events).filter(e=> e.trip === trip._id)
   let lng = -73.99376925185645;
   let lat = 40.73631643149453;
 
@@ -109,10 +110,7 @@ const TripItem = ({trip}) => {
                 {/* <p className='price-p'><span className='price-span'>{`$${<p>{trip.cost}</p>}`}</span> night</p>            */}
             </div>
             <ul>
-              <li>Event 1</li>
-              <li>Event 2</li>
-              <li>Event 3</li>
-              <li>Event 4</li>
+              {tripEvents.map(event => (<li>{event.title}</li>))}
             </ul>
           
 

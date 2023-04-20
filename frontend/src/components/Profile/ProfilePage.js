@@ -4,6 +4,7 @@ import * as  tripActions from '../../store/trips';
 import TripItem from '../Trips/TripItem';
 import TripTest from '../Trips/TripTest';
 import './ProfilePage.css'
+import { clearEvents, fetchEvents } from '../../store/events';
 
 
 
@@ -13,10 +14,12 @@ const ProfilePage = () => {
   // const trips = useSelector(tripActions.getTrips); 
   const trips = useSelector(state => Object.values(state.trips.all))
   const tripsUser = trips.filter(trip => trip.author._id == currentUser._id);
-
+  const events = useSelector(state => state.events)
   
   useEffect(() => {
+    dispatch(clearEvents())
     dispatch(tripActions.fetchTrips());
+    dispatch(fetchEvents())
   }, [dispatch]);
   
   useEffect(() => {
