@@ -152,7 +152,8 @@ ul li button:hover {
   text-align: right;
 }
 
-.addfriends_button:hover{
+.addfriends_button:hover,
+.tripcreate_button:hover {
   transform: scale(1.005); 
   z-index: 2;
   box-shadow: 1px 1px 2px 1px #8a8888;
