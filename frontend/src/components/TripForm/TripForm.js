@@ -20,6 +20,10 @@ function TripForm () {
     const [redirect, setRedirect] = useState(false)
     const [newTrip, setNewTrip] = useState();
     const [currCollaborator, setCurrCollaborator] = useState('')
+    const [collabErrors, setCollabErrors] = useState(false)
+    // const [collaboratorIds, setCollaboratorIds] = useState([])
+
+    let collaboratorIds = []
 
     useEffect(() => {
         dispatch(userActions.fetchAllUsers())
@@ -61,10 +65,22 @@ function TripForm () {
     const CollaboratorsList = <ul>{collaborators.map(collaborator => <li><span>{collaborator}</span><button onClick={e=>handleRemove(e)}>Remove</button></li>)}</ul>
 
     const handleAdd = (e) => { 
+        debugger
             e.preventDefault();
-            // debugger
-            setCollaborators(collaborators.concat([currCollaborator]))
-            setCurrCollaborator('')
+            setCollabErrors(true)
+            allUsers.forEach((user) => {
+                debugger
+                if (currCollaborator === user.email) {
+                    debugger
+                    collaboratorIds = (collaboratorIds.concat(user._id))
+                    debugger
+                    setCollaborators(collaborators.concat(user.email))
+                    setCollabErrors(false)
+                    setCurrCollaborator('')
+                    debugger
+                }
+            })
+            debugger
     }
 
     const handleRemove = (e) => {
@@ -97,8 +113,9 @@ return(
                         value={currCollaborator}
                         onChange={e => setCurrCollaborator(e.target.value)}
                 />
-                <button value={currCollaborator} onClick={(e) => handleAdd(e)}>Add</button>
-            </ul>            
+                <button onClick={(e) => handleAdd(e)}>Add</button>
+            </ul>     
+            <span>{collabErrors ? 'No user found with that email' : null}</span>       
             <p className="tripformsubheader">Collaborators: {CollaboratorsList}</p>
             <br/>
             <input type="submit" className="tripformsubmit"  value={submit} onClick={e=> handleSubmit(e)}/>
