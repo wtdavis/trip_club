@@ -9,17 +9,21 @@ import GoogleMap from '../GoogleMap'
 import './TripShow.css';
 import * as eventActions from "../../store/events"
 import EventForm from '../EventForm/EventForm';
+import EventItem from '../EventItem/EventItem';
 
 const TripShow = (props) => {
+
+
   const dispatch = useDispatch()
-  
   const currentTrip = useSelector(state => state.trips.current)
   const [trip, setTrip] = useState(false)
   const [dateList, setDateList] = useState([])
+  const [eventList, setEventList] = useState([])
   // const [thing, setThing] = useState()  
 
-  useEffect(()=>{
 
+
+  useEffect(()=>{
     if (props?.location.trip !== undefined) {
       const storageTrip = JSON.stringify(props.location.trip);
       setTrip(props.location.trip);
@@ -34,10 +38,13 @@ const TripShow = (props) => {
   }, [dispatch]
   )
   
+
+
   useEffect(()=> {
     if (trip || props?.location.trip){
     fetchEvents()}
   }, [])
+
 
 const fetchEvents = () => {
   if (props?.location.trip !== undefined) {
@@ -45,11 +52,15 @@ const fetchEvents = () => {
   } else {
   dispatch(eventActions.fetchTripEvents(trip._id))}
 }
+  
+  const events = useSelector(state => state.events)
 
-const events = useSelector(state => state.events)
+  
 
-  const { tripId } = useParams();
-  const history = useHistory;
+
+
+  // const { tripId } = useParams();
+  // const history = useHistory;
   // const trip = useSelector(state => Object.values(state.trips.all[tripId]))
 
   // const userId = listing ? listing.userId : null 
@@ -90,10 +101,8 @@ const events = useSelector(state => state.events)
 }
 
     let list = dates()
-    console.log(list)
     if (dateList.length < list.length) {setDateList(oldlist => [...oldlist, ...list])}
-    // setDateList(list)
-    console.log(dateList)
+
 
   const compareDates = (a, b) => {
     let ele1;
@@ -109,15 +118,21 @@ const events = useSelector(state => state.events)
     } else {
       ele2 = b.startDate
     }
+    debugger
     return ele1 - ele2
   }
 
+  const compareNums = (a, b) => {
+    return a - b
+  }
+
+  let arr = [new Date(2023, 12, 12), new Date(2023, 5, 1 ), new Date(2023, 1, 1)]
+  console.log(arr.sort(compareDates))
+  // debugger
   useEffect( () => {
     dates(startDate, endDate)
 
-  // console.log(dateList) 
 }, [dispatch])
-
   // let datess = dateList.map(date => new Date(date).toDateString())
 
   // const eventsList = () => {
@@ -130,24 +145,24 @@ const events = useSelector(state => state.events)
 
         <div className='tripshowtrippanel'>
           <div className='tripshowinfo'>
-
-          <p className='tripshowinfoitem' id='tripshowtriptitle'>{trip.title}</p>
-          <p className='tripshowinfoitem' id='tripshowtripdescription'>{trip.description}</p>
-          <p className='tripshowinfoitem' id='tripshowtripcollaborators'>{trip.collaborators}</p>
-          <p className='tripshowinfoitem' id='tripshowstartdate'>Begins {startDateString}</p>
-          <p className='tripshowinfoitem' id='tripshowenddate'>Ends {endDateString}</p>
-          <EventForm trip={trip}/>
+            <p className='tripshowinfoitem' id='tripshowtriptitle'>{trip.title}</p>
+            <p className='tripshowinfoitem' id='tripshowtripdescription'>{trip.description}</p>
+            <p className='tripshowinfoitem' id='tripshowtripcollaborators'>{trip.collaborators}</p>
+            <p className='tripshowinfoitem' id='tripshowstartdate'>Begins {startDateString}</p>
+            <p className='tripshowinfoitem' id='tripshowenddate'>Ends {endDateString}</p>
+            <EventForm trip={trip}/>
           </div>
         </div>
-        <div className='tripshoweventslist'>
-        {/* {eventsList.map(ele => <p>{ele}</p>)} */}
-        {/* <p>{dateList}</p> */}
-        </div>
+          <div className='tripshoweventslist'>
+            {dateList.map((ele) => (<EventItem event={ele}/>))}
+            {/* {dateList[0].toDateString()} */}
+            {/* <p> test</p> */}
+          </div>
       </div>
   )
 
   // return(<p > trip {title} description {description}</p>)
-;
+
 
 }
 export default TripShow
