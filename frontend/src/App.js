@@ -17,6 +17,7 @@ import TripForm from './components/TripForm/TripForm';
 
 import { getCurrentUser } from './store/session';
 import TripShow from './components/TrpShow/TripShow';
+import TripEditForm from './components/TripForm/TripEditForm'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -41,6 +42,7 @@ function App() {
 
         <ProtectedRoute exact path="/profile"><ProfilePage /></ProtectedRoute>
         {/* <ProtectedRoute exact path="/tweets/new" component={TweetCompose} /> */}
+        <ProtectedRoute exact path="/trips/:tripId/edit" component={TripEditForm} />
         <ProtectedRoute exact path="/trips/new" component={TripForm} />
         {/* <ProtectedRoute exact path='/trips/show'><TripShow /></ProtectedRoute>  */}
         {/* <ProtectedRoute exact path="/trips/show" component={TripShow} /> */}
