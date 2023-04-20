@@ -32,3 +32,18 @@
     font-size: 40px;
     font-weight: bold;
 }
+
+.eventitembox:hover {
+    transform: scale(1.005);
+    background-color: blue;
+}
+
+.eventitembox {
+    border: 1px grey solid;
+    border-radius: 5px;
+    transition: 0.5s;
+}
+
+.dateseperator {
+    border-top: 1px solid darkgrey
+}
