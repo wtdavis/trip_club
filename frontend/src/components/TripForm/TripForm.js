@@ -78,9 +78,9 @@ function TripForm () {
                     setCollaborators(prevCollaborators => {
                         return prevCollaborators.filter(prevCollaborator => (prevCollaborator !== emailToRemove))
                     })
-                    debugger
+                    // debugger
                 }
-                debugger
+                // debugger
             }
         })
     }
@@ -111,7 +111,7 @@ function TripForm () {
         return (
             <ul>
                 {collaborators.map(collaborator => {
-                    debugger
+                    // debugger
                     return (
                         <li><span>{collaborator}</span><button value={collaborator} onClick={e => handleRemove(e)}>Remove</button></li>
                         )
