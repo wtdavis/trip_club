@@ -5,7 +5,6 @@ const { validationResult } = require("express-validator");
 // express-validator's documentation.)
 const handleValidationErrors = (req, res, next) => {
   const validationErrors = validationResult(req);
-  // debugger
   if (!validationErrors.isEmpty()) {
     const errorFormatter = ({ msg }) => msg;
     const errors = validationErrors.formatWith(errorFormatter).mapped();

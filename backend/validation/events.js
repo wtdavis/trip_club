@@ -10,25 +10,25 @@ const validateEventInput = [
     // .exists({ checkFalsy: true})
     // .withMessage('Event must have a trip it belongs to'),
 
-    check('lat')
-    .isFloat({min: -90, max: 90})
-    .withMessage('Latitude must be a number between -90 and 90'),
+    // check('lat')
+    // .isFloat({min: -90, max: 90})
+    // .withMessage('Latitude must be a number between -90 and 90'),
 
-    check('lng')
-    .isFloat({min: -180, max: 180})
-    .withMessage('Longitude must be a number between -180 and 180'),
+    // check('lng')
+    // .isFloat({min: -180, max: 180})
+    // .withMessage('Longitude must be a number between -180 and 180'),
 
-    check('startTime')
-    .exists({ checkFalsy: true })
-    .withMessage('Event must have a start time'),
+    // check('startTime')
+    // .exists({ checkFalsy: true })
+    // .withMessage('Event must have a start time'),
 
-    check('endTime')
-    .exists({ checkFalsy: true })
-    .withMessage('Event must have an end time'),
+    // check('endTime')
+    // .exists({ checkFalsy: true })
+    // .withMessage('Event must have an end time'),
 
-    check('title')
-    .exists({ checkFalsy: true })
-    .withMessage('Event must have a title'),
+    // check('description')
+    // .exists({ checkFalsy: true })
+    // .withMessage('Event must have a title'),
 
     handleValidationErrors
 ]

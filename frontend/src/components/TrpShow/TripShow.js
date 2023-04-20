@@ -8,26 +8,42 @@ import * as  sessionActions from '../../store/session';
 import GoogleMap from '../GoogleMap'
 import './TripShow.css';
 import * as eventActions from "../../store/events"
+import EventForm from '../EventForm/EventForm';
 
 const TripShow = (props) => {
   const dispatch = useDispatch()
+  
+  const currentTrip = useSelector(state => state.trips.current)
   const [trip, setTrip] = useState(false)
+  const [dateList, setDateList] = useState([])
+  // const [thing, setThing] = useState()  
 
   useEffect(()=>{
-    if (props?.location.trip !== undefined)
-    {
+
+    if (props?.location.trip !== undefined) {
       const storageTrip = JSON.stringify(props.location.trip);
       setTrip(props.location.trip);
-    localStorage.setItem("currentTrip", storageTrip);
-  } else {
-    const storageTrip = localStorage.getItem("currentTrip");
-    setTrip(JSON.parse(storageTrip))
-  };
-  fetchEvents()
-}, [dispatch, trip])
+      dispatch(tripActions.setCurrentTrip(props.location.trip))
+      localStorage.setItem("currentTrip", storageTrip);
+    } else {
+      const storageTrip = JSON.parse(localStorage.getItem("currentTrip"));
+      dispatch(tripActions.setCurrentTrip(storageTrip))
+      setTrip(storageTrip)
+    }; 
+   
+  }, [dispatch]
+  )
+  
+  useEffect(()=> {
+    if (trip || props?.location.trip){
+    fetchEvents()}
+  }, [])
 
 const fetchEvents = () => {
-dispatch(eventActions.fetchTripEvents(trip._id))
+  if (props?.location.trip !== undefined) {
+    dispatch(eventActions.fetchTripEvents(props.location.trip._id))
+  } else {
+  dispatch(eventActions.fetchTripEvents(trip._id))}
 }
 
 const events = useSelector(state => state.events)
@@ -49,35 +65,67 @@ const events = useSelector(state => state.events)
   //   dispatch(tripActions.fetchTrip(trip._id))
   // }
 
-  // const eventseventsevents = ["bingo", "bango", "stupid", "eventnames!"]
+  const eventseventsevents = ["bingo", "bango", "stupid", "eventnames!"]
+
   let lng = -73.99376925185645;
   let lat = 40.73631643149453;
+  const startDate = trip.startDate;
+  const endDate = trip.endDate;
 
-  const startDate = new Date(trip.startDate).toDateString()
-  const endDate = new Date(trip.endDate).toDateString()
+  const startDateString = new Date(trip.startDate).toDateString()
+  const endDateString = new Date(trip.endDate).toDateString()
 
-  const eventsList = []
 
-  const dateDiff = (first, second) => {
-    let mili = (1000 * 60 * 60 * 24)
-    let diff = second - first
-    diff = (diff/mili)
-    return diff
+
+  const dates = () => {
+    let res =  trip.startDate;
+    let list = [];
+    // debugger
+    while (res <= trip.endDate) {
+      res = new Date(res);
+      list.push(res)
+      res = new Date(res.getFullYear(), res.getMonth(), res.getDate() + 1).toISOString();
+  }
+  return list
+}
+
+    let list = dates()
+    console.log(list)
+    if (dateList.length < list.length) {setDateList(oldlist => [...oldlist, ...list])}
+    // setDateList(list)
+    console.log(dateList)
+
+  const compareDates = (a, b) => {
+    let ele1;
+    let ele2;
+
+    if (a instanceof Date) {
+      ele1 = a
+    } else {
+      ele1 = a.startDate
+    }
+    if (b instanceof Date) {
+      ele2 = b
+    } else {
+      ele2 = b.startDate
+    }
+    return ele1 - ele2
   }
 
-  const increDate = (date) => {
-    let year = date.getFullYear();
-    let month = date.getMonth() 
-    let day = date.getDate();
-    let newDate = new Date(year, month, day)
-  }
+  useEffect( () => {
+    dates(startDate, endDate)
 
+  // console.log(dateList) 
+}, [dispatch])
 
-  for (let i = 0; i < dateDiff(startDate, endDate); i++) {
+  // let datess = dateList.map(date => new Date(date).toDateString())
 
-  }
+  // const eventsList = () => {
+  //   let list = dateList.map(date =>  {date})
+  //   return list
+  // }
 
-   return (
+   if (dateList.length) return (
       <div className='tripshowpage'>
 
         <div className='tripshowtrippanel'>
@@ -86,18 +134,20 @@ const events = useSelector(state => state.events)
           <p className='tripshowinfoitem' id='tripshowtriptitle'>{trip.title}</p>
           <p className='tripshowinfoitem' id='tripshowtripdescription'>{trip.description}</p>
           <p className='tripshowinfoitem' id='tripshowtripcollaborators'>{trip.collaborators}</p>
-          <p className='tripshowinfoitem' id='tripshowstartdate'>Begins {startDate}</p>
-          <p className='tripshowinfoitem' id='tripshowenddate'>Ends {endDate}</p>
-
+          <p className='tripshowinfoitem' id='tripshowstartdate'>Begins {startDateString}</p>
+          <p className='tripshowinfoitem' id='tripshowenddate'>Ends {endDateString}</p>
+          <EventForm trip={trip}/>
           </div>
         </div>
         <div className='tripshoweventslist'>
-        {Object.values(events).map(event => <p>{event}</p>)}
+        {/* {eventsList.map(ele => <p>{ele}</p>)} */}
+        {/* <p>{dateList}</p> */}
         </div>
       </div>
   )
 
   // return(<p > trip {title} description {description}</p>)
-};
+;
 
-export default TripShow;
+}
+export default TripShow
