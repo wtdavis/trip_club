@@ -11,6 +11,7 @@ import * as eventActions from "../../store/events"
 import EventForm from '../EventForm/EventForm';
 import EventItem from '../EventItem/EventItem';
 
+
 const TripShow = (props) => {
 
 
@@ -34,26 +35,28 @@ const TripShow = (props) => {
       const storageTrip = JSON.parse(localStorage.getItem("currentTrip"));
       dispatch(tripActions.setCurrentTrip(storageTrip))
       setTrip(storageTrip)
-      fetchEvents(storageTrip._id)
+      dispatch(eventActions.clearEvents())
+      dispatch(eventActions.fetchTripEvents(storageTrip._id))
     }; 
    
   }, [dispatch]
   )
   
-
-
-  useEffect(()=> {
-    if (trip || props?.location.trip){
-    fetchEvents()}
-  }, [])
-
-
-const fetchEvents = () => {
-  if (props?.location.trip !== undefined) {
-    dispatch(eventActions.fetchTripEvents(props.location.trip._id))
-  } else {
-  dispatch(eventActions.fetchTripEvents(trip._id))}
+if (!tripEvents) {
+  dispatch()
 }
+
+  // useEffect(()=> {
+  //   if (trip || props?.location.trip){
+  //   fetchEvents()}
+  // }, [])
+
+
+// const fetchEvents = () => {
+//     if (trip){
+//     dispatch(eventActions.fetchTripEvents(props.location.trip._id))}
+ 
+// }
   
   // const events = useSelector(state => state.events)
 
@@ -142,6 +145,7 @@ const fetchEvents = () => {
 // debugger
   let events = Object.values(tripEvents).filter(ele => ele.trip === currentTrip._id)
 // debugger
+
    if (dateList.length) return (
       <div className='tripshowpage'>
 
@@ -149,7 +153,7 @@ const fetchEvents = () => {
           <div className='tripshowinfo'>
             <p className='tripshowinfoitem' id='tripshowtriptitle'>{trip.title}</p>
             <p className='tripshowinfoitem' id='tripshowtripdescription'>{trip.description}</p>
-            <p className='tripshowinfoitem' id='tripshowtripcollaborators'>{trip.collaborators}</p>
+            <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{trip.collaborators.map(e => (<li>{e.username}</li>))}</ul>
             <p className='tripshowinfoitem' id='tripshowstartdate'>Begins {startDateString}</p>
             <p className='tripshowinfoitem' id='tripshowenddate'>Ends {endDateString}</p>
             <EventForm trip={trip}/>
