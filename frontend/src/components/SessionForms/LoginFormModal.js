@@ -74,7 +74,7 @@ const LoginFormModal = (props) => {
             
             <span className="bold" target="_blank" rel="noopener noreferrer"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">  Terms of Service</a></span>
           </div> */}
-        <button type="submit" className="continue-button">Continue</button>
+        <button type="submit" className="continue-button" >Continue</button>
 
         {/* <input
           className="continue-button"

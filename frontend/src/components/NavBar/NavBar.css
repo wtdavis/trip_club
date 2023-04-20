@@ -116,10 +116,11 @@
     
 }
 
-/* .navlink:hover {
-   border-bottom: 2px solid white;
+.navlink:hover {
+  /* padding-bottom: 3px; */
+   border-bottom: 2px solid black;
    transform: scale(1.025);
-} */
+}
 
 /* #logoutbutton:hover {
     transform: scale(1.025);
@@ -171,6 +172,9 @@ header.site-header {
   font-weight: 800;
   letter-spacing: 1px;
   /* text-shadow: 1px 1px 1px var(--dark-black-color); */
+  /* background: linear-gradient(to right, black, var(--blue-sands-brand)); */
+  /* -webkit-background-clip: text; */
+  /* -webkit-text-fill-color: transparent; */
 }
 
 
