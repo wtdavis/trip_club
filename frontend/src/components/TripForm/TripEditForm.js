@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom/cjs/react-router-dom.min"
 import * as userActions from '../../store/users'
 
 
-function TripForm () {
+function TripEditForm () {
     const dispatch = useDispatch()
     const { tripId } = useParams()
     const currentUser = useSelector(state => state.session.user)
@@ -150,4 +150,4 @@ function TripForm () {
 )
 }
 
-export default TripForm
+export default TripEditForm

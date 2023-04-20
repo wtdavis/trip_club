@@ -4,13 +4,16 @@ import session from './session';
 import errors from './errors';
 import tweets from './tweets';
 import trips from './trips';
+import users from './users'
 import events from './events'
+
 
 const rootReducer = combineReducers({
   tweets,
   trips,
   session,
   errors,
+  users,
   events
 });
 

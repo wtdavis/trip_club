@@ -105,19 +105,21 @@ export const fetchUserTrips = id => async dispatch => {
 
 
 export const composeTrips = data => async dispatch => {
+  let trip;
   try {
     const res = await jwtFetch('/api/trips/', {
       method: 'POST',
       body: JSON.stringify(data)
     });
-    const trip = await res.json();
+    trip = await res.json();
     dispatch(receiveNewTrip(trip));
   } catch(err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
-      return dispatch(receiveErrors(resBody.errors));
+      dispatch(receiveErrors(resBody.errors));
     }
   }
+  return trip
 };
 
 const nullErrors = null;
