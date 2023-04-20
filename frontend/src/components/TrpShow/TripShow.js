@@ -112,32 +112,30 @@ if (!tripEvents) {
   const compareDates = (a, b) => {
     let ele1;
     let ele2;
-    // debugger
-
-    if (a instanceof Object) {
-      ele1 = a.startTime
-    } else {
+    
+    if (a instanceof Date) {
       ele1 = a
-    }
-    if (b instanceof Object) {
-      ele2 = b.startTime
     } else {
-      ele2 = b
+      ele1 = new Date(a).startTime
     }
     // debugger
-    return ele1 - ele2
+    if (b instanceof Date) {
+      ele2 = b
+    } else {
+      ele2 = new Date(b).startTime
+    }
+    // debugger
+    return ele1.getTime() - ele2.getTime()
   }
 
-  const compareNums = (a, b) => {
-    return a - b
-  }
+ 
 
-  // let arr = [new Date(2023, 10, 12).toISOString(), new Date(2023, 2, 1).toISOString(), new Date(2023, 9, 1).toISOString(), new Date(2023, 1, 23).toISOString()]
+  // let arr = [new Date(2023, 10, 12), new Date(2023, 2, 1)]
   // console.log(arr.sort(compareDates))
   // debugger
   useEffect( () => {
     dates(startDate, endDate)
-
+    
 }, [dispatch])
   // let datess = dateList.map(date => new Date(date).toDateString())
 

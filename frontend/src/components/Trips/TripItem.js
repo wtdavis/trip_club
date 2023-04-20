@@ -14,9 +14,10 @@ const TripItem = ({trip}) => {
     e.preventDefault();
     dispatch(tripActions.fetchTrip(trip._id))
   }
-
+  const currentTrip = trip
   const events = useSelector(state => state.events)
-  const tripEvents = Object.values(events).filter(e=> e.trip === trip._id)
+  const tripEvents = Object.values(events).filter(e => e.trip === currentTrip._id)
+  let arr = tripEvents.map(event => (<li>{event.title}</li>))
   let lng = -73.99376925185645;
   let lat = 40.73631643149453;
 
@@ -30,7 +31,7 @@ const TripItem = ({trip}) => {
     <Redirect to={{pathname:`trips/show`, trip: trip}}/>)
     }
   
-  if (trip) return (
+  if (currentTrip) return (
     
       <div className="trip-item-container" > 
         <div className='left-column'>
