@@ -5,6 +5,18 @@ const RECEIVE_EVENTS = 'events/receiveEvents'
 const RECEIVE_EVENT = 'events/receiveEvent'
 const REMOVE_EVENTS = 'events/removeEvents'
 const CLEAR_EVENTS = 'events/clearEvents'
+const RECEIVE_EVENT_ERRORS = 'events/receiveEventErrors'
+const CLEAR_EVENT_ERRORS = 'events/clearEventErrors'
+
+const receiveEventErrors = errors => ({
+    type: RECEIVE_EVENT_ERRORS,
+    errors
+  });
+  
+  export const clearEventErrors = errors => ({
+      type: CLEAR_EVENT_ERRORS,
+      errors
+  });
 
 
 export const receiveEvents = (events) => {
@@ -27,23 +39,49 @@ export const clearEvents = () => {
 }
 
 
-export const createTripEvent = (tripId, event) => async (dispatch) => {
-    let res = await jwtFetch (`/api/trips/${tripId}/events`, {
-        method: 'POST',
-        body: JSON.stringify(event)
-    })
-    let data = await res.json()
-    dispatch(receiveEvent(data))
-    return( data)
+
+
+export const createTripEvent = ({tripId, event}) => async (dispatch) => {
+    try{
+        let res = await jwtFetch (`/api/trips/${tripId}/events`, {
+            method: 'POST',
+            body: JSON.stringify(event)
+        })
+        let data = await res.json()
+        dispatch(receiveEvent(data))
+        return(data)
+    }catch (err) {
+        const resBody = await err.json();
+        if (resBody.statusCode === 400) {
+        dispatch(receiveEventErrors(resBody.errors));
+        }
+    }
 }
 
 export const fetchTripEvents = tripId => async dispatch => {
-    // debugger
+    
     let res = await jwtFetch (`/api/trips/${tripId}/events`);
     let data = await res.json();
     await dispatch(receiveEvents(data))
     // return (res)
 }
+
+
+const nullErrors = null;
+
+export const eventsErrorsReducer = (state = nullErrors, action) => {
+  switch(action.type) {
+    case RECEIVE_EVENT_ERRORS:
+      return action.errors;
+    case RECEIVE_EVENT:
+    case CLEAR_EVENT_ERRORS:
+      return nullErrors;
+    default:
+      return state;
+  }
+};
+
+
 
 const initialState = {}
 
