@@ -4,6 +4,7 @@ import { composeTrips } from "../../store/trips"
 import { useParams } from "react-router-dom"
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min"
 import * as userActions from '../../store/users'
+import * as tripActions from '../../store/trips'
 
 
 function TripEditForm () {
@@ -14,7 +15,7 @@ function TripEditForm () {
     const [description, setDescription] = useState("")
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
-    const [submit, setSubmit] = useState("Create Trip")
+    const [submit, setSubmit] = useState("Update Trip")
     const [collaborators, setCollaborators] = useState([])
     const allUsers = Object.values(useSelector(state => state.users))
     const [redirect, setRedirect] = useState(false)
@@ -24,10 +25,7 @@ function TripEditForm () {
     
     useEffect(() => {
         dispatch(userActions.fetchAllUsers())
-        // setCollaborators([])
-        // debugger
-    }, [])
-    useEffect(() => {
+        dispatch(tripActions.fetchTrip(tripId))
 
     }, [])
 
@@ -58,7 +56,7 @@ function TripEditForm () {
             collaborators: collaboratorIds
         }
         // debugger
-        setNewTrip(await dispatch(composeTrips(formData)))
+        setNewTrip(await dispatch(tripActions.updateTrip(formData)))
         // debugger
         setRedirect(true)
     }
@@ -118,7 +116,7 @@ function TripEditForm () {
     
     return(
         <div className="tripformdiv">
-        <h3 className="tripformheader">Create a New Trip!</h3>
+        <h3 className="tripformheader">Update Your Trip!</h3>
         <form classname="tripformform" onSubmit={e => handleSubmit(e)}>
        
             <p className="tripformsubheader">Name Your New Trip:</p>
