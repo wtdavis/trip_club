@@ -135,7 +135,7 @@ if (!tripEvents) {
   // debugger
   useEffect( () => {
     dates(startDate, endDate)
-    
+
 }, [dispatch])
   // let datess = dateList.map(date => new Date(date).toDateString())
 
@@ -144,7 +144,7 @@ if (!tripEvents) {
   let events = Object.values(tripEvents).filter(ele => ele.trip === currentTrip._id)
 // debugger
 
-   if (dateList.length) return (
+   if (dateList.length && currentTrip) return (
       <div className='tripshowpage'>
 
         <div className='tripshowtrippanel'>
