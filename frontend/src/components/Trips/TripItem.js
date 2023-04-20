@@ -47,7 +47,7 @@ const TripItem = ({trip}) => {
                 <a href="#item-2">Slide 2</a>
               </div>
 
-              <div className='slide'>
+              <div className='slide' >
                 <a href="#item-1">Slide 1</a>
                   <img id="item-2" src={require("../../assets/trips/1/event1/2.jpg")} alt=""></img>
                 <a href="#item-3">Slide 3</a>

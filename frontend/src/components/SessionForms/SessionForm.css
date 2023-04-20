@@ -1,3 +1,10 @@
+:root {
+  --grey-color: #9da09d;
+  --red-brand-color: #F95E5C;  
+  --font-size: 18px;
+  --dark-black-color: #383838; 
+}
+
 .session-form > label {
   width: 100%;
   padding: 4px 0;
@@ -25,3 +32,49 @@
   margin-top: 100px;
   margin-left: 100px;
 }
+
+/* .login-form {
+  padding: 18px;
+  font-size: 16px;
+}
+
+.email-login-input, 
+.password-login-input {
+  border-bottom: none;
+  width: 100%;
+  height: 35px;
+  padding-top: 10px;
+  padding-left: 10px;
+  border: 1px solid var(--grey-color);
+  font-weight: 400;
+  font-size: var(--font-size);
+}
+
+.email-login-input {
+  border-radius: 8px 8px 0 0;
+}
+
+.password-login-input {
+  border-radius: 0 0 8px 8px;
+} 
+
+
+.continue-button, .demo-button {
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  height: 48px;
+  font-size: var(--font-size);
+  font-weight: bold;
+  width: 500px;
+  background: linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%);
+  color: rgb(255, 255, 255);
+  border-radius: 8px;
+}
+
+.demo-button {
+  color: var(--dark-black-color);
+  background: white;
+  border: 1px solid var(--dark-black-color);
+  margin-top: 5px;
+} */

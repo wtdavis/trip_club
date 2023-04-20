@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
 import NavBar from './components/NavBar/NavBar';
+import Navigation from './components/NavBar/Navigation';
 import Footer from './components/Footer/Footer';
 
 import SplashPage from './components/SplashPage/SplashPage';
@@ -22,18 +23,21 @@ import TripShow from './components/TrpShow/TripShow';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
+  // const [showLoginModal, setShowLoginModal] = useState(false);
   const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch(getCurrentUser()).then(() => setLoaded(true));
   }, [dispatch]);
 
   return loaded && (
     <>
-      <NavBar />
+      <Navigation />
+      {/* <NavBar /> */}
       <Switch>
         <AuthRoute exact path="/" component={SplashPage} />
-        <AuthRoute exact path="/login" component={LoginForm} />
-        <AuthRoute exact path="/signup" component={SignupForm} />
+        {/* <AuthRoute exact path="/login" component={LoginForm} /> */}
+        {/* <AuthRoute exact path="/signup" component={SignupForm} /> */}
         <Route exact path={'/contact'}><ContactUs /></Route> 
 
 
@@ -51,7 +55,7 @@ function App() {
         {/* <Route exact path={'/trips/show'}><TripShow /></Route>  */}
       </Switch>
 
-      <Footer />
+      {/* <Footer /> */}
 
     </>
   );
