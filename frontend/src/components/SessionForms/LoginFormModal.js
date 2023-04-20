@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as sessionActions from "../../store/session";
-import './SessionForm.css';
+import './FormModal.css';
 
 
 const LoginFormModal = (props) => {
+  // const LoginFormModal = (props) => {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const errors = useSelector(state => state.errors.session);
@@ -36,44 +39,59 @@ const LoginFormModal = (props) => {
   };
 
   return (
-    <>
-      <form className="session-form" onSubmit={handleSubmit}>
-      <h2>Log In Form</h2>
-      <div className="errors">{errors?.email}</div>
-      <label>
-        <span>Email</span>
-        <input type="text"
-          value={email}
-          onChange={update('email')}
-          placeholder="Email"
-        />
-      </label>
-      <div className="errors">{errors?.password}</div>
-      <label>
-        <span>Password</span>
-        <input type="password"
-          value={password}
-          onChange={update('password')}
-          placeholder="Password"
-        />
-      </label>
-      <input
-        type="submit"
-        value="Log In"
-        disabled={!email || !password}
-      />
 
-
-      <div id="demo-button-div">
-        <button className="demo-button" onClick={handleDemo}>Continue with Demo User</button>
+    <div className='login-modal'>
+      <div onClick={() => setShowLoginModal(false)} className="close-button">
+        <i className="fa-solid fa-x"></i>
       </div>
+
+      <header className="login-header">
+        <div className="login-header-text">Log in</div>
+      </header> 
+
+      <form className="login-form" onSubmit={handleSubmit}>
+        <div className="errors">{errors?.email}</div>
+        <div className="email-div">
+          <input className="email-login-input" type="text"
+            value={email}
+            onChange={update('email')}
+            placeholder="Email"
+          />
+        </div>
+
+        <div className="errors">{errors?.password}</div>
+        <div className="password-div">
+          <input className="password-login-input" type="password"
+            value={password}
+            onChange={update('password')}
+            placeholder="Password"
+          />
+        </div>
+        {/* <div className="agree-message">            
+            By clicking <span className="continue-span"> Continue </span>
+            
+            I agree to Trip Club's  
+            
+            <span className="bold" target="_blank" rel="noopener noreferrer"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">  Terms of Service</a></span>
+          </div> */}
+        <button type="submit" className="continue-button">Continue</button>
+
+        {/* <input
+          className="continue-button"
+          type="submit"
+          value="Log In"
+          // disabled={!email || !password}
+        /> */}
+
     </form>
 
-      {/* <div id="demo-button-div">
-        <button className="demo-button" >Continue with Demo User</button>
-      </div> */}
+        <div id="demo-button-div">
+          <button className="demo_button" onClick={handleDemo}>Continue with Demo User</button>
+        </div>
 
-    </>
+
+    </div>
+
     
   );
 }
