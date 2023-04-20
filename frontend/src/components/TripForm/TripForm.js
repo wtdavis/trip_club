@@ -21,6 +21,8 @@ function TripForm () {
     const [newTrip, setNewTrip] = useState();
     const [currCollaborator, setCurrCollaborator] = useState('')
     const [collabErrors, setCollabErrors] = useState(false)
+    const [lat, setLat] = useState(0)
+    const [lng, setLng] = useState(0)
     
     useEffect(() => {
         dispatch(userActions.fetchAllUsers())
@@ -55,7 +57,9 @@ function TripForm () {
             description: description,
             startDate: startDate,
             endDate: endDate,
-            collaborators: collaboratorIds
+            collaborators: collaboratorIds,
+            lat: lat,
+            lng: lng
         }
         // debugger
         setNewTrip(await dispatch(composeTrips(formData)))
@@ -74,9 +78,9 @@ function TripForm () {
                     setCollaborators(prevCollaborators => {
                         return prevCollaborators.filter(prevCollaborator => (prevCollaborator !== emailToRemove))
                     })
-                    debugger
+                    // debugger
                 }
-                debugger
+                // debugger
             }
         })
     }
@@ -107,7 +111,7 @@ function TripForm () {
         return (
             <ul>
                 {collaborators.map(collaborator => {
-                    debugger
+                    // debugger
                     return (
                         <li><span>{collaborator}</span><button value={collaborator} onClick={e => handleRemove(e)}>Remove</button></li>
                         )
@@ -132,6 +136,14 @@ function TripForm () {
             
             <p className="tripformsubheader">Trip End Date:</p>
             <input type="date" className="tripforminput" value={endDate} onChange={e => setEndDate(e.target.value)}/>
+            <br/>
+
+            <p className="tripformsubheader">Latitude:</p>
+            <input type="number" className="tripforminput" value={lat} onChange={e => setLat(e.target.value)}/>
+            <br/>
+
+            <p className="tripformsubheader">Longitude:</p>
+            <input type="number" className="tripforminput" value={lng} onChange={e => setLng(e.target.value)}/>
             <br/>
 
             <ul className="tripformsubheader">Add a Collaborator by Email

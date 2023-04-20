@@ -24,6 +24,12 @@ const tripSchema = new Schema({
     },
     events: [Schema.Types.ObjectId],
     collaborators: [Schema.Types.ObjectId],
+    lat: {
+        type: Number,
+    },
+    lng: {
+        type: Number
+    }
     //images: {
         //type: Schema.Types.
     // }

@@ -88,6 +88,21 @@ export const fetchTrip = id => async dispatch => {
 };
 
 
+export const updateTrip = (tripId) => async (dispatch) => {
+  try {
+    const res = await jwtFetch(`/api/trips/${tripId}/edit`, {
+      method: 'PATCH',
+      body: JSON.stringify(tripId)
+    })
+    const updatedTrip = await res.json()
+    dispatch(receiveTrip(updatedTrip))
+  } catch(err) {
+    const resBody = await err.json();
+    if (resBody.statusCode === 400) {
+      dispatch(receiveErrors(resBody.errors));
+    }
+  }
+}
 
 export const fetchUserTrips = id => async dispatch => {
   try {
@@ -138,6 +153,8 @@ export const tripErrorsReducer = (state = nullErrors, action) => {
 
 const tripsReducer = (state = { all: {}, user: {}, new: undefined, current: null }, action) => {
   switch(action.type) {
+    case RECEIVE_TRIP :
+      return { ...state, edit: action.trip }
     case RECEIVE_TRIPS:
       return { ...state, all: action.trips, new: undefined};
     case RECEIVE_USER_TRIPS:
