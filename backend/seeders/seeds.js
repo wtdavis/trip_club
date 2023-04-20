@@ -101,7 +101,9 @@ trips.push(
     startDate: "03/03/2023",
     endDate: "03/03/2023",
     events: [],
-    collaborators: [users[1]._id, users[2]._id] 
+    collaborators: [users[1]._id, users[2]._id],
+    lat: 39.6061,
+    lng: -106.3550
   })
 );
 
@@ -113,7 +115,9 @@ trips.push(
     startDate: "05/05/2023",
     endDate: "05/05/2023",
     events: [],
-    collaborators: [users[3]._id]
+    collaborators: [users[3]._id],
+    lat: -48.8584,
+    lng: 2.2945,
   })
 )
 
@@ -125,7 +129,9 @@ trips.push(
     startDate: "03/03/2023",
     endDate: "03/10/2023" ,
     events: [],
-    collaborators: [users[0]._id, users[4].id, users[5]._id]
+    collaborators: [users[0]._id, users[4].id, users[5]._id],
+    lat: 27.9881,
+    lng: 86.9250
   })
 )
 

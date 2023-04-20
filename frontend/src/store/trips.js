@@ -87,9 +87,7 @@ export const fetchTrip = id => async dispatch => {
   }
 };
 
-<<<<<<< HEAD
 
-=======
 export const updateTrip = (tripId) => async (dispatch) => {
   try {
     const res = await jwtFetch(`/api/trips/${tripId}/edit`, {
@@ -105,7 +103,6 @@ export const updateTrip = (tripId) => async (dispatch) => {
     }
   }
 }
->>>>>>> b22f0937 (Reseed)
 
 export const fetchUserTrips = id => async dispatch => {
   try {
