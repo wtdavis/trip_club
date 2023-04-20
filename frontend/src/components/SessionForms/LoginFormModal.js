@@ -4,10 +4,11 @@ import * as sessionActions from "../../store/session";
 import './SessionForm.css';
 
 
-function LoginForm () {
+const LoginFormModal = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const errors = useSelector(state => state.errors.session);
+  const {setShowLoginModal} = props;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -77,4 +78,4 @@ function LoginForm () {
   );
 }
 
-export default LoginForm;
+export default LoginFormModal;

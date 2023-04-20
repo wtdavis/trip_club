@@ -163,6 +163,7 @@ a {
   padding: 0.5rem;
   transition: 0.5s;
   justify-items: center;
+  /* max-height: 500px; */
 }
 
 .contact_us_column {
@@ -185,9 +186,12 @@ a {
 }
 
 .contact_us_image_container img {
+  height: 300px;
+  width: 200px;
   object-fit: cover;
-  width: 100%;
-  height: 100%;
+  /* width: 100%; */
+  /* height: 100%; */
+  /* border-radius: 8px; */
   /* display: block;
   max-height: 100%;
   max-width: 100%;
@@ -202,7 +206,7 @@ a {
 .contact_us_role {
   /* margin-top: 5px; */
   /* margin-bottom: 5px; */
-  font-size: 25px;
+  font-size: 22px;
 }
 
 .social_links i {

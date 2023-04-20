@@ -75,12 +75,12 @@ const ContactUs = () => {
 
             <div className="social_links">
               <div>
-                <a className = 'github-link' href="https://github.com/wtdavis/">
+                <a className = 'github-link' target="_blank" rel="noopener noreferrer" href="https://github.com/wtdavis/">
                   <i className="fa-brands fa-github fa-2x"></i>
                 </a>
               </div>
               <div>
-                <a className = 'linkedin-link' href="https://www.linkedin.com/">
+                <a className = 'linkedin-link' target="_blank" rel="noopener noreferrer" href="https://linkedin.com/in/william-davis-9390801ab">
                   <i className="fa-brands fa-linkedin-in fa-2x"></i>
                 </a>
               </div>
@@ -101,12 +101,12 @@ const ContactUs = () => {
             </div>
             <div className="social_links">
               <div>
-                <a className = 'github-link' href="https://github.com/olga-bessonova/">
+                <a className = 'github-link' target="_blank" rel="noopener noreferrer" href="https://github.com/olga-bessonova/">
                   <i className="fa-brands fa-github fa-2x"></i>
                 </a>
               </div>
               <div>
-                <a className = 'linkedin-link' href="https://www.linkedin.com/in/olga-borovikova/">
+                <a className = 'linkedin-link' target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/olga-borovikova/">
                   <i className="fa-brands fa-linkedin-in fa-2x"></i>
                 </a>
               </div>
@@ -126,12 +126,12 @@ const ContactUs = () => {
             </div>
             <div className="social_links">
               <div>
-                <a className = 'github-link' href="https://github.com/zeisen33">
+                <a className = 'github-link' target="_blank" rel="noopener noreferrer" href="https://github.com/zeisen33">
                   <i className="fa-brands fa-github fa-2x"></i>
                 </a>
               </div>
               <div>
-                <a className = 'linkedin-link' href="https://www.linkedin.com/in/zane-eisen-121856bb/">
+                <a className = 'linkedin-link' target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/zane-eisen-121856bb/">
                   <i className="fa-brands fa-linkedin-in fa-2x"></i>
                 </a>
               </div>
