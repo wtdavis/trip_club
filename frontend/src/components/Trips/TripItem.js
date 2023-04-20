@@ -23,10 +23,10 @@ const TripItem = ({trip}) => {
     e.preventDefault();
     setIsShow(true)
   }
-
+  
   if (isShow)
   {return(
-    <Redirect to={{pathname:`trips/show`, jabroni: true, trip: trip}}/>)
+    <Redirect to={{pathname:`trips/show`, trip: trip}}/>)
     }
   
   if (trip) return (
@@ -47,7 +47,7 @@ const TripItem = ({trip}) => {
                 <a href="#item-2">Slide 2</a>
               </div>
 
-              <div className='slide'>
+              <div className='slide' >
                 <a href="#item-1">Slide 1</a>
                   <img id="item-2" src={require("../../assets/trips/1/event1/2.jpg")} alt=""></img>
                 <a href="#item-3">Slide 3</a>
@@ -114,10 +114,15 @@ const TripItem = ({trip}) => {
               <li>Event 3</li>
               <li>Event 4</li>
             </ul>
-            <div className='google-map-container'>
+          
+
+          </div>
+
+          <div className='google-map-container'>
               <GoogleMap lng={lng} lat={lat}/>
             </div>
-          </div>
+
+
         </div>        
         
       </div>

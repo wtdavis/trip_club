@@ -7,6 +7,8 @@ const RECEIVE_USER_TRIPS = "trips/RECEIVE_USER_TRIPS";
 const RECEIVE_NEW_TRIP = "trips/RECEIVE_NEW_TRIP";
 const RECEIVE_TRIP_ERRORS = "trips/RECEIVE_TRIP_ERRORS";
 const CLEAR_TRIP_ERRORS = "trips/CLEAR_TRIP_ERRORS";
+const SET_CURRENT_TRIP = "trips/setCurrentTrip"
+const CLEAR_CURRENT_TRIP = "trips/clearCurrentTrip"
 
 const receiveTrips = trips => ({
   type: RECEIVE_TRIPS,
@@ -27,6 +29,19 @@ const receiveNewTrip = trip => ({
   type: RECEIVE_NEW_TRIP,
   trip
 });
+
+export const setCurrentTrip = trip => {
+  return {
+    type: SET_CURRENT_TRIP,
+    trip
+  }
+}
+export const clearCurrentTrip = trip => {
+  return {
+    type: CLEAR_CURRENT_TRIP,
+    trip
+  }
+}
 
 const receiveErrors = errors => ({
   type: RECEIVE_TRIP_ERRORS,
@@ -71,6 +86,8 @@ export const fetchTrip = id => async dispatch => {
     }
   }
 };
+
+
 
 export const fetchUserTrips = id => async dispatch => {
   try {
@@ -119,7 +136,7 @@ export const tripErrorsReducer = (state = nullErrors, action) => {
   }
 };
 
-const tripsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
+const tripsReducer = (state = { all: {}, user: {}, new: undefined, current: null }, action) => {
   switch(action.type) {
     case RECEIVE_TRIPS:
       return { ...state, all: action.trips, new: undefined};
@@ -128,7 +145,11 @@ const tripsReducer = (state = { all: {}, user: {}, new: undefined }, action) => 
     case RECEIVE_NEW_TRIP:
       return { ...state, new: action.trip};
     case RECEIVE_USER_LOGOUT:
-      return { ...state, user: {}, new: undefined }
+      return { ...state, user: {}, new: undefined };
+    case SET_CURRENT_TRIP:
+      return {...state, current: action.trip};
+    case CLEAR_CURRENT_TRIP:
+      return {...state, current: null}
     default:
       return state;
   }

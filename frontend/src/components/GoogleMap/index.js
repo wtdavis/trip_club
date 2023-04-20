@@ -14,7 +14,7 @@ const GoogleMap = ({lng, lat}) => {
         mapRef.current, 
         {
           center: {lat:lat, lng: lng},
-          zoom: 14
+          zoom: 11
         }
       )
     )

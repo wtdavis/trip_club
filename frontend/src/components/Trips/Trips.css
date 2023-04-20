@@ -49,14 +49,16 @@
 }
 
 .right-column {
-  /* display: flex; */
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  
 }
 
 .google-map-container {
-  /* width: 100%;
-  height: 100%; */
+  width: 100%;
+  height: 100%;
   /* width: auto; */
 }
 
@@ -81,6 +83,11 @@
 .trip-link {
   text-decoration: none; /* Remove underline and other decorations from links */
   color: var(--brand-color); /* Set the link color to blue */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
 }
 
 img {
@@ -88,7 +95,7 @@ img {
 }
 
 ul {
-  margin: 0;
+  margin: 10px;
   padding: 0;
   list-style: none;
 }

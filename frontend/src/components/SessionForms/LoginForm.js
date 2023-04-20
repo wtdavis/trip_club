@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as sessionActions from "../../store/session";
 import './SessionForm.css';
 
-// import { login, clearSessionErrors } from '../../store/session';
 
 function LoginForm () {
   const [email, setEmail] = useState('');
@@ -64,10 +63,10 @@ function LoginForm () {
       />
 
 
-    </form>
       <div id="demo-button-div">
         <button className="demo-button" onClick={handleDemo}>Continue with Demo User</button>
       </div>
+    </form>
 
       {/* <div id="demo-button-div">
         <button className="demo-button" >Continue with Demo User</button>

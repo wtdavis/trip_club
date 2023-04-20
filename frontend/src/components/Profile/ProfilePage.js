@@ -30,7 +30,7 @@ if (trips) {
   if (trips.length == 0) {
     return (
      <div className='trips-div'>     
-      <div>{currentUser.username} has no Trips</div>
+      <div>You have no Trips</div>
            </div> 
 
   )} else if (trips.length > 0){
@@ -38,7 +38,9 @@ if (trips) {
       <div className='trips-container'>
 
         <div className='trips-div'>
-          <h2>All of {currentUser.username}'s Trips</h2>
+          <div className='header_message'>
+            <h1 className='header_message_h2'> Your Trips</h1>
+          </div>
           
           {/* {tripsSelected.map(trip => (
             <TripItem

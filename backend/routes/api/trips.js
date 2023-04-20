@@ -44,8 +44,6 @@ router.get('/:id', async (req, res, next) => {
 
 // Trip Create, works
 router.post('/', requireUser, validateTripInput, async (req, res, next) => {
-    // debugger
-    // console.log(req.user._id)
     try {
         const newTrip = new Trip({
             author: req.user,
@@ -57,7 +55,6 @@ router.post('/', requireUser, validateTripInput, async (req, res, next) => {
             collaborators: req.body.collaborators
         });
         let trip = await newTrip.save()
-        // debugger
         trip = await trip.populate('author', '_id username');
         return res.json(trip)
     }
@@ -65,7 +62,6 @@ router.post('/', requireUser, validateTripInput, async (req, res, next) => {
         next(err)
     }
 })
-
 
 //Author Show, works
 router.get('/author/:userId', async (req, res, next) => {
@@ -170,21 +166,24 @@ router.delete('/:id', requireUser, async (req, res, next) => {
 })
 
 
-// New event for a trip
-router.post('/:tripId/events/', requireUser, validateEventInput, async (req, res, next) => {
+// New event for a trip, works but fails the commented out validations
+router.post('/:tripId/events', requireUser, validateEventInput, async (req, res, next) => {
+    // console.log(req.body)
+    // console.log(req.params.tripId)
     try {
         const newEvent = new Event({
-            author: req.user._id,
+            author: req.user,
             trip: req.params.tripId,
             title: req.body.title,
             lat: req.body.lat,
             lng: req.body.lng,
             startTime: req.body.startTime,
             endTime: req.body.endTime,
+            attendees: req.body.attendees,
             description: req.body.description
         })
         let event = await newEvent.save()
-        event = await event.populate('trip', '_id title')
+        event = await event.populate('author', '_id username')
         return res.json(event)
     }
     catch(err) {
