@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as sessionActions from "../../store/session";
@@ -6,6 +7,7 @@ import './FormModal.css';
 
 const LoginFormModal = (props) => {
   // const LoginFormModal = (props) => {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const errors = useSelector(state => state.errors.session);
@@ -37,6 +39,7 @@ const LoginFormModal = (props) => {
   };
 
   return (
+
     <div className='login-modal'>
       <div onClick={() => setShowLoginModal(false)} className="close-button">
         <i className="fa-solid fa-x"></i>
@@ -88,6 +91,7 @@ const LoginFormModal = (props) => {
 
 
     </div>
+
     
   );
 }
