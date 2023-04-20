@@ -76,7 +76,6 @@ export const fetchTripEvents = tripId => async dispatch => {
         dispatch(receiveEventErrors(resBody.errors));
         }
  }
-    // return (res)
 }
 
 export const fetchEvents = () => async dispatch => {
