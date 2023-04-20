@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { composeTrips } from "../../store/trips"
 import { useParams } from "react-router-dom"
 import * as userActions from '../../store/users'
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min"
 
 
 function TripForm () {
@@ -16,46 +17,62 @@ function TripForm () {
     const [submit, setSubmit] = useState("Create Trip")
     const [collaborators, setCollaborators] = useState([])
     const allUsers = Object.values(useSelector(state => state.users))
+    const [redirect, setRedirect] = useState(false)
+    const [newTrip, setNewTrip] = useState();
+    const [currCollaborator, setCurrCollaborator] = useState('')
 
     useEffect(() => {
         dispatch(userActions.fetchAllUsers())
+        setCollaborators([])
+        // debugger
     }, [])
 
+    if (redirect) {
+        // debugger
+        return <Redirect to={{pathname:`/trips/show`, trip: newTrip}}/>
+    }
+
     const author = currentUser.id
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        let collaboratorIds = []
+        allUsers.forEach(user => {
+            debugger
+            if (collaborators.includes(user.email)) {
+                debugger
+                collaboratorIds.push(user._id)
+            }
+        })
+
+        debugger
         const formData = {
             title: title,
             description: description,
             startDate: startDate,
             endDate: endDate,
-            collaborators: collaborators
+            collaborators: collaboratorIds
         }
-        dispatch(composeTrips(formData))
+        // debugger
+        setNewTrip(await dispatch(composeTrips(formData)))
+        // debugger
+        setRedirect(true)
     }
 
-    const userDropDown = () => {
-        return(
-            <select multiple>
-                {allUsers.map(user => {
-                return (
-                    <option value={collaborators} 
-                            onChange={e => setCollaborators(e.target.value)}
-                    >
-                        {user.username}
-                    </option>
-                    )
-                    })
-                }
-            </select>
-        )
+    const CollaboratorsList = <ul>{collaborators.map(collaborator => <li><span>{collaborator}</span><button onClick={e=>handleRemove(e)}>Remove</button></li>)}</ul>
+
+    const handleAdd = (e) => { 
+            e.preventDefault();
+            // debugger
+            setCollaborators(collaborators.concat([currCollaborator]))
+            setCurrCollaborator('')
     }
-    // const changeSubmit = () => {
-    //     if (submit = "Create Trip")
-    //     {setSubmit("Update Trip")
-    //     }else{
-    //     setSubmit("Create Trip")}
-    // }
+
+    const handleRemove = (e) => {
+        e.preventDefault();
+        // const idx = collaborators.indexOf(e.target.value)
+        // setCollaborators(collaborators.splice(idx, 1))
+    }
+
 
 return(
     <div className="tripformdiv">
@@ -73,8 +90,16 @@ return(
             
             <p className="tripformsubheader">Trip End Date:</p>
             <input type="date" className="tripforminput" value={endDate} onChange={e => setEndDate(e.target.value)}/>
-            <p className="tripformsubheader">Collaborators (hold ctrl or cmd to select multiple):</p>
-            {userDropDown()}
+            <br/>
+
+            <ul className="tripformsubheader">Add a Collaborator by Email
+                <input type='text'
+                        value={currCollaborator}
+                        onChange={e => setCurrCollaborator(e.target.value)}
+                />
+                <button value={currCollaborator} onClick={(e) => handleAdd(e)}>Add</button>
+            </ul>            
+            <p className="tripformsubheader">Collaborators: {CollaboratorsList}</p>
             <br/>
             <input type="submit" className="tripformsubmit"  value={submit} onClick={e=> handleSubmit(e)}/>
         </form>
