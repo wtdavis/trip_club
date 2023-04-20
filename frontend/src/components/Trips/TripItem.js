@@ -115,11 +115,13 @@ const TripItem = ({trip}) => {
               <li>Event 4</li>
             </ul>
           
-            <div className='google-map-container'>
+
+          </div>
+
+          <div className='google-map-container'>
               <GoogleMap lng={lng} lat={lat}/>
             </div>
 
-          </div>
 
         </div>        
         
