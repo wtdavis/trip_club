@@ -2,8 +2,8 @@ import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { composeTrips } from "../../store/trips"
 import { useParams } from "react-router-dom"
-import * as userActions from '../../store/users'
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min"
+import * as userActions from '../../store/users'
 
 
 function TripForm () {
@@ -21,34 +21,35 @@ function TripForm () {
     const [newTrip, setNewTrip] = useState();
     const [currCollaborator, setCurrCollaborator] = useState('')
     const [collabErrors, setCollabErrors] = useState(false)
-    // const [collaboratorIds, setCollaboratorIds] = useState([])
-
-    let collaboratorIds = []
-
+    
     useEffect(() => {
         dispatch(userActions.fetchAllUsers())
-        setCollaborators([])
+        // setCollaborators([])
         // debugger
     }, [])
+    useEffect(() => {
+
+    }, [])
+
+    let collaboratorIds = []
 
     if (redirect) {
         // debugger
         return <Redirect to={{pathname:`/trips/show`, trip: newTrip}}/>
     }
-
+    
     const author = currentUser.id
     const handleSubmit = async (e) => {
         e.preventDefault();
         let collaboratorIds = []
         allUsers.forEach(user => {
-            debugger
+            // debugger
             if (collaborators.includes(user.email)) {
-                debugger
+                // debugger
                 collaboratorIds.push(user._id)
             }
         })
-
-        debugger
+        // debugger
         const formData = {
             title: title,
             description: description,
@@ -61,37 +62,62 @@ function TripForm () {
         // debugger
         setRedirect(true)
     }
-
-    const CollaboratorsList = <ul>{collaborators.map(collaborator => <li><span>{collaborator}</span><button onClick={e=>handleRemove(e)}>Remove</button></li>)}</ul>
-
-    const handleAdd = (e) => { 
-        debugger
-            e.preventDefault();
-            setCollabErrors(true)
-            allUsers.forEach((user) => {
-                debugger
-                if (currCollaborator === user.email) {
-                    debugger
-                    collaboratorIds = (collaboratorIds.concat(user._id))
-                    debugger
-                    setCollaborators(collaborators.concat(user.email))
-                    setCollabErrors(false)
-                    setCurrCollaborator('')
+    
+    const handleRemove = (e) => {
+        e.preventDefault()
+        const emailToRemove = e.target.value
+        allUsers.forEach((user) => {
+            if (emailToRemove === user.email) {
+                const emailsIdxOf = collaborators.indexOf(user.email)
+                if (emailsIdxOf !== -1) {
+                    const prevCollaborators = [...collaborators]
+                    setCollaborators(prevCollaborators => {
+                        return prevCollaborators.filter(prevCollaborator => (prevCollaborator !== emailToRemove))
+                    })
                     debugger
                 }
-            })
-            debugger
+                debugger
+            }
+        })
     }
 
-    const handleRemove = (e) => {
-        e.preventDefault();
-        // const idx = collaborators.indexOf(e.target.value)
-        // setCollaborators(collaborators.splice(idx, 1))
+    const handleAdd = (e) => { 
+        // debugger
+        e.preventDefault()
+        setCollabErrors(true)
+        allUsers.forEach((user) => {
+            // debugger
+            if (currCollaborator === user.email) {
+                // debugger
+                collaboratorIds = (collaboratorIds.concat(user._id))
+                // debugger
+                const newArr = collaborators.slice()
+                const anotherNewArr = newArr.concat(user.email)
+                setCollaborators(anotherNewArr)
+                setCollabErrors(false)
+                setCurrCollaborator('')
+                // debugger
+            }
+        })
+        // debugger
     }
-
-
-return(
-    <div className="tripformdiv">
+    
+    const CollaboratorsList = () => {
+        // debugger
+        return (
+            <ul>
+                {collaborators.map(collaborator => {
+                    debugger
+                    return (
+                        <li><span>{collaborator}</span><button value={collaborator} onClick={e => handleRemove(e)}>Remove</button></li>
+                        )
+                    })}
+            </ul>
+        )
+    }
+    
+    return(
+        <div className="tripformdiv">
         <h3 className="tripformheader">Create a New Trip!</h3>
         <form classname="tripformform" onSubmit={e => handleSubmit(e)}>
        
@@ -116,13 +142,12 @@ return(
                 <button onClick={(e) => handleAdd(e)}>Add</button>
             </ul>     
             <span>{collabErrors ? 'No user found with that email' : null}</span>       
-            <p className="tripformsubheader">Collaborators: {CollaboratorsList}</p>
+            <p className="tripformsubheader">Collaborators: {CollaboratorsList()}</p>
             <br/>
             <input type="submit" className="tripformsubmit"  value={submit} onClick={e=> handleSubmit(e)}/>
         </form>
     </div>
 )
-
 }
 
 export default TripForm
