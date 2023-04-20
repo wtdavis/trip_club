@@ -7,11 +7,13 @@ import { logout } from '../../store/session';
 import { Modal } from '../../context/Modal';
 import LoginFormModal from '../SessionForms/LoginFormModal';
 import SignupFormModal from '../SessionForms/SignupFormModal';
+import TripFormModal from '../TripForm/TripFormModal';
 import './NavBar.css';
 
 function Navigation () {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
+  const [showCreateTripModal, setShowCreateTripModal] = useState(false);
 
   const loggedIn = useSelector(state => !!state.session.user);
   const dispatch = useDispatch();
@@ -29,7 +31,8 @@ function Navigation () {
           {/* <Link className="navlink"  to={'/tweets'}>All Tweets</Link> */}
           <Link className="navlink"  to={'/profile'}>profile</Link>
           {/* <Link  className="navlink" to={'/tweets/new'}>Write a Tweet</Link> */}
-          <Link className="navlink"  to={'/trips/new'}> create a trip</Link>
+          {/* <Link className="navlink"  to={'/trips/new'}> create a trip</Link> */}
+          <button className="navlink" onClick={()=> setShowCreateTripModal(true)}>create a trip</button>
 
           <Link className="navlink" to={'/'}> <button id="navlink_logout" onClick={logoutUser}>logout</button></Link>
           <Link className="navlink"  to={'/contact'}>contact us</Link>
@@ -89,6 +92,12 @@ function Navigation () {
           </Modal>
         )}
 
+        {showCreateTripModal && (
+          <Modal onClose={() => setShowCreateTripModal(false)}>
+            <TripFormModal setShowCreateTripModal={setShowCreateTripModal} />
+          </Modal>
+        )}
+
         
         
 
@@ -96,28 +105,6 @@ function Navigation () {
 
 
     </>
-    // <div className="navlinkdiv" >
-    //   {/* <Link className="navlink"  to={'/login'}>login</Link> */}
-    //   <button onClick={()=> setShowLoginModal(true)}>login</button>
-      
-    //   {/* <Link className="navlink"  to={'/signup'}>signup</Link> */}
-    //   <button onClick={()=> setShowSignupModal(true)}>signup</button>
-
-    //   <Link className="navlink"  to={'/contact'}>contact us</Link>
-      
-    //   {showLoginModal && (
-    //     <Modal onClose={() => setShowLoginModal(false)}>
-    //       <LoginFormModal setShowLoginModal={setShowLoginModal} />
-    //     </Modal>
-    //   )}
-
-    //   {showSignupModal && (
-    //     <Modal onClose={() => setShowSignupModal(false)}>
-    //       <SignupFormModal setShowSignupModal={setShowSignupModal}/>
-    //     </Modal>
-    //   )}
-    // {console.log(showLoginModal)}
-    // </div>
   );
 }
 
