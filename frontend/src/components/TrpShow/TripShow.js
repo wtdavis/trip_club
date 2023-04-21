@@ -114,37 +114,50 @@ if (!tripEvents) {
     let ele2;
     
     if (a instanceof Date) {
-      ele1 = a
+      ele1 = new Date(a)
     } else {
-      ele1 = new Date(a).startTime
+      ele1 = new Date(a.startTime)
     }
     // debugger
     if (b instanceof Date) {
-      ele2 = b
+      ele2 = new Date(b)
     } else {
-      ele2 = new Date(b).startTime
+      ele2 = new Date(a.startTime)
     }
     // debugger
-    return ele1.getTime() - ele2.getTime()
+    if (ele1) { ele1 = myGetTime(ele1)}
+    if (ele2) { ele2 = myGetTime(ele2)}
+
+    return ele1 - ele2
   }
 
- 
+    const myGetTime = (ele) => {
+     let res =  ele.getTime()
+     return res
+    }
 
-  // let arr = [new Date(2023, 10, 12), new Date(2023, 2, 1)]
-  // console.log(arr.sort(compareDates))
-  // debugger
-  useEffect( () => {
-    dates(startDate, endDate)
 
-}, [dispatch])
+    let events;
+    let allEvents;
+    
+    if (currentTrip){
+    allEvents = Object.values(tripEvents).filter(ele => ele.trip === currentTrip._id)
+    allEvents = [...allEvents, ...dateList]
+    events = allEvents.sort(compareDates)}
+
+//   useEffect( () => {
+//     allEvents = [...allEvents, ...dateList];
+//     events = allEvents.sort(compareDates)
+// }, [dispatch, tripEvents])
   // let datess = dateList.map(date => new Date(date).toDateString())
 
   console.log(tripEvents)
 // debugger
-  let events = Object.values(tripEvents).filter(ele => ele.trip === currentTrip._id)
-// debugger
+  debugger
 
-   if (dateList.length && currentTrip) return (
+
+  debugger
+   if (dateList.length && currentTrip) {return (
       <div className='tripshowpage'>
 
         <div className='tripshowtrippanel'>
@@ -163,7 +176,7 @@ if (!tripEvents) {
             {/* <p> test</p> */}
           </div>
       </div>
-  )
+  )}
 
   // return(<p > trip {title} description {description}</p>)
 

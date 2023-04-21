@@ -5,6 +5,7 @@ import TripItem from '../Trips/TripItem';
 import TripTest from '../Trips/TripTest';
 import './ProfilePage.css'
 import { clearEvents, fetchEvents } from '../../store/events';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 
@@ -13,8 +14,10 @@ const ProfilePage = () => {
   const currentUser = useSelector(state => state.session.user);
   // const trips = useSelector(tripActions.getTrips); 
   const trips = useSelector(state => Object.values(state.trips.all))
-  const tripsUser = trips.filter(trip => trip.author._id == currentUser._id);
+  const tripsUser = trips.filter(trip => trip.author?._id == currentUser?._id);
   const events = useSelector(state => state.events)
+  
+  
   
   useEffect(() => {
     dispatch(clearEvents())
@@ -23,9 +26,10 @@ const ProfilePage = () => {
   }, [dispatch]);
   
   useEffect(() => {
-    dispatch(tripActions.fetchUserTrips(currentUser._id));
+    dispatch(tripActions.fetchUserTrips(currentUser?._id));
     return () => dispatch(tripActions.clearTripErrors());
   }, [currentUser, dispatch]);
+  
 
 
 
@@ -53,7 +57,7 @@ if (trips) {
           ))} */}
           {tripsUser ? tripsUser.map(trip => (
             <TripItem 
-              key={trip._id}
+              key={trip?._id}
               trip={trip} 
             />
           )) : 

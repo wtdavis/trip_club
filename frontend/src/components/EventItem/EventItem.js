@@ -1,5 +1,7 @@
 function EventItem (props)  {
     
+  let startTime = new Date(props.event.startTime).toDateString()
+  let endTime = new Date(props.event.endTime).toDateString()
     if (props.event instanceof Date){
     return (
         <div className="dateseperator">
@@ -10,8 +12,8 @@ function EventItem (props)  {
         <div className="eventitembox">
             <p className="eventitemitem">{props.event.title}</p>
             <p className="eventitemitem">{props.event.description}</p>
-            <p className="eventitemitem">{props.event.startTime}</p>
-            <p className="eventitemitem">{props.event.endTime}</p>
+            <p className="eventitemitem">{startTime}</p>
+            <p className="eventitemitem">{endTime}</p>
         </div>
       )  
     }
