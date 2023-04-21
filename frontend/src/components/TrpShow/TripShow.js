@@ -42,46 +42,17 @@ const TripShow = (props) => {
   }, [dispatch]
   )
   
-if (!tripEvents) {
-  dispatch()
-}
-
-  // useEffect(()=> {
-  //   if (trip || props?.location.trip){
-  //   fetchEvents()}
-  // }, [])
-
-
-// const fetchEvents = () => {
-//     if (trip){
-//     dispatch(eventActions.fetchTripEvents(props.location.trip._id))}
- 
+// if (!tripEvents) {
+//   dispatch()
 // }
-  
-  // const events = useSelector(state => state.events)
-
-  
 
 
 
-  // const { tripId } = useParams();
-  // const history = useHistory;
-  // const trip = useSelector(state => Object.values(state.trips.all[tripId]))
-
-  // const userId = listing ? listing.userId : null 
-  // const user = useSelector(state => state.users ? state.users[userId] : null);
   const users = useSelector(state => state.users);
-  // const reviews = useSelector(state => Object.values(state.reviews));
-  // const reviewsSelected = reviews.filter(review => review.listingId == listingId);
-
   const currentUser = useSelector(state => state.session.user);
 
-  // const handleCLick = (e) => {
-  //   e.preventDefault();
-  //   dispatch(tripActions.fetchTrip(trip._id))
-  // }
 
-  const eventseventsevents = ["bingo", "bango", "stupid", "eventnames!"]
+  const eventseventsevents = [new Date(2023, 3, 30), {id: "50505", startTime: new Date(2023, 3, 20)}, new Date(2023, 3, 18), new Date(2023, 3, 25)]
 
   let lng = -73.99376925185645;
   let lat = 40.73631643149453;
@@ -113,50 +84,32 @@ if (!tripEvents) {
     let ele1;
     let ele2;
     
-    if (a instanceof Date) {
-      ele1 = new Date(a)
-    } else {
-      ele1 = new Date(a.startTime)
-    }
-    // debugger
-    if (b instanceof Date) {
-      ele2 = new Date(b)
-    } else {
-      ele2 = new Date(a.startTime)
-    }
-    // debugger
-    if (ele1) { ele1 = myGetTime(ele1)}
-    if (ele2) { ele2 = myGetTime(ele2)}
 
+
+
+    if (a instanceof Date) {
+      ele1 = a.getTime()
+    } else {
+      ele1 = new Date(a.startTime).getTime()
+    }
+    if (b instanceof Date) {
+      ele2 = b.getTime()
+    } else {
+      ele2 = new Date( b.startTime).getTime()
+    }
     return ele1 - ele2
   }
 
-    const myGetTime = (ele) => {
-     let res =  ele.getTime()
-     return res
-    }
-
+  
 
     let events;
     let allEvents;
     
-    if (currentTrip){
+    if (currentTrip && dateList.length){
     allEvents = Object.values(tripEvents).filter(ele => ele.trip === currentTrip._id)
     allEvents = [...allEvents, ...dateList]
     events = allEvents.sort(compareDates)}
 
-//   useEffect( () => {
-//     allEvents = [...allEvents, ...dateList];
-//     events = allEvents.sort(compareDates)
-// }, [dispatch, tripEvents])
-  // let datess = dateList.map(date => new Date(date).toDateString())
-
-  console.log(tripEvents)
-// debugger
-  debugger
-
-
-  debugger
    if (dateList.length && currentTrip) {return (
       <div className='tripshowpage'>
 
@@ -167,7 +120,7 @@ if (!tripEvents) {
             <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{trip.collaborators.map(e => (<li>{e.username}</li>))}</ul>
             <p className='tripshowinfoitem' id='tripshowstartdate'>Begins {startDateString}</p>
             <p className='tripshowinfoitem' id='tripshowenddate'>Ends {endDateString}</p>
-            <EventForm trip={trip}/>
+            <EventForm  id="eventform" trip={trip}/>
           </div>
         </div>
           <div className='tripshoweventslist'>

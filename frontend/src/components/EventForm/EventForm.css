@@ -1,0 +1,27 @@
+.eventformdiv {
+    width: 100%;
+ /* display: block; */
+ background-color: var(--darkyellow-sands-brand);
+ text-align: center;
+ padding: 20px;
+ border-radius: 20px
+}
+
+.eventformform {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+.eventforminput {
+    width: 80%;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 10px
+}
+
+.eventformsubmit {
+    width: 30%;
+    height: 30px;
+    background-color: var(--lightblue-sands-brand);
+    margin-top: 10px
+}

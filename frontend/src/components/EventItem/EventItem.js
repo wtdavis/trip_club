@@ -10,7 +10,7 @@ function EventItem (props)  {
     )} else {
       return (
         <div className="eventitembox">
-            <p className="eventitemitem">{props.event.title}</p>
+            <p id="eventitemtitle" className="eventitemitem">{props.event.title}</p>
             <p className="eventitemitem">{props.event.description}</p>
             <p className="eventitemitem">{startTime}</p>
             <p className="eventitemitem">{endTime}</p>

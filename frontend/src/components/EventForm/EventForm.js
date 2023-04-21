@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Calendar from "react-calendar";
 import { createTripEvent } from "../../store/events";
+import "./EventForm.css"
 
 function EventForm (props) {
 
@@ -24,7 +25,6 @@ function EventForm (props) {
             endTime: new Date(endDate),
             trip: currentTrip._id
         }
-        console.log("eventful")
         dispatch(createTripEvent({tripId: currentTrip._id, event: formData}))
     }
 return(

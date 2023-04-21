@@ -4,46 +4,80 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 98%;
-    height: 540px;
+    /* height: 100%; */
     border: 2px solid white;
+    padding: 20px;
 }
 
 .tripshowtrippanel {
     display: flex;
     justify-content: center;
     width: 45%;
-    height: 500px;
-    border: 2px solid grey;   
+    height: 700px;
+    border: 2px solid var(--neutral );
+    border-radius: 15px;
+     
 }
 
 .tripshoweventslist {
     display: block;
     overflow-y: scroll;
     width: 45%;
-    height: 500px;
-    border: 2px solid grey;   
+    height: 700px;
+    border: 2px solid var(--neutral);
+    border-radius: 15px;
+
 }
 
+.tripshowinfo {
+    width: 80%;
+    margin: 20px 0px 20px 0px;
+    
+}
 .tripshowinfoitem {
     text-align: center;
+
 }
 
 #tripshowtriptitle {
-    font-size: 40px;
+    font-size: 25px;
     font-weight: bold;
 }
 
 .eventitembox:hover {
     transform: scale(1.005);
-    background-color: blue;
+    background-color: var(--lightblue-sands-brand);
 }
 
 .eventitembox {
-    border: 1px grey solid;
-    border-radius: 5px;
+    border: 2px grey solid;
+    border-radius: 10px;
     transition: 0.5s;
+    padding: 10px;
+    margin: 10px;
+    /* background-color: rgb(171, 187, 234); */
 }
 
 .dateseperator {
-    border-top: 1px solid darkgrey
+    border-top: 1px solid darkgrey;
+    min-height: 30px;   
+}
+
+.dateseperatortext {
+    padding: 5px 0px 5px 0px;
+    text-align: center;
+}   
+
+.eventitemitem {
+    
+}
+
+#eventitemtitle {
+    font-size: larger;
+    font-weight: bold;
+    text-align: center;
+}
+
+#eventform {
+    border-top: 1px solid lemonchiffon;
 }
