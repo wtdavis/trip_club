@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Calendar from "react-calendar";
+// import Calendar from "react-calendar";
 import { createTripEvent } from "../../store/events";
 import "./EventForm.css"
 
