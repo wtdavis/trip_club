@@ -11,22 +11,22 @@ function TripEditForm () {
     const dispatch = useDispatch()
     const { tripId } = useParams()
     const currentUser = useSelector(state => state.session.user)
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
-    const [startDate, setStartDate] = useState(null)
-    const [endDate, setEndDate] = useState(null)
+    const currentTrip = useSelector(state => state.trips.edit)
+    const [title, setTitle] = useState(currentTrip.title)
+    const [description, setDescription] = useState(currentTrip.description)
+    const [startDate, setStartDate] = useState(currentTrip.startDate)
+    const [endDate, setEndDate] = useState(currentTrip.endDate)
     const [submit, setSubmit] = useState("Update Trip")
-    const [collaborators, setCollaborators] = useState([])
+    const [collaborators, setCollaborators] = useState([currentTrip.collaborators])
     const allUsers = Object.values(useSelector(state => state.users))
     const [redirect, setRedirect] = useState(false)
-    const [newTrip, setNewTrip] = useState();
+    const [newTrip, setNewTrip] = useState(currentTrip);
     const [currCollaborator, setCurrCollaborator] = useState('')
     const [collabErrors, setCollabErrors] = useState(false)
     
     useEffect(() => {
         dispatch(userActions.fetchAllUsers())
         dispatch(tripActions.fetchTrip(tripId))
-
     }, [])
 
     let collaboratorIds = []
@@ -72,9 +72,9 @@ function TripEditForm () {
                     setCollaborators(prevCollaborators => {
                         return prevCollaborators.filter(prevCollaborator => (prevCollaborator !== emailToRemove))
                     })
-                    debugger
+                    // debugger
                 }
-                debugger
+                // debugger
             }
         })
     }
@@ -105,7 +105,7 @@ function TripEditForm () {
         return (
             <ul>
                 {collaborators.map(collaborator => {
-                    debugger
+                    // debugger
                     return (
                         <li><span>{collaborator}</span><button value={collaborator} onClick={e => handleRemove(e)}>Remove</button></li>
                         )
