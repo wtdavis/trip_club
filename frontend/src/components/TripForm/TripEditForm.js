@@ -5,30 +5,44 @@ import { useParams } from "react-router-dom"
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min"
 import * as userActions from '../../store/users'
 import * as tripActions from '../../store/trips'
+import './TripForm.css'
 
 
-function TripEditForm () {
+const TripEditForm = () => {
     const dispatch = useDispatch()
     const { tripId } = useParams()
     const currentUser = useSelector(state => state.session.user)
-    const currentTrip = useSelector(state => state.trips.edit)
-    const [title, setTitle] = useState(currentTrip.title)
-    const [description, setDescription] = useState(currentTrip.description)
-    const [startDate, setStartDate] = useState(currentTrip.startDate)
-    const [endDate, setEndDate] = useState(currentTrip.endDate)
+    const currentTrip = useSelector(state => state.trips.edit ? state.trips.edit : null)
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
+    const [startDate, setStartDate] = useState(null)
+    const [endDate, setEndDate] = useState(null)
     const [submit, setSubmit] = useState("Update Trip")
-    const [collaborators, setCollaborators] = useState([currentTrip.collaborators])
+    const [collaborators, setCollaborators] = useState([])
     const allUsers = Object.values(useSelector(state => state.users))
     const [redirect, setRedirect] = useState(false)
-    const [newTrip, setNewTrip] = useState(currentTrip);
+    const [newTrip, setNewTrip] = useState({})
     const [currCollaborator, setCurrCollaborator] = useState('')
     const [collabErrors, setCollabErrors] = useState(false)
     
+    
     useEffect(() => {
+        debugger
         dispatch(userActions.fetchAllUsers())
         dispatch(tripActions.fetchTrip(tripId))
+        debugger
     }, [])
-
+    
+    useEffect(() => {
+        if (currentTrip) {
+            setTitle(currentTrip.title)
+            setDescription(currentTrip.description)
+            setStartDate(currentTrip.startDate)
+            setEndDate(currentTrip.endDate)
+            setCollaborators(currentTrip.collaborators)
+        }
+    }, [currentTrip])
+ 
     let collaboratorIds = []
 
     if (redirect) {
@@ -107,17 +121,17 @@ function TripEditForm () {
                 {collaborators.map(collaborator => {
                     // debugger
                     return (
-                        <li><span>{collaborator}</span><button value={collaborator} onClick={e => handleRemove(e)}>Remove</button></li>
+                        <li><span>{collaborator.username}</span><button value={collaborator.username} onClick={e => handleRemove(e)}>Remove</button></li>
                         )
                     })}
             </ul>
         )
     }
-    
+    // debugger
     return(
         <div className="tripformdiv">
         <h3 className="tripformheader">Update Your Trip!</h3>
-        <form classname="tripformform" onSubmit={e => handleSubmit(e)}>
+        <form className="tripformform" onSubmit={e => handleSubmit(e)}>
        
             <p className="tripformsubheader">Name Your New Trip:</p>
             <input type="text" className="tripforminput" value={title} onChange={e => setTitle(e.target.value)}/>
