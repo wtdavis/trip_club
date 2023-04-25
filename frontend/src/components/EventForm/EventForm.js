@@ -11,8 +11,8 @@ function EventForm (props) {
     const currentUser = useSelector(state => state.session.user)
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
-    const [startDate, setStartDate] = useState(null)
-    const [endDate, setEndDate] = useState(null)
+    const [startTime, setStartTime] = useState(null)
+    const [endTime, setEndTime] = useState(null)
 
     // const author = currentUser.id
     const handleSubmit = (e) => {
@@ -21,8 +21,8 @@ function EventForm (props) {
             author: currentUser._id,
             title: title,
             description: description,
-            startTime: new Date(startDate),
-            endTime: new Date(endDate),
+            startTime: new Date(startTime),
+            endTime: new Date(endTime),
             trip: currentTrip._id
         }
         dispatch(createTripEvent({tripId: currentTrip._id, event: formData}))
@@ -55,17 +55,17 @@ return(
             <p className="eventformsubheader">Event Start Date:</p>
             <input 
                 className="createevent_input" 
-                type="date" 
-                value={startDate} 
-                onChange={e => setStartDate(e.target.value)}
+                type="datetime-local" 
+                value={startTime} 
+                onChange={e => setStartTime(e.target.value)}
             />
             
             <p className="eventformsubheader">Event End Date:</p>
             <input 
-                type="date" 
+                type="datetime-local" 
                 className="createevent_input" 
-                value={endDate} 
-                onChange={e => setEndDate(e.target.value)}
+                value={endTime} 
+                onChange={e => setEndTime(e.target.value)}
             />
             {/* <Calendar/> */}
             <br/>
