@@ -22,8 +22,10 @@ const tripSchema = new Schema({
         type: Date,
         required: true
     },
-    events: [Schema.Types.ObjectId],
-    collaborators: [Schema.Types.ObjectId],
+    events: [{type: Schema.Types.ObjectId,
+                ref: 'Event'}],
+    collaborators: [{type: Schema.Types.ObjectId,
+                    ref: 'User'}],
     lat: {
         type: Number,
     },
