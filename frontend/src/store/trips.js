@@ -9,6 +9,7 @@ const RECEIVE_TRIP_ERRORS = "trips/RECEIVE_TRIP_ERRORS";
 const CLEAR_TRIP_ERRORS = "trips/CLEAR_TRIP_ERRORS";
 const SET_CURRENT_TRIP = "trips/setCurrentTrip"
 const CLEAR_CURRENT_TRIP = "trips/clearCurrentTrip"
+const REMOVE_TRIP = "trips/REMOVE_TRIP";
 
 const receiveTrips = trips => ({
   type: RECEIVE_TRIPS,
@@ -36,6 +37,14 @@ export const setCurrentTrip = trip => {
     trip
   }
 }
+
+export const removeTrip = trip => {
+  return {
+    type: REMOVE_TRIP,
+    trip
+  }
+}
+
 export const clearCurrentTrip = trip => {
   return {
     type: CLEAR_CURRENT_TRIP,
@@ -117,7 +126,13 @@ export const fetchUserTrips = id => async dispatch => {
   }
 };
 
-
+export const deleteTrip = data => async dispatch => {
+  debugger
+  const res = await jwtFetch(`/api/trips/${data._id}`, {
+    method: 'DELETE'
+  })
+  dispatch(removeTrip(data))
+}
 
 export const composeTrips = data => async dispatch => {
   let trip;
@@ -167,6 +182,15 @@ const tripsReducer = (state = { all: {}, user: {}, new: undefined, current: null
       return {...state, current: action.trip};
     case CLEAR_CURRENT_TRIP:
       return {...state, current: null}
+    case REMOVE_TRIP:
+      debugger
+      let nextState = { ...state };
+      let idxOfDeletingTrip = nextState.all.indexOf(action.trip)
+      if (idxOfDeletingTrip > -1) {
+        nextState.all.splice(idxOfDeletingTrip, 1)
+      }
+      debugger
+      return { ...nextState, current: null, edit: null, new: undefined }
     default:
       return state;
   }
