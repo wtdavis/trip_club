@@ -17,7 +17,6 @@ const TripEditForm = () => {
     const [description, setDescription] = useState('')
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
-    const [submit, setSubmit] = useState("Update Trip")
     const [collaborators, setCollaborators] = useState([])
     const allUsers = Object.values(useSelector(state => state.users))
     const [redirect, setRedirect] = useState(false)
@@ -63,13 +62,14 @@ const TripEditForm = () => {
         })
         // debugger
         const formData = {
+            _id: tripId,
             title: title,
             description: description,
             startDate: startDate,
             endDate: endDate,
             collaborators: collaboratorIds
         }
-        // debugger
+        debugger
         setNewTrip(await dispatch(tripActions.updateTrip(formData)))
         // debugger
         setRedirect(true)
@@ -156,7 +156,7 @@ const TripEditForm = () => {
             <span>{collabErrors ? 'No user found with that email' : null}</span>       
             <p className="tripformsubheader">Collaborators: {CollaboratorsList()}</p>
             <br/>
-            <input type="submit" className="tripformsubmit"  value={submit} onClick={e=> handleSubmit(e)}/>
+            <input type="submit" className="tripformsubmit"  value='Update Trip' onClick={e=> handleSubmit(e)}/>
         </form>
     </div>
 )

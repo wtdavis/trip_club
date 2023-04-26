@@ -97,11 +97,12 @@ export const fetchTrip = id => async dispatch => {
 };
 
 
-export const updateTrip = (tripId) => async (dispatch) => {
+export const updateTrip = (trip) => async (dispatch) => {
+  debugger
   try {
-    const res = await jwtFetch(`/api/trips/${tripId}/edit`, {
+    const res = await jwtFetch(`/api/trips/${trip._id}`, {
       method: 'PATCH',
-      body: JSON.stringify(tripId)
+      body: JSON.stringify(trip)
     })
     const updatedTrip = await res.json()
     dispatch(receiveTrip(updatedTrip))
