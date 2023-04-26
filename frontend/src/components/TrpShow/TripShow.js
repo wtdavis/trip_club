@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from "react"
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import * as  tripActions from '../../store/trips';
@@ -11,10 +11,9 @@ import * as eventActions from "../../store/events"
 import EventForm from '../EventForm/EventForm';
 import EventItem from '../EventItem/EventItem';
 
-
 const TripShow = (props) => {
 
-
+  const history = useHistory();
   const dispatch = useDispatch()
   const currentTrip = useSelector(state => state.trips.current)
   const tripEvents = useSelector(state => state.events)
@@ -110,7 +109,13 @@ const TripShow = (props) => {
     allEvents = [...allEvents, ...dateList]
     events = allEvents.sort(compareDates)}
 
-   if (dateList.length && currentTrip) {return (
+    const handleDeleteTrip = (e) => {
+      e.preventDefault();
+      dispatch(tripActions.deleteTrip(currentTrip))
+      history.push("/profile")
+    }
+
+    if (dateList.length && currentTrip) {return (
       <div className='tripshowpage'>
 
         <div className='tripshowtrippanel'>
@@ -128,6 +133,10 @@ const TripShow = (props) => {
             {/* {dateList[0].toDateString()} */}
             {/* <p> test</p> */}
           </div>
+
+        <Link className='Edit_Trip_Link' to={`/trips/${currentTrip._id}/edit`}>Edit Trip</Link>
+        <button className='Delete_Trip_Link' onClick={(e) => handleDeleteTrip(e)}>Delete Trip</button>
+
       </div>
   )}
 
