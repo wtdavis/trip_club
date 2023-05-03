@@ -47,8 +47,7 @@ function Navigation () {
           <button className="navlink" onClick={()=> setShowLoginModal(true)}>login</button>
           {/* <Link className="navlink"  to={'/signup'}>signup</Link> */}
           <button className="navlink" onClick={()=> setShowSignupModal(true)}>signup</button>
-          <Link className="navlink"  to={'/contact'}>contact us</Link>
-          
+          <Link className="navlink"  to={'/contact'}>contact us</Link> 
 
 
         </div>
@@ -58,7 +57,7 @@ function Navigation () {
 
   return (
     <>
-      <header className="site-header">
+      <header className="site_header">
         <NavLink className="nav-title" exact to="/" >
           <div className = "logo-box">
             <div className="logo-name">trip club</div>
