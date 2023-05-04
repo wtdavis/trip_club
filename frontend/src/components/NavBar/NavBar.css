@@ -110,7 +110,7 @@
 .navlink:hover {
    transform: scale(1.025);
    background-color: rgba(255, 255, 255, 0.3);
-   border-radius: 10px;
+   border-radius: 20px;
 }
 
 /* #logoutbutton:hover {
@@ -143,18 +143,16 @@ header.site_header {
 
 .logo-box:hover {
     transform: scale(1.025);
+    /* background-color: rgba(255, 255, 255, 0.3); */
+    /* padding: 5px 10px; */
+    border-radius: 20px;
 }
 
-.logo-name {
-  /* color: var(--pink-brand); */
+.logo_name {
   color: black;
   font-size: 35px;
   font-weight: 800;
   letter-spacing: 1px;
-  /* text-shadow: 1px 1px 1px var(--dark-black-color); */
-  /* background: linear-gradient(to right, black, var(--blue-sands-brand)); */
-  /* -webkit-background-clip: text; */
-  /* -webkit-text-fill-color: transparent; */
 }
 
 

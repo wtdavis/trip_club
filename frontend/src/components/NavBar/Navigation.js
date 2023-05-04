@@ -60,24 +60,14 @@ function Navigation () {
       <header className="site_header">
         <NavLink className="nav-title" exact to="/" >
           <div className = "logo-box">
-            <div className="logo-name">trip club</div>
+            <div className="logo_name">trip club</div>
           </div>
         </NavLink>
 
         <div className="site_header_right_side">
             { getLinks() }
         </div>
-
-        {/* <div className='site_header_right_side_________'>
-          <div className="site_header_right_side">
-            { getLinks() }
-          </div>
-
-          <Link className="contact_us_link"  to={'/contact'}>
-            <div className='contact_us'>Contact Us</div>
-          </Link>
-        </div> */}
-
+        
         {showLoginModal && (
           <Modal onClose={() => setShowLoginModal(false)}>
             <LoginFormModal setShowLoginModal={setShowLoginModal} />
