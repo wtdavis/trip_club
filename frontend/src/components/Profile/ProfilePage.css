@@ -52,7 +52,8 @@
     
   }
 
-  h1 {
+  trips-div h1,
+  trips-container h1 {
     background: linear-gradient(to right, var(--darkyellow-sands-brand), var(--blue-sands-brand));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
