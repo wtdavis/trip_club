@@ -28,11 +28,13 @@ const LoginFormModal = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(sessionActions.login({ email, password })); 
+    setShowLoginModal(false)
   };
 
   const handleDemo = (e) => {
 
-    return dispatch(sessionActions.login({ 
+    setShowLoginModal(false)
+    dispatch(sessionActions.login({ 
       email: 'demo@user.io', 
       password: 'password' 
     })); 

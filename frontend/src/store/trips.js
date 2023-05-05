@@ -106,6 +106,7 @@ export const updateTrip = (trip) => async (dispatch) => {
     })
     const updatedTrip = await res.json()
     dispatch(receiveTrip(updatedTrip))
+    return updatedTrip
   } catch(err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {

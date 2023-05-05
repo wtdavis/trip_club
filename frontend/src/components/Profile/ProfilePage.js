@@ -33,7 +33,7 @@ const ProfilePage = () => {
 
 
 
-if (trips) {
+if (trips && currentUser) {
   if (trips.length == 0) {
     return (
      <div className='trips-div'>     
@@ -70,6 +70,8 @@ if (trips) {
     );
   }
 
+} else {
+  return <Redirect to="/"/>
 }
 
 
