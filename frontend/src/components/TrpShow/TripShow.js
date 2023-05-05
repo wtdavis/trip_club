@@ -10,6 +10,8 @@ import './TripShow.css';
 import * as eventActions from "../../store/events"
 import EventForm from '../EventForm/EventForm';
 import EventItem from '../EventItem/EventItem';
+import { Modal } from '../../context/Modal';
+import TripFormModal from '../TripForm/TripFormModal';
 
 const TripShow = (props) => {
 
@@ -20,8 +22,8 @@ const TripShow = (props) => {
   const [trip, setTrip] = useState(false)
   const [dateList, setDateList] = useState([])
   const [eventList, setEventList] = useState([])
+  const [showEditTripModal, setShowEditTripModal] = useState(false)
   // const [thing, setThing] = useState()  
-
 
 
   useEffect(()=>{
@@ -41,11 +43,16 @@ const TripShow = (props) => {
   }, [dispatch]
   )
   
-// if (!tripEvents) {
-//   dispatch()
-// }
-
-
+  // const handleEdit = (e) => {
+  //   e.preventDefault()
+  //   if (!showEditTripModal){
+  //   setShowEditTripModal(true)
+  // }
+  // else {
+  //   setShowEditTripModal(false)
+  // }
+  // console.log(showEditTripModal)
+  // }
 
   const users = useSelector(state => state.users);
   const currentUser = useSelector(state => state.session.user);
@@ -55,18 +62,13 @@ const TripShow = (props) => {
 
   let lng = -73.99376925185645;
   let lat = 40.73631643149453;
-  const startDate = trip.startDate;
-  const endDate = trip.endDate;
 
   const startDateString = new Date(trip.startDate).toDateString()
   const endDateString = new Date(trip.endDate).toDateString()
 
-
-
   const dates = () => {
     let res =  trip.startDate;
     let list = [];
-    // debugger
     while (res <= trip.endDate) {
       res = new Date(res);
       list.push(res)
@@ -82,10 +84,6 @@ const TripShow = (props) => {
   const compareDates = (a, b) => {
     let ele1;
     let ele2;
-    
-
-
-
     if (a instanceof Date) {
       ele1 = a.getTime()
     } else {
@@ -103,17 +101,16 @@ const TripShow = (props) => {
 
     let events;
     let allEvents;
-    
     if (currentTrip && dateList.length){
     allEvents = Object.values(tripEvents).filter(ele => ele.trip === currentTrip._id)
     allEvents = [...allEvents, ...dateList]
     events = allEvents.sort(compareDates)}
-
     const handleDeleteTrip = (e) => {
       e.preventDefault();
       dispatch(tripActions.deleteTrip(currentTrip))
       history.push("/profile")
     }
+
 
     if (dateList.length && currentTrip) {return (
       <div className='tripshowpage'>
@@ -133,15 +130,16 @@ const TripShow = (props) => {
             {/* {dateList[0].toDateString()} */}
             {/* <p> test</p> */}
           </div>
-
-        <Link className='Edit_Trip_Link' to={`/trips/${currentTrip._id}/edit`}>Edit Trip</Link>
+        {showEditTripModal && (
+          <Modal onClose={(e) => {setShowEditTripModal(false); console.log(e)}}>
+            <TripFormModal currentTrip={currentTrip} setShowCreateTripModal={setShowEditTripModal}/>
+          </Modal>
+        )}
+        <button className='Edit_Trip_Link' onClick={() => {setShowEditTripModal(true)}}>Edit Trip</button>
         <button className='Delete_Trip_Link' onClick={(e) => handleDeleteTrip(e)}>Delete Trip</button>
 
       </div>
   )}
-
-  // return(<p > trip {title} description {description}</p>)
-
 
 }
 export default TripShow

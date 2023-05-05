@@ -5,24 +5,41 @@ import { useParams } from "react-router-dom"
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min"
 import * as userActions from '../../store/users'
 import './TripForm.css'
+import { updateTrip } from "../../store/trips"
 
 
 const TripFormModal = (props) => {
   const {setShowCreateTripModal} = props;
+  const currentTrip = (props.currentTrip ? props.currentTrip : null)
+    // const dispatch = useDispatch()
+    // const { tripId } = useParams()
+    // const currentUser = useSelector(state => state.session.user)
+    // const [title, setTitle] = useState("")
+    // const [description, setDescription] = useState("")
+    // const [startDate, setStartDate] = useState(null)
+    // const [endDate, setEndDate] = useState(null)
+    // const [submit, setSubmit] = useState("Create Trip")
+    // const [collaborators, setCollaborators] = useState([])
+    // const allUsers = Object.values(useSelector(state => state.users))
+    // const [redirect, setRedirect] = useState(false)
+    // const [newTrip, setNewTrip] = useState();
+    // const [currCollaborator, setCurrCollaborator] = useState('')
+    // const [collabErrors, setCollabErrors] = useState(false)
 
+    
     const dispatch = useDispatch()
     const { tripId } = useParams()
     const currentUser = useSelector(state => state.session.user)
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
-    const [startDate, setStartDate] = useState(null)
-    const [endDate, setEndDate] = useState(null)
+    const [title, setTitle] = useState(currentTrip ? currentTrip.title : "")
+    const [description, setDescription] = useState(currentTrip ? currentTrip.description : "")
+    const [startDate, setStartDate] = useState(currentTrip ? currentTrip.startDate.split("T")[0] : new Date().toISOString().split("T")[0])
+    const [endDate, setEndDate] = useState(currentTrip ? currentTrip.endDate.split("T")[0] : new Date().toISOString().split("T")[0])
     const [submit, setSubmit] = useState("Create Trip")
-    const [collaborators, setCollaborators] = useState([])
+    const [collaborators, setCollaborators] = useState(currentTrip ? currentTrip.collaborators : [])
     const allUsers = Object.values(useSelector(state => state.users))
     const [redirect, setRedirect] = useState(false)
     const [newTrip, setNewTrip] = useState();
-    const [currCollaborator, setCurrCollaborator] = useState('')
+    const [currCollaborator, setCurrCollaborator] = useState()
     const [collabErrors, setCollabErrors] = useState(false)
     
     useEffect(() => {
@@ -55,8 +72,15 @@ const TripFormModal = (props) => {
             endDate: endDate,
             collaborators: collaboratorIds
         }
+        if (!currentTrip){
         setNewTrip(await dispatch(composeTrips(formData)))
         setRedirect(true)
+      } else if (currentTrip) {
+        dispatch(updateTrip({...currentTrip, ...formData}))
+        debugger
+        setNewTrip({...currentTrip, ...formData})
+        setRedirect(true)
+      }
     }
     
     const handleRemove = (e) => {
