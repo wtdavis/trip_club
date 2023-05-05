@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as  tripActions from '../../store/trips';
 import TripItem from '../Trips/TripItem';
-import TripTest from '../Trips/TripTest';
+import TripItemCarousel from '../Trips/TripItemCarousel';
 import './ProfilePage.css'
 import { clearEvents, fetchEvents } from '../../store/events';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
@@ -56,10 +56,14 @@ if (trips && currentUser) {
             />
           ))} */}
           {tripsUser ? tripsUser.map(trip => (
-            <TripItem 
-              key={trip?._id}
-              trip={trip} 
-            />
+            // <TripItem 
+            //   key={trip?._id}
+            //   trip={trip} 
+            // />
+            <TripItemCarousel 
+            key={trip?._id}
+            trip={trip} 
+          />
           )) : 
           <></>
           }
