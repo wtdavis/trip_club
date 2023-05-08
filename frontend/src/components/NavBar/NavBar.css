@@ -19,8 +19,20 @@
     --lightblue-sands-brand: #81EAFF;
     --darkyellow-sands-brand: #FBC00E;
     --yellow-sands-brand: #FFD774;
-
   }
+
+  header.site_header {
+    display: flex;
+    justify-content: space-between;
+    height: 70px;
+    align-items: center;
+    padding: 0px 70px 0px 70px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);    
+  }
+  
   
   /* .container {
     color: var(--grey-color);
@@ -56,8 +68,7 @@
     margin-right: 100px;
     display: flex;
     flex-direction: row;
-    align-items: center;
-    
+    align-items: center;   
 }
 
 #navlink_logout {
@@ -86,13 +97,16 @@
     color: var(--pink-brand);
     padding: 5px 15px;
     align-items: center;
-    color: rgb(55, 55, 55);
+    color: black;
+    color:rgb(236, 232, 232);
     font-size: 22px;
     font-weight: 900;
     letter-spacing: 1px;
     transition: 0.5s;
     cursor: pointer;
     position: relative;
+    opacity: 1;
+
 }
 
 .navlink #navlink_logout{
@@ -123,16 +137,6 @@
     padding: 5px
 } */
 
-header.site_header {
-  display: flex;
-  justify-content: space-between;
-  height: 70px;
-  align-items: center;
-  padding: 0px 70px 0px 70px;
-  position: sticky;
-  top: 0;
-  width: 100%;
-}
 
 .logo-box {
   /* display: flex;
@@ -149,7 +153,7 @@ header.site_header {
 }
 
 .logo_name {
-  color: black;
+  color:rgb(236, 232, 232);
   font-size: 35px;
   font-weight: 800;
   letter-spacing: 1px;
