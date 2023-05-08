@@ -26,10 +26,10 @@ const TripEditForm = () => {
     
     
     useEffect(() => {
-        debugger
+        // debugger
         dispatch(userActions.fetchAllUsers())
         dispatch(tripActions.fetchTrip(tripId))
-        debugger
+        // debugger
     }, [])
     
     useEffect(() => {
@@ -69,7 +69,7 @@ const TripEditForm = () => {
             endDate: endDate,
             collaborators: collaboratorIds
         }
-        debugger
+        // debugger
         setNewTrip(await dispatch(tripActions.updateTrip(formData)))
         // debugger
         setRedirect(true)

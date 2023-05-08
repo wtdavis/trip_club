@@ -21,6 +21,7 @@ const ProfilePage = () => {
   
   useEffect(() => {
     dispatch(clearEvents())
+    dispatch(tripActions.clearCurrentTrip())
     dispatch(tripActions.fetchTrips());
     dispatch(fetchEvents())
   }, [dispatch]);

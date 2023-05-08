@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { composeTrips } from "../../store/trips"
+import { composeTrips, setCurrentTrip } from "../../store/trips"
 import { useParams } from "react-router-dom"
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min"
 import * as userActions from '../../store/users'
@@ -57,6 +57,7 @@ const TripFormModal = (props) => {
     }
     
     const author = currentUser.id
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         let collaboratorIds = []
@@ -72,15 +73,20 @@ const TripFormModal = (props) => {
             endDate: endDate,
             collaborators: collaboratorIds
         }
+        
         if (!currentTrip){
         setNewTrip(await dispatch(composeTrips(formData)))
         setRedirect(true)
       } else if (currentTrip) {
         dispatch(updateTrip({...currentTrip, ...formData}))
-        debugger
+        dispatch(setCurrentTrip({...currentTrip, ...formData}))
+
+        // localStorage.setItem("currentTrip", {...currentTrip, ...formData})
+        // debugger
         setNewTrip({...currentTrip, ...formData})
         setRedirect(true)
       }
+      setShowCreateTripModal(false)
     }
     
     const handleRemove = (e) => {

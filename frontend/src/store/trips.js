@@ -98,7 +98,7 @@ export const fetchTrip = id => async dispatch => {
 
 
 export const updateTrip = (trip) => async (dispatch) => {
-  debugger
+  // debugger
   try {
     const res = await jwtFetch(`/api/trips/${trip._id}`, {
       method: 'PATCH',
@@ -129,7 +129,7 @@ export const fetchUserTrips = id => async dispatch => {
 };
 
 export const deleteTrip = data => async dispatch => {
-  debugger
+  // debugger
   const res = await jwtFetch(`/api/trips/${data._id}`, {
     method: 'DELETE'
   })
@@ -185,13 +185,13 @@ const tripsReducer = (state = { all: {}, user: {}, new: undefined, current: null
     case CLEAR_CURRENT_TRIP:
       return {...state, current: null}
     case REMOVE_TRIP:
-      debugger
+      // debugger
       let nextState = { ...state };
       let idxOfDeletingTrip = nextState.all.indexOf(action.trip)
       if (idxOfDeletingTrip > -1) {
         nextState.all.splice(idxOfDeletingTrip, 1)
       }
-      debugger
+      // debugger
       return { ...nextState, current: null, edit: null, new: undefined }
     default:
       return state;

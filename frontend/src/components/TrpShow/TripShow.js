@@ -14,7 +14,6 @@ import { Modal } from '../../context/Modal';
 import TripFormModal from '../TripForm/TripFormModal';
 
 const TripShow = (props) => {
-
   const history = useHistory();
   const dispatch = useDispatch()
   const currentTrip = useSelector(state => state.trips.current)
@@ -23,25 +22,76 @@ const TripShow = (props) => {
   const [dateList, setDateList] = useState([])
   const [eventList, setEventList] = useState([])
   const [showEditTripModal, setShowEditTripModal] = useState(false)
-  // const [thing, setThing] = useState()  
 
+
+const setStorageTrip = (trip) => {
+  localStorage.setItem("currentTrip", trip)
+}
+
+const getStorageTrip = () => {
+ return ( localStorage.getItem("currentTrip"))
+}
+
+// const fetchUpdatedTrip = async (tripId) => {
+//  let res = dispatch(tripActions.fetchTrip(tripId));
+//  let newTrip = await res;
+// return newTrip
+// }
+
+// debugger
 
   useEffect(()=>{
-    if (props?.location.trip !== undefined) {
-      const storageTrip = JSON.stringify(props.location.trip);
-      setTrip(props.location.trip);
-      dispatch(tripActions.setCurrentTrip(props.location.trip))
-      localStorage.setItem("currentTrip", storageTrip);
-    } else {
-      const storageTrip = JSON.parse(localStorage.getItem("currentTrip"));
-      dispatch(tripActions.setCurrentTrip(storageTrip))
+    if (props?.location.trip === undefined) {
+      debugger
+      let storageTrip = JSON.parse(getStorageTrip())
+      // debugger
       setTrip(storageTrip)
-      dispatch(eventActions.clearEvents())
-      dispatch(eventActions.fetchTripEvents(storageTrip._id))
-    }; 
+      dispatch(tripActions.setCurrentTrip(storageTrip))
+    } else if (props?.location.trip !== undefined && !currentTrip) {
+      let storageTrip = props.location.trip
+      setTrip(storageTrip)
+      setStorageTrip(storageTrip)
+      dispatch(tripActions.setCurrentTrip(storageTrip))
+      debugger
+    } else {
+      let storageTrip = currentTrip
+      setTrip(storageTrip);
+      setStorageTrip(JSON.stringify(storageTrip))
+      dispatch(tripActions.setCurrentTrip(storageTrip))
+      // debugger
+    }
+
+
+
+
+
+    // ---------------------------
+    // if (props?.location.trip !== undefined) {
+    //   const storageTrip = JSON.stringify(props.location.trip);
+    //   setTrip(props.location.trip);
+    //   dispatch(tripActions.setCurrentTrip(props.location.trip))
+    //   setStorageTrip(storageTrip)
+    // } else if (currentTrip) { 
+    //   dispatch(eventActions.fetchTripEvents(currentTrip));
+    //   setTrip(currentTrip)
+    //   localStorage.setItem("currentTrip", JSON.stringify(currentTrip))
+    // } else {
+    //   let storageTrip =  JSON.parse(getStorageTrip());
+    //     // storageTrip = fetchUpdatedTrip(storageTrip._id)
+    //   dispatch(tripActions.setCurrentTrip(storageTrip))
+    //   setTrip(storageTrip)
+    //   dispatch(eventActions.clearEvents())
+    //   dispatch(eventActions.fetchTripEvents(storageTrip._id))
+    // };
+
+    
+    // return ( () => {
+    //   dispatch(tripActions.clearCurrentTrip())}
+    // )
    
-  }, [dispatch]
+  }, [dispatch, currentTrip]
   )
+  
   
   // const handleEdit = (e) => {
   //   e.preventDefault()
