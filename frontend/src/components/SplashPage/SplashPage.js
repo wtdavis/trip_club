@@ -24,11 +24,11 @@ function SplashPage() {
       <p className='text_p'>TRIP CLUB is the platform for planning your dream travel with your friends</p>
       
       <div className="about_grid_container">
-      <div className="about_column">
+        <div className="about_column">
             <div class="flip_card" tabIndex="0">
               <div class="flip_card_inner">
                 <div class="flip_card_front">
-                  <h3>Hover, please!</h3>
+                <i className="fa-solid fa-laptop-code fa-10x"></i>
                 </div>
                 <div class="flip_card_back">
                   <h3>Responsive Design</h3>
@@ -37,34 +37,34 @@ function SplashPage() {
             </div>
 
             <div className="about_bullet">
-              <p>customize your travel itineraries, invite your friends to join, and collaborate together to create unforgettable memories</p>
+              <p>Customize your travel itineraries, invite your friends to join, and collaborate together to create unforgettable memories</p>
             </div>
 
-          </div>
+        </div>
 
-          <div className="about_column">
+        <div className="about_column">
             <div class="flip_card" tabIndex="0">
               <div class="flip_card_inner">
                 <div class="flip_card_front">
-                  <h3>Hover, please!</h3>
+                  <i class="fa-regular fa-face-grin-wide fa-10x"></i>
                 </div>
                 <div class="flip_card_back">
-                  <h3>Easy to use</h3>
+                  <h3>Easy to Use</h3>
                 </div>
               </div>
             </div>
 
             <div className="about_bullet">
-              <p>Intuitive and simple design</p>
+              <p>The navigation is intuitive. Collaboratively create and edit trip and event details</p>
             </div>
 
-          </div>
+        </div>
 
-          <div className="about_column">
+        <div className="about_column">
             <div class="flip_card" tabIndex="0">
               <div class="flip_card_inner">
                 <div class="flip_card_front">
-                  <h3>Hover, please!</h3>
+                  <i class="fa-solid fa-chart-line fa-10x"></i>
                 </div>
                 <div class="flip_card_back">
                   <h3>Effective Planning</h3>
@@ -73,11 +73,11 @@ function SplashPage() {
             </div>
 
             <div className="about_bullet">
-              <p>No more endless group chats, lost emails, or scattered notes - with Trip Club, you can keep all your travel plans and event details in one convenient location. </p>
+              <p>No more endless group chats, lost emails, or scattered notes - with Trip Club, you can keep all your travel details in one convenient place. </p>
             </div>
 
-          </div>
         </div>
+      </div>
       
     </div>
      
