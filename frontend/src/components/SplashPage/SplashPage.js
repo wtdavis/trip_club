@@ -6,25 +6,81 @@ function SplashPage() {
  return (
   
   <div className='splash_container'>
-    <video muted autoplay="autoplay" playsinline loop id="bg_video">
-      <source src="https://trip-club-dev.s3.amazonaws.com/splash/bg_video.mp4" type="video/mp4"></source>      
-    </video> 
+
+    <div className='video_container'>
+      <video muted autoplay="autoplay" playsinline loop id="bg_video">
+        <source src="https://trip-club-dev.s3.amazonaws.com/splash/bg_video.mp4" type="video/mp4"></source>      
+      </video> 
+
+      <div className='text_container'>
+        {/* <h1 className='tripclub_text'>TRIP CLUB</h1> */}
+      </div>  
+    </div>
+
+    <div className='about_container'>
+      <h1 className='text_h1'>ABOUT</h1>
+      <p className='text_p'>TRIP CLUB is the platform for planning your dream travel with your friends</p>
+      
+      <div className="about_grid_container">
+        <div className="about_column">
+            <div class="flip_card" tabIndex="0">
+              <div class="flip_card_inner">
+                <div class="flip_card_front">
+                <i className="fa-solid fa-laptop-code fa-10x"></i>
+                </div>
+                <div class="flip_card_back">
+                  <h3>Responsive Design</h3>
+                </div>
+              </div>
+            </div>
+
+            <div className="about_bullet">
+              <p>Customize your travel itineraries, invite your friends to join, and collaborate together to create unforgettable memories</p>
+            </div>
+
+        </div>
+
+        <div className="about_column">
+            <div class="flip_card" tabIndex="0">
+              <div class="flip_card_inner">
+                <div class="flip_card_front">
+                  <i class="fa-regular fa-face-grin-wide fa-10x"></i>
+                </div>
+                <div class="flip_card_back">
+                  <h3>Easy to Use</h3>
+                </div>
+              </div>
+            </div>
+
+            <div className="about_bullet">
+              <p>The navigation is intuitive. Collaboratively create and edit trip and event details</p>
+            </div>
+
+        </div>
+
+        <div className="about_column">
+            <div class="flip_card" tabIndex="0">
+              <div class="flip_card_inner">
+                <div class="flip_card_front">
+                  <i class="fa-solid fa-chart-line fa-10x"></i>
+                </div>
+                <div class="flip_card_back">
+                  <h3>Effective Planning</h3>
+                </div>
+              </div>
+            </div>
+
+            <div className="about_bullet">
+              <p>No more endless group chats, lost emails, or scattered notes - with Trip Club, you can keep all your travel details in one convenient place. </p>
+            </div>
+
+        </div>
+      </div>
+      
+    </div>
      
 
-    <div className='text_container'>
-      <div className='text_content'>
 
-      <h1 className='text_h1'>Welcome to Trip Club</h1>  
-      <p className='text_p'>the ultimate platform for planning your dream travel and events with your friends</p>
-      <p className='text_p'>We understand that planning a trip can be stressful, time-consuming, and overwhelming. That's why we've created Trip Club, a convenient tool for all your travel planning needs.</p>
-      <p className='text_p'>Our platform allows easily plan and customize your travel itineraries, invite your friends to join, and collaborate together to create unforgettable memories. </p>
-      {/* <span className='text_h1' id="tooltip" data-tooltip="With Trip Club, you can easily share your travel plans, make real-time updates, and communicate with your travel buddies to ensure everyone is on the same page.
-        No more endless group chats, lost emails, or scattered notes - with Trip Club, you can keep all your travel plans and event details in one convenient location. 
-        Access your travel plans from anywhere, at any time, so you can focus on enjoying your trip without any added stress!
-        Join the Trip Club community today and experience hassle-free travel planning like never before. Start planning your next adventure and get ready for a journey of a lifetime!">Welcome to Trip Club</span>     */}
-      </div>
-
-   </div>  
   </div>
  ) 
 }
