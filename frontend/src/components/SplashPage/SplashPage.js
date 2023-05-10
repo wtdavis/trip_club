@@ -13,9 +13,7 @@ function SplashPage() {
       </video> 
 
       <div className='text_container'>
-        <div className='text_content'>
-          <h1 className='text_h1'>welcome to the Trip Club</h1>  
-       </div>
+        {/* <h1 className='tripclub_text'>TRIP CLUB</h1> */}
       </div>  
     </div>
 
