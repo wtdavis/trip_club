@@ -21,10 +21,10 @@ const Trips = () => {
     return (
       <>
         <h2>All Trips</h2>
-        {tripsSelected.map(trip => (
-          // <TripItem key={trip._id} trip={trip} />
-          <TripItemCarousel key={trip._id} trip={trip} />
-        ))}
+        {/* {tripsSelected.map(trip => ( */}
+          {/* // <TripItem key={trip._id} trip={trip} />
+          // <TripItemCarousel key={trip._id} trip={trip} /> */}
+        {/* ))} */}
       </>
     );
   };

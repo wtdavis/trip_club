@@ -4,6 +4,7 @@ import { composeTrips } from "../../store/trips"
 import { useParams } from "react-router-dom"
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min"
 import * as userActions from '../../store/users'
+import Search from "../Search/Search"
 
 
 function TripForm () {

@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom/cjs/react-router-dom.min"
 import * as userActions from '../../store/users'
 import './TripForm.css'
 import { updateTrip } from "../../store/trips"
-
+import Search from "../Search/Search"
 
 const TripFormModal = (props) => {
   const {setShowCreateTripModal} = props;
@@ -217,6 +217,7 @@ const TripFormModal = (props) => {
 
             {/* <input type="submit" className="tripformsubmit"  value={submit} onClick={e=> handleSubmit(e)}/> */}
         </form>
+        <h1><Search /></h1>
     </div>
 )
 }

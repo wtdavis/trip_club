@@ -43,6 +43,18 @@ router.get('/', async (req, res) => {
   }
 })
 
+// users Matching Index
+router.get('/search', async (req, res) => {
+  try {
+    const search = req.query.search || ''
+    const users = await User.find({username: { $regex: search, $options: 'i' }})
+                            .sort({username: -1})
+  } 
+  catch(err) {
+    return res.json([])
+  }
+})
+
 // users Show
 router.get('/:id', async (req, res, next) => {
   try {

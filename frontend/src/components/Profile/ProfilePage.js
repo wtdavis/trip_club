@@ -55,18 +55,18 @@ if (trips && currentUser) {
               trip={trip}
             />
           ))} */}
-          {tripsUser ? tripsUser.map(trip => (
+          {/* {tripsUser ? tripsUser.map(trip => (
             // <TripItem 
             //   key={trip?._id}
             //   trip={trip} 
             // />
-            <TripItemCarousel 
-            key={trip?._id}
-            trip={trip} 
+            // <TripItemCarousel 
+            // key={trip?._id}
+            // trip={trip} 
           />
-          )) : 
+          )) :  */}
           <></>
-          }
+          {/* } */}
 
       </div>
       </div>
