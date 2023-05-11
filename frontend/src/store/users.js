@@ -30,5 +30,24 @@ export const fetchAllUsers = () => async (dispatch) => {
     dispatch(receiveUsers(data))
 }
 
+export const fetchAllUsersNoState = () => async (dispatch) => {
+    const res = await jwtFetch('/api/users/')
+
+    const data = await res.json()
+    return data
+}
+
+export const fetchMatchingUsers = async (searchStr) => {
+    // debugger
+    // const res = await jwtFetch('/api/users/search', {
+    //     query: JSON.stringify(searchStr)
+    // })
+
+    const res = await jwtFetch(`/api/users/search?query=${searchStr}`)
+
+    debugger
+    const users = await res.json();
+    return users
+}
 
 export default usersReducer
