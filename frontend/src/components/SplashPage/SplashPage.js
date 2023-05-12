@@ -12,14 +12,15 @@ function SplashPage() {
         <source src="https://trip-club-dev.s3.amazonaws.com/splash/bg_video.mp4" type="video/mp4"></source>      
       </video> 
 
-      <div className='text_container'>
-        {/* <h1 className='tripclub_text'>TRIP CLUB</h1> */}
-      </div>  
+          <h1 className='video_h1' data-bf="Welcome to the" data-af="ultimate trip planner">TRIP CLUB</h1>
+      {/* <div className='text_container'>
+
+      </div>   */}
     </div>
 
     <div className='about_container'>
-      <h1 className='text_h1'>ABOUT</h1>
-      <p className='text_p'>TRIP CLUB is the platform for planning your dream travel with your friends</p>
+      <h1 className='about_h1'>ABOUT</h1>
+      <p className='about_p'>TRIP CLUB is the platform for planning your dream travel with your friends</p>
       
       <div className="about_grid_container">
         <div className="about_column">
