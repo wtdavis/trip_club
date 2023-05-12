@@ -22,7 +22,8 @@ const TripShow = (props) => {
   const [dateList, setDateList] = useState([])
   const [eventList, setEventList] = useState([])
   const [showEditTripModal, setShowEditTripModal] = useState(false)
-
+  
+  // debugger
 
 const setStorageTrip = (trip) => {
   localStorage.setItem("currentTrip", trip)
@@ -39,26 +40,24 @@ const getStorageTrip = () => {
 // }
 
 // debugger
+// let updateTrip = currentTrip ? Object.values(currentTrip) : null
 
   useEffect(()=>{
-    if (props?.location.trip === undefined) {
-      debugger
-      let storageTrip = JSON.parse(getStorageTrip())
-      // debugger
+    let storageTrip
+    if (props?.location.trip === undefined && !currentTrip) {
+      storageTrip = JSON.parse(getStorageTrip())
       setTrip(storageTrip)
       dispatch(tripActions.setCurrentTrip(storageTrip))
     } else if (props?.location.trip !== undefined && !currentTrip) {
-      let storageTrip = props.location.trip
+      storageTrip = props.location.trip
       setTrip(storageTrip)
-      setStorageTrip(storageTrip)
+      setStorageTrip(JSON.stringify(storageTrip))
       dispatch(tripActions.setCurrentTrip(storageTrip))
-      debugger
     } else {
-      let storageTrip = currentTrip
+     storageTrip = currentTrip
       setTrip(storageTrip);
       setStorageTrip(JSON.stringify(storageTrip))
       dispatch(tripActions.setCurrentTrip(storageTrip))
-      // debugger
     }
 
 
@@ -172,6 +171,10 @@ const getStorageTrip = () => {
             <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{trip.collaborators.map(e => (<li>{e.username}</li>))}</ul>
             <p className='tripshowinfoitem' id='tripshowstartdate'>Begins {startDateString}</p>
             <p className='tripshowinfoitem' id='tripshowenddate'>Ends {endDateString}</p>
+            <div className="tripshowpanelbuttons">
+          <button className='tripshowpanelbutton' onClick={() => {setShowEditTripModal(true)}}>Edit Trip</button>
+          <button className='tripshowpanelbutton' id="tripshowpaneldeletebutton" onClick={(e) => handleDeleteTrip(e)}>Delete Trip</button>
+            </div>
             <EventForm  id="eventform" trip={trip}/>
           </div>
         </div>
@@ -185,8 +188,6 @@ const getStorageTrip = () => {
             <TripFormModal currentTrip={currentTrip} setShowCreateTripModal={setShowEditTripModal}/>
           </Modal>
         )}
-        <button className='Edit_Trip_Link' onClick={() => {setShowEditTripModal(true)}}>Edit Trip</button>
-        <button className='Delete_Trip_Link' onClick={(e) => handleDeleteTrip(e)}>Delete Trip</button>
 
       </div>
   )}

@@ -143,6 +143,7 @@ export const composeTrips = data => async dispatch => {
       method: 'POST',
       body: JSON.stringify(data)
     });
+    debugger
     trip = await res.json();
     dispatch(receiveNewTrip(trip));
   } catch(err) {

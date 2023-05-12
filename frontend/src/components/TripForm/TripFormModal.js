@@ -74,19 +74,27 @@ const TripFormModal = (props) => {
             collaborators: collaboratorIds
         }
         
-        if (!currentTrip){
-        setNewTrip(await dispatch(composeTrips(formData)))
-        setRedirect(true)
-      } else if (currentTrip) {
-        dispatch(updateTrip({...currentTrip, ...formData}))
-        dispatch(setCurrentTrip({...currentTrip, ...formData}))
-
-        // localStorage.setItem("currentTrip", {...currentTrip, ...formData})
-        // debugger
-        setNewTrip({...currentTrip, ...formData})
-        setRedirect(true)
-      }
-      setShowCreateTripModal(false)
+        if (!currentTrip){ 
+          let res = dispatch(composeTrips(formData))
+          .then( () => { if (res.ok) {
+            setNewTrip(formData)
+            // debugger 
+            dispatch(setCurrentTrip(formData))
+            setRedirect(true)
+            setShowCreateTripModal(false)
+            
+          }}, () => {
+            return (
+            setInterval(console.log("await"), 5000))}
+          
+        //  console.log("nope")
+        )
+        } else if (currentTrip) {
+          dispatch(updateTrip({...currentTrip, ...formData}))
+          dispatch(setCurrentTrip({...currentTrip, ...formData}))
+          setNewTrip({...currentTrip, ...formData})
+          setRedirect(true)
+        }
     }
     
     const handleRemove = (e) => {

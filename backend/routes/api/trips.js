@@ -160,7 +160,7 @@ router.delete('/:id', requireUser, async (req, res, next) => {
         return next(error);    
     }
     // debugger
-    if (!req.user._id === trip.author._id) {
+    if (!req.user._id === trip?.author._id) {
         throw new Error('Current user is not the trip author')
     } else {
         await Trip.deleteOne({_id: req.params.id})   

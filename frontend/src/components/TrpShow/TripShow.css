@@ -19,6 +19,27 @@
      
 }
 
+.tripshowpanelbuttons {
+    display: flex;
+    align-items: center;
+    /* border: 3px solid grey; */
+    flex-direction: column ;
+    /* justify-content: center; */
+    /* width: 30%   */
+}
+
+.tripshowpanelbutton {
+    background-color: var(--blue-sands-brand);
+    margin: 2px 0 2px 0;
+    width: 30%;
+    border-radius: 5px
+}
+
+#tripshowpaneldeletebutton:hover {
+    background-color: var(--red-brand-color);
+    /* display: none */
+}
+
 .tripshoweventslist {
     display: block;
     overflow-y: scroll;
