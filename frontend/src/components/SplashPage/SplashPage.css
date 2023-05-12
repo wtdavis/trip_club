@@ -3,11 +3,13 @@
 }
 
 .video_h1{
-  color: black;
+  color: white;
   font-size: 100px;
+  font-weight: 900;
   position: relative;
   top: -70px;
   transition: 2s ease-out;
+  text-shadow: 0 5px 0 black;
 }
 
 .video_h1:hover{
@@ -23,6 +25,7 @@
   position: relative;
   top:-90px;
   left: 40px;
+  text-shadow: 0 3px 0 black;
 }
 
 .video_h1::after {
@@ -34,6 +37,7 @@
   position: relative;
   top: 30px;
   right: 40px;
+  text-shadow: 0 3px 0 black;
 }
 
 .video_h1:hover::before {
@@ -68,11 +72,12 @@
   right: 0;
   top: 0;
   bottom: 0;
+
 }
 
 .about_container{
   background-color: var(--lightblue-sands-brand);
-  height: 100vh;
+  height: 70vh;
   width: 100vw;
   justify-content: center;
   align-items: center;
@@ -83,10 +88,13 @@
 
 .about_h1{
   font-size: 40px;
+  font-weight: 600;
+  font-style: bold;
 }
 
 .about_p{
   font-size: 30px;
+  font-weight: 600;
   color: white;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -108,6 +116,15 @@
   display: grid;
   grid-template-rows: 3fr 1fr;
   gap: 10px;
+  padding: 10px;
+  transition: 1s;
+}
+
+.about_column:hover {
+  transform: scale(1.005); 
+  z-index: 2;
+  box-shadow: 1px 1px 2px 1px #8a8888;
+  border-radius: 8px;
 }
 
 .flip_card {
@@ -167,19 +184,8 @@
 
 .about_bullet{
   font-size: 20px;
+  font-weight: 600;
 }
-
-/* .tripclub_text:hover {
-  transform: scale(1.5);
-} */
-
-
-
-
-
-
-
-
 
 
 
