@@ -118,7 +118,20 @@ const TripShow = (props) => {
         <div className='tripshowtrippanel'>
           
           <div className='tripshowinfo'>
-            <p className='tripshowinfoitem' id='tripshowtriptitle'>{trip.title}</p>
+
+          <div className='tripshow_title_container'>
+            <p id='tripshowtriptitle'>{trip.title}</p>
+
+            <div className='edit_delete_buttons'>
+              <button className='Edit_Trip_Link' onClick={() => {setShowEditTripModal(true)}}>
+                <i data-title="Edit Trip" class="fa-solid fa-pencil fa-1x"></i>
+              </button>
+              <button className='Delete_Trip_Link' onClick={(e) => handleDeleteTrip(e)}>
+                <i data-title="Delete Trip" class="fa-solid fa-trash-can fa-1x"></i>
+              </button>
+            </div>
+          </div>
+
             <p className='tripshowinfoitem' id='tripshowtripdescription'>{trip.description}</p>
             <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{trip.collaborators.map(e => (<li>{e.username}</li>))}</ul>
             <p className='tripshowinfoitem' id='tripshowstartdate'>Begins {startDateString}</p>
@@ -128,14 +141,7 @@ const TripShow = (props) => {
         </div>
           <div className='tripshoweventslist'>
 
-            <div className='edit_delete_buttons'>
-              <button className='Edit_Trip_Link' onClick={() => {setShowEditTripModal(true)}}>
-                <i class="fa-solid fa-pencil fa-2x"></i>
-              </button>
-              <button className='Delete_Trip_Link' onClick={(e) => handleDeleteTrip(e)}>
-                <i class="fa-solid fa-trash-can fa-2x"></i>
-              </button>
-            </div>
+
             
 
             {events.map((ele) => (<EventItem event={ele}/>))}

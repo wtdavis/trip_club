@@ -19,6 +19,62 @@
      
 }
 
+.Edit_Trip_Link{
+    margin-right: 15px;
+}
+
+[data-title]:hover:after {
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+    visibility: visible;
+}
+[data-title]:after {
+    content: attr(data-title);
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    padding: 6px;
+    color: black;
+    white-space: nowrap; 
+    -moz-border-radius: 8px; 
+    -webkit-border-radius: 8px;  
+    border-radius: 8px;  
+    -moz-box-shadow: 0px 0px 4px #222;  
+    -webkit-box-shadow: 0px 0px 4px #222;  
+    box-shadow: 0px 0px 4px #222;  
+    opacity: 0;
+    z-index: 99999;
+    visibility: hidden;
+    font-family: sans-serif;
+    background-color: white;
+}
+[data-title] {
+    position: relative;
+}
+
+.tripshow_title_container{
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+#tripshowtriptitle{
+    font-size: 25px;
+    font-weight: bold;
+    flex: 0 1 auto;
+    position: absolute;
+    top:-15%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.edit_delete_buttons{
+    text-align: right;
+    flex: 0 1 auto;
+    margin-left: auto;
+}
+
 .tripshoweventslist {
     display: block;
     overflow-y: scroll;
@@ -36,12 +92,11 @@
 }
 .tripshowinfoitem {
     text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-size: 18px;
 
-}
-
-#tripshowtriptitle {
-    font-size: 25px;
-    font-weight: bold;
 }
 
 .eventitembox:hover {
@@ -68,10 +123,6 @@
     text-align: center;
 }   
 
-.eventitemitem {
-    
-}
-
 #eventitemtitle {
     font-size: larger;
     font-weight: bold;
@@ -82,12 +133,4 @@
     border-top: 1px solid lemonchiffon;
 }
 
-.edit_delete_buttons{
-    text-align: right;
-    margin: 20px;
 
-}
-
-.Edit_Trip_Link{
-    margin-right: 10px;
-}

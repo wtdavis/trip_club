@@ -164,7 +164,7 @@ const TripFormModal = (props) => {
             />
             
             <div className="createtrip_date">
-              <p className="tripformsubheader">trip start date:</p>
+              <p className="tripformsubheader">Trip Start Date:</p>
               <input 
                 type="date" 
                 className="createtrip_input" 
@@ -174,7 +174,7 @@ const TripFormModal = (props) => {
             </div>
 
             <div className="createtrip date">
-              <p className="tripformsubheader">trip end date:</p>
+              <p className="tripformsubheader">Trip End Date:</p>
               <input 
                 className="createtrip_input" 
                 type="date" 
@@ -186,7 +186,7 @@ const TripFormModal = (props) => {
             {/* <br/> */}
 
             <div className="createtrip friends_container">
-              <p className="tripformsubheader">add friends:</p>
+              <p className="tripformsubheader">Add Friends:</p>
               
               <input 
                 className="createtrip_input"

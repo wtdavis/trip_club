@@ -44,7 +44,7 @@ ul li button:hover {
 .createtrip_modal {
   width: 600;
   height: 700;
-  margin: 15px;
+  margin: 15px 15px 40px 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -94,8 +94,9 @@ ul li button:hover {
 .tripformsubheader {
   margin-top: 10px;
   margin-bottom: 10px;
+  text-align: center;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .continue_button, .addfriends_button {
