@@ -110,9 +110,7 @@
 
 .navlink #navlink_logout{
     text-decoration: none;
-    color: var(--pink-brand);
     align-items: center;
-    color: rgb(55, 55, 55);
     font-size: 22px;
     font-weight: 900;
     letter-spacing: 1px;
