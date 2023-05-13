@@ -7,7 +7,7 @@ const validateLoginInput = [
   check('email')
     .exists({ checkFalsy: true })
     .isEmail()
-    .withMessage('Email is invalid'),
+    .withMessage('Email is incorrect'),
   check('password')
     .exists({ checkFalsy: true })
     .isLength({ min: 6, max: 30 })
