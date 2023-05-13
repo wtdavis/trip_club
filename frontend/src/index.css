@@ -11,11 +11,12 @@ h1, h2, h3, h4, h5, h6, p, div, span, nav, link, body {
 
 /* TODO Add site wide styles */
 form > .errors {
-  color: red;
-  font-size: 0.875em;
-  height: 15px;
+  color: rgb(241, 19, 19);
+  font-size: 16px;
+  margin-top: 4px;
+  margin-bottom: 4px;
   display: flex;
-  align-items: center;
+  align-items: left;
 }
 
 *, body {

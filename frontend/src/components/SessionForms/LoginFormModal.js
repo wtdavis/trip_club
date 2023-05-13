@@ -51,7 +51,7 @@ const LoginFormModal = (props) => {
       </header> 
 
       <form className="login-form" onSubmit={handleSubmit}>
-        <div className="errors">{errors?.email}</div>
+        
         <div className="email-div">
           <input className="email-login-input" type="text"
             value={email}
@@ -59,8 +59,9 @@ const LoginFormModal = (props) => {
             placeholder="Email"
           />
         </div>
+        <div className="errors">{errors?.email}</div>
 
-        <div className="errors">{errors?.password}</div>
+        
         <div className="password-div">
           <input className="password-login-input" type="password"
             value={password}
@@ -68,6 +69,7 @@ const LoginFormModal = (props) => {
             placeholder="Password"
           />
         </div>
+        <div className="errors">{errors?.password}</div>
         {/* <div className="agree-message">            
             By clicking <span className="continue-span"> Continue </span>
             

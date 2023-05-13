@@ -26,13 +26,6 @@
   --dark-black-color: #383838; 
 }
 
-.createtrip_modal button {
-  margin-left: 10px;
-  margin-top: 10px;
-  /* color: var(--blue-sands-brand); */
-  font-weight: 400;
-}
-
 ul li button:hover {
   transform: scale(1.005); 
   z-index: 2;
@@ -61,7 +54,7 @@ ul li button:hover {
 
 .createtrip_header {
   /* text-align: center; */
-  font-weight: 600;
+  font-weight: 800;
   font-size: 20px;
   margin-top: 25px;
   margin-bottom: 10px;
@@ -81,18 +74,19 @@ ul li button:hover {
 .createtrip_input {
   border-bottom: none;
   width: 100%;
-  height: 35px;
-  padding-top: 10px;
+  height: 48px;
   padding-left: 10px;
   border: 1px solid var(--grey-color);
   font-weight: 400;
   font-size: var(--font-size);
   margin: auto;
+  align-items: center;
   justify-content: center;
   border-radius: 8px;
 }
 
 .createtrip_input.description {
+  padding-top: 10px;
   height: 70px;
   margin-top: 10px;
 }
@@ -100,64 +94,39 @@ ul li button:hover {
 .tripformsubheader {
   margin-top: 10px;
   margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 20px;
 }
 
-.tripcreate_button, .addfriends_button {
+.continue_button, .addfriends_button {
   cursor: pointer;
-  display: inline-block;
-  text-align: center;
-  align-self: center;
-  /* touch-action: manipulation; */
-  /* margin-top: 16px; */
   height: 48px;
-  /* font-size: 16px; */
   font-size: var(--font-size);
-  font-weight: bold;
-  /* width: 500px; */
-  background: linear-gradient(to right, var(--blue-sands-brand), var(--darkyellow-sands-brand));
-  /* background: black; */
-  /* color: rgb(255, 255, 255); */
+  font-weight: 800;
+  width: 500px;
+  border-radius: 8px;
+  margin-top: 18px;
   color: black;
-  border-radius: 8px;
-  /* width: 100%; */
-  margin-top: 15px;
-  justify-content: center;
-  margin-left: 15px;
+  -webkit-transition: all .5s ease-in-out;
+  moz-transition: all .5s ease-in-out;
+  -o-transition: all .5s ease-in-out;
+  transition: all .4s ease-in-out;
+
+  background-image: linear-gradient(to right, var(--blue-sands-brand), var(--lightblue-sands-brand), var(--yellow-sands-brand), var(--darkyellow-sands-brand));
+  box-shadow: 0 2px 10px 0 rgba(129, 234, 255, 0.5);
+  background-size: 300% 100%;
 }
 
-.tripcreate_button {
-  width: 100%;
-  margin-bottom: 15px;
-}
-
-
-.addfriends_button {
-  /* margin-left: 10px; */
-  margin-top: 10px;
-  margin-bottom: 15px;
-
-  /* margin: auto; */
-  padding-left: 30px;
-  padding-right: 30px;
-  /* margin-left: 20px; */
-  color: var(--dark-black-color);
-  /* background: white; */
-  /* border: 1px solid var(--dark-black-color); */
-  background: linear-gradient(to right, var(--darkyellow-sands-brand), var(--blue-sands-brand));
-  /* width: 50%; */
-  display: inline-block;
-}
-
-.addfriends_container{
-  text-align: right;
-}
-
-.addfriends_button:hover,
-.tripcreate_button:hover {
+.continue_button:hover,
+.addfriends_button:hover{
   transform: scale(1.005); 
-  z-index: 2;
   box-shadow: 1px 1px 2px 1px #8a8888;
-  border-radius: 8px;
+  background-position: 100% 0;
+  -webkit-transition: all .5s ease-in-out;
+  moz-transition: all .5s ease-in-out;
+  -o-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+  box-shadow: 0 2px 10px 0 rgba(251, 192, 14, 0.5);
 }
 
 .friends_list_container {
@@ -181,7 +150,6 @@ ul li button:hover {
   display: grid;
   grid-template-columns: 2fr 1fr;
   justify-items: center;
-
 }
 
 .removefriend_button {

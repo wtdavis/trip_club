@@ -81,3 +81,13 @@
 #eventform {
     border-top: 1px solid lemonchiffon;
 }
+
+.edit_delete_buttons{
+    text-align: right;
+    margin: 20px;
+
+}
+
+.Edit_Trip_Link{
+    margin-right: 10px;
+}

@@ -70,7 +70,7 @@ return(
             {/* <Calendar/> */}
             <br/>
             <button 
-                className="eventformsubmit" 
+                className="continue_button" 
                 type="submit" 
                 // value={submit} 
                 onClick={e=> handleSubmit(e)}

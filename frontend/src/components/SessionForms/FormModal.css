@@ -65,6 +65,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .login-form {
@@ -97,7 +98,7 @@
   font-weight: 800;
   width: 500px;
   border-radius: 8px;
-  margin-top: 15px;
+  margin-top: 18px;
   color: black;
   -webkit-transition: all .5s ease-in-out;
   moz-transition: all .5s ease-in-out;
@@ -118,4 +119,13 @@
   transition: all .5s ease-in-out;
   box-shadow: 0 2px 10px 0 rgba(251, 192, 14, 0.5);
 }
+
+/* .errors{
+  color: red;
+  font-size: 0.875em;
+  height: 15px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  display: flex; 
+} */
 

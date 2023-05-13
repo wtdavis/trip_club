@@ -160,7 +160,7 @@ const TripFormModal = (props) => {
               className="createtrip_input description" 
               value={description} 
               onChange={e => setDescription(e.target.value)}
-              placeholder="Enter a description"
+              placeholder="Enter a Description"
             />
             
             <div className="createtrip_date">
@@ -193,7 +193,7 @@ const TripFormModal = (props) => {
                 type='text'
                 value={currCollaborator}
                 onChange={e => setCurrCollaborator(e.target.value)}
-                placeholder="friend's email"
+                placeholder="Friend's Email"
               />
 
               <div className="addfriends_container">
@@ -201,7 +201,7 @@ const TripFormModal = (props) => {
                   className="addfriends_button"
                   onClick={(e) => handleAdd(e)}
                 >
-                  Add
+                  Add a Friend
                 </button>
               </div>
 
@@ -213,7 +213,7 @@ const TripFormModal = (props) => {
                 <div>{CollaboratorsList()}</div>
 
               </div>
-              <button type="submit" className="tripcreate_button" value={submit} onClick={e=> handleSubmit(e)}>Continue</button>
+              <button type="submit" className="continue_button" value={submit} onClick={e=> handleSubmit(e)}>Continue</button>
 
             {/* <input type="submit" className="tripformsubmit"  value={submit} onClick={e=> handleSubmit(e)}/> */}
         </form>

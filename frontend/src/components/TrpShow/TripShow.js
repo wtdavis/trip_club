@@ -116,6 +116,7 @@ const TripShow = (props) => {
       <div className='tripshowpage'>
 
         <div className='tripshowtrippanel'>
+          
           <div className='tripshowinfo'>
             <p className='tripshowinfoitem' id='tripshowtriptitle'>{trip.title}</p>
             <p className='tripshowinfoitem' id='tripshowtripdescription'>{trip.description}</p>
@@ -126,6 +127,17 @@ const TripShow = (props) => {
           </div>
         </div>
           <div className='tripshoweventslist'>
+
+            <div className='edit_delete_buttons'>
+              <button className='Edit_Trip_Link' onClick={() => {setShowEditTripModal(true)}}>
+                <i class="fa-solid fa-pencil fa-2x"></i>
+              </button>
+              <button className='Delete_Trip_Link' onClick={(e) => handleDeleteTrip(e)}>
+                <i class="fa-solid fa-trash-can fa-2x"></i>
+              </button>
+            </div>
+            
+
             {events.map((ele) => (<EventItem event={ele}/>))}
             {/* {dateList[0].toDateString()} */}
             {/* <p> test</p> */}
@@ -135,9 +147,7 @@ const TripShow = (props) => {
             <TripFormModal currentTrip={currentTrip} setShowCreateTripModal={setShowEditTripModal}/>
           </Modal>
         )}
-        <button className='Edit_Trip_Link' onClick={() => {setShowEditTripModal(true)}}>Edit Trip</button>
-        <button className='Delete_Trip_Link' onClick={(e) => handleDeleteTrip(e)}>Delete Trip</button>
-
+        
       </div>
   )}
 
