@@ -3,29 +3,43 @@
 }
 
 .video_h1{
-  color: white;
   font-size: 100px;
   font-weight: 900;
   position: relative;
   top: -70px;
-  transition: 2s ease-out;
-  text-shadow: 0 5px 0 black;
+  -webkit-transition: all 2s ease-in-out;
+  moz-transition: all 2s ease-in-out;
+  -o-transition: all 2s ease-in-out;
+  transition: all 2s ease-out;
+  background-image: linear-gradient(to right, var(--yellow-sands-brand),var(--darkyellow-sands-brand), rgb(253, 134, 15), var(--lightblue-sands-brand), var(--blue-sands-brand));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke:0.5px white;
+  background-size: 500% 100%;
 }
 
 .video_h1:hover{
   transform: scale(1.1);
+  background-position: 100% 0;
+  -webkit-transition: all 2s ease-in-out;
+  moz-transition: all 2s ease-in-out;
+  -o-transition: all 2s ease-in-out;
+  transition: all 2s ease-in-out;
 }
 
 .video_h1::before {
   content: attr(data-bf);
   display: inline-block;
-  color:white;
+  /* color:white; */
   font-size: 30px;
   transition: 2s ease-out;
   position: relative;
   top:-90px;
   left: 40px;
-  text-shadow: 0 3px 0 black;
+  /* -webkit-text-stroke:unset; */
+  -webkit-text-fill-color:black;
+  -webkit-text-stroke-width: 0;
+  background-size: 500% 100%;
 }
 
 .video_h1::after {
@@ -37,15 +51,30 @@
   position: relative;
   top: 30px;
   right: 40px;
-  text-shadow: 0 3px 0 black;
+  -webkit-text-fill-color:black;
+  background-image: linear-gradient(to right, black,black,white, black, black);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 0;
+  background-size: 500% 100%;
 }
 
 .video_h1:hover::before {
   transform: scale(1.2) translate(-25px, -15px);
+  background-position: 100% 0;
+  -webkit-transition: all 2s ease-in-out;
+  moz-transition: all 2s ease-in-out;
+  -o-transition: all 2s ease-in-out;
+  transition: all 2s ease-in-out;
 }
 
 .video_h1:hover::after {
   transform: scale(1.2) translate(25px, 15px);
+  background-position: 100% 0;
+  -webkit-transition: all 2s ease-in-out;
+  moz-transition: all 2s ease-in-out;
+  -o-transition: all 2s ease-in-out;
+  transition: all 2s ease-in-out;
 }
 .text_p{
   color: white;

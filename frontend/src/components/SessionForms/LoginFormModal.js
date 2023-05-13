@@ -6,7 +6,6 @@ import './FormModal.css';
 
 
 const LoginFormModal = (props) => {
-  // const LoginFormModal = (props) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -76,10 +75,10 @@ const LoginFormModal = (props) => {
             
             <span className="bold" target="_blank" rel="noopener noreferrer"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">  Terms of Service</a></span>
           </div> */}
-        <button type="submit" className="continue-button" >Continue</button>
+        <button type="submit" className="continue_button" >Continue</button>
 
         {/* <input
-          className="continue-button"
+          className="continue_button"
           type="submit"
           value="Log In"
           // disabled={!email || !password}
@@ -90,7 +89,6 @@ const LoginFormModal = (props) => {
         <div id="demo-button-div">
           <button className="demo_button" onClick={handleDemo}>Continue with Demo User</button>
         </div>
-
 
     </div>
 

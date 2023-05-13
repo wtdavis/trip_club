@@ -105,9 +105,9 @@ function SignupFormModal (props) {
             
             I agree to Trip Club's  
             
-            <span className="bold" target="_blank" rel="noopener noreferrer"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">  Terms of Service</a></span>
+            <span className="agree_span" target="_blank" rel="noopener noreferrer"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">  Terms of Service</a></span>
             and
-            <span className="bold" target="_blank" rel="noopener noreferrer"><a href="https://www.youtube.com/watch?v=DiBmfcYaBoI&t=4s"> Privacy Policy</a></span>
+            <span className="agree_span" target="_blank" rel="noopener noreferrer"><a href="https://www.youtube.com/watch?v=DiBmfcYaBoI&t=4s"> Privacy Policy</a></span>
             
             {/* ,<span className="bold" target="_blank" rel="noopener noreferrer"><a href="https://www.airbnb.com/help/article/2855"> Privacy Policy</a></span>, 
             <span className="bold" target="_blank" rel="noopener noreferrer"><a href="https://www.airbnb.com/help/article/2868"> Guest Refund Policy</a></span>, and
@@ -119,7 +119,7 @@ function SignupFormModal (props) {
           value="Sign Up"
           // disabled={!email || !username || !password || password !== password2}
         /> */}
-        <button type="submit" className="continue-button">Continue</button>
+        <button type="submit" className="continue_button">Continue</button>
 
       </form>
     </div>
