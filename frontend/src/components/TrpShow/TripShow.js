@@ -146,7 +146,6 @@ const getStorageTrip = () => {
     return ele1 - ele2
   }
 
-  
 
     let events;
     let allEvents;
@@ -154,9 +153,12 @@ const getStorageTrip = () => {
     allEvents = Object.values(tripEvents).filter(ele => ele.trip === currentTrip._id)
     allEvents = [...allEvents, ...dateList]
     events = allEvents.sort(compareDates)}
+
+
     const handleDeleteTrip = (e) => {
       e.preventDefault();
       dispatch(tripActions.deleteTrip(currentTrip))
+      debugger
       history.push("/profile")
     }
 
@@ -185,6 +187,7 @@ const getStorageTrip = () => {
           </div>
         {showEditTripModal && (
           <Modal onClose={(e) => {setShowEditTripModal(false); console.log(e)}}>
+
             <TripFormModal currentTrip={currentTrip} setShowCreateTripModal={setShowEditTripModal}/>
           </Modal>
         )}

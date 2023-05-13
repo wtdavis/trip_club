@@ -98,13 +98,14 @@ export const fetchTrip = id => async dispatch => {
 
 
 export const updateTrip = (trip) => async (dispatch) => {
-  // debugger
+  debugger
   try {
     const res = await jwtFetch(`/api/trips/${trip._id}`, {
       method: 'PATCH',
       body: JSON.stringify(trip)
     })
     const updatedTrip = await res.json()
+    debugger
     dispatch(receiveTrip(updatedTrip))
     return updatedTrip
   } catch(err) {
@@ -143,7 +144,6 @@ export const composeTrips = data => async dispatch => {
       method: 'POST',
       body: JSON.stringify(data)
     });
-    debugger
     trip = await res.json();
     dispatch(receiveNewTrip(trip));
   } catch(err) {
@@ -152,6 +152,7 @@ export const composeTrips = data => async dispatch => {
       dispatch(receiveErrors(resBody.errors));
     }
   }
+  // debugger
   return trip
 };
 

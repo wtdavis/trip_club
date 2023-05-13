@@ -26,7 +26,7 @@ const TripFormModal = (props) => {
     // const [currCollaborator, setCurrCollaborator] = useState('')
     // const [collabErrors, setCollabErrors] = useState(false)
 
-    
+    const errors = useSelector(state => state.errors)
     const dispatch = useDispatch()
     const { tripId } = useParams()
     const currentUser = useSelector(state => state.session.user)
@@ -74,29 +74,52 @@ const TripFormModal = (props) => {
             collaborators: collaboratorIds
         }
         
-        if (!currentTrip){ 
-          let res = dispatch(composeTrips(formData))
-          .then( () => { if (res.ok) {
-            setNewTrip(formData)
-            // debugger 
-            dispatch(setCurrentTrip(formData))
-            setRedirect(true)
-            setShowCreateTripModal(false)
-            
-          }}, () => {
-            return (
-            setInterval(console.log("await"), 5000))}
-          
-        //  console.log("nope")
-        )
-        } else if (currentTrip) {
+        const handleCreate = (formData) => {
+          dispatch(composeTrips(formData))
+          .then( res => {
+            if (!res) {
+              // debugger
+              return 
+            } else {
+                  console.log(res)
+                  console.log("res")
+                  setNewTrip(res)
+                  dispatch(setCurrentTrip(res))
+                  setRedirect(true)
+                  setShowCreateTripModal(false)
+              }
+            })
+        }
+
+
+        const handleUpdate = (formData) => {
+          debugger
           dispatch(updateTrip({...currentTrip, ...formData}))
-          dispatch(setCurrentTrip({...currentTrip, ...formData}))
-          setNewTrip({...currentTrip, ...formData})
-          setRedirect(true)
+          .then( res => {
+            // debugger
+            if (!res) {
+              debugger
+              return
+            } else {
+              debugger
+              dispatch(setCurrentTrip(res))
+              setNewTrip(res)
+              setRedirect(true)
+              setShowCreateTripModal(false)}
+          })
+        } 
+
+
+        if (!currentTrip){ 
+          handleCreate(formData)
+        } else if (currentTrip) {
+          // debugger
+          handleUpdate(formData)
         }
     }
     
+
+
     const handleRemove = (e) => {
         e.preventDefault()
         const emailToRemove = e.target.value

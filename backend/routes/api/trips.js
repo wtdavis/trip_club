@@ -8,7 +8,8 @@ const Event = mongoose.model('Event')
 const { requireUser } = require('../../config/passport');
 const validateTweetInput = require('../../validation/tweets')
 const validateTripInput = require('../../validation/trips')
-const validateEventInput = require('../../validation/events')
+const validateEventInput = require('../../validation/events');
+const { updateTrip } = require('../../../frontend/src/store/trips');
 
 // Trip Index, works
 router.get('/', async (req, res) => {
@@ -140,7 +141,9 @@ router.patch('/:id', requireUser, async (req, res, next) => {
         throw new Error('Current user is not the trip author')
     } else {
             updatedTrip = await Trip.updateOne({...trip}, {...tripData })
-            return res.json(updatedTrip)       
+            // updatedTrippp = await Trip.findOne(trip._id)
+            // updatedTrip = {...updatedTrip, ...tripData}
+            return res.json(updatedTrippp)       
     }
 })
 
@@ -160,7 +163,7 @@ router.delete('/:id', requireUser, async (req, res, next) => {
         return next(error);    
     }
     // debugger
-    if (!req.user._id === trip?.author._id) {
+    if (!req.user._id === trip.author._id) {
         throw new Error('Current user is not the trip author')
     } else {
         await Trip.deleteOne({_id: req.params.id})   
