@@ -146,7 +146,7 @@ router.patch('/:id', requireUser, async (req, res, next) => {
 
 // Trip Delete, works
 router.delete('/:id', requireUser, async (req, res, next) => {
-    debugger
+    // debugger
     let trip;
     
     try {
@@ -159,8 +159,8 @@ router.delete('/:id', requireUser, async (req, res, next) => {
         error.errors = { message: "No trip found with that id" };
         return next(error);    
     }
-    debugger
-    if (!req.user._id === trip.author._id) {
+    // debugger
+    if (!req.user._id === trip?.author._id) {
         throw new Error('Current user is not the trip author')
     } else {
         await Trip.deleteOne({_id: req.params.id})   

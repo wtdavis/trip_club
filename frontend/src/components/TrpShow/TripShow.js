@@ -14,7 +14,6 @@ import { Modal } from '../../context/Modal';
 import TripFormModal from '../TripForm/TripFormModal';
 
 const TripShow = (props) => {
-
   const history = useHistory();
   const dispatch = useDispatch()
   const currentTrip = useSelector(state => state.trips.current)
@@ -23,25 +22,75 @@ const TripShow = (props) => {
   const [dateList, setDateList] = useState([])
   const [eventList, setEventList] = useState([])
   const [showEditTripModal, setShowEditTripModal] = useState(false)
-  // const [thing, setThing] = useState()  
+  
+  // debugger
 
+const setStorageTrip = (trip) => {
+  localStorage.setItem("currentTrip", trip)
+}
+
+const getStorageTrip = () => {
+ return ( localStorage.getItem("currentTrip"))
+}
+
+// const fetchUpdatedTrip = async (tripId) => {
+//  let res = dispatch(tripActions.fetchTrip(tripId));
+//  let newTrip = await res;
+// return newTrip
+// }
+
+// debugger
+// let updateTrip = currentTrip ? Object.values(currentTrip) : null
 
   useEffect(()=>{
-    if (props?.location.trip !== undefined) {
-      const storageTrip = JSON.stringify(props.location.trip);
-      setTrip(props.location.trip);
-      dispatch(tripActions.setCurrentTrip(props.location.trip))
-      localStorage.setItem("currentTrip", storageTrip);
-    } else {
-      const storageTrip = JSON.parse(localStorage.getItem("currentTrip"));
-      dispatch(tripActions.setCurrentTrip(storageTrip))
+    let storageTrip
+    if (props?.location.trip === undefined && !currentTrip) {
+      storageTrip = JSON.parse(getStorageTrip())
       setTrip(storageTrip)
-      dispatch(eventActions.clearEvents())
-      dispatch(eventActions.fetchTripEvents(storageTrip._id))
-    }; 
+      dispatch(tripActions.setCurrentTrip(storageTrip))
+    } else if (props?.location.trip !== undefined && !currentTrip) {
+      storageTrip = props.location.trip
+      setTrip(storageTrip)
+      setStorageTrip(JSON.stringify(storageTrip))
+      dispatch(tripActions.setCurrentTrip(storageTrip))
+    } else {
+     storageTrip = currentTrip
+      setTrip(storageTrip);
+      setStorageTrip(JSON.stringify(storageTrip))
+      dispatch(tripActions.setCurrentTrip(storageTrip))
+    }
+
+
+
+
+
+    // ---------------------------
+    // if (props?.location.trip !== undefined) {
+    //   const storageTrip = JSON.stringify(props.location.trip);
+    //   setTrip(props.location.trip);
+    //   dispatch(tripActions.setCurrentTrip(props.location.trip))
+    //   setStorageTrip(storageTrip)
+    // } else if (currentTrip) { 
+    //   dispatch(eventActions.fetchTripEvents(currentTrip));
+    //   setTrip(currentTrip)
+    //   localStorage.setItem("currentTrip", JSON.stringify(currentTrip))
+    // } else {
+    //   let storageTrip =  JSON.parse(getStorageTrip());
+    //     // storageTrip = fetchUpdatedTrip(storageTrip._id)
+    //   dispatch(tripActions.setCurrentTrip(storageTrip))
+    //   setTrip(storageTrip)
+    //   dispatch(eventActions.clearEvents())
+    //   dispatch(eventActions.fetchTripEvents(storageTrip._id))
+    // };
+
+    
+    // return ( () => {
+    //   dispatch(tripActions.clearCurrentTrip())}
+    // )
    
-  }, [dispatch]
+  }, [dispatch, currentTrip]
   )
+  
   
   // const handleEdit = (e) => {
   //   e.preventDefault()
@@ -136,6 +185,10 @@ const TripShow = (props) => {
             <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{trip.collaborators.map(e => (<li>{e.username}</li>))}</ul>
             <p className='tripshowinfoitem' id='tripshowstartdate'>Begins {startDateString}</p>
             <p className='tripshowinfoitem' id='tripshowenddate'>Ends {endDateString}</p>
+            <div className="tripshowpanelbuttons">
+          <button className='tripshowpanelbutton' onClick={() => {setShowEditTripModal(true)}}>Edit Trip</button>
+          <button className='tripshowpanelbutton' id="tripshowpaneldeletebutton" onClick={(e) => handleDeleteTrip(e)}>Delete Trip</button>
+            </div>
             <EventForm  id="eventform" trip={trip}/>
           </div>
         </div>
@@ -153,7 +206,9 @@ const TripShow = (props) => {
             <TripFormModal currentTrip={currentTrip} setShowCreateTripModal={setShowEditTripModal}/>
           </Modal>
         )}
+
         
+
       </div>
   )}
 
