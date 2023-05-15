@@ -65,7 +65,6 @@ function SignupFormModal (props) {
         </header> 
 
       <form className="login-form" onSubmit={handleSubmit}>
-        <div className="errors">{errors?.email}</div>
         <div className="email-div">
           <input className="email-login-input" type="text"
             value={email}
@@ -73,8 +72,9 @@ function SignupFormModal (props) {
             placeholder="Email"
           />
         </div>
+        <div className="errors">{errors?.email}</div>
 
-        <div className="errors">{errors?.username}</div>
+
         <div className="username-div">
           <input className="username-login-input" type="text"
             value={username}
@@ -82,7 +82,8 @@ function SignupFormModal (props) {
             placeholder="Username"
           />
         </div>
-        <div className="errors">{errors?.password}</div>
+        <div className="errors">{errors?.username}</div>
+
         <div>
           <input className="password-login-input" type="password"
             value={password}
@@ -90,9 +91,9 @@ function SignupFormModal (props) {
             placeholder="Password"
           />
         </div>
-        <div className="errors">
-          {password !== password2 && 'Confirm Password field must match'}
-        </div>
+        <div className="errors">{errors?.password}</div>
+
+        
         <div>
           <input  className="password-login-input" type="password"
             value={password2}
@@ -100,14 +101,18 @@ function SignupFormModal (props) {
             placeholder="Confirm Password"
           />
         </div>
+        <div className="errors">
+          {password !== password2 && 'Confirm Password field must match'}
+        </div>
+        
         <div className="agree-message">            
             By clicking <span className="continue-span"> Continue </span>
             
             I agree to Trip Club's  
             
-            <span className="bold" target="_blank" rel="noopener noreferrer"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">  Terms of Service</a></span>
+            <span className="agree_span" target="_blank" rel="noopener noreferrer"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">  Terms of Service</a></span>
             and
-            <span className="bold" target="_blank" rel="noopener noreferrer"><a href="https://www.youtube.com/watch?v=DiBmfcYaBoI&t=4s"> Privacy Policy</a></span>
+            <span className="agree_span" target="_blank" rel="noopener noreferrer"><a href="https://www.youtube.com/watch?v=DiBmfcYaBoI&t=4s"> Privacy Policy</a></span>
             
             {/* ,<span className="bold" target="_blank" rel="noopener noreferrer"><a href="https://www.airbnb.com/help/article/2855"> Privacy Policy</a></span>, 
             <span className="bold" target="_blank" rel="noopener noreferrer"><a href="https://www.airbnb.com/help/article/2868"> Guest Refund Policy</a></span>, and
@@ -119,7 +124,7 @@ function SignupFormModal (props) {
           value="Sign Up"
           // disabled={!email || !username || !password || password !== password2}
         /> */}
-        <button type="submit" className="continue-button">Continue</button>
+        <button type="submit" className="continue_button">Continue</button>
 
       </form>
     </div>

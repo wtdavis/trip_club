@@ -7,7 +7,7 @@ const validateRegisterInput = [
   check('email')
     .exists({ checkFalsy: true })
     .isEmail()
-    .withMessage('Email is invalid'),
+    .withMessage('Email is incorrect'),
   check('username')
     .exists({ checkFalsy: true })
     .isLength({ min: 2, max: 30 })
