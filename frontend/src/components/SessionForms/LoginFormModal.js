@@ -6,7 +6,7 @@ import './FormModal.css';
 
 
 const LoginFormModal = (props) => {
-
+  const user = useSelector(state => state.session.user); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const errors = useSelector(state => state.errors.session);
@@ -26,8 +26,10 @@ const LoginFormModal = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(sessionActions.login({ email, password }));
-    setShowLoginModal(false)
+    dispatch(sessionActions.login({ email, password }))
+      .then(res => {
+        if (res.currentUser)  setShowLoginModal(false)
+    });
   };
 
   const handleDemo = (e) => {
@@ -70,21 +72,7 @@ const LoginFormModal = (props) => {
           />
         </div>
         <div className="errors">{errors?.password}</div>
-        {/* <div className="agree-message">            
-            By clicking <span className="continue-span"> Continue </span>
-            
-            I agree to Trip Club's  
-            
-            <span className="bold" target="_blank" rel="noopener noreferrer"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">  Terms of Service</a></span>
-          </div> */}
         <button type="submit" className="continue_button" >Continue</button>
-
-        {/* <input
-          className="continue_button"
-          type="submit"
-          value="Log In"
-          // disabled={!email || !password}
-        /> */}
 
     </form>
 
