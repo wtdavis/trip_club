@@ -27,7 +27,7 @@ const LoginFormModal = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(sessionActions.login({ email, password })); 
+    dispatch(sessionActions.login({ email, password }));
     setShowLoginModal(false)
   };
 

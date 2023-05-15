@@ -75,24 +75,21 @@ const TripFormModal = (props) => {
         }
         
         if (!currentTrip){ 
-          let res = dispatch(composeTrips(formData))
-          .then( () => { if (res.ok) {
-            setNewTrip(formData)
+           dispatch(composeTrips(formData))
+          .then( (res) => { if (res) {
+            setNewTrip(res)
             // debugger 
-            dispatch(setCurrentTrip(formData))
+            dispatch(setCurrentTrip(res))
             setRedirect(true)
             setShowCreateTripModal(false)
             
-          }}, () => {
-            return (
-            setInterval(console.log("await"), 5000))}
-          
-        //  console.log("nope")
+          }}
         )
         } else if (currentTrip) {
           dispatch(updateTrip({...currentTrip, ...formData}))
           dispatch(setCurrentTrip({...currentTrip, ...formData}))
           setNewTrip({...currentTrip, ...formData})
+          setShowCreateTripModal(false)
           setRedirect(true)
         }
     }
