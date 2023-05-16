@@ -37,18 +37,18 @@ const TripFormModal = (props) => {
     const [submit, setSubmit] = useState("Create Trip")
     const [collaborators, setCollaborators] = useState(currentTrip ? currentTrip.collaborators : [])
     const allUsers = Object.values(useSelector(state => state.users))
+    const tripErrors = useSelector(state => state.errors.trips)
     const [redirect, setRedirect] = useState(false)
     const [newTrip, setNewTrip] = useState();
     const [currCollaborator, setCurrCollaborator] = useState()
     const [collabErrors, setCollabErrors] = useState(false)
+    const [submitErrors, setSubmitErrors] = useState(false)
     
     useEffect(() => {
         dispatch(userActions.fetchAllUsers())
         // setCollaborators([])
     }, [])
-    useEffect(() => {
-
-    }, [])
+   
 
     let collaboratorIds = []
 
@@ -76,21 +76,30 @@ const TripFormModal = (props) => {
         
         if (!currentTrip){ 
            dispatch(composeTrips(formData))
-          .then( (res) => { if (res) {
-            setNewTrip(res)
-            // debugger 
-            dispatch(setCurrentTrip(res))
-            setRedirect(true)
-            setShowCreateTripModal(false)
+          .then( (res) => { 
+            if (res) {
+              setNewTrip(res)
+              debugger 
+              dispatch(setCurrentTrip(res))
+              setRedirect(true)
+              setShowCreateTripModal(false)
             
+          } else {
+            let errors = tripErrors
+
+            debugger
+            setSubmitErrors(true)
           }}
         )
         } else if (currentTrip) {
           dispatch(updateTrip({...currentTrip, ...formData}))
-          dispatch(setCurrentTrip({...currentTrip, ...formData}))
-          setNewTrip({...currentTrip, ...formData})
-          setShowCreateTripModal(false)
-          setRedirect(true)
+          .then ( (res) => { 
+            debugger
+            dispatch(setCurrentTrip({...currentTrip, ...formData}))
+            setNewTrip({...currentTrip, ...formData})
+            setShowCreateTripModal(false)
+            setRedirect(true)
+          })
         }
     }
     
@@ -155,7 +164,7 @@ const TripFormModal = (props) => {
           <div className="login-header-text">Create a New Trip!</div>
         </header> 
 
-        <form classname="createtrip_form" onSubmit={e => handleSubmit(e)}>
+        <form className="createtrip_form" onSubmit={e => handleSubmit(e)}>
        
             {/* <p className="tripformsubheader">Name Your New Trip:</p> */}
             <input 
@@ -166,6 +175,9 @@ const TripFormModal = (props) => {
               placeholder="Name Your New Trip"
             />
             
+            {submitErrors && 
+            <p className="submiterror">{tripErrors.title}</p>}
+            
             {/* <p className="tripformsubheader">Enter a description:</p> */}
             <textarea 
               className="createtrip_input description" 
@@ -173,7 +185,9 @@ const TripFormModal = (props) => {
               onChange={e => setDescription(e.target.value)}
               placeholder="Enter a Description"
             />
-            
+            {submitErrors && 
+            <p className="submiterror">{tripErrors.description}</p>}
+
             <div className="createtrip_date">
               <p className="tripformsubheader">Trip Start Date:</p>
               <input 
@@ -184,6 +198,9 @@ const TripFormModal = (props) => {
               />
             </div>
 
+            {submitErrors && 
+            <p className="submiterror">{tripErrors.startDate}</p>}
+
             <div className="createtrip date">
               <p className="tripformsubheader">Trip End Date:</p>
               <input 
@@ -193,6 +210,9 @@ const TripFormModal = (props) => {
                 onChange={e => setEndDate(e.target.value)}
               />
             </div>
+
+            {submitErrors && 
+            <p className="submiterror">{tripErrors.endDate}</p>}
             
             {/* <br/> */}
 

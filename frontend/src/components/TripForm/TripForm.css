@@ -157,3 +157,8 @@ ul li button:hover {
   color: var(--blue-sands-brand);
 
 }
+
+.submiterror {
+  color: red;
+
+}
