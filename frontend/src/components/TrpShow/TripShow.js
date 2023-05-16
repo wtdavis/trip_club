@@ -186,8 +186,8 @@ const getStorageTrip = () => {
             <p className='tripshowinfoitem' id='tripshowstartdate'>Begins {startDateString}</p>
             <p className='tripshowinfoitem' id='tripshowenddate'>Ends {endDateString}</p>
             <div className="tripshowpanelbuttons">
-          <button className='tripshowpanelbutton' onClick={() => {setShowEditTripModal(true)}}>Edit Trip</button>
-          <button className='tripshowpanelbutton' id="tripshowpaneldeletebutton" onClick={(e) => handleDeleteTrip(e)}>Delete Trip</button>
+          {/* <button className='tripshowpanelbutton' onClick={() => {setShowEditTripModal(true)}}>Edit Trip</button> */}
+          {/* <button className='tripshowpanelbutton' id="tripshowpaneldeletebutton" onClick={(e) => handleDeleteTrip(e)}>Delete Trip</button> */}
             </div>
             <EventForm  id="eventform" trip={trip}/>
           </div>
