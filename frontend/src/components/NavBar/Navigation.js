@@ -70,7 +70,7 @@ function Navigation () {
         
         {showLoginModal && (
           <Modal onClose={() => setShowLoginModal(false)}>
-            <LoginFormModal setShowLoginModal={setShowLoginModal} />
+            <LoginFormModal showLoginModal={showLoginModal} setShowLoginModal={setShowLoginModal}/>
             {/* <LoginFormModal /> */}
           </Modal>
         )}

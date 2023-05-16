@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import './FormModal.css';
 
@@ -33,12 +34,17 @@ const LoginFormModal = (props) => {
   };
 
   const handleDemo = (e) => {
-
-    setShowLoginModal(false)
     dispatch(sessionActions.login({ 
       email: 'demo@user.io', 
       password: 'password' 
-    })); 
+    }))
+    .then(res => {
+      if (res.currentUser)  setShowLoginModal(false)
+    }); 
+  };
+
+  if (user) {
+    return <Redirect to="/profile" />;
   };
 
   return (
@@ -78,7 +84,8 @@ const LoginFormModal = (props) => {
 
         <div id="demo-button-div">
           <button className="demo_button" onClick={handleDemo}>Continue with Demo User</button>
-        </div>
+        </div>  
+      
 
     </div>
 
