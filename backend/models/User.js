@@ -15,7 +15,11 @@ const userSchema = new Schema({
     required: true
   },
   trips: [Schema.Types.ObjectId],
-  events: [Schema.Types.ObjectId]
+  events: [Schema.Types.ObjectId],
+  profileImageUrl: {
+    type: String,
+    required: true
+  }
 }, {
   // tells mongoose to add and maintain `createdAt` and `updatedAt` fields with
   // datetime timestamps

@@ -31,10 +31,11 @@ const tripSchema = new Schema({
     },
     lng: {
         type: Number
-    }
-    //images: {
-        //type: Schema.Types.
-    // }
+    },
+    imageUrls: {
+        type: [String],
+        required: false
+      }
 }, {
     timestamps: true
 })
