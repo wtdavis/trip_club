@@ -60,7 +60,7 @@ const getStorageTrip = () => {
       dispatch(tripActions.setCurrentTrip(storageTrip))
     }
 
-
+   
 
 
 

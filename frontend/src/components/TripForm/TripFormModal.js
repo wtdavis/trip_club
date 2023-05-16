@@ -43,9 +43,14 @@ const TripFormModal = (props) => {
     const [currCollaborator, setCurrCollaborator] = useState()
     const [collabErrors, setCollabErrors] = useState(false)
     const [submitErrors, setSubmitErrors] = useState(false)
-    
+    const [modalTitle, setModalTitle] = useState("Create a New Trip")
+  
     useEffect(() => {
         dispatch(userActions.fetchAllUsers())
+        if (currentTrip) {
+          setModalTitle("Edit This Trip")
+        }
+        
         // setCollaborators([])
     }, [])
    
@@ -161,7 +166,7 @@ const TripFormModal = (props) => {
         </div>
 
         <header className="createtrip_header">
-          <div className="login-header-text">Create a New Trip!</div>
+          <div className="login-header-text">{modalTitle}</div>
         </header> 
 
         <form className="createtrip_form" onSubmit={e => handleSubmit(e)}>
