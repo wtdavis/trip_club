@@ -56,7 +56,7 @@ router.post('/', requireUser, validateTripInput, async (req, res, next) => {
             collaborators: req.body.collaborators
         });
         let trip = await newTrip.save()
-        trip = await trip.populate('author', '_id username');
+        trip = await trip.populate("author", "_id username profileImageUrl");
         return res.json(trip)
     }
     catch(err){

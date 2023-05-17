@@ -1,3 +1,4 @@
+const { singleFileUpload, singleMulterUpload } = require("../../awsS3");
 const express = require("express");
 const router = express.Router();
 const bcrypt = require('bcryptjs');
@@ -5,6 +6,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const { loginUser, restoreUser } = require('../../config/passport');
+const DEFAULT_PROFILE_IMAGE_URL = "https://trip-club-dev.s3.amazonaws.com/public/profile_image_default.jpg";
 
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
@@ -26,6 +28,7 @@ router.get('/current', restoreUser, (req, res) => {
   res.json({
     _id: req.user._id,
     username: req.user.username,
+    profileImageUrl: req.user.profileImageUrl,
     email: req.user.email
   });
 })
@@ -58,7 +61,7 @@ router.get('/:id', async (req, res, next) => {
 })
 
 // Attach validateRegisterInput as a middleware before the route handler
-router.post('/register', validateRegisterInput, async (req, res, next) => {
+router.post('/register', singleMulterUpload("image"), validateRegisterInput, async (req, res, next) => {
   // Check to make sure nobody has already registered with a duplicate email or
   // username
   const user = await User.findOne({
@@ -81,8 +84,12 @@ router.post('/register', validateRegisterInput, async (req, res, next) => {
   }
 
   // Otherwise create a new user
+  const profileImageUrl = req.file ?
+      await singleFileUpload({ file: req.file, public: true }) :
+      DEFAULT_PROFILE_IMAGE_URL;
   const newUser = new User({
     username: req.body.username,
+    profileImageUrl,
     email: req.body.email
   });
 
