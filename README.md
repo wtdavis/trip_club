@@ -52,7 +52,7 @@ const userSchema = new Schema({
 ## Frontend
 ```javascript
 <>
-      <NavBar />
+      <Navigation />
       <Switch>
         <AuthRoute exact path="/" component={SplashPage} />
         <AuthRoute exact path="/login" component={LoginForm} />

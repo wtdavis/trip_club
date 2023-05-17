@@ -32,8 +32,8 @@ const startSession = (userInfo, route) => async dispatch => {
   formData.append("username", username);
   formData.append("password", password);
   formData.append("email", email);
-
   if (image) formData.append("image", image);
+  
   try {  
     const res = await jwtFetch(route, {
       method: "POST",

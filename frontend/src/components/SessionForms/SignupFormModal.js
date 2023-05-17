@@ -52,7 +52,10 @@ function SignupFormModal (props) {
       password
     };
 
-    dispatch(signup(user)); 
+    dispatch(signup(user))
+      .then(res => {
+        if (res.currentUser)  setShowSignupModal(false)
+    }); 
   };
 
   const updateFile = e => setImage(e.target.files[0]);
