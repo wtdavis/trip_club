@@ -33,15 +33,6 @@ const getStorageTrip = () => {
  return ( localStorage.getItem("currentTrip"))
 }
 
-// const fetchUpdatedTrip = async (tripId) => {
-//  let res = dispatch(tripActions.fetchTrip(tripId));
-//  let newTrip = await res;
-// return newTrip
-// }
-
-// debugger
-// let updateTrip = currentTrip ? Object.values(currentTrip) : null
-
   useEffect(()=>{
     let storageTrip
     if (props?.location.trip === undefined && !currentTrip) {
@@ -59,49 +50,10 @@ const getStorageTrip = () => {
       setStorageTrip(JSON.stringify(storageTrip))
       dispatch(tripActions.setCurrentTrip(storageTrip))
     }
-
-   
-
-
-
-    // ---------------------------
-    // if (props?.location.trip !== undefined) {
-    //   const storageTrip = JSON.stringify(props.location.trip);
-    //   setTrip(props.location.trip);
-    //   dispatch(tripActions.setCurrentTrip(props.location.trip))
-    //   setStorageTrip(storageTrip)
-    // } else if (currentTrip) { 
-    //   dispatch(eventActions.fetchTripEvents(currentTrip));
-    //   setTrip(currentTrip)
-    //   localStorage.setItem("currentTrip", JSON.stringify(currentTrip))
-    // } else {
-    //   let storageTrip =  JSON.parse(getStorageTrip());
-    //     // storageTrip = fetchUpdatedTrip(storageTrip._id)
-    //   dispatch(tripActions.setCurrentTrip(storageTrip))
-    //   setTrip(storageTrip)
-    //   dispatch(eventActions.clearEvents())
-    //   dispatch(eventActions.fetchTripEvents(storageTrip._id))
-    // };
-
-    
-    // return ( () => {
-    //   dispatch(tripActions.clearCurrentTrip())}
-    // )
    
   }, [dispatch, currentTrip]
   )
   
-  
-  // const handleEdit = (e) => {
-  //   e.preventDefault()
-  //   if (!showEditTripModal){
-  //   setShowEditTripModal(true)
-  // }
-  // else {
-  //   setShowEditTripModal(false)
-  // }
-  // console.log(showEditTripModal)
-  // }
 
   const users = useSelector(state => state.users);
   const currentUser = useSelector(state => state.session.user);

@@ -97,11 +97,13 @@ const TripFormModal = (props) => {
           }}
         )
         } else if (currentTrip) {
-          dispatch(updateTrip({...currentTrip, ...formData}))
+          let data = {...currentTrip, ...formData}
+          debugger
+          dispatch(updateTrip(data))
           .then ( (res) => { 
             debugger
-            dispatch(setCurrentTrip({...currentTrip, ...formData}))
-            setNewTrip({...currentTrip, ...formData})
+            dispatch(setCurrentTrip(data))
+            setNewTrip(data)
             setShowCreateTripModal(false)
             setRedirect(true)
           })
@@ -141,6 +143,11 @@ const TripFormModal = (props) => {
         })
     }
     
+    const handleChange = () => {
+      setSubmitErrors(false);
+      setCollabErrors(false)
+    }
+
     const CollaboratorsList = () => {
         return (
           // <div className="friends_ul_container">
@@ -176,7 +183,7 @@ const TripFormModal = (props) => {
               className="createtrip_input" 
               type="text" 
               value={title} 
-              onChange={e => setTitle(e.target.value)}
+              onChange={e => {setTitle(e.target.value); handleChange()}}
               placeholder="Name Your New Trip"
             />
             
@@ -187,7 +194,7 @@ const TripFormModal = (props) => {
             <textarea 
               className="createtrip_input description" 
               value={description} 
-              onChange={e => setDescription(e.target.value)}
+              onChange={e => {setDescription(e.target.value); handleChange()}}
               placeholder="Enter a Description"
             />
             {submitErrors && 
@@ -199,7 +206,7 @@ const TripFormModal = (props) => {
                 type="date" 
                 className="createtrip_input" 
                 value={startDate} 
-                onChange={e => setStartDate(e.target.value)}
+                onChange={e => {setStartDate(e.target.value); handleChange()}}
               />
             </div>
 
@@ -212,7 +219,7 @@ const TripFormModal = (props) => {
                 className="createtrip_input" 
                 type="date" 
                 value={endDate} 
-                onChange={e => setEndDate(e.target.value)}
+                onChange={e => {setEndDate(e.target.value); handleChange()}}
               />
             </div>
 
@@ -228,7 +235,7 @@ const TripFormModal = (props) => {
                 className="createtrip_input"
                 type='text'
                 value={currCollaborator}
-                onChange={e => setCurrCollaborator(e.target.value)}
+                onChange={e => {setCurrCollaborator(e.target.value); handleChange()}}
                 placeholder="Friend's Email"
               />
 

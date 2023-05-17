@@ -5,16 +5,18 @@ import { createTripEvent } from "../../store/events";
 import "./EventForm.css"
 
 function EventForm (props) {
-
+    const {setShowEventEditModal, event} = props
     const currentTrip = props.trip
     const dispatch = useDispatch()    
     const currentUser = useSelector(state => state.session.user)
-    const [title, setTitle] = useState("")
-    const [description, setDescription] = useState("")
-    const [startTime, setStartTime] = useState(null)
-    const [endTime, setEndTime] = useState(null)
+    const [title, setTitle] = useState(event ? event.title : "")
+    const [description, setDescription] = useState(event ? event.description : "")
+    const [startTime, setStartTime] = useState(event ? event.startTime : null)
+    const [endTime, setEndTime] = useState(event ? event.endTime : null)
+    const [eventFormTitle, setEventFormTitle] = useState(event ? "Edit This Event" : "Create a New Event!")
 
     // const author = currentUser.id
+debugger
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = {
@@ -29,9 +31,14 @@ function EventForm (props) {
     }
 return(
     <div className="eventformdiv">
+        {props?.event &&  
+        <button onClick={e=> {setShowEventEditModal(false)}}>
+            <i id="eventeditclosebutton" class="fa fa-x"></i>
+            </button>}
         <header className="createevent_header">
-          <div className="eventformheader">Create a New Event!</div>
+          <div className="eventformheader">{eventFormTitle}</div>
         </header> 
+
         {/* <h3 className="eventformheader">Create a New Event!</h3> */}
         <form classname="eventformform" onSubmit={e => handleSubmit(e)}>
        
@@ -56,7 +63,7 @@ return(
             <input 
                 className="createevent_input" 
                 type="datetime-local" 
-                value={startTime} 
+                value={() => {startTime.toISOString().slice(0, 16)}} 
                 onChange={e => setStartTime(e.target.value)}
             />
             

@@ -1,6 +1,10 @@
+import { useState } from 'react';
+import { Modal } from '../../context/Modal';
+import EventForm from '../EventForm/EventForm';
 import GoogleMap from '../GoogleMap'
 
 function EventItem (props)  {
+  const [showEventEditModal, setShowEventEditModal] = useState(false)
   let lng = -73.99376925185645;
   let lat = 40.73631643149453;
     
@@ -28,7 +32,17 @@ function EventItem (props)  {
             <div className='google-map-container'>
               <GoogleMap lng={lng} lat={lat}/>
             </div>
+            <button onClick={e => {setShowEventEditModal(true)}}>
+            <i data-title="Edit Event" class="fa-solid fa-pencil fa-1x"></i>
+            </button>
+            <button onClick={e => {setShowEventEditModal(true)}}>
+            <i data-title="Delete Event" class="fa-solid fa-trash-can fa-1x"></i>
+            </button>
 
+            {showEventEditModal && 
+            <Modal onClose={(e)=> {setShowEventEditModal(false)}}>
+              <EventForm setShowEventEditModal={setShowEventEditModal} event={props.event}/>
+              </Modal>}
         </div>
       )  
     }
