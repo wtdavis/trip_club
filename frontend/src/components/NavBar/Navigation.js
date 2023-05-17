@@ -8,12 +8,13 @@ import { Modal } from '../../context/Modal';
 import LoginFormModal from '../SessionForms/LoginFormModal';
 import SignupFormModal from '../SessionForms/SignupFormModal';
 import TripFormModal from '../TripForm/TripFormModal';
-import './NavBar.css';
+import './Navigation.css';
 
 function Navigation () {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [showCreateTripModal, setShowCreateTripModal] = useState(false);
+  const currentUser = useSelector(state => state.session.user)
 
   const loggedIn = useSelector(state => !!state.session.user);
   const dispatch = useDispatch();
@@ -29,7 +30,14 @@ function Navigation () {
 
         <div className="navlinkdiv" >
           {/* <Link className="navlink"  to={'/tweets'}>All Tweets</Link> */}
-          <Link className="navlink"  to={'/profile'}>profile</Link>
+          <Link className="navlink"  to={'/profile'}>
+            {currentUser.profileImageUrl ?
+              <img className="profile_image" src={currentUser.profileImageUrl} alt=""/> :
+              undefined
+            }
+            <span className='navlink_profile'>profile</span>
+          </Link>
+          
           {/* <Link  className="navlink" to={'/tweets/new'}>Write a Tweet</Link> */}
           {/* <Link className="navlink"  to={'/trips/new'}> create a trip</Link> */}
           <button className="navlink" onClick={()=> setShowCreateTripModal(true)}>create a trip</button>

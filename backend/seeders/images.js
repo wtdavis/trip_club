@@ -3,7 +3,7 @@ const { mongoURI: db } = require('../config/keys.js');
 const User = require('../models/User');
 const Trip = require('../models/Trip');
 
-const DEFAULT_PROFILE_IMAGE_URL = 'https://trip-club-dev.s3.amazonaws.com/profile_image/profile_image_default.jpg'; 
+const DEFAULT_PROFILE_IMAGE_URL = 'https://trip-club-dev.s3.amazonaws.com/public/profile_image_default.jpg'; 
 
 // Connect to database
 mongoose
