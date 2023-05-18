@@ -16,7 +16,7 @@ function EventForm (props) {
     const [eventFormTitle, setEventFormTitle] = useState(event ? "Edit This Event" : "Create a New Event!")
 
     // const author = currentUser.id
-debugger
+// debugger
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = {

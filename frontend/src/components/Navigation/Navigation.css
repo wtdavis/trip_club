@@ -30,7 +30,12 @@
     position: sticky;
     top: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.5);    
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;    
+  }
+
+  header.site_header.notsplash_page {
+    background: linear-gradient(to right, var(--blue-sands-brand), var(--lightblue-sands-brand), var(--yellow-sands-brand), var(--darkyellow-sands-brand));
   }
   
 .navlinkdiv {
@@ -48,11 +53,9 @@
 
 .navlink {
     text-decoration: none;
-    color: var(--pink-brand);
     padding: 5px 15px;
     align-items: center;
     color: black;
-    color:rgb(236, 232, 232);
     font-size: 22px;
     font-weight: 900;
     letter-spacing: 1px;
@@ -60,6 +63,10 @@
     cursor: pointer;
     position: relative;
     opacity: 1;
+}
+
+.navlink.splash_page {
+  color:rgb(236, 232, 232);
 }
 
 .navlink #navlink_logout{
