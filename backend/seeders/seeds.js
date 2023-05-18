@@ -17,7 +17,7 @@ users.push(
     username: 'demo',
     email: 'demo@user.io',
     hashedPassword: bcrypt.hashSync('password', 10),
-    profileImageUrl:"https://trip-club-dev.s3.amazonaws.com/public/demo.jpg"
+    profileImageUrl:"https://trip-club-dev.s3.amazonaws.com/profile_image/demo_female.jpg"
   })
 )
 
@@ -25,35 +25,35 @@ users.push( new User ({
   username: 'peter',
   email: 'peter@user.io',
   hashedPassword: bcrypt.hashSync('password', 10),
-  profileImageUrl:"https://trip-club-dev.s3.amazonaws.com/public/demo.jpg"
+  profileImageUrl:"https://trip-club-dev.s3.amazonaws.com/profile_image/demo_male.jpg"
 }));
 
 users.push(new User ({
   username: 'olga',
   email: 'olga@user.io',
   hashedPassword: bcrypt.hashSync('password', 10),
-  profileImageUrl:"https://trip-club-dev.s3.amazonaws.com/public/demo.jpg"
+  profileImageUrl:"https://trip-club-dev.s3.amazonaws.com/profile_image/demo_female.jpg"
 }))
 
 users.push( new User ({
   username: 'amin',
   email: 'amin@user.io',
   hashedPassword: bcrypt.hashSync('password', 10),
-  profileImageUrl:"https://trip-club-dev.s3.amazonaws.com/public/demo.jpg"
+  profileImageUrl:"https://trip-club-dev.s3.amazonaws.com/profile_image/demo_male.jpg"
 }))
 
 users.push( new User ({
   username: 'clarence',
   email: 'clarence@user.io',
   hashedPassword: bcrypt.hashSync('password', 10),
-  profileImageUrl:"https://trip-club-dev.s3.amazonaws.com/public/demo.jpg"
+  profileImageUrl:"https://trip-club-dev.s3.amazonaws.com/profile_image/demo_male.jpg"
 }))
 
 users.push( new User ({
   username: 'stephen',
   email: 'stephen@user.io',
   hashedPassword: bcrypt.hashSync('password', 10),
-  profileImageUrl:"https://trip-club-dev.s3.amazonaws.com/public/demo.jpg"
+  profileImageUrl:"https://trip-club-dev.s3.amazonaws.com/profile_image/demo_male.jpg"
 }))
 
 // for (let i = 1; i < NUM_SEED_USERS; i++) {
