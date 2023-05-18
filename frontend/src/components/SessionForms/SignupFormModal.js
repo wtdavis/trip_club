@@ -8,6 +8,7 @@ function SignupFormModal (props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
+  const [image, setImage] = useState(null);
   const errors = useSelector(state => state.errors.session);
   const dispatch = useDispatch();
   const { setShowSignupModal } = props;
@@ -47,11 +48,17 @@ function SignupFormModal (props) {
     const user = {
       email,
       username,
+      image,
       password
     };
 
-    dispatch(signup(user)); 
-  }
+    dispatch(signup(user))
+      .then(res => {
+        if (res.currentUser)  setShowSignupModal(false)
+    }); 
+  };
+
+  const updateFile = e => setImage(e.target.files[0]);
 
   return (
     <div className='login-modal'>
@@ -104,6 +111,13 @@ function SignupFormModal (props) {
         <div className="errors">
           {password !== password2 && 'Confirm Password field must match'}
         </div>
+
+        <div>
+          Profile Image
+          <input  className="image_input" type="file" accept=".jpg, .jpeg, .png"
+            onChange={updateFile}
+          />
+        </div>
         
         <div className="agree-message">            
             By clicking <span className="continue-span"> Continue </span>
@@ -113,17 +127,8 @@ function SignupFormModal (props) {
             <span className="agree_span" target="_blank" rel="noopener noreferrer"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">  Terms of Service</a></span>
             and
             <span className="agree_span" target="_blank" rel="noopener noreferrer"><a href="https://www.youtube.com/watch?v=DiBmfcYaBoI&t=4s"> Privacy Policy</a></span>
-            
-            {/* ,<span className="bold" target="_blank" rel="noopener noreferrer"><a href="https://www.airbnb.com/help/article/2855"> Privacy Policy</a></span>, 
-            <span className="bold" target="_blank" rel="noopener noreferrer"><a href="https://www.airbnb.com/help/article/2868"> Guest Refund Policy</a></span>, and
-            <span className="bold" target="_blank" rel="noopener noreferrer"><a href="https://www.airbnb.com/help/article/2869"> Host Damage Protection Terms</a></span>. 
-             */}
-          </div>
-        {/* <button
-          type="submit"
-          value="Sign Up"
-          // disabled={!email || !username || !password || password !== password2}
-        /> */}
+        </div>
+
         <button type="submit" className="continue_button">Continue</button>
 
       </form>

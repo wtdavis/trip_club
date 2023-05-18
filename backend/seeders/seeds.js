@@ -1,14 +1,12 @@
 const mongoose = require("mongoose");
 const { mongoURI: db } = require('../config/keys.js');
 const User = require('../models/User.js');
-const Tweet = require('../models/Tweet.js');
 const Trip = require('../models/Trip.js')
 const Event = require('../models/Event.js')
 const bcrypt = require('bcryptjs');
 const { faker } = require('@faker-js/faker');
 
 // const NUM_SEED_USERS = 10;
-// const NUM_SEED_TWEETS = 30;
 // const NUM_SEED_TRIPS = 7;
 
 // Create users
@@ -18,38 +16,44 @@ users.push(
   new User ({
     username: 'demo',
     email: 'demo@user.io',
-    hashedPassword: bcrypt.hashSync('password', 10)
+    hashedPassword: bcrypt.hashSync('password', 10),
+    profileImageUrl:"https://trip-club-dev.s3.amazonaws.com/profile_image/demo_female.jpg"
   })
 )
 
 users.push( new User ({
   username: 'peter',
   email: 'peter@user.io',
-  hashedPassword: bcrypt.hashSync('password', 10)
+  hashedPassword: bcrypt.hashSync('password', 10),
+  profileImageUrl:"https://trip-club-dev.s3.amazonaws.com/profile_image/demo_male.jpg"
 }));
 
 users.push(new User ({
   username: 'olga',
   email: 'olga@user.io',
-  hashedPassword: bcrypt.hashSync('password', 10)
+  hashedPassword: bcrypt.hashSync('password', 10),
+  profileImageUrl:"https://trip-club-dev.s3.amazonaws.com/profile_image/demo_female.jpg"
 }))
 
 users.push( new User ({
   username: 'amin',
   email: 'amin@user.io',
-  hashedPassword: bcrypt.hashSync('password', 10)
+  hashedPassword: bcrypt.hashSync('password', 10),
+  profileImageUrl:"https://trip-club-dev.s3.amazonaws.com/profile_image/demo_male.jpg"
 }))
 
 users.push( new User ({
   username: 'clarence',
   email: 'clarence@user.io',
-  hashedPassword: bcrypt.hashSync('password', 10)
+  hashedPassword: bcrypt.hashSync('password', 10),
+  profileImageUrl:"https://trip-club-dev.s3.amazonaws.com/profile_image/demo_male.jpg"
 }))
 
 users.push( new User ({
   username: 'stephen',
   email: 'stephen@user.io',
-  hashedPassword: bcrypt.hashSync('password', 10)
+  hashedPassword: bcrypt.hashSync('password', 10),
+  profileImageUrl:"https://trip-club-dev.s3.amazonaws.com/profile_image/demo_male.jpg"
 }))
 
 // for (let i = 1; i < NUM_SEED_USERS; i++) {
@@ -64,18 +68,6 @@ users.push( new User ({
 //   )
 // }
   
-// Create tweets
-const tweets = [];
-
-// for (let i = 0; i < NUM_SEED_TWEETS; i++) {
-//   tweets.push(
-//     new Tweet ({
-//       text: faker.hacker.phrase(),
-//       author: users[Math.floor(Math.random() * NUM_SEED_USERS)]._id
-//     })
-//   )
-// }
-
 const trips = [];
 
 // for (let i = 0; i < NUM_SEED_TRIPS; i++) {
@@ -265,14 +257,12 @@ mongoose
 
 // Reset and seed db
 const insertSeeds = () => {
-  console.log("Resetting db and seeding users, tweets, trips, and events...");
+  console.log("Resetting db and seeding users, trips, and events...");
 
   User.collection.drop()
-                 .then(() => Tweet.collection.drop())
                  .then(() => Trip.collection.drop())
                  .then(() => Event.collection.drop())
                  .then(() => User.insertMany(users))
-                 .then(() => Tweet.insertMany(tweets))
                  .then(() => Event.insertMany(events))
                  .then(() => Trip.insertMany(trips))
                  .then(() => {

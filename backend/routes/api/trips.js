@@ -1,3 +1,4 @@
+const { multipleFilesUpload, multipleMulterUpload } = require("../../awsS3");
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -44,7 +45,8 @@ router.get('/:id', async (req, res, next) => {
 })
 
 // Trip Create, works
-router.post('/', requireUser, validateTripInput, async (req, res, next) => {
+router.post('/', multipleMulterUpload("images"), requireUser, validateTripInput, async (req, res, next) => {
+    const imageUrls = await multipleFilesUpload({ files: req.files, public: true });
     try {
         const newTrip = new Trip({
             author: req.user,
@@ -52,11 +54,12 @@ router.post('/', requireUser, validateTripInput, async (req, res, next) => {
             description: req.body.description,
             startDate: new Date(req.body.startDate),
             endDate: new Date(req.body.endDate),
+            imageUrls,
             events: req.body.events,
             collaborators: req.body.collaborators
         });
         let trip = await newTrip.save()
-        trip = await trip.populate('author', '_id username');
+        trip = await trip.populate("author", "_id username profileImageUrl");
         return res.json(trip)
     }
     catch(err){

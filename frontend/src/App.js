@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 
 import { AuthRoute, ProtectedRoute } from './components/Routes/Routes';
-import Navigation from './components/NavBar/Navigation';
+import Navigation from './components/Navigation/Navigation';
 
 import SplashPage from './components/SplashPage/SplashPage';
 import ContactUs from './components/ContactUs/ContactUs';
