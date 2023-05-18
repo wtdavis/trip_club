@@ -87,10 +87,12 @@ router.post('/register', singleMulterUpload("image"), validateRegisterInput, asy
   const profileImageUrl = req.file ?
       await singleFileUpload({ file: req.file, public: true }) :
       DEFAULT_PROFILE_IMAGE_URL;
+
   const newUser = new User({
     username: req.body.username,
     profileImageUrl,
     email: req.body.email
+    // profileImageUrl: req.body.profileImageUrl
   });
 
   bcrypt.genSalt(10, (err, salt) => {
