@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Modal } from '../../context/Modal';
 import TripFormModal from '../TripForm/TripFormModal';
@@ -35,28 +35,28 @@ const DropDown = ({ user }) => {
   return (
     <>
       <button className='profile_button' onClick={toggleMenu}>
-          {user.profileImageUrl ?
-            <img className="profile_image" src={user.profileImageUrl} alt=""/> :
-              undefined
-          }
-          <span className='drop_down_username'>{user.username}</span>
-        {/* <i id="profile_button_bars" className="fa-solid fa-bars"></i> */}
-        {/* <i id="profile_button_user_circle" className="fa-regular fa-user-circle" /> */}
+        <img className="profile_image" src={user.profileImageUrl} alt=""/> 
+        <span className='drop_down_username'>{user.username}</span>
       </button>
 
       {menu && (
-        <ul className="profile_dropdown_login" onClick={() => setMenu(false)}>
-          <li>{user.username}</li>
-          <li><Link className="navlink"  to={'/profile'}>
-            <span className='navlink_profile'>your trips</span>
+        <ul className="profile_dropdown" onClick={() => setMenu(false)}>
+          <li className='profile_dropdown_navlink'>{user.username}</li>
+          <li className='dropdown_divider'></li>
+          <li className='profile_dropdown_navlink'>
+            <Link to={'/profile'}>
+              <span className='profile_dropdown_span'>your trips</span>
             </Link>
           </li>
-          <li> <Link className="navlink" to={'/'}> <button id="navlink_logout" onClick={logoutUser}>logout</button></Link></li>
 
-          <li> <button className="navlink" onClick={()=> setShowCreateTripModal(true)}>create a trip</button></li>
-          <li> Name</li>
-          <li> Name</li>
-          <li className='dropdown-divider'></li>
+          <li className='profile_dropdown_navlink'> <button onClick={()=> setShowCreateTripModal(true)}>create a trip</button></li>
+
+          <li className='profile_dropdown_navlink'> 
+            <Link to={'/'}> 
+              <button id="logout_button" onClick={logoutUser}>logout</button>
+            </Link>
+          </li>
+
         </ul>
       )}
 

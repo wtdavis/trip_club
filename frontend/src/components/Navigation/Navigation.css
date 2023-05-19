@@ -42,20 +42,13 @@
 
   .site_header_right_side{
     position: relative;
-    left: 70px;
   }
   
 .navlinkdiv {
-    margin-right: 100px;
+    margin-right: 20px;
     display: flex;
     flex-direction: row;
     align-items: center;   
-}
-
-#navlink_logout {
-    padding: 0;
-    border: none;
-    background: none;
 }
 
 .navlink {
@@ -78,34 +71,11 @@
   color:rgb(236, 232, 232);
 }
 
-.navlink #navlink_logout{
-    text-decoration: none;
-    align-items: center;
-    font-size: 20px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    transition: 0.5s;
-    cursor: pointer;    
-}
-
-.navlink_profile{
-  margin-left: 8px;
-}
-
-.profile_image {
-  height: 45px;
-  font-weight: 30px;
-  border-radius: 50%;
-  aspect-ratio: 1;
-  object-fit: cover;
-}
-
 .navlink:hover {
   transform: scale(1.025);
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 20px;
-  height: 55px;
-  
+  height: 55px;  
 }
 
 .logo-box {
@@ -129,9 +99,12 @@
 
 }
 
-a {
+.nav_title a,
+.navlink a {
   text-decoration: none;
   display: flex;
   align-items: center;
 }
+
+
 
