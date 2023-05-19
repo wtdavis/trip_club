@@ -47,22 +47,17 @@
   color: var(--dark-black-color);
   }
 
-  .header_message {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    font-size: 25px;
-    font-weight: 800;
-    top: 70px;
-    position: sticky;
-    position: fixed;
-    justify-content: center;
-    /* z-index: 99; */
-    width: 86%;
-    height: 70px;
-    /* margin-bottom: 20px; */
-    border: 2px solid red;
-  }
+.header_message {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  font-size: 25px;
+  font-weight: 800;
+  position: sticky;
+  justify-content: center;
+  z-index: 99;
+  height: 70px;
+}
 
 @media (min-width: 0px) {
   .trips_div {
