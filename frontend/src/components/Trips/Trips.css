@@ -5,74 +5,45 @@
   --brand-color: #383838; 
 }
 
-.trip-item-container:hover {
-	cursor: pointer;
-}
-
-.trip-image {
-	height: 100%;
-	width: 100%;
-	border-radius: 10px;
-	
-}
-
-.trip-item-container {
-  /* width: 50%;  */
-  /* Set the width of the container */
-  /* height: 500px;  */
-  /* Set the height of the container */
-  /* max-height: 200px; */
-  margin: 10px;
-  overflow: hidden; /* hide any part of the image that exceeds the container */
-  /* display: flex; */
-  /* grid-template-columns: repeat(2, 1fr);  */
-  /* Set the grid-template-columns property to repeat the 1fr unit 2 times */
+.trip_item_container {
+  overflow: hidden;
   grid-gap: 20px; 
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-auto-flow: dense;
   padding: 0.5rem;
   transition: 0.5s;
+  /* height: 70%; */
 }
 
-.trip-item-container:hover {
+.trip_item_container:hover {
   transform: scale(1.005); 
-  /* background: #49abcf; */
-  /* opacity: 0.2; */
-  z-index: 2;
+  /* z-index: 2; */
   box-shadow: 1px 1px 2px 1px #8a8888;
   border-radius: 8px;
+  cursor: pointer;
 }
 
-.left-column .right-column {
+.left_column .right_column {
   flex: 50%;
+  /* padding-top: 50px; */
 }
 
-.right-column {
+.right_column {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content:space-between;
   align-items: center;
   
 }
 
-.google-map-container {
+.google_map_container {
   width: 100%;
   height: 100%;
   /* width: auto; */
 }
 
-
-#trip-image {
-	/* height: 80%;  */
-	/* width: 80%; */
-	border-radius: 10px;
-  max-width: 100%; /* set the maximum width of the image to 100% of the container's width */
-  max-height: 100%; /* set the maximum height of the image to 100% of the container's height */
-  display: block; /* ensure the image is a block element */
-}
-
-.description-container {
+.description_container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,8 +52,8 @@
 
 
 .trip-link {
-  text-decoration: none; /* Remove underline and other decorations from links */
-  color: var(--brand-color); /* Set the link color to blue */
+  text-decoration: none; 
+  color: var(--brand-color);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -100,94 +71,7 @@ ul {
   list-style: none;
 }
 
-.carousel {
-  position: relative;
-  display: flex;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  z-index: 0;
+.horizontal_line {
+  border-top: 2px solid rgb(164, 163, 163);
 }
-
-.carousel:focus {
-  outline: 0.25rem solid hsl(220, 60%, 60%);
-  outline-offset: 0.25rem;
-}
-
-.wrapper {
-  position: relative;
-}
-
-.wrapper::before,
-.wrapper::after {
-  --size: 2rem;
-  content: '';
-  display: block;
-  position: absolute;
-  width: var(--size);
-  height: 100%;
-  top: 0;
-  left: 0.5rem;
-  padding: 0.25rem;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"><path d="M7 2 L2 5 L7 8" /></svg>');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center center;
-  color: #fff;
-  z-index: 10;
-  pointer-events: none;
-}
-
-.wrapper::after {
-  left: auto;
-  right: 0.5rem;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2 L7 5 L2 8" /></svg>');
-}
-
-.slide {
-  position: relative;
-  flex: 1 0 100%;
-  scroll-snap-align: center;
-}
-
-.slide a {
-  position: absolute;
-  top: 0;
-  width: 3rem;
-  height: 100%;
-  display: grid;
-  place-items: center;
-  font-size: 0;
-}
-
-.slide a:last-of-type {
-  top: 0;
-  right: 0;
-}
-
-.carousel img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.carousel__nav ul {
-  margin-top: -3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.carousel__nav a {
-  display: grid;
-  place-items: center;
-  width: 25px;
-  height: 20px;
-  color: var(--grey-color);
-  /* text-decoration: none; */
-  /* text-shadow: 1px 1px 0 hsla(220, 20%, 20%, 0.5); */
-}
-
 

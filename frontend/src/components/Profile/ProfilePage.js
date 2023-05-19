@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as  tripActions from '../../store/trips';
-import TripItem from '../Trips/TripItem';
 import TripItemCarousel from '../Trips/TripItemCarousel';
 import './ProfilePage.css'
 import { clearEvents, fetchEvents } from '../../store/events';
@@ -38,39 +37,32 @@ const ProfilePage = () => {
 if (trips && currentUser) {
   if (trips.length == 0) {
     return (
-     <div className='trips-div'>     
-      <div>You have no Trips</div>
-           </div> 
+      <div className='trips_div'>     
+        <div>You have no Trips</div>
+      </div> 
 
   )} else if (trips.length > 0){
     return (
-      <div className='trips-container'>
+      <div className='trips_container'>
 
-        <div className='trips-div'>
+        <div className='trips_div'>
           <div className='header_message'>
             <h1 className='header_message_h2'> Your Trips</h1>
           </div>
           
-          {/* {tripsSelected.map(trip => (
-            <TripItem
-              key={trip._id}
-              trip={trip}
-            />
-          ))} */}
           {tripsUser ? tripsUser.map(trip => (
-            // <TripItem 
-            //   key={trip?._id}
-            //   trip={trip} 
-            // />
-            <TripItemCarousel 
-            key={trip?._id}
-            trip={trip} 
-          />
+            <>
+              <TripItemCarousel 
+              key={trip?._id}
+              trip={trip} 
+              />
+              <hr class="horizontal_line"></hr>
+            </>
           )) : 
-          <></>
+            <></>
           }
 
-      </div>
+        </div>
       </div>
       
     );

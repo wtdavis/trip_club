@@ -101,7 +101,7 @@ function Navigation () {
         <header className="site_header notsplash_page">
         <NavLink className="nav-title" exact to="/" >
           <div className = "logo-box">
-            <div className="logo_name">trip club</div>
+            <div className="logo_name notsplash_page">trip club</div>
           </div>
         </NavLink>
 

@@ -13,9 +13,6 @@ function SplashPage() {
       </video> 
 
           <h1 className='video_h1' data-bf="Welcome to the" data-af="ultimate trip planner">TRIP CLUB</h1>
-      {/* <div className='text_container'>
-
-      </div>   */}
     </div>
 
     <div className='about_container'>
