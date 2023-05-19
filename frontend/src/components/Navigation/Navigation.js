@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { logout } from '../../store/session';
 import { Modal } from '../../context/Modal';
+import DropDown from '../DropDown/DropDown';
 import LoginFormModal from '../SessionForms/LoginFormModal';
 import SignupFormModal from '../SessionForms/SignupFormModal';
 import TripFormModal from '../TripForm/TripFormModal';
@@ -32,6 +33,7 @@ function Navigation () {
       return (
 
         <div className="navlinkdiv" >
+          <DropDown />
           <Link className="navlink"  to={'/profile'}>
             {currentUser.profileImageUrl ?
               <img className="profile_image" src={currentUser.profileImageUrl} alt=""/> :
