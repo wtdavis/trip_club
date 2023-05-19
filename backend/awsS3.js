@@ -23,11 +23,12 @@ const singleFileUpload = async ({ file, public = false }) => {
 };
 
 const multipleFilesUpload = async ({files, public = false}) => {
+  if (files){
   return await Promise.all(
     files.map((file) => {
       return singleFileUpload({file, public});
     })
-  );
+  )};
 };
 
 const retrievePrivateFile = (key) => {
