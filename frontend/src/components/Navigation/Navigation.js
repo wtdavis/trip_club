@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 import { logout } from '../../store/session';
 import { Modal } from '../../context/Modal';
 import DropDown from '../DropDown/DropDown';
@@ -9,7 +8,6 @@ import LoginFormModal from '../SessionForms/LoginFormModal';
 import SignupFormModal from '../SessionForms/SignupFormModal';
 import TripFormModal from '../TripForm/TripFormModal';
 import './Navigation.css';
-import { useLocation } from "react-router-dom";
 
 
 function Navigation () {
@@ -33,7 +31,7 @@ function Navigation () {
       return (
 
         <div className="navlinkdiv" >
-          <DropDown />
+          <DropDown user={currentUser} />
           <Link className="navlink"  to={'/profile'}>
             {currentUser.profileImageUrl ?
               <img className="profile_image" src={currentUser.profileImageUrl} alt=""/> :
