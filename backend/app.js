@@ -6,7 +6,6 @@ const cors = require('cors');
 const csurf = require('csurf');
 /* --- Need to import these to load the models into mongoose --- */
 require('./models/User');
-require('./models/Tweet');
 require('./models/Trip')
 require('./models/Event')
 /* ------------------------------------------------------------- */
@@ -47,12 +46,10 @@ app.use(
 // app.get("/", (req, res) => res.send("Hello World!!"));
 
 // Attach Express routers
-const tweetsRouter = require('./routes/api/tweets');
 const usersRouter = require('./routes/api/users');
 const csrfRouter = require('./routes/api/csrf');
 const tripsRouter = require('./routes/api/trips')
 const eventsRouter = require('./routes/api/events')
-app.use('/api/tweets', tweetsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/csrf', csrfRouter);
 app.use('/api/trips', tripsRouter)
