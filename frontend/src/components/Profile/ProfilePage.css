@@ -26,51 +26,41 @@
   --dark-black-color: #383838; 
 }
 
-.trips-container {
-  display: flex; 
+.trips_container {
+  display: flex;
   justify-content: center;
   align-items: center; 
+  flex-direction: column; 
 }
 
-.trips-div {
+.trips_div {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding-top: 13px;
-  display: grid;
-  gap: 20px;
   padding-bottom: 20px;
   display: grid;
-  width: 50%;
-  }
-
-  .header_message {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-clip: text;
-    
-  }
-
-  trips-div h1,
-  trips-container h1 {
-    background: linear-gradient(to right, var(--darkyellow-sands-brand), var(--blue-sands-brand));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 30px;
-  }
-
-.trip-div {
-	min-height: 358px;
-	/* display: flex;  */
-	/* align-items: center; */
-	/* flex-direction: column; */
-	/* justify-content: flex-end; */
+  gap: 20px;
+  width: 80%;
+  min-height: 358px;
   color: var(--dark-black-color);
+  }
+
+.header_message {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  font-size: 25px;
+  font-weight: 800;
+  position: sticky;
+  justify-content: center;
+  /* z-index: 2; */
+  height: 70px;
 }
 
 @media (min-width: 0px) {
-  .trips-div {
+  .trips_div {
       grid-template-columns: 1fr;
       justify-content: center; 
       align-items: center;

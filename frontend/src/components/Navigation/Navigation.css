@@ -26,34 +26,39 @@
     justify-content: space-between;
     height: 70px;
     align-items: center;
-    padding: 0px 70px 0px 70px;
+    padding: 0px 0px 0px 70px;
     position: sticky;
     top: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.5);    
+    background: rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    z-index: 9999;   
+  }
+
+  header.site_header.notsplash_page {
+    background: linear-gradient(to right, var(--blue-sands-brand), var(--lightblue-sands-brand), var(--yellow-sands-brand), var(--darkyellow-sands-brand));
+  }
+
+  .site_header_right_side{
+    position: relative;
   }
   
 .navlinkdiv {
-    margin-right: 100px;
+    margin-right: 20px;
     display: flex;
     flex-direction: row;
     align-items: center;   
 }
 
-#navlink_logout {
-    padding: 0;
-    border: none;
-    background: none;
-}
-
 .navlink {
     text-decoration: none;
-    color: var(--pink-brand);
+    margin-left: 3px;
+    margin-right: 3px;
     padding: 5px 15px;
     align-items: center;
     color: black;
-    color:rgb(236, 232, 232);
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 900;
     letter-spacing: 1px;
     transition: 0.5s;
@@ -62,34 +67,15 @@
     opacity: 1;
 }
 
-.navlink #navlink_logout{
-    text-decoration: none;
-    align-items: center;
-    font-size: 22px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    transition: 0.5s;
-    cursor: pointer;    
-}
-
-.navlink_profile{
-  margin-left: 8px;
-}
-
-.profile_image {
-  height: 45px;
-  font-weight: 30px;
-  border-radius: 50%;
-  aspect-ratio: 1;
-  object-fit: cover;
+.navlink.splash_page {
+  color:rgb(236, 232, 232);
 }
 
 .navlink:hover {
   transform: scale(1.025);
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 20px;
-  height: 55px;
-  
+  height: 55px;  
 }
 
 .logo-box {
@@ -108,9 +94,17 @@
   letter-spacing: 1px;
 }
 
-a {
+.logo_name.notsplash_page{
+  color:white;
+
+}
+
+.nav_title a,
+.navlink a {
   text-decoration: none;
   display: flex;
   align-items: center;
 }
+
+
 

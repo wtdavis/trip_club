@@ -84,7 +84,7 @@ const TripFormModal = (props) => {
           .then( (res) => { 
             if (res) {
               setNewTrip(res)
-              debugger 
+              // debugger 
               dispatch(setCurrentTrip(res))
               setRedirect(true)
               setShowCreateTripModal(false)
@@ -92,16 +92,16 @@ const TripFormModal = (props) => {
           } else {
             let errors = tripErrors
 
-            debugger
+            // debugger
             setSubmitErrors(true)
           }}
         )
         } else if (currentTrip) {
           let data = {...currentTrip, ...formData}
-          debugger
+          // debugger
           dispatch(updateTrip(data))
           .then ( (res) => { 
-            debugger
+            // debugger
             dispatch(setCurrentTrip(data))
             setNewTrip(data)
             setShowCreateTripModal(false)

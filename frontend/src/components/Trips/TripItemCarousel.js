@@ -34,32 +34,32 @@ const TripItemCarousel = ({trip}) => {
     }
   
   if (currentTrip) return (
-    
-      <div className="trip-item-container" > 
-        <div className='left-column'>
+    <div className="trip_item_container" > 
+      <h2 className='trip_title'>{trip.title.length < 25 ? trip.title : `${trip.title.slice(0,25)}...`}</h2>
+
+      <div className="trip_grid" >
+      <div className='left_column'>
           <Carousel />
         </div>
 
-        <div className='right-column' onClick={handleCLick}>
-          <div className="trip-link" onClick={handleShow} >
-            <div className='description-container'>
-                <h2 className='trip-title'>{trip.title.length < 25 ? trip.title : `${trip.title.slice(0,25)}...`}</h2>
-                {/* <p className='description-p'>{trip.description.length < 35 ? trip.description : `${trip.description.slice(0,35)}...`}</p> */}
-                {/* <p className='price-p'><span className='price-span'>{`$${<p>{trip.cost}</p>}`}</span> night</p>            */}
-            </div>
+        <div className='right_column' onClick={handleCLick}>
+          <div className="trip_link" onClick={handleShow} >
             <ul>
               {tripEvents.map(event => (<li>{event.title}</li>))}
-            </ul>
-          
+            </ul>      
 
           </div>
 
-          <div className='google-map-container'>
+          <div className='google_map_container'>
               <GoogleMap lng={lng} lat={lat}/>
             </div>
 
 
-        </div>        
+        </div> 
+
+      </div>
+
+            
         
       </div>
   )
