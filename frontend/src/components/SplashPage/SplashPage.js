@@ -24,7 +24,7 @@ function SplashPage() {
             <div class="flip_card" tabIndex="0">
               <div class="flip_card_inner">
                 <div class="flip_card_front">
-                <i className="fa-solid fa-laptop-code fa-10x"></i>
+                <i className="fa-solid fa-laptop-code fa-6x"></i>
                 </div>
                 <div class="flip_card_back">
                   <h3>Responsive Design</h3>
@@ -42,7 +42,7 @@ function SplashPage() {
             <div class="flip_card" tabIndex="0">
               <div class="flip_card_inner">
                 <div class="flip_card_front">
-                  <i class="fa-regular fa-face-grin-wide fa-10x"></i>
+                  <i class="fa-regular fa-face-grin-wide fa-6x"></i>
                 </div>
                 <div class="flip_card_back">
                   <h3>Easy to Use</h3>
@@ -60,7 +60,7 @@ function SplashPage() {
             <div class="flip_card" tabIndex="0">
               <div class="flip_card_inner">
                 <div class="flip_card_front">
-                  <i class="fa-solid fa-chart-line fa-10x"></i>
+                  <i class="fa-solid fa-chart-line fa-6x"></i>
                 </div>
                 <div class="flip_card_back">
                   <h3>Effective Planning</h3>
