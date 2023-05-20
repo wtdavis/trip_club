@@ -33,10 +33,10 @@ function EventItem (props)  {
               <GoogleMap lng={lng} lat={lat}/>
             </div>
             <button onClick={e => {setShowEventEditModal(true)}}>
-            <i data-title="Edit Event" class="fa-solid fa-pencil fa-1x"></i>
+            <i data-title="Edit Event" className="fa-solid fa-pencil fa-1x"></i>
             </button>
             <button onClick={e => {setShowEventEditModal(true)}}>
-            <i data-title="Delete Event" class="fa-solid fa-trash-can fa-1x"></i>
+            <i data-title="Delete Event" className="fa-solid fa-trash-can fa-1x"></i>
             </button>
 
             {showEventEditModal && 

@@ -125,10 +125,10 @@ const getStorageTrip = () => {
 
             <div className='edit_delete_buttons'>
               <button className='Edit_Trip_Link' onClick={() => {setShowEditTripModal(true)}}>
-                <i data-title="Edit Trip" class="fa-solid fa-pencil fa-1x"></i>
+                <i data-title="Edit Trip" className="fa-solid fa-pencil fa-1x"></i>
               </button>
               <button className='Delete_Trip_Link' onClick={(e) => handleDeleteTrip(e)}>
-                <i data-title="Delete Trip" class="fa-solid fa-trash-can fa-1x"></i>
+                <i data-title="Delete Trip" className="fa-solid fa-trash-can fa-1x"></i>
               </button>
             </div>
           </div>

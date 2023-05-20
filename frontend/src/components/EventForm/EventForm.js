@@ -33,7 +33,7 @@ return(
     <div className="eventformdiv">
         {props?.event &&  
         <button onClick={e=> {setShowEventEditModal(false)}}>
-            <i id="eventeditclosebutton" class="fa fa-x"></i>
+            <i id="eventeditclosebutton" className="fa fa-x"></i>
             </button>}
         <header className="createevent_header">
           <div className="eventformheader">{eventFormTitle}</div>

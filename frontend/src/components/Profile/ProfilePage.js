@@ -56,7 +56,7 @@ if (trips && currentUser) {
               key={trip?._id}
               trip={trip} 
               />
-              <hr class="horizontal_line"></hr>
+              <hr className="horizontal_line"></hr>
             </>
           )) : 
             <></>
