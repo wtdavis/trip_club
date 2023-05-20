@@ -35,7 +35,7 @@ const TripItemCarousel = ({trip}) => {
   
   if (currentTrip) return (
     <div className="trip_item_container" > 
-      <h2 className='trip_title'>{trip.title.length < 25 ? trip.title : `${trip.title.slice(0,25)}...`}</h2>
+      <h2 className='trip_title' onClick={handleShow}>{trip.title.length < 25 ? trip.title : `${trip.title.slice(0,25)}...`}</h2>
 
       <div className="trip_grid" >
       <div className='left_column'>
