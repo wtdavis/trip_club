@@ -44,7 +44,6 @@
 }
 
 .createtrip_header {
-  /* text-align: center; */
   font-weight: 800;
   font-size: 20px;
   margin-top: 25px;
@@ -112,7 +111,6 @@
 .continue_button:hover,
 .addfriends_button:hover{
   transform: scale(1.005); 
-  box-shadow: 1px 1px 2px 1px #8a8888;
   background-position: 100% 0;
   -webkit-transition: all .5s ease-in-out;
   moz-transition: all .5s ease-in-out;
