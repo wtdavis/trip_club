@@ -26,15 +26,6 @@
   --dark-black-color: #383838; 
 }
 
-ul li button:hover {
-  transform: scale(1.005); 
-  z-index: 2;
-  box-shadow: 1px 1px 2px 1px #8a8888;
-  border-radius: 8px;
-  padding: 3px;
-
-}
-
 .close-button {
   font-size: 15px;
   width: 100%;

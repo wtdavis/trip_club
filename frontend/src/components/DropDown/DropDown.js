@@ -45,11 +45,11 @@ const DropDown = ({ user }) => {
           <li className='dropdown_divider'></li>
           <li className='profile_dropdown_navlink'>
             <Link to={'/profile'}>
-              <span className='profile_dropdown_span'>your trips</span>
+              <span className='profile_dropdown_span' id="your_trips_button">your trips</span>
             </Link>
           </li>
 
-          <li className='profile_dropdown_navlink'> <button onClick={()=> setShowCreateTripModal(true)}>create a trip</button></li>
+          <li className='profile_dropdown_navlink'> <button id="create_trip_button" onClick={()=> setShowCreateTripModal(true)}>create a trip</button></li>
 
           <li className='profile_dropdown_navlink'> 
             <Link to={'/'}> 

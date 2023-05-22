@@ -88,9 +88,8 @@ profile_dropdown a {
   margin: 20px;
 }
 
-.profile_dropdown_span {
-  text-align: right;
-
+.profile_dropdown_navlink:hover {
+  cursor: pointer;
 }
 
 .dropdown_divider {
@@ -102,3 +101,21 @@ profile_dropdown a {
 #logout_button:hover {
 color: red;
 }
+
+#your_trips_button:hover,
+#create_trip_button:hover,
+#logout_button:hover {
+  /* background-image: linear-gradient(to right, var(--blue-sands-brand), var(--lightblue-sands-brand), var(--yellow-sands-brand), var(--darkyellow-sands-brand)); */
+  /* background-size: 100%; */
+  background-color: blue;
+  
+}
+
+/* ul li button:hover {
+  transform: scale(1.005); 
+  z-index: 2;
+  box-shadow: 1px 1px 2px 1px #8a8888;
+  border-radius: 8px;
+  padding: 3px;
+
+} */
