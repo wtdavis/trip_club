@@ -50,10 +50,9 @@ const getStorageTrip = () => {
       setStorageTrip(JSON.stringify(storageTrip))
       dispatch(tripActions.setCurrentTrip(storageTrip))
     }
-     dispatch(eventActions.fetchTripEvents(trip._id))
+   
   }, [dispatch, currentTrip]
   )
-  // debugger
   
 
   const users = useSelector(state => state.users);
@@ -103,13 +102,10 @@ const getStorageTrip = () => {
 
     let events;
     let allEvents;
-    
     if (currentTrip && dateList.length){
     allEvents = Object.values(tripEvents).filter(ele => ele.trip === currentTrip._id)
     allEvents = [...allEvents, ...dateList]
     events = allEvents.sort(compareDates)}
-
-
     const handleDeleteTrip = (e) => {
       e.preventDefault();
       dispatch(tripActions.deleteTrip(currentTrip))
@@ -145,7 +141,7 @@ const getStorageTrip = () => {
           {/* <button className='tripshowpanelbutton' onClick={() => {setShowEditTripModal(true)}}>Edit Trip</button> */}
           {/* <button className='tripshowpanelbutton' id="tripshowpaneldeletebutton" onClick={(e) => handleDeleteTrip(e)}>Delete Trip</button> */}
             </div>
-            <EventForm  id="eventform" currentTrip={currentTrip}/>
+            <EventForm  id="eventform" trip={trip}/>
           </div>
         </div>
           <div className='tripshoweventslist'>
@@ -153,7 +149,7 @@ const getStorageTrip = () => {
 
             
 
-            {events.map((ele) => (<EventItem currentTrip={currentTrip} event={ele}/>))}
+            {events.map((ele) => (<EventItem event={ele}/>))}
             {/* {dateList[0].toDateString()} */}
             {/* <p> test</p> */}
           </div>
