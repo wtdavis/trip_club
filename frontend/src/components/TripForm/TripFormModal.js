@@ -102,18 +102,20 @@ const TripFormModal = (props) => {
     }
 
     const handleAdd = (e) => { 
-        e.preventDefault()
-        setCollabErrors(true)
-        allUsers.forEach((user) => {
-            if (currCollaborator === user.email) {
-                collaboratorIds = (collaboratorIds.concat(user._id))
-                const newArr = collaborators.slice()
-                const anotherNewArr = newArr.concat(user.email)
-                setCollaborators(anotherNewArr)
-                setCollabErrors(false)
-                setCurrCollaborator('')
-            }
-        })
+      e.preventDefault();
+
+        // e.preventDefault()
+        // setCollabErrors(true)
+        // allUsers.forEach((user) => {
+        //     if (currCollaborator === user.email) {
+        //         collaboratorIds = (collaboratorIds.concat(user._id))
+        //         const newArr = collaborators.slice()
+        //         const anotherNewArr = newArr.concat(user.email)
+        //         setCollaborators(anotherNewArr)
+        //         setCollabErrors(false)
+        //         setCurrCollaborator('')
+        //     }
+        // })
     }
     
     const CollaboratorsList = () => {
@@ -188,7 +190,8 @@ const TripFormModal = (props) => {
             <div className="createtrip friends_container">
               <p className="tripformsubheader">add friends:</p>
               
-              <Search />
+                <Search />
+                
 
 
               {/* <input  */}
