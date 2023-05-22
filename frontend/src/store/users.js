@@ -45,7 +45,7 @@ export const fetchMatchingUsers = async (searchStr) => {
 
     const res = await jwtFetch(`/api/users/search?query=${searchStr}`)
 
-    debugger
+    // debugger
     const users = await res.json();
     return users
 }

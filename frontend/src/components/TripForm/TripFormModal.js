@@ -188,13 +188,16 @@ const TripFormModal = (props) => {
             <div className="createtrip friends_container">
               <p className="tripformsubheader">add friends:</p>
               
-              <input 
-                className="createtrip_input"
-                type='text'
-                value={currCollaborator}
-                onChange={e => setCurrCollaborator(e.target.value)}
-                placeholder="friend's email"
-              />
+              <Search />
+
+
+              {/* <input  */}
+                {/* className="createtrip_input" */}
+                {/* type='text' */}
+                {/* value={currCollaborator}
+                // onChange={e => setCurrCollaborator(e.target.value)}
+                // placeholder="friend's email" */}
+              {/* /> */}
 
               <div className="addfriends_container">
                 <button 

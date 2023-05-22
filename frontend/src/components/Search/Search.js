@@ -9,9 +9,9 @@ const Search = () => {
         console.log('Hello from useEffect')
         const getMatchingUsers = async () => {
             try {
-                const { users } = await userActions.fetchMatchingUsers(search)
+                const users = await userActions.fetchMatchingUsers(search)
                 console.log(users)
-                setMatchingUsers(Object.values(users))
+                setMatchingUsers(users)
             }
             catch(err) {
                 console.log(err)
@@ -25,9 +25,9 @@ const Search = () => {
         <>
         <input type='text' list='users' value={search} onChange={(e) => setSearch(e.target.value)} />
         <datalist id='users'>
-            {matchingUsers.map(user => <option value={user}>{user.username}</option>)}
+            {matchingUsers.map(user => <option>{user.username}</option>)}
+            {/* <option>Hello from option</option> */}
         </datalist>
-        <h1>change 4 Search</h1>
         </>
     )
 }
