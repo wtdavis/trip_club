@@ -77,15 +77,10 @@
   z-index: 99999;
 }
 
-profile_dropdown a {
-  text-decoration: none;
-  display: flex;
-  align-items: right;
-}
-
 .profile_dropdown_navlink {
   text-align: right;
   margin: 20px;
+  padding-right: 2px;
 }
 
 .dropdown_divider {
@@ -99,7 +94,6 @@ profile_dropdown a {
   background-image: linear-gradient(to right, var(--blue-sands-brand), var(--lightblue-sands-brand), var(--yellow-sands-brand), var(--darkyellow-sands-brand));
   background-size: auto;
   border-radius: 8px;
-  /* background-color: blue; */
   
 }
 
