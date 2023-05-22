@@ -32,6 +32,7 @@ function EventForm (props) {
             let data = {...event, ...formData}
             debugger
             dispatch(updateTripEvent(data))
+            setShowEventEditModal(false)
         } else {
             dispatch(createTripEvent({tripId: currentTrip._id, event: formData}))
         }

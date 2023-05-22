@@ -101,7 +101,7 @@ const TripFormModal = (props) => {
           // debugger
           dispatch(updateTrip(data))
           .then ( (res) => { 
-            // debugger
+            debugger
             dispatch(setCurrentTrip(data))
             setNewTrip(data)
             setShowCreateTripModal(false)

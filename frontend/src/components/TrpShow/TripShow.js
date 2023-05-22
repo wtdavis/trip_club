@@ -50,10 +50,10 @@ const getStorageTrip = () => {
       setStorageTrip(JSON.stringify(storageTrip))
       dispatch(tripActions.setCurrentTrip(storageTrip))
     }
-    debugger
-   dispatch(eventActions.fetchTripEvents(trip._id))
+     dispatch(eventActions.fetchTripEvents(trip._id))
   }, [dispatch, currentTrip]
   )
+  debugger
   
 
   const users = useSelector(state => state.users);
