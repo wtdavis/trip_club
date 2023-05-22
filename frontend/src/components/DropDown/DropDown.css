@@ -106,9 +106,7 @@
   moz-transition: all .5s ease-in-out;
   -o-transition: all .5s ease-in-out;
   transition: all .5s ease-in-out;
-  box-shadow: 1px 1px 2px 1px #8a8888;
-
-  
+  box-shadow: 1px 1px 2px 1px #8a8888;  
 }
 
 #profile_dropdown_navlink_username:hover{
