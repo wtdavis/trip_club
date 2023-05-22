@@ -88,27 +88,23 @@ profile_dropdown a {
   margin: 20px;
 }
 
-.profile_dropdown_navlink:hover {
-  cursor: pointer;
-}
-
 .dropdown_divider {
   height: 1px; 
   border: none;
   background-color: var(--lightblue-sands-brand);
 }
 
-#logout_button:hover {
-color: red;
+.profile_dropdown_navlink:hover {
+  cursor: pointer;
+  background-image: linear-gradient(to right, var(--blue-sands-brand), var(--lightblue-sands-brand), var(--yellow-sands-brand), var(--darkyellow-sands-brand));
+  background-size: auto;
+  border-radius: 8px;
+  /* background-color: blue; */
+  
 }
 
-#your_trips_button:hover,
-#create_trip_button:hover,
-#logout_button:hover {
-  /* background-image: linear-gradient(to right, var(--blue-sands-brand), var(--lightblue-sands-brand), var(--yellow-sands-brand), var(--darkyellow-sands-brand)); */
-  /* background-size: 100%; */
-  background-color: blue;
-  
+#profile_dropdown_navlink_username:hover{
+  background-image: none;
 }
 
 /* ul li button:hover {
