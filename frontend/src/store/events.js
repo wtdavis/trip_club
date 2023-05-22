@@ -5,7 +5,6 @@ const RECEIVE_EVENTS = 'events/receiveEvents'
 const RECEIVE_EVENT = 'events/receiveEvent'
 const REMOVE_EVENTS = 'events/removeEvents'
 const REMOVE_EVENT = 'events/removeEvent'
-const UPDATE_EVENT = 'events/updateEvent'
 const CLEAR_EVENTS = 'events/clearEvents'
 const RECEIVE_EVENT_ERRORS = 'events/receiveEventErrors'
 const CLEAR_EVENT_ERRORS = 'events/clearEventErrors'
@@ -41,32 +40,13 @@ export const receiveEvent = (event) => {
     }
 }
 
-export const updateEvent = (event) => {
-    return {
-        type: UPDATE_EVENT,
-        payload: event
-    }
-}
-
 export const clearEvents = () => {
     return {
     type: CLEAR_EVENTS}
 }
 
 
-export const updateTripEvent = (event) => async (dispatch) => {
-    debugger
-    try {
-        let res = await jwtFetch(`/api/events/${event._id}/edit`, {
-            method: 'PATCH',
-            body: JSON.stringify(event)
-        } )
-        let data = await res.json()
-        dispatch(receiveEvent(event))
-    } catch (err) {
-        return err
-    }
-}
+
 
 export const createTripEvent = ({tripId, event}) => async (dispatch) => {
     try{
@@ -86,7 +66,6 @@ export const createTripEvent = ({tripId, event}) => async (dispatch) => {
 }
 
 export const fetchTripEvents = tripId => async dispatch => {
-    // debugger
     try {
     let res = await jwtFetch (`/api/trips/${tripId}/events`);
     let data = await res.json();
@@ -134,14 +113,7 @@ const initialState = {}
 const eventsReducer = (state = initialState, action) => {
     switch(action.type) {
         case RECEIVE_EVENTS:
-            let events = action.payload
-            let obj = {}
-            for (let i = 0; i < events.length; i++) {
-                let temp1 = events[i]._id
-                let temp2 = events[i]
-                obj[temp1] = temp2
-            }
-            return {...state, ...obj}
+            return {...state, ...action.payload};
         case RECEIVE_EVENT:
             return {...state, [action.payload._id]: action.payload};
         case REMOVE_EVENT:

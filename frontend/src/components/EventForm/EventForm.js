@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import Calendar from "react-calendar";
-import { createTripEvent, updateEvent, updateTripEvent } from "../../store/events";
+import { createTripEvent } from "../../store/events";
 import "./EventForm.css"
 
 function EventForm (props) {
     const {setShowEventEditModal, event} = props
-    const currentTrip = props.currentTrip
+    const currentTrip = props.trip
     const dispatch = useDispatch()    
     const currentUser = useSelector(state => state.session.user)
     const [title, setTitle] = useState(event ? event.title : "")
@@ -14,11 +14,11 @@ function EventForm (props) {
     const [startTime, setStartTime] = useState(event ? event.startTime : null)
     const [endTime, setEndTime] = useState(event ? event.endTime : null)
     const [eventFormTitle, setEventFormTitle] = useState(event ? "Edit This Event" : "Create a New Event!")
+
     // const author = currentUser.id
-    // debugger
+// debugger
     const handleSubmit = (e) => {
         e.preventDefault();
-        
         const formData = {
             author: currentUser._id,
             title: title,
@@ -27,15 +27,7 @@ function EventForm (props) {
             endTime: new Date(endTime),
             trip: currentTrip._id
         }
-
-        if (event){
-            let data = {...event, ...formData}
-            // debugger
-            dispatch(updateTripEvent(data))
-            setShowEventEditModal(false)
-        } else {
-            dispatch(createTripEvent({tripId: currentTrip._id, event: formData}))
-        }
+        dispatch(createTripEvent({tripId: currentTrip._id, event: formData}))
     }
 return(
     <div className="eventformdiv">
@@ -71,7 +63,7 @@ return(
             <input 
                 className="createevent_input" 
                 type="datetime-local" 
-                value={startTime }
+                value={() => {startTime.toISOString().slice(0, 16)}} 
                 onChange={e => setStartTime(e.target.value)}
             />
             
