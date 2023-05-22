@@ -39,13 +39,13 @@ const TripItemCarousel = ({trip}) => {
 
       <div className="trip_grid" >
       <div className='left_column'>
-          <Carousel />
+          <Carousel tripImages={trip.imageUrls}/>
         </div>
 
         <div className='right_column' onClick={handleCLick}>
           <div className="trip_link" onClick={handleShow} >
             <ul>
-              {tripEvents.map(event => (<li>{event.title}</li>))}
+              {tripEvents.map(event => (<li key={event._id}>{event.title}</li>))}
             </ul>      
 
           </div>

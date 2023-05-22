@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import {useState, useRef, useEffect} from 'react';
 import { useDispatch, useSelector } from "react-redux"
 import { composeTrips, setCurrentTrip } from "../../store/trips"
 import { useParams } from "react-router-dom"
@@ -44,6 +44,9 @@ const TripFormModal = (props) => {
     const [collabErrors, setCollabErrors] = useState(false)
     const [submitErrors, setSubmitErrors] = useState(false)
     const [modalTitle, setModalTitle] = useState("Create a New Trip")
+    const [images, setImages] = useState([]);
+    const [imageUrls, setImageUrls] = useState([]);
+    const fileRef = useRef(null);
   
     useEffect(() => {
         dispatch(userActions.fetchAllUsers())
@@ -63,21 +66,50 @@ const TripFormModal = (props) => {
     
     const author = currentUser.id
 
+    const handleFiles = async e => {
+      const files = e.target.files;
+      setImages(files);
+      if (files.length !== 0) {
+        let filesLoaded = 0;
+        const urls = [];
+        Array.from(files).forEach((file, index) => {
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(file);
+          fileReader.onload = () => {
+            urls[index] = fileReader.result;
+            if (++filesLoaded === files.length) 
+              setImageUrls(urls);
+          }
+        });
+      }
+      else setImageUrls([]);
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const formData = new FormData(); 
+        Array.from(images).forEach(image => formData.append("images", image));
+        fileRef.current.value = null;
+
         let collaboratorIds = []
         allUsers.forEach(user => {
             if (collaborators.includes(user.email)) {
                 collaboratorIds.push(user._id)
             }
         })
-        const formData = {
-            title: title,
-            description: description,
-            startDate: startDate,
-            endDate: endDate,
-            collaborators: collaboratorIds
-        }
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('startDate', startDate);
+        formData.append('endDate', endDate);
+        formData.append('collaborators', collaboratorIds);
+
+        // const formData = {
+        //     title: title,
+        //     description: description,
+        //     startDate: startDate,
+        //     endDate: endDate,
+        //     collaborators: collaboratorIds
+        // }
         
         if (!currentTrip){ 
            dispatch(composeTrips(formData))
@@ -87,6 +119,9 @@ const TripFormModal = (props) => {
               // debugger 
               dispatch(setCurrentTrip(res))
               setRedirect(true)
+              setImages([]);
+              setImageUrls([]);
+              fileRef.current.value = null;
               setShowCreateTripModal(false)
             
           } else {
@@ -105,6 +140,8 @@ const TripFormModal = (props) => {
             dispatch(setCurrentTrip(data))
             setNewTrip(data)
             setShowCreateTripModal(false)
+            setImages([]);
+            setImageUrls([]);
             setRedirect(true)
           })
         }
@@ -165,6 +202,8 @@ const TripFormModal = (props) => {
           // </div>
         )
     }
+
+
     
     return(
       <div className="createtrip_modal">
@@ -226,7 +265,16 @@ const TripFormModal = (props) => {
             {submitErrors && 
             <p className="submiterror">{tripErrors.endDate}</p>}
             
-            {/* <br/> */}
+            <label>
+              Images to Upload
+              <input 
+                type="file" 
+                ref={fileRef}
+                accept=".jpg, .jpeg, .png" 
+                multiple 
+                onChange={handleFiles} 
+              />
+            </label>
 
             <div className="createtrip friends_container">
               <p className="tripformsubheader">Add Friends:</p>

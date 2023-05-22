@@ -136,12 +136,13 @@ export const deleteTrip = data => async dispatch => {
   dispatch(removeTrip(data))
 }
 
-export const composeTrips = data => async dispatch => {
+export const composeTrips = (formData) => async dispatch => {
   let trip;
   try {
     const res = await jwtFetch('/api/trips/', {
       method: 'POST',
-      body: JSON.stringify(data)
+      body: formData
+      // body: JSON.stringify(data)
     });
     // debugger
     trip = await res.json();

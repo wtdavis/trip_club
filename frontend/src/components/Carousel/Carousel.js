@@ -2,15 +2,33 @@ import React, { useState } from 'react';
 import { RxDotFilled } from 'react-icons/rx';
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
 
-function Carousel() {
+function Carousel(tripImages) {
   
   const [currentIndex, setCurrentIndex] = useState(0);
-  const slides = [
-    {url: "https://trip-club-dev.s3.amazonaws.com/trips/1/event1/1.jpg"},
-    {url: "https://trip-club-dev.s3.amazonaws.com/trips/1/event1/2.jpg"},
-    {url: "https://trip-club-dev.s3.amazonaws.com/trips/1/event1/3.jpg"},
-    {url: "https://trip-club-dev.s3.amazonaws.com/trips/1/event3/1.jpg"}         
-  ];
+  // debugger
+  let images = tripImages.tripImages;
+  console.log(images);
+  let slides = [];
+  
+  if (images.length === 0) {
+    slides = [
+      {url: "https://trip-club-dev.s3.amazonaws.com/trips/1/event1/1.jpg"},
+      {url: "https://trip-club-dev.s3.amazonaws.com/trips/1/event1/2.jpg"},
+      {url: "https://trip-club-dev.s3.amazonaws.com/trips/1/event1/3.jpg"},
+      {url: "https://trip-club-dev.s3.amazonaws.com/trips/1/event3/1.jpg"}         
+    ];
+  } else {
+    for (let i = 0; i < images.length; i++) {
+      slides.push({url: images[i]})
+    }
+    // slides = [
+    //   {url: images[0]},
+    //   {url: images[1]},
+    //   {url: images[2]},
+    //   {url: images[3]},
+    //   {url: images[4]}
+    // ]
+  }
 
   const prevPhoto = () => {
     const nextIndex = currentIndex === 0 ? slides.length - 1 : currentIndex - 1;

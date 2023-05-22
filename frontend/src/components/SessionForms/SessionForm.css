@@ -1,4 +1,25 @@
 :root {
+  --dark-red: #4d1207;
+  --darker-blue: #12033c;  
+  --neutral: rgb(172, 172, 172);
+  --light-blue: #60a0ba;
+  --dark-blue: #8ab3e8;
+  --logo-blue: rgb(169, 188, 212);
+  --yellow: rgb(247, 202, 24);
+  --grey-color: #9da09d;
+  --red-brand-color: #F95E5C; 
+  --dark-black-color: #383838;
+
+  --orange-brand: #FFB067;
+  --yellow-brand: #FFED86;
+  --blue-brand: #A2DCE7;
+  --pink-brand: #F8CCDC;
+
+  --blue-sands-brand: #29B3FF;
+  --lightblue-sands-brand: #81EAFF;
+  --darkyellow-sands-brand: #FBC00E;
+  --yellow-sands-brand: #FFD774;
+
   --grey-color: #9da09d;
   --red-brand-color: #F95E5C;  
   --font-size: 18px;
@@ -37,7 +58,7 @@
 .agree-message {
   display: flex;
   color: rgb(152, 151, 151);
-  font-weight: 600;
+  font-weight: 00;
   font-size: 14px;
   margin-top: 20px;
 }
@@ -58,4 +79,39 @@
 .agree_span{
   padding-left: 5px;
   padding-right: 5px;
+}
+
+.profile_image_container {
+  position: relative;
+  display: inline-block;
+  left: -115px;
+  color: rgb(152, 151, 151);
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.profile_image_container span {
+  margin-right: 10px;
+}
+
+.image_input {
+  position: absolute;
+  left: -9999px;
+}
+
+.profile_image_container label {
+  display: inline-block;
+  padding: 10px 15px;
+  background-image: linear-gradient(to right, var( --yellow-sands-brand), var(--darkyellow-sands-brand));
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.image_input_label:hover {
+  transform: scale(1.005);
+  box-shadow: #383838;
+  box-shadow: 0 2px 10px 0 rgba(169, 171, 171, 0.5);
+
 }

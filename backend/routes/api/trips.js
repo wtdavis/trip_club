@@ -3,11 +3,9 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-const Tweet = mongoose.model('Tweet');
 const Trip = mongoose.model('Trip');
 const Event = mongoose.model('Event')
 const { requireUser } = require('../../config/passport');
-const validateTweetInput = require('../../validation/tweets')
 const validateTripInput = require('../../validation/trips')
 const validateEventInput = require('../../validation/events')
 
