@@ -53,7 +53,7 @@ const getStorageTrip = () => {
      dispatch(eventActions.fetchTripEvents(trip._id))
   }, [dispatch, currentTrip]
   )
-  debugger
+  // debugger
   
 
   const users = useSelector(state => state.users);

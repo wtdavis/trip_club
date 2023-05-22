@@ -51,7 +51,7 @@ const TripItemCarousel = ({trip}) => {
           </div>
 
           <div className='google_map_container'>
-              <GoogleMap lng={lng} lat={lat}/>
+              {/* <GoogleMap lng={lng} lat={lat}/> */}
             </div>
 
 

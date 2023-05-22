@@ -86,7 +86,7 @@ export const createTripEvent = ({tripId, event}) => async (dispatch) => {
 }
 
 export const fetchTripEvents = tripId => async dispatch => {
-    debugger
+    // debugger
     try {
     let res = await jwtFetch (`/api/trips/${tripId}/events`);
     let data = await res.json();
@@ -134,7 +134,14 @@ const initialState = {}
 const eventsReducer = (state = initialState, action) => {
     switch(action.type) {
         case RECEIVE_EVENTS:
-            return {...state, ...action.payload};
+            let events = action.payload
+            let obj = {}
+            for (let i = 0; i < events.length; i++) {
+                let temp1 = events[i]._id
+                let temp2 = events[i]
+                obj[temp1] = temp2
+            }
+            return {...state, ...obj}
         case RECEIVE_EVENT:
             return {...state, [action.payload._id]: action.payload};
         case REMOVE_EVENT:

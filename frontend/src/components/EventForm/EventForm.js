@@ -15,7 +15,7 @@ function EventForm (props) {
     const [endTime, setEndTime] = useState(event ? event.endTime : null)
     const [eventFormTitle, setEventFormTitle] = useState(event ? "Edit This Event" : "Create a New Event!")
     // const author = currentUser.id
-    debugger
+    // debugger
     const handleSubmit = (e) => {
         e.preventDefault();
         
@@ -30,7 +30,7 @@ function EventForm (props) {
 
         if (event){
             let data = {...event, ...formData}
-            debugger
+            // debugger
             dispatch(updateTripEvent(data))
             setShowEventEditModal(false)
         } else {
