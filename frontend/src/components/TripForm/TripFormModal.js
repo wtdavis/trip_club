@@ -44,6 +44,8 @@ const TripFormModal = (props) => {
     // const [currCollaborator, setCurrCollaborator] = useState(searchStr)
     const [collabErrors, setCollabErrors] = useState(false)
     
+
+    console.log(collaborators)
     useEffect(() => {
       // debugger
         dispatch(userActions.fetchAllUsers())
@@ -119,7 +121,8 @@ const TripFormModal = (props) => {
     }
     
     const CollaboratorsList = () => {
-        if (collaborators.length > 0) {
+      debugger
+        if (collaborators.length === 0) {
           return null
         }
         else {
@@ -127,11 +130,11 @@ const TripFormModal = (props) => {
           // <div className="friends_ul_container">
             <ul>
                 {collaborators.map(collaborator => {
-                    // debugger
+                    debugger
                     return (
                         <div className="friendsemail_container">
-                          <span>{collaborator}</span>
-                          <button className="removefriend_button" value={collaborator} onClick={e => handleRemove(e)}>Remove</button>
+                          <span>{collaborator.username}</span>
+                          <button className="removefriend_button" value={collaborator.username} onClick={e => handleRemove(e)}>Remove</button>
                         </div>
                         )
                     })}
@@ -222,6 +225,7 @@ const TripFormModal = (props) => {
                 <div className="createtrip_header">Who goes on a trip:</div> 
                 
                 <div>{CollaboratorsList()}</div>
+                {/* collaborators.length === 0 ? null : */}
 
               </div>
               <button type="submit" className="tripcreate_button" value={submit} onClick={e=> handleSubmit(e)}>Continue</button>
