@@ -20,7 +20,7 @@ function EventItem (props)  {
         <div className="eventitembox">
           <div className='eventshow_title_container'>
             <p id="eventitemtitle" className="eventitemitem">{props.event.title}</p>
-            <div className='edit_delete_buttons'>
+            <div className='edit_delete_buttons_event'>
               <button className='Edit_Event_Link' onClick={e => {setShowEventEditModal(true)}}>
                 <i data-title="Edit Event" className="fa-solid fa-pencil fa-1x"></i>
               </button>
@@ -43,12 +43,7 @@ function EventItem (props)  {
             <div className='google-map-container'>
               <GoogleMap lng={lng} lat={lat}/>
             </div>
-            <button onClick={e => {setShowEventEditModal(true)}}>
-              <i data-title="Edit Event" className="fa-solid fa-pencil fa-1x"></i>
-            </button>
-            <button onClick={e => {setShowEventEditModal(true)}}>
-              <i data-title="Delete Event" className="fa-solid fa-trash-can fa-1x"></i>
-            </button>
+
 
             {showEventEditModal && 
             <Modal onClose={(e)=> {setShowEventEditModal(false)}}>
