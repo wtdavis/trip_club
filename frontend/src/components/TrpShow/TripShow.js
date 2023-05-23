@@ -49,8 +49,8 @@ const getStorageTrip = () => {
       setTrip(storageTrip);
       setStorageTrip(JSON.stringify(storageTrip))
       dispatch(tripActions.setCurrentTrip(storageTrip))
-    }
-   
+    };
+   dispatch(eventActions.fetchTripEvents(trip._id))
   }, [dispatch, currentTrip]
   )
   
@@ -141,7 +141,7 @@ const getStorageTrip = () => {
           {/* <button className='tripshowpanelbutton' onClick={() => {setShowEditTripModal(true)}}>Edit Trip</button> */}
           {/* <button className='tripshowpanelbutton' id="tripshowpaneldeletebutton" onClick={(e) => handleDeleteTrip(e)}>Delete Trip</button> */}
             </div>
-            <EventForm  id="eventform" trip={trip}/>
+            <EventForm  id="eventform" currentTrip={currentTrip} trip={trip}/>
           </div>
         </div>
           <div className='tripshoweventslist'>
@@ -149,7 +149,7 @@ const getStorageTrip = () => {
 
             
 
-            {events.map((ele) => (<EventItem event={ele}/>))}
+            {events.map((ele) => (<EventItem currentTrip={currentTrip} event={ele}/>))}
             {/* {dateList[0].toDateString()} */}
             {/* <p> test</p> */}
           </div>
