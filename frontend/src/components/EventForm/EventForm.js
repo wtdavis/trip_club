@@ -13,6 +13,7 @@ function EventForm (props) {
     const [description, setDescription] = useState(event ? event.description : "")
     const [startTime, setStartTime] = useState(event ? event.startTime : null)
     const [endTime, setEndTime] = useState(event ? event.endTime : null)
+
     const [eventFormTitle, setEventFormTitle] = useState(event ? "Edit This Event" : "Create a New Event!")
     // const author = currentUser.id
     // debugger
@@ -50,13 +51,13 @@ return(
         {/* <h3 className="eventformheader">Create a New Event!</h3> */}
         <form classname="eventformform" onSubmit={e => handleSubmit(e)}>
        
-            {/* <p className="eventformsubheader">Name Your New Event:</p> */}
+            {/* <p className="eventformsubheader">Name Your Event:</p> */}
             <input 
                 className="createevent_input" 
                 type="text" 
                 value={title} 
                 onChange={e => setTitle(e.target.value)}
-                placeholder="Name Your New Event"
+                placeholder="Name Your Event"
             />
             
             {/* <p className="eventformsubheader">Enter a description:</p> */}
