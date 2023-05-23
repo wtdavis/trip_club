@@ -19,8 +19,8 @@
      
 }
 
-
-.Edit_Trip_Link{
+.Edit_Trip_Link,
+.Edit_Event_Link {
     margin-right: 15px;
 }
 
@@ -53,14 +53,16 @@
     position: relative;
 }
 
-.tripshow_title_container{
+.tripshow_title_container,
+.eventshow_title_container {
     display: flex;
     justify-content: flex-start;
     position: relative;
     margin-bottom: 15px;
 }
 
-#tripshowtriptitle{
+#tripshowtriptitle,
+#eventitemtitle {
     font-size: 25px;
     font-weight: bold;
     flex: 0 1 auto;

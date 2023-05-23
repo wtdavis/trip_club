@@ -149,5 +149,40 @@
 
 .submiterror {
   color: red;
+}
+
+.trip_image_container {
+  position: relative;
+  display: inline-block;
+  left: -54px;
+  color: rgb(152, 151, 151);
+  font-weight: 400;
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+.trip_image_container span {
+  margin-right: 10px;
+}
+
+.images_input {
+  position: absolute;
+  left: -9999px;
+}
+
+.trip_image_container label {
+  display: inline-block;
+  padding: 10px 15px;
+  background-image: linear-gradient(to right, var( --yellow-sands-brand), var(--darkyellow-sands-brand));
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.images_input_label:hover {
+  transform: scale(1.005);
+  box-shadow: #383838;
+  box-shadow: 0 2px 10px 0 rgba(169, 171, 171, 0.5);
 
 }

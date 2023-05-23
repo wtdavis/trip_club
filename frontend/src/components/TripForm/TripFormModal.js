@@ -51,7 +51,7 @@ const TripFormModal = (props) => {
     useEffect(() => {
         dispatch(userActions.fetchAllUsers())
         if (currentTrip) {
-          setModalTitle("Edit This Trip")
+          setModalTitle("Edit Trip")
         }
         
         // setCollaborators([])
@@ -217,13 +217,13 @@ const TripFormModal = (props) => {
 
         <form className="createtrip_form" onSubmit={e => handleSubmit(e)}>
        
-            {/* <p className="tripformsubheader">Name Your New Trip:</p> */}
+            {/* <p className="tripformsubheader">Name Your Trip:</p> */}
             <input 
               className="createtrip_input" 
               type="text" 
               value={title} 
               onChange={e => {setTitle(e.target.value); handleChange()}}
-              placeholder="Name Your New Trip"
+              placeholder="Name Your Trip"
             />
             
             {submitErrors && 
@@ -265,16 +265,21 @@ const TripFormModal = (props) => {
             {submitErrors && 
             <p className="submiterror">{tripErrors.endDate}</p>}
             
-            <label>
-              Images to Upload
-              <input 
-                type="file" 
-                ref={fileRef}
-                accept=".jpg, .jpeg, .png" 
-                multiple 
-                onChange={handleFiles} 
-              />
-            </label>
+
+            <div className='trip_image_container'>
+              <span>Trip Images</span>
+              <label className="images_input_label" for="images_input_profile">Choose Files</label>
+                <input 
+                  className="images_input"
+                  id="images_input_profile"
+                  type="file" 
+                  ref={fileRef}
+                  accept=".jpg, .jpeg, .png" 
+                  multiple 
+                  onChange={handleFiles} 
+                />              
+            </div>
+            
 
             <div className="createtrip friends_container">
               <p className="tripformsubheader">Add Friends:</p>

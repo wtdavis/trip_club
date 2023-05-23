@@ -133,7 +133,7 @@ const TripEditForm = () => {
         <h3 className="tripformheader">Update Your Trip!</h3>
         <form className="tripformform" onSubmit={e => handleSubmit(e)}>
        
-            <p className="tripformsubheader">Name Your New Trip:</p>
+            <p className="tripformsubheader">Name Your Trip:</p>
             <input type="text" className="tripforminput" value={title} onChange={e => setTitle(e.target.value)}/>
             
             <p className="tripformsubheader">Enter a description:</p>
