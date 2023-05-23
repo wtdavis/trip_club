@@ -43,6 +43,17 @@ router.get('/', async (req, res) => {
   }
 })
 
+
+router.get('/username/:username', async (req, res) => {
+  try {
+    const user = await User.find({username: req.params.username})
+    return res.json(user)
+  }
+  catch(err) {
+    return res.json({})
+  }
+})
+
 // users Matching Index
 router.get('/search', async (req, res) => {
   console.log('searching')

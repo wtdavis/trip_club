@@ -23,6 +23,16 @@ const usersReducer = (state={}, action) => {
     }
 }
 
+export const fetchUserByUsername = async (username) => {
+    // debugger
+    const res = await jwtFetch(`api/users/username/${username}`, {
+    })
+
+    const user = await res.json()
+    // debugger
+    return user 
+}
+
 export const fetchAllUsers = () => async (dispatch) => {
     const res = await jwtFetch('/api/users/')
 

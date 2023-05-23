@@ -1,23 +1,23 @@
 import * as userActions from '../../store/users'
 import { useState, useEffect } from 'react'
 
-const Search = ({setMatches}) => {
+const Search = ({setMatches, setCurrCollaborator}) => {
     const [search, setSearch] = useState('')
     const [matchingUsers, setMatchingUsers] = useState([])
 
     useEffect(() => {
-        debugger
+        // debugger
         console.log('Hello from useEffect')
         const getMatchingUsers = async () => {
             try {
                 const users = await userActions.fetchMatchingUsers(search)
                 console.log(users)
-                debugger
+                // debugger
                 let userMatches = users.map(user => {
-                    debugger
-                    return {username: user.username}
+                    // debugger
+                    return {username: user.username, _id: user._id}
                 })
-                debugger
+                // debugger
                 console.log(userMatches)
                 setMatchingUsers(userMatches)
             }
@@ -34,6 +34,7 @@ const Search = ({setMatches}) => {
         <>
         <input type='text' list='users' value={search} onChange={(e) => {
             setSearch(e.target.value)
+            setCurrCollaborator(e.target.value)
         }} />
         <datalist id='users'>
             {matchingUsers.map(user => <option>{user.username}</option>)}

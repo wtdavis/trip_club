@@ -10,6 +10,7 @@ import Search from "../Search/Search"
 
 const TripFormModal = (props) => {
   const [matches, setMatches] = useState([])
+  const [currCollaborator, setCurrCollaborator] = useState('')
   const {setShowCreateTripModal} = props;
   const currentTrip = (props.currentTrip ? props.currentTrip : null)
     // const dispatch = useDispatch()
@@ -44,13 +45,10 @@ const TripFormModal = (props) => {
     const [collabErrors, setCollabErrors] = useState(false)
     
     useEffect(() => {
-      debugger
+      // debugger
         dispatch(userActions.fetchAllUsers())
         // setCollaborators([])
     }, [])
-    useEffect(() => {
-        console.log(`matches: ${matches}`)
-    }, [matches])
 
     let collaboratorIds = []
 
@@ -72,7 +70,7 @@ const TripFormModal = (props) => {
             description: description,
             startDate: startDate,
             endDate: endDate,
-            collaborators: collaboratorIds
+            collaborators: collaborators
         }
         if (!currentTrip){
         setNewTrip(await dispatch(composeTrips(formData)))
@@ -103,25 +101,29 @@ const TripFormModal = (props) => {
         })
     }
 
-    const handleAdd = (e) => { 
+    const handleAdd = async (e) => { 
       e.preventDefault();
-
-        // e.preventDefault()
-        // setCollabErrors(true)
-        // allUsers.forEach((user) => {
-        //     if (currCollaborator === user.email) {
-        //         collaboratorIds = (collaboratorIds.concat(user._id))
-        //         const newArr = collaborators.slice()
-        //         const anotherNewArr = newArr.concat(user.email)
-        //         setCollaborators(anotherNewArr)
-        //         setCollabErrors(false)
-        //         setCurrCollaborator('')
-        //     }
-        // })
+      console.log(currCollaborator)
+      setCollabErrors(true)
+      const user = await userActions.fetchUserByUsername(currCollaborator)
+      debugger
+      if (user.length > 0) {
+        debugger
+        const newArr = collaborators.slice()
+        const anotherNewArr = newArr.concat(user)
+        setCollaborators(anotherNewArr)
+        setCollabErrors(false)
+        debugger     
+      }
+      debugger 
     }
     
     const CollaboratorsList = () => {
-        return (
+        if (collaborators.length > 0) {
+          return null
+        }
+        else {
+          return (
           // <div className="friends_ul_container">
             <ul>
                 {collaborators.map(collaborator => {
@@ -135,7 +137,8 @@ const TripFormModal = (props) => {
                     })}
             </ul>
           // </div>
-        )
+          )
+        }
     }
     
     return(
@@ -192,7 +195,7 @@ const TripFormModal = (props) => {
             <div className="createtrip friends_container">
               <p className="tripformsubheader">add friends:</p>
               
-                <Search setMatches={setMatches}/>
+                <Search setMatches={setMatches} setCurrCollaborator={setCurrCollaborator}/>
                 
 
 
