@@ -12,10 +12,14 @@ const Search = ({setMatches}) => {
             try {
                 const users = await userActions.fetchMatchingUsers(search)
                 console.log(users)
-                users.map(user => {
-                    return user.username
+                debugger
+                let userMatches = users.map(user => {
+                    debugger
+                    return {username: user.username}
                 })
-                setMatchingUsers(users)
+                debugger
+                console.log(userMatches)
+                setMatchingUsers(userMatches)
             }
             catch(err) {
                 console.log(err)
