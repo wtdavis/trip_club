@@ -79,7 +79,7 @@ const TripFormModal = (props) => {
         setRedirect(true)
       } else if (currentTrip) {
         dispatch(updateTrip({...currentTrip, ...formData}))
-        debugger
+        // debugger
         setNewTrip({...currentTrip, ...formData})
         setRedirect(true)
       }
@@ -87,20 +87,15 @@ const TripFormModal = (props) => {
     
     const handleRemove = (e) => {
         e.preventDefault()
-        const emailToRemove = e.target.value
-        allUsers.forEach((user) => {
-            if (emailToRemove === user.email) {
-                const emailsIdxOf = collaborators.indexOf(user.email)
-                if (emailsIdxOf !== -1) {
-                    const prevCollaborators = [...collaborators]
-                    setCollaborators(prevCollaborators => {
-                        return prevCollaborators.filter(prevCollaborator => (prevCollaborator !== emailToRemove))
-                    })
-                    // debugger
-                }
-                // debugger
+        const usernameToRemove = e.target.value
+        const newArr = collaborators.slice()
+        const anotherNewArr = []
+        newArr.forEach((user) => {
+            if (usernameToRemove !== user.username) {
+              anotherNewArr.push(user)
             }
         })
+        setCollaborators(anotherNewArr)
     }
 
     const handleAdd = async (e) => { 
@@ -108,20 +103,20 @@ const TripFormModal = (props) => {
       console.log(currCollaborator)
       setCollabErrors(true)
       const user = await userActions.fetchUserByUsername(currCollaborator)
-      debugger
+      // debugger
       if (user.length > 0) {
-        debugger
+        // debugger
         const newArr = collaborators.slice()
         const anotherNewArr = newArr.concat(user)
         setCollaborators(anotherNewArr)
         setCollabErrors(false)
-        debugger     
+        // debugger     
       }
-      debugger 
+      // debugger 
     }
     
     const CollaboratorsList = () => {
-      debugger
+      // debugger
         if (collaborators.length === 0) {
           return null
         }
@@ -130,7 +125,7 @@ const TripFormModal = (props) => {
           // <div className="friends_ul_container">
             <ul>
                 {collaborators.map(collaborator => {
-                    debugger
+                    // debugger
                     return (
                         <div className="friendsemail_container">
                           <span>{collaborator.username}</span>
