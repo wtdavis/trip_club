@@ -31,7 +31,7 @@
   background-image: linear-gradient(to bottom right, var(--lightblue-sands-brand), var(--blue-sands-brand));
   text-align: center;
   padding: 20px;
-  border-radius: 20px;
+  border-radius: 8px;
   /* margin-bottom: 20px; */
 }
 
