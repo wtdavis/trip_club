@@ -14,7 +14,7 @@ function EventForm (props) {
     const [startTime, setStartTime] = useState(event ? event.startTime : null)
     const [endTime, setEndTime] = useState(event ? event.endTime : null)
 
-    const [eventFormTitle, setEventFormTitle] = useState(event ? "Edit This Event" : "Create a New Event!")
+    const [eventFormTitle, setEventFormTitle] = useState(event ? "Edit Event" : "Create a New Event!")
     // const author = currentUser.id
     // debugger
     const handleSubmit = (e) => {
