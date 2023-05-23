@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import Calendar from "react-calendar";
-import { createTripEvent, updateTripEvent } from "../../store/events";
+import { createTripEvent, updateEvent, updateTripEvent } from "../../store/events";
 import "./EventForm.css"
 
 function EventForm (props) {
-    debugger
-    const {setShowEventEditModal} = props
-    const event = props.event
+    const {setShowEventEditModal, event} = props
     const currentTrip = props.currentTrip
     const dispatch = useDispatch()    
     const currentUser = useSelector(state => state.session.user)
@@ -16,12 +14,11 @@ function EventForm (props) {
     const [startTime, setStartTime] = useState(event ? event.startTime : null)
     const [endTime, setEndTime] = useState(event ? event.endTime : null)
     const [eventFormTitle, setEventFormTitle] = useState(event ? "Edit This Event" : "Create a New Event!")
-
     // const author = currentUser.id
-// debugger
+    // debugger
     const handleSubmit = (e) => {
         e.preventDefault();
-        debugger
+        debugger            
         const formData = {
             author: currentUser._id,
             title: title,
@@ -30,14 +27,13 @@ function EventForm (props) {
             endTime: new Date(endTime),
             trip: currentTrip._id
         }
+
         if (event){
             let data = {...event, ...formData}
-            debugger
-            
+            // debugger
             dispatch(updateTripEvent(data))
             setShowEventEditModal(false)
         } else {
-            debugger
             dispatch(createTripEvent({tripId: currentTrip._id, event: formData}))
         }
     }
@@ -45,7 +41,7 @@ return(
     <div className="eventformdiv">
         {props?.event &&  
         <button onClick={e=> {setShowEventEditModal(false)}}>
-            <i id="eventeditclosebutton" className="fa fa-x"></i>
+            <i id="eventeditclosebutton" class="fa fa-x"></i>
             </button>}
         <header className="createevent_header">
           <div className="eventformheader">{eventFormTitle}</div>
@@ -75,7 +71,7 @@ return(
             <input 
                 className="createevent_input" 
                 type="datetime-local" 
-                value={startTime} 
+                value={startTime }
                 onChange={e => setStartTime(e.target.value)}
             />
             

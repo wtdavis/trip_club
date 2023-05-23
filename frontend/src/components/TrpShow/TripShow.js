@@ -149,7 +149,7 @@ const getStorageTrip = () => {
 
             
 
-            {events.map((ele) => (<EventItem event={ele}/>))}
+            {events.map((ele) => (<EventItem currentTrip={currentTrip} event={ele}/>))}
             {/* {dateList[0].toDateString()} */}
             {/* <p> test</p> */}
           </div>
