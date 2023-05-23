@@ -137,6 +137,15 @@ const getStorageTrip = () => {
             <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{trip.collaborators.map(e => (<li>{e.username}</li>))}</ul>
             <p className='tripshowinfoitem' id='tripshowstartdate'>Begins {startDateString}</p>
             <p className='tripshowinfoitem' id='tripshowenddate'>Ends {endDateString}</p>
+
+            <ul className="trip_show_images_ul">
+              {currentTrip.imageUrls.map(photo => {
+                return (              
+                  <li className="trip_show_images_li"><img className="trip_show_images" src={photo} alt=""/></li>
+                )
+              })}
+            </ul>
+          
             <div className="tripshowpanelbuttons">
           {/* <button className='tripshowpanelbutton' onClick={() => {setShowEditTripModal(true)}}>Edit Trip</button> */}
           {/* <button className='tripshowpanelbutton' id="tripshowpaneldeletebutton" onClick={(e) => handleDeleteTrip(e)}>Delete Trip</button> */}

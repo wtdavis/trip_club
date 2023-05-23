@@ -5,7 +5,6 @@ import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
 function Carousel(tripImages) {
   
   const [currentIndex, setCurrentIndex] = useState(0);
-  // debugger
   let images = tripImages.tripImages;
   console.log(images);
   let slides = [];
