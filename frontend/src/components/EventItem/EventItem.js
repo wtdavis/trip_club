@@ -4,6 +4,8 @@ import EventForm from '../EventForm/EventForm';
 import GoogleMap from '../GoogleMap'
 
 function EventItem (props)  {
+  const event = props.event
+  const currentTrip = props.currentTrip
   const [showEventEditModal, setShowEventEditModal] = useState(false)
   let lng = -73.99376925185645;
   let lat = 40.73631643149453;
@@ -41,7 +43,7 @@ function EventItem (props)  {
 
             {showEventEditModal && 
             <Modal onClose={(e)=> {setShowEventEditModal(false)}}>
-              <EventForm setShowEventEditModal={setShowEventEditModal} event={props.event}/>
+              <EventForm setShowEventEditModal={setShowEventEditModal} currentTrip={currentTrip} event={event}/>
               </Modal>}
         </div>
       )  
