@@ -4,6 +4,7 @@ import EventForm from '../EventForm/EventForm';
 import GoogleMap from '../GoogleMap'
 
 function EventItem (props)  {
+  // debugger
   const event = props.event
   const currentTrip = props.currentTrip
   const [showEventEditModal, setShowEventEditModal] = useState(false)

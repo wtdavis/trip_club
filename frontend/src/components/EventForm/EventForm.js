@@ -5,7 +5,9 @@ import { createTripEvent, updateTripEvent } from "../../store/events";
 import "./EventForm.css"
 
 function EventForm (props) {
-    const {setShowEventEditModal, event} = props
+    debugger
+    const {setShowEventEditModal} = props
+    const event = props.event
     const currentTrip = props.currentTrip
     const dispatch = useDispatch()    
     const currentUser = useSelector(state => state.session.user)
@@ -19,6 +21,7 @@ function EventForm (props) {
 // debugger
     const handleSubmit = (e) => {
         e.preventDefault();
+        debugger
         const formData = {
             author: currentUser._id,
             title: title,
@@ -29,11 +32,12 @@ function EventForm (props) {
         }
         if (event){
             let data = {...event, ...formData}
-            // debugger
+            debugger
             
             dispatch(updateTripEvent(data))
             setShowEventEditModal(false)
         } else {
+            debugger
             dispatch(createTripEvent({tripId: currentTrip._id, event: formData}))
         }
     }
