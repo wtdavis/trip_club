@@ -9,6 +9,7 @@ import { updateTrip } from "../../store/trips"
 import Search from "../Search/Search"
 
 const TripFormModal = (props) => {
+  const [matches, setMatches] = useState([])
   const {setShowCreateTripModal} = props;
   const currentTrip = (props.currentTrip ? props.currentTrip : null)
     // const dispatch = useDispatch()
@@ -39,16 +40,17 @@ const TripFormModal = (props) => {
     const allUsers = Object.values(useSelector(state => state.users))
     const [redirect, setRedirect] = useState(false)
     const [newTrip, setNewTrip] = useState();
-    const [currCollaborator, setCurrCollaborator] = useState()
+    // const [currCollaborator, setCurrCollaborator] = useState(searchStr)
     const [collabErrors, setCollabErrors] = useState(false)
     
     useEffect(() => {
+      debugger
         dispatch(userActions.fetchAllUsers())
         // setCollaborators([])
     }, [])
     useEffect(() => {
-
-    }, [])
+        console.log(`matches: ${matches}`)
+    }, [matches])
 
     let collaboratorIds = []
 
@@ -190,7 +192,7 @@ const TripFormModal = (props) => {
             <div className="createtrip friends_container">
               <p className="tripformsubheader">add friends:</p>
               
-                <Search />
+                <Search setMatches={setMatches}/>
                 
 
 
@@ -223,7 +225,6 @@ const TripFormModal = (props) => {
 
             {/* <input type="submit" className="tripformsubmit"  value={submit} onClick={e=> handleSubmit(e)}/> */}
         </form>
-        <h1><Search /></h1>
     </div>
 )
 }
