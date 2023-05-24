@@ -33,9 +33,7 @@
 }
 
 .createtrip_modal {
-  width: 600;
-  height: 700;
-  margin: 15px 15px 40px 15px;
+  margin: 15px 15px 15px 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
