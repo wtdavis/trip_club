@@ -167,7 +167,7 @@
 }
 
 .removefriend_button:hover {
-  transform: scale(1.005);
+  transform: scale(1.05);
 }
 
 .submiterror {
@@ -191,6 +191,8 @@
   font-weight: 700;
   font-size: 18px;
   white-space: nowrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .images_input {
@@ -208,6 +210,7 @@
   cursor: pointer;
   transition: 0.5s;
   width: 160px;
+  text-align: center;
 }
 
 .images_input_label:hover {
