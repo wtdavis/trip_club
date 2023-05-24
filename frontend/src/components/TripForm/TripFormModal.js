@@ -73,7 +73,6 @@ const TripFormModal = (props) => {
 
   const handleAdd = async (e) => { 
     e.preventDefault();
-    console.log(currCollaborator)
     setCollabErrors(true)
     const user = await userActions.fetchUserByUsername(currCollaborator)
     // debugger
