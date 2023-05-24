@@ -130,6 +130,7 @@ const TripEditForm = () => {
     // debugger
     return(
         <div className="tripformdiv">
+            <h1>Hello from TripEdit</h1>
         <h3 className="tripformheader">Update Your Trip!</h3>
         <form className="tripformform" onSubmit={e => handleSubmit(e)}>
        
