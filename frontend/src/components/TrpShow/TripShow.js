@@ -135,8 +135,7 @@ const getStorageTrip = () => {
 
             <p className='tripshowinfoitem' id='tripshowtripdescription'>{trip.description}</p>
             <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{trip.collaborators.map(e => (<li>{e.username}</li>))}</ul>
-            <p className='tripshowinfoitem' id='tripshowstartdate'>Begins {startDateString}</p>
-            <p className='tripshowinfoitem' id='tripshowenddate'>Ends {endDateString}</p>
+            <p className='tripshowinfoitem' id='tripshowstartdate'> <span>Begins</span> {startDateString} <span>Ends</span> {endDateString}</p>
 
             <ul className="trip_show_images_ul">
               {currentTrip.imageUrls.map(photo => {
@@ -153,15 +152,13 @@ const getStorageTrip = () => {
             <EventForm  id="eventform" currentTrip={currentTrip} trip={trip}/>
           </div>
         </div>
-          <div className='tripshoweventslist'>
 
+        <div className='tripshoweventslist'>         
+          {events.map((ele) => (<EventItem currentTrip={currentTrip} event={ele}/>))}
+          {/* {dateList[0].toDateString()} */}
+          {/* <p> test</p> */}
+        </div>
 
-            
-
-            {events.map((ele) => (<EventItem currentTrip={currentTrip} event={ele}/>))}
-            {/* {dateList[0].toDateString()} */}
-            {/* <p> test</p> */}
-          </div>
         {showEditTripModal && (
           <Modal onClose={(e) => {setShowEditTripModal(false); console.log(e)}}>
             <TripFormModal currentTrip={currentTrip} setShowCreateTripModal={setShowEditTripModal}/>
