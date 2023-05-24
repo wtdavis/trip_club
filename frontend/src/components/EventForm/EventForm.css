@@ -67,12 +67,23 @@
     padding-top: 10px;
   }
 
-  .eventformsubheader {
+  .event_date_container {
+    display: flex;
+    align-items: center;
     margin-top: 10px;
     margin-bottom: 10px;
+  }
+
+  .eventformsubheader {
+    margin-right: 5px;
     font-weight: 700;
     font-size: 18px;
+    clear: both;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
   }
+
 
 .continue_button{
   cursor: pointer;

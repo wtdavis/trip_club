@@ -15,8 +15,6 @@ function EventForm (props) {
     const [endTime, setEndTime] = useState(event ? event.endTime : null)
 
     const [eventFormTitle, setEventFormTitle] = useState(event ? "Edit Event" : "Create a New Event!")
-    // const author = currentUser.id
-    // debugger
     const handleSubmit = (e) => {
         e.preventDefault();
         debugger            
@@ -31,7 +29,6 @@ function EventForm (props) {
 
         if (event){
             let data = {...event, ...formData}
-            // debugger
             dispatch(updateTripEvent(data))
             setShowEventEditModal(false)
         } else {
@@ -48,10 +45,8 @@ return(
           <div className="eventformheader">{eventFormTitle}</div>
         </header> 
 
-        {/* <h3 className="eventformheader">Create a New Event!</h3> */}
         <form classname="eventformform" onSubmit={e => handleSubmit(e)}>
        
-            {/* <p className="eventformsubheader">Name Your Event:</p> */}
             <input 
                 className="createevent_input" 
                 type="text" 
@@ -60,29 +55,33 @@ return(
                 placeholder="Name Your Event"
             />
             
-            {/* <p className="eventformsubheader">Enter a description:</p> */}
             <textarea 
                 className="createevent_input description"
                 value={description}
                 onChange={e => setDescription(e.target.value)}
                 placeholder="Enter a description"
             />
+
+            <div className="event_date_container">
+                <p className="eventformsubheader">Start Date:</p>
+                <input 
+                    className="createevent_input" 
+                    type="datetime-local" 
+                    value={startTime }
+                    onChange={e => setStartTime(e.target.value)}
+                />
+            </div>
             
-            <p className="eventformsubheader">Event Start Date:</p>
-            <input 
-                className="createevent_input" 
-                type="datetime-local" 
-                value={startTime }
-                onChange={e => setStartTime(e.target.value)}
-            />
+            <div className="event_date_container">
+                <p className="eventformsubheader">End Date:</p>
+                <input 
+                    type="datetime-local" 
+                    className="createevent_input" 
+                    value={endTime} 
+                    onChange={e => setEndTime(e.target.value)}
+                />
+            </div>
             
-            <p className="eventformsubheader">Event End Date:</p>
-            <input 
-                type="datetime-local" 
-                className="createevent_input" 
-                value={endTime} 
-                onChange={e => setEndTime(e.target.value)}
-            />
             {/* <Calendar/> */}
             <br/>
             <button 
@@ -91,12 +90,8 @@ return(
                 // value={submit} 
                 onClick={e=> handleSubmit(e)}
             >
-                Continue
+                Create Event
             </button>
-            {/* <button type="submit" className="tripcreate_button" value={submit} onClick={e=> handleSubmit(e)}>Continue</button> */}
-
-
-            {/* <input type="submit" className="eventformsubmit"  value="Create!" onClick={e=> handleSubmit(e)}/> */}
         </form>
     </div>
 )
