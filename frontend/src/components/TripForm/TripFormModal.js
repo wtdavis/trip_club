@@ -101,7 +101,10 @@ const TripFormModal = (props) => {
         formData.append('description', description);
         formData.append('startDate', startDate);
         formData.append('endDate', endDate);
-        formData.append('collaborators', collaboratorIds);
+        // formData.append('collaborators', collaboratorIds);
+        collaboratorIds.forEach((collaborator) => {
+          formData.append('collaborators', collaborator)
+        })
 
         // const formData = {
         //     title: title,
