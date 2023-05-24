@@ -13,7 +13,7 @@ const ProfilePage = () => {
   const currentUser = useSelector(state => state.session.user);
   // const trips = useSelector(tripActions.getTrips); 
   const trips = useSelector(state => Object.values(state.trips.all))
-  const tripsUser = trips.filter(trip => trip.author?._id == currentUser?._id);
+  const tripsUser = trips.filter(trip => trip.author?._id == currentUser?._id || trip.collaborators.includes(currentUser?._id));
   const events = useSelector(state => state.events)
   
   
