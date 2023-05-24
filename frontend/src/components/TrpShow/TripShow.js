@@ -14,6 +14,7 @@ import { Modal } from '../../context/Modal';
 import TripFormModal from '../TripForm/TripFormModal';
 
 const TripShow = (props) => {
+  const currentUser = useSelector(state => state.session.user)
   const history = useHistory();
   const dispatch = useDispatch()
   const currentTrip = useSelector(state => state.trips.current)
@@ -56,8 +57,6 @@ const getStorageTrip = () => {
   
 
   const users = useSelector(state => state.users);
-  const currentUser = useSelector(state => state.session.user);
-
 
   const eventseventsevents = [new Date(2023, 3, 30), {id: "50505", startTime: new Date(2023, 3, 20)}, new Date(2023, 3, 18), new Date(2023, 3, 25)]
 
@@ -112,6 +111,22 @@ const getStorageTrip = () => {
       history.push("/profile")
     }
 
+    const tripEditDeleteButtons = () => {
+      if (currentUser._id === currentTrip.author._id) {
+        return (
+          <div className='edit_delete_buttons'>
+              <button className='Edit_Trip_Link' onClick={() => {setShowEditTripModal(true)}}>
+                <i data-title="Edit Trip" className="fa-solid fa-pencil fa-1x"></i>
+              </button>
+              <button className='Delete_Trip_Link' onClick={(e) => handleDeleteTrip(e)}>
+                <i data-title="Delete Trip" className="fa-solid fa-trash-can fa-1x"></i>
+              </button>
+            </div>
+        )
+      } else {
+        return <br />
+      }
+    }
 
     if (dateList.length && currentTrip) {return (
       <div className='tripshowpage'>
@@ -123,14 +138,7 @@ const getStorageTrip = () => {
           <div className='tripshow_title_container'>
             <p id='tripshowtriptitle'>{trip.title}</p>
 
-            <div className='edit_delete_buttons'>
-              <button className='Edit_Trip_Link' onClick={() => {setShowEditTripModal(true)}}>
-                <i data-title="Edit Trip" className="fa-solid fa-pencil fa-1x"></i>
-              </button>
-              <button className='Delete_Trip_Link' onClick={(e) => handleDeleteTrip(e)}>
-                <i data-title="Delete Trip" className="fa-solid fa-trash-can fa-1x"></i>
-              </button>
-            </div>
+            {tripEditDeleteButtons()}
           </div>
 
             <p className='tripshowinfoitem' id='tripshowtripdescription'>{trip.description}</p>

@@ -49,8 +49,9 @@ const TripFormModal = (props) => {
     const fileRef = useRef(null);
   
     useEffect(() => {
+      debugger
       if (modalTitle === 'Edit Trip') {
-        if (currentUser !== currentTrip.author) {
+        if (currentUser._id !== currentTrip.author._id) {
           setRedirect(true)
         }
       }

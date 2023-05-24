@@ -6,7 +6,7 @@ import GoogleMap from '../GoogleMap'
 function EventItem (props)  {
   const event = props.event
   const currentTrip = props.currentTrip
-  debugger
+  // debugger
   const [showEventEditModal, setShowEventEditModal] = useState(false)
   let lng = -73.99376925185645;
   let lat = 40.73631643149453;
