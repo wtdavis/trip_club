@@ -135,13 +135,22 @@ const TripFormModal = (props) => {
           }}
         )
         } else if (currentTrip) {
-          let data = {...currentTrip, ...formData}
+          // let data = {...currentTrip, ...formData}
           // debugger
-          dispatch(updateTrip(data))
+          let keys = Object.keys(currentTrip)
+          for (let i = 0; i < keys.length; i++) {
+            if (formData.has(keys[i])) {
+              formData.set(`${keys[i]}`, currentTrip[keys[i]])
+            } else {
+              formData.append(`${keys[i]}`, currentTrip[keys[i]])
+            }
+          }
+          debugger
+          dispatch(updateTrip(formData))
           .then ( (res) => { 
             // debugger
-            dispatch(setCurrentTrip(data))
-            setNewTrip(data)
+            dispatch(setCurrentTrip(formData))
+            setNewTrip(formData)
             setShowCreateTripModal(false)
             setImages([]);
             setImageUrls([]);
