@@ -123,6 +123,7 @@ router.patch('/:id', requireUser, async (req, res, next) => {
                     endDate: new Date(req.body.endDate),
                     events: req.body.events,
                     collaborators: req.body.collaborators
+
                 }
 
     try {

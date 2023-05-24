@@ -188,21 +188,26 @@ const TripFormModal = (props) => {
       setCollabErrors(false)
     }
 
-    const CollaboratorsList = () => {
+    const collaboratorEmail = (id) => {
+      if (id){
+        const collaboratorData = allUsers.find(user => user._id === id);
+        return collaboratorData.email
+      }
+    } 
+
+    const collaboratorsList = () => {
         return (
-          // <div className="friends_ul_container">
             <ul>
                 {collaborators.map(collaborator => {
-                    // debugger
                     return (
                         <div className="friendsemail_container">
-                          <span>{collaborator}</span>
+                          
+                          <span>{collaboratorEmail(collaborator)}</span>
                           <button className="removefriend_button" value={collaborator} onClick={e => handleRemove(e)}>Remove</button>
                         </div>
                         )
                     })}
             </ul>
-          // </div>
         )
     }
 
@@ -242,7 +247,7 @@ const TripFormModal = (props) => {
             {submitErrors && 
             <p className="submiterror">{tripErrors.description}</p>}
 
-            <div className="createtrip_date">
+            <div className="createtrip_container_start">
               <p className="tripformsubheader">Trip Start Date:</p>
               <input 
                 type="date" 
@@ -255,7 +260,7 @@ const TripFormModal = (props) => {
             {submitErrors && 
             <p className="submiterror">{tripErrors.startDate}</p>}
 
-            <div className="createtrip date">
+            <div className="createtrip_container_end">
               <p className="tripformsubheader">Trip End Date:</p>
               <input 
                 className="createtrip_input" 
@@ -270,11 +275,11 @@ const TripFormModal = (props) => {
             
 
             <div className='trip_image_container'>
-              <span>Trip Images</span>
+              <span>Trip Images:</span>
               <label className="images_input_label" for="images_input_profile">Choose Files</label>
                 <input 
                   className="images_input"
-                  id="images_input_profile"
+                  id="images_input_trip"
                   type="file" 
                   ref={fileRef}
                   accept=".jpg, .jpeg, .png" 
@@ -306,11 +311,9 @@ const TripFormModal = (props) => {
 
             </div>     
             <span className="errors">{collabErrors ? 'No user found with that email' : null}</span>       
+            <div className="createtrip_header">Who goes on a trip:</div> 
               <div className="friends_list_container">
-                <div className="createtrip_header">Who goes on a trip:</div> 
-                
-                <div>{CollaboratorsList()}</div>
-
+                <div>{collaboratorsList()}</div>
               </div>
               <button type="submit" className="continue_button" value={submit} onClick={e=> handleSubmit(e)}>Continue</button>
 
