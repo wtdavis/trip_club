@@ -123,6 +123,7 @@ router.patch('/:id', multipleMulterUpload("images"), requireUser, async (req, re
                     description: req.body.description,
                     startDate: new Date(req.body.startDate),
                     endDate: new Date(req.body.endDate),
+
                     events: JSON.parse(req.body.events),
                     imageUrls,
                     collaborators: JSON.parse(req.body.collaborators)

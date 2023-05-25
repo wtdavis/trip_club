@@ -4,6 +4,7 @@ import * as  tripActions from '../../store/trips';
 import TripItemCarousel from '../Trips/TripItemCarousel';
 import './ProfilePage.css'
 import { clearEvents, fetchEvents } from '../../store/events';
+import { fetchAllUsers } from '../../store/users';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 
@@ -24,6 +25,8 @@ const ProfilePage = () => {
     // dispatch(tripActions.clearTrips)
     dispatch(tripActions.fetchTrips());
     dispatch(fetchEvents())
+    dispatch(fetchAllUsers())
+
   }, [dispatch]);
   
   useEffect(() => {
