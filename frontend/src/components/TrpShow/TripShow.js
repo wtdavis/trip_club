@@ -55,7 +55,7 @@ const getStorageTrip = () => {
       
   }, [dispatch, currentTrip]
   )
-  
+  debugger
 
   const users = useSelector(state => state.users);
   const currentUser = useSelector(state => state.session.user);
@@ -135,12 +135,12 @@ const getStorageTrip = () => {
             </div>
           </div>
 
-            <p className='tripshowinfoitem' id='tripshowtripdescription'>{trip.description}</p>
-            <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{trip.collaborators.map(e => (<li>{e.username}</li>))}</ul>
+            <p className='tripshowinfoitem' id='tripshowtripdescription'>{currentTrip.description}</p>
+            <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{currentTrip.collaborators?.map(e => (<li>{e.username}</li>))}</ul>
             <p className='tripshowinfoitem' id='tripshowstartdate'> <span>Begins</span> {startDateString} <span>Ends</span> {endDateString}</p>
 
             <ul className="trip_show_images_ul">
-              {currentTrip.imageUrls.map(photo => {
+              {currentTrip.imageUrls?.map(photo => {
                 return (              
                   <li className="trip_show_images_li"><img className="trip_show_images" src={photo} alt=""/></li>
                 )
