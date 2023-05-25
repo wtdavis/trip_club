@@ -8,7 +8,7 @@ import './TripForm.css'
 import { updateTrip } from "../../store/trips"
 
 
-const TripFormModal = (props) => {
+const NewTripFormModal = (props) => {
   const {setShowCreateTripModal} = props;
   const currentTrip = (props.currentTrip ? props.currentTrip : null)
       
@@ -40,15 +40,10 @@ const TripFormModal = (props) => {
       }
   }, [])
   
-
-  let collaboratorIds = []
-
   if (redirect) {
       return <Redirect to={{pathname:`/trips/show`, trip: newTrip}}/>
   }
   
-  const author = currentUser.id
-
   const handleFiles = async e => {
     const files = e.target.files;
     setImages(files);
@@ -84,18 +79,9 @@ const TripFormModal = (props) => {
       formData.append('description', description);
       formData.append('startDate', startDate);
       formData.append('endDate', endDate);
-      // formData.append('collaborators', collaboratorIds);
-      collaboratorIds.forEach((collaborator) => {
+      collaborators.forEach((collaborator) => {
         formData.append('collaborators', collaborator)
       })
-
-      // const formData = {
-      //     title: title,
-      //     description: description,
-      //     startDate: startDate,
-      //     endDate: endDate,
-      //     collaborators: collaboratorIds
-      // }
       
       if (!currentTrip){ 
           dispatch(composeTrips(formData))
@@ -156,6 +142,7 @@ const TripFormModal = (props) => {
         setCollabErrors(true)
         allUsers.forEach((user) => {
             if (currCollaborator === user.email) {
+                setCollaborators(collaborators.append(user._id))
                 collaboratorIds = (collaboratorIds.concat(user._id))
                 const newArr = collaborators.slice()
                 const anotherNewArr = newArr.concat(user.email)
@@ -306,4 +293,4 @@ const TripFormModal = (props) => {
 )
 }
 
-export default TripFormModal;
+export default NewTripFormModal;
