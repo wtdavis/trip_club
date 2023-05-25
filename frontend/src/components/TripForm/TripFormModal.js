@@ -85,8 +85,8 @@ const TripFormModal = (props) => {
           if (collaborators.includes(user.email)) {
               collaboratorIds.push(user._id)
           }
-
       })
+
       formData.append('title', title);
       formData.append('description', description);
       formData.append('startDate', startDate);
@@ -100,38 +100,34 @@ const TripFormModal = (props) => {
         
         if (!currentTrip){ 
            dispatch(composeTrips(formData))
-          .then( (res) => { 
-            if (res) {
-              setNewTrip(res)
-              // debugger 
-              dispatch(setCurrentTrip(res))
-              setRedirect(true)
-              setImages([]);
-              setImageUrls([]);
-              fileRef.current.value = null;
-              setShowCreateTripModal(false)
-            
-          } else {
-            let errors = tripErrors
+            .then( (res) => { 
+              if (res) {
+                setNewTrip(res)
+                // debugger 
+                dispatch(setCurrentTrip(res))
+                setRedirect(true)
+                setImages([]);
+                setImageUrls([]);
+                fileRef.current.value = null;
+                setShowCreateTripModal(false)
+              
+            } else {
+              let errors = tripErrors
+              setSubmitErrors(true)
+            }
+          })
+      } else if (currentTrip) {
 
-            // debugger
-            setSubmitErrors(true)
-          }}
-        )
-        } else if (currentTrip) {
-          // let data = {...currentTrip, ...formData}
-          // debugger
           let keys = Object.keys(currentTrip)
+
           for (let i = 0; i < keys.length; i++) {
             if (!(formData.has(keys[i]))) {
               formData.append(`${keys[i]}`, currentTrip[keys[i]])
             } 
-            // else {
-            //   formData.append(`${keys[i]}`, currentTrip[keys[i]])
-            // }
           }
+
           dispatch(updateTrip(formData))
-          .then ( (res) => { 
+          .then( (res) => { 
             debugger
             dispatch(setCurrentTrip(res))
             setNewTrip(res)
@@ -141,29 +137,29 @@ const TripFormModal = (props) => {
             setImageUrls([]);
             fileRef.current.value = null;
             setShowCreateTripModal(false)
-          
+            })
         } else {
           let errors = tripErrors
 
           // debugger
           setSubmitErrors(true)
-        }}
-      )
-      } else if (currentTrip) {
-        let data = {...currentTrip, ...formData}
-        // debugger
-        dispatch(updateTrip(data))
-        .then ( (res) => { 
-          // debugger
-          dispatch(setCurrentTrip(data))
-          setNewTrip(data)
-          setShowCreateTripModal(false)
-          setImages([]);
-          setImageUrls([]);
-          setRedirect(true)
-        })
+        }
       }
-    }
+    //   } else if (currentTrip) {
+    //     let data = {...currentTrip, ...formData}
+    //     // debugger
+    //     dispatch(updateTrip(data))
+    //     .then ( (res) => { 
+    //       // debugger
+    //       dispatch(setCurrentTrip(data))
+    //       setNewTrip(data)
+    //       setShowCreateTripModal(false)
+    //       setImages([]);
+    //       setImageUrls([]);
+    //       setRedirect(true)
+    //     })
+    //   }
+    // }
     
     const handleRemove = (e) => {
         e.preventDefault()
@@ -338,4 +334,4 @@ const TripFormModal = (props) => {
 )
 }
 
-export default TripFormModal;
+export default TripFormModal
