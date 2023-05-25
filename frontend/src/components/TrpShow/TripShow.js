@@ -23,7 +23,7 @@ const TripShow = (props) => {
   const [eventList, setEventList] = useState([])
   const [showEditTripModal, setShowEditTripModal] = useState(false)
   
-  // debugger
+  
 
 const setStorageTrip = (trip) => {
   localStorage.setItem("currentTrip", trip)
@@ -50,7 +50,9 @@ const getStorageTrip = () => {
       setStorageTrip(JSON.stringify(storageTrip))
       dispatch(tripActions.setCurrentTrip(storageTrip))
     };
-   dispatch(eventActions.fetchTripEvents(trip._id))
+    dispatch(eventActions.clearEvents())
+       dispatch(eventActions.fetchTripEvents(trip._id))
+      
   }, [dispatch, currentTrip]
   )
   
@@ -160,7 +162,7 @@ const getStorageTrip = () => {
         </div>
 
         {showEditTripModal && (
-          <Modal onClose={(e) => {setShowEditTripModal(false); console.log(e)}}>
+          <Modal onClose={(e) => {setShowEditTripModal(false)}}>
             <TripFormModal currentTrip={currentTrip} setShowCreateTripModal={setShowEditTripModal}/>
           </Modal>
         )}

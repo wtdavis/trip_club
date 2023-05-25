@@ -53,10 +53,11 @@ router.post('/', multipleMulterUpload("images"), requireUser, validateTripInput,
             startDate: new Date(req.body.startDate),
             endDate: new Date(req.body.endDate),
             imageUrls,
-            events: req.body.events,
-            collaborators: req.body.collaborators
+            events: JSON.parse(req.body.events),
+            collaborators: JSON.parse(req.body.collaborators)
         });
         let trip = await newTrip.save()
+        
         trip = await trip.populate("author", "_id username profileImageUrl");
         return res.json(trip)
     }
@@ -113,21 +114,24 @@ router.get('/user/:userId', async (req, res, next) => {
 })
 
 // Trip Patch works
-router.patch('/:id', requireUser, async (req, res, next) => {
+router.patch('/:id', multipleMulterUpload("images"), requireUser, async (req, res, next) => {
+    const imageUrls = await multipleFilesUpload({files: req.files, public: true})
     let trip;
-    // console.log(Date(req.body.startDate))
+    
     let tripData = {...trip, 
                     title: req.body.title, 
                     description: req.body.description,
                     startDate: new Date(req.body.startDate),
                     endDate: new Date(req.body.endDate),
-                    events: req.body.events,
-                    collaborators: req.body.collaborators
+                    events: JSON.parse(req.body.events),
+                    imageUrls,
+                    collaborators: JSON.parse(req.body.collaborators)
                 }
 
     try {
         trip = await Trip.findById(req.params.id)
                                         .populate('title');
+                                       
     }
     catch(err) {
         const error = new Error('Trip not found');
@@ -140,8 +144,11 @@ router.patch('/:id', requireUser, async (req, res, next) => {
     if (!req.user._id === trip.author._id) {
         throw new Error('Current user is not the trip author')
     } else {
-            updatedTrip = await Trip.updateOne({...trip}, {...tripData })
-            return res.json(updatedTrip)       
+            const updatedTrip = await Trip.findOneAndUpdate({_id: trip._id}, {...trip, ...tripData}, {new: true})
+            return res.json(updatedTrip)
+            // updatedTrip = await Trip.updateOne({_id: trip._id}, {...tripData, events: req.body.events, collaborators: req.body.collaborators, imageUrls: imageUrls})
+            // await updatedTrip.save()
+            // return res.json(updatedTrip)       
     }
 })
 
