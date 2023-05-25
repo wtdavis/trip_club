@@ -99,6 +99,7 @@ export const fetchTrip = id => async dispatch => {
 
 export const updateTrip = (formData) => async (dispatch) => {
   let tripId = formData.get('_id')
+  debugger
   try {
     const res = await jwtFetch(`/api/trips/${tripId}`, {
       method: 'PATCH',

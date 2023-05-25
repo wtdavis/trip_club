@@ -57,6 +57,7 @@ router.post('/', multipleMulterUpload("images"), requireUser, validateTripInput,
             collaborators: req.body.collaborators
         });
         let trip = await newTrip.save()
+        
         trip = await trip.populate("author", "_id username profileImageUrl");
         return res.json(trip)
     }
@@ -113,9 +114,11 @@ router.get('/user/:userId', async (req, res, next) => {
 })
 
 // Trip Patch works
-router.patch('/:id', requireUser, async (req, res, next) => {
+router.patch('/:id', multipleMulterUpload("images"), requireUser, async (req, res, next) => {
+    const imageUrls = multipleFilesUpload({files: req.files, public: true})
     let trip;
-    // console.log(Date(req.body.startDate))
+
+    console.log(req.body.title)
     let tripData = {...trip, 
                     title: req.body.title, 
                     description: req.body.description,
@@ -128,6 +131,7 @@ router.patch('/:id', requireUser, async (req, res, next) => {
     try {
         trip = await Trip.findById(req.params.id)
                                         .populate('title');
+                                       
     }
     catch(err) {
         const error = new Error('Trip not found');
@@ -140,7 +144,7 @@ router.patch('/:id', requireUser, async (req, res, next) => {
     if (!req.user._id === trip.author._id) {
         throw new Error('Current user is not the trip author')
     } else {
-            updatedTrip = await Trip.updateOne({...trip}, {...tripData })
+            updatedTrip = await Trip.updateOne(tripData)
             return res.json(updatedTrip)       
     }
 })

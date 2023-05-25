@@ -6,11 +6,13 @@ import { Redirect } from "react-router-dom/cjs/react-router-dom.min"
 import * as userActions from '../../store/users'
 import './TripForm.css'
 import { updateTrip } from "../../store/trips"
+import * as eventActions from "../../store/events"
 
 
 const TripFormModal = (props) => {
   const {setShowCreateTripModal} = props;
   const currentTrip = (props.currentTrip ? props.currentTrip : null)
+  const events = useSelector(state => state.events)
     // const dispatch = useDispatch()
     // const { tripId } = useParams()
     // const currentUser = useSelector(state => state.session.user)
@@ -30,6 +32,7 @@ const TripFormModal = (props) => {
     const dispatch = useDispatch()
     const { tripId } = useParams()
     const currentUser = useSelector(state => state.session.user)
+
     const [title, setTitle] = useState(currentTrip ? currentTrip.title : "")
     const [description, setDescription] = useState(currentTrip ? currentTrip.description : "")
     const [startDate, setStartDate] = useState(currentTrip ? currentTrip.startDate.split("T")[0] : new Date().toISOString().split("T")[0])
@@ -49,6 +52,7 @@ const TripFormModal = (props) => {
     const fileRef = useRef(null);
   
     useEffect(() => {
+      // debugger
         dispatch(userActions.fetchAllUsers())
         if (currentTrip) {
           setModalTitle("Edit Trip")
@@ -56,7 +60,7 @@ const TripFormModal = (props) => {
         
         // setCollaborators([])
     }, [])
-   
+  //  console.log(events)
 
     let collaboratorIds = []
 
@@ -86,26 +90,32 @@ const TripFormModal = (props) => {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        const formData = new FormData(); 
-        Array.from(images).forEach(image => formData.append("images", image));
-        fileRef.current.value = null;
+      e.preventDefault();
+      const formData = new FormData(); 
+      Array.from(images).forEach(image => formData.append("images", image));
+      fileRef.current.value = null;
+      
+      let collaboratorIds = []
+      allUsers.forEach(user => {
+        if (collaborators.includes(user.email)) {
+          collaboratorIds.push(user._id)
+        }
+      })
+      formData.append('title', title);
+      formData.append('description', description);
+      formData.append('startDate', startDate);
+      formData.append('endDate', endDate);
+      
+      
+      let eventsArr = Object.keys(events)
+      formData.append('events', JSON.stringify(eventsArr))
+      
+      formData.append('collaborators', JSON.stringify(collaboratorIds))
 
-        let collaboratorIds = []
-        allUsers.forEach(user => {
-            if (collaborators.includes(user.email)) {
-                collaboratorIds.push(user._id)
-            }
-        })
-        formData.append('title', title);
-        formData.append('description', description);
-        formData.append('startDate', startDate);
-        formData.append('endDate', endDate);
-        // formData.append('collaborators', collaboratorIds);
-        collaboratorIds.forEach((collaborator) => {
-          formData.append('collaborators', collaborator)
-        })
-
+      // collaboratorIds.forEach((collaborator) => {
+      //   formData.append('collaborators', JSON.stringify(collaborator))
+      // })
+      
         // const formData = {
         //     title: title,
         //     description: description,
@@ -139,13 +149,13 @@ const TripFormModal = (props) => {
           // debugger
           let keys = Object.keys(currentTrip)
           for (let i = 0; i < keys.length; i++) {
-            if (formData.has(keys[i])) {
-              formData.set(`${keys[i]}`, currentTrip[keys[i]])
-            } else {
+            if (!(formData.has(keys[i]))) {
               formData.append(`${keys[i]}`, currentTrip[keys[i]])
-            }
+            } 
+            // else {
+            //   formData.append(`${keys[i]}`, currentTrip[keys[i]])
+            // }
           }
-          debugger
           dispatch(updateTrip(formData))
           .then ( (res) => { 
             // debugger
