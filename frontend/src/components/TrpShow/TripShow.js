@@ -56,7 +56,7 @@ const getStorageTrip = () => {
       
   }, [dispatch, currentTrip]
   )
-  debugger
+  // debugger
 
   const users = useSelector(state => state.users);
   const currentUser = useSelector(state => state.session.user);

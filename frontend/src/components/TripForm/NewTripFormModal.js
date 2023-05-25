@@ -39,6 +39,10 @@ const NewTripFormModal = (props) => {
         setModalTitle("Edit Trip")
       }
   }, [])
+
+
+  let collaboratorIds = []
+  
   
   if (redirect) {
       return <Redirect to={{pathname:`/trips/show`, trip: newTrip}}/>
@@ -69,7 +73,6 @@ const NewTripFormModal = (props) => {
       Array.from(images).forEach(image => formData.append("images", image));
       fileRef.current.value = null;
 
-      let collaboratorIds = []
       allUsers.forEach(user => {
           if (collaborators.includes(user.email)) {
               collaboratorIds.push(user._id)

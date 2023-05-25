@@ -10,9 +10,10 @@ import * as eventActions from "../../store/events"
 
 
 const TripFormModal = (props) => {
+  debugger
   const {setShowCreateTripModal} = props;
   const currentTrip = (props.currentTrip ? props.currentTrip : null)
-
+  const events = currentTrip?.events
       
   const dispatch = useDispatch()
   const { tripId } = useParams()
@@ -42,8 +43,6 @@ const TripFormModal = (props) => {
       }
   }, [])
   
-
-
   let collaboratorIds = []
 
   if (redirect) {
@@ -73,14 +72,12 @@ const TripFormModal = (props) => {
 
 
   const handleSubmit = async (e) => {
-
       e.preventDefault();
       const formData = new FormData(); 
       Array.from(images).forEach(image => formData.append("images", image));
       fileRef.current.value = null;
 
-
-      let collaboratorIds = []
+      // let collaboratorIds = []
       allUsers.forEach(user => {
           if (collaborators.includes(user.email)) {
               collaboratorIds.push(user._id)
@@ -92,7 +89,6 @@ const TripFormModal = (props) => {
       formData.append('startDate', startDate);
       formData.append('endDate', endDate);
 
-      
       let eventsArr = Object.keys(events)
       formData.append('events', JSON.stringify(eventsArr))
       formData.append('collaborators', JSON.stringify(collaboratorIds))
@@ -103,20 +99,19 @@ const TripFormModal = (props) => {
             .then( (res) => { 
               if (res) {
                 setNewTrip(res)
-                // debugger 
                 dispatch(setCurrentTrip(res))
                 setRedirect(true)
                 setImages([]);
                 setImageUrls([]);
                 fileRef.current.value = null;
                 setShowCreateTripModal(false)
-              
-            } else {
-              let errors = tripErrors
-              setSubmitErrors(true)
-            }
-          })
+              } else {
+                let errors = tripErrors
+                setSubmitErrors(true)
+              }
+            })
       } else if (currentTrip) {
+        debugger  
 
           let keys = Object.keys(currentTrip)
 
@@ -128,7 +123,6 @@ const TripFormModal = (props) => {
 
           dispatch(updateTrip(formData))
           .then( (res) => { 
-            debugger
             dispatch(setCurrentTrip(res))
             setNewTrip(res)
             setShowCreateTripModal(false)
@@ -213,7 +207,8 @@ const TripFormModal = (props) => {
                     return (
                         <div className="friendsemail_container">
                           
-                          <span>{collaboratorEmail(collaborator)}</span>
+                          {/* <span>{collaboratorEmail(collaborator)}</span> */}
+                          <span>{collaborator}</span>
                           <button className="removefriend_button" value={collaborator} onClick={e => handleRemove(e)}>Remove</button>
                         </div>
                         )
