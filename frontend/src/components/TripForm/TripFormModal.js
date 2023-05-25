@@ -106,23 +106,10 @@ const TripFormModal = (props) => {
       formData.append('startDate', startDate);
       formData.append('endDate', endDate);
       
-      
       let eventsArr = Object.keys(events)
       formData.append('events', JSON.stringify(eventsArr))
-      
       formData.append('collaborators', JSON.stringify(collaboratorIds))
-
-      // collaboratorIds.forEach((collaborator) => {
-      //   formData.append('collaborators', JSON.stringify(collaborator))
-      // })
       
-        // const formData = {
-        //     title: title,
-        //     description: description,
-        //     startDate: startDate,
-        //     endDate: endDate,
-        //     collaborators: collaboratorIds
-        // }
         
         if (!currentTrip){ 
            dispatch(composeTrips(formData))
@@ -158,9 +145,9 @@ const TripFormModal = (props) => {
           }
           dispatch(updateTrip(formData))
           .then ( (res) => { 
-            // debugger
-            dispatch(setCurrentTrip(formData))
-            setNewTrip(formData)
+            debugger
+            dispatch(setCurrentTrip(res))
+            setNewTrip(res)
             setShowCreateTripModal(false)
             setImages([]);
             setImageUrls([]);
