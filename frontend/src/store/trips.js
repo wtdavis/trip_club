@@ -97,14 +97,15 @@ export const fetchTrip = id => async dispatch => {
 };
 
 
-export const updateTrip = (trip) => async (dispatch) => {
-  // debugger
+export const updateTrip = (formData) => async (dispatch) => {
+  let tripId = formData.get('_id')
   try {
-    const res = await jwtFetch(`/api/trips/${trip._id}`, {
+    const res = await jwtFetch(`/api/trips/${tripId}`, {
       method: 'PATCH',
-      body: JSON.stringify(trip)
+      body: formData
     })
     const updatedTrip = await res.json()
+    debugger
     dispatch(receiveTrip(updatedTrip))
     return updatedTrip
   } catch(err) {
@@ -137,6 +138,8 @@ export const deleteTrip = data => async dispatch => {
 }
 
 export const composeTrips = (formData) => async dispatch => {
+  debugger
+
   let trip;
   try {
     const res = await jwtFetch('/api/trips/', {

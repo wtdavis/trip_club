@@ -24,7 +24,7 @@ const TripShow = (props) => {
   const [eventList, setEventList] = useState([])
   const [showEditTripModal, setShowEditTripModal] = useState(false)
   
-  // debugger
+  
 
 const setStorageTrip = (trip) => {
   localStorage.setItem("currentTrip", trip)
@@ -51,10 +51,12 @@ const getStorageTrip = () => {
       setStorageTrip(JSON.stringify(storageTrip))
       dispatch(tripActions.setCurrentTrip(storageTrip))
     };
-   dispatch(eventActions.fetchTripEvents(trip._id))
+    dispatch(eventActions.clearEvents())
+       dispatch(eventActions.fetchTripEvents(trip._id))
+      
   }, [dispatch, currentTrip]
   )
-  
+  debugger
 
   const users = useSelector(state => state.users);
   const currentUser = useSelector(state => state.session.user);
@@ -134,12 +136,12 @@ const getStorageTrip = () => {
             </div>
           </div>
 
-            <p className='tripshowinfoitem' id='tripshowtripdescription'>{trip.description}</p>
-            <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{trip.collaborators.map(e => (<li>{e.username}</li>))}</ul>
+            <p className='tripshowinfoitem' id='tripshowtripdescription'>{currentTrip.description}</p>
+            <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{currentTrip.collaborators?.map(e => (<li>{e.username}</li>))}</ul>
             <p className='tripshowinfoitem' id='tripshowstartdate'> <span>Begins</span> {startDateString} <span>Ends</span> {endDateString}</p>
 
             <ul className="trip_show_images_ul">
-              {currentTrip.imageUrls.map(photo => {
+              {currentTrip.imageUrls?.map(photo => {
                 return (              
                   <li className="trip_show_images_li"><img className="trip_show_images" src={photo} alt=""/></li>
                 )
@@ -161,7 +163,7 @@ const getStorageTrip = () => {
         </div>
 
         {showEditTripModal && (
-          <Modal onClose={(e) => {setShowEditTripModal(false); console.log(e)}}>
+          <Modal onClose={(e) => {setShowEditTripModal(false)}}>
             <TripFormModal currentTrip={currentTrip} setShowCreateTripModal={setShowEditTripModal}/>
           </Modal>
         )}

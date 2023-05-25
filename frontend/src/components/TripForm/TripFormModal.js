@@ -6,11 +6,13 @@ import { Redirect } from "react-router-dom/cjs/react-router-dom.min"
 import * as userActions from '../../store/users'
 import './TripForm.css'
 import { updateTrip } from "../../store/trips"
+import * as eventActions from "../../store/events"
 
 
 const TripFormModal = (props) => {
   const {setShowCreateTripModal} = props;
   const currentTrip = (props.currentTrip ? props.currentTrip : null)
+
       
   const dispatch = useDispatch()
   const { tripId } = useParams()
@@ -41,6 +43,7 @@ const TripFormModal = (props) => {
   }, [])
   
 
+
   let collaboratorIds = []
 
   if (redirect) {
@@ -68,43 +71,72 @@ const TripFormModal = (props) => {
     else setImageUrls([]);
   }
 
+
   const handleSubmit = async (e) => {
+
       e.preventDefault();
       const formData = new FormData(); 
       Array.from(images).forEach(image => formData.append("images", image));
       fileRef.current.value = null;
+
 
       let collaboratorIds = []
       allUsers.forEach(user => {
           if (collaborators.includes(user.email)) {
               collaboratorIds.push(user._id)
           }
+
       })
       formData.append('title', title);
       formData.append('description', description);
       formData.append('startDate', startDate);
       formData.append('endDate', endDate);
-      // formData.append('collaborators', collaboratorIds);
-      collaboratorIds.forEach((collaborator) => {
-        formData.append('collaborators', collaborator)
-      })
 
-      // const formData = {
-      //     title: title,
-      //     description: description,
-      //     startDate: startDate,
-      //     endDate: endDate,
-      //     collaborators: collaboratorIds
-      // }
       
-      if (!currentTrip){ 
-          dispatch(composeTrips(formData))
-        .then( (res) => { 
-          if (res) {
-            setNewTrip(res)
-            // debugger 
+      let eventsArr = Object.keys(events)
+      formData.append('events', JSON.stringify(eventsArr))
+      formData.append('collaborators', JSON.stringify(collaboratorIds))
+      
+        
+        if (!currentTrip){ 
+           dispatch(composeTrips(formData))
+          .then( (res) => { 
+            if (res) {
+              setNewTrip(res)
+              // debugger 
+              dispatch(setCurrentTrip(res))
+              setRedirect(true)
+              setImages([]);
+              setImageUrls([]);
+              fileRef.current.value = null;
+              setShowCreateTripModal(false)
+            
+          } else {
+            let errors = tripErrors
+
+            // debugger
+            setSubmitErrors(true)
+          }}
+        )
+        } else if (currentTrip) {
+          // let data = {...currentTrip, ...formData}
+          // debugger
+          let keys = Object.keys(currentTrip)
+          for (let i = 0; i < keys.length; i++) {
+            if (!(formData.has(keys[i]))) {
+              formData.append(`${keys[i]}`, currentTrip[keys[i]])
+            } 
+            // else {
+            //   formData.append(`${keys[i]}`, currentTrip[keys[i]])
+            // }
+          }
+          dispatch(updateTrip(formData))
+          .then ( (res) => { 
+            debugger
             dispatch(setCurrentTrip(res))
-            setRedirect(true)
+            setNewTrip(res)
+            setShowCreateTripModal(false)
+
             setImages([]);
             setImageUrls([]);
             fileRef.current.value = null;
