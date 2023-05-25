@@ -10,85 +10,89 @@ import * as eventActions from "../../store/events"
 
 
 const TripFormModal = (props) => {
-  debugger
   const {setShowCreateTripModal} = props;
   const currentTrip = (props.currentTrip ? props.currentTrip : null)
-  const events = currentTrip?.events
-      
-  const dispatch = useDispatch()
-  const { tripId } = useParams()
-  const currentUser = useSelector(state => state.session.user)
-  const [title, setTitle] = useState(currentTrip ? currentTrip.title : "")
-  const [description, setDescription] = useState(currentTrip ? currentTrip.description : "")
-  const [startDate, setStartDate] = useState(currentTrip ? currentTrip.startDate.split("T")[0] : new Date().toISOString().split("T")[0])
-  const [endDate, setEndDate] = useState(currentTrip ? currentTrip.endDate.split("T")[0] : new Date().toISOString().split("T")[0])
-  const [submit, setSubmit] = useState("Create Trip")
-  const [collaborators, setCollaborators] = useState(currentTrip ? currentTrip.collaborators : [])
-  const allUsers = Object.values(useSelector(state => state.users))
-  const tripErrors = useSelector(state => state.errors.trips)
-  const [redirect, setRedirect] = useState(false)
-  const [newTrip, setNewTrip] = useState();
-  const [currCollaborator, setCurrCollaborator] = useState()
-  const [collabErrors, setCollabErrors] = useState(false)
-  const [submitErrors, setSubmitErrors] = useState(false)
-  const [modalTitle, setModalTitle] = useState("Create a New Trip")
-  const [images, setImages] = useState([]);
-  const [imageUrls, setImageUrls] = useState([]);
-  const fileRef = useRef(null);
+  const events = useSelector(state => state.events)
+    
 
-  useEffect(() => {
-      dispatch(userActions.fetchAllUsers())
-      if (currentTrip) {
-        setModalTitle("Edit Trip")
-      }
-  }, [])
+    
+    const dispatch = useDispatch()
+    const { tripId } = useParams()
+    const currentUser = useSelector(state => state.session.user)
+
+    const [title, setTitle] = useState(currentTrip ? currentTrip.title : "")
+    const [description, setDescription] = useState(currentTrip ? currentTrip.description : "")
+    const [startDate, setStartDate] = useState(currentTrip ? currentTrip.startDate.split("T")[0] : new Date().toISOString().split("T")[0])
+    const [endDate, setEndDate] = useState(currentTrip ? currentTrip.endDate.split("T")[0] : new Date().toISOString().split("T")[0])
+    const [submit, setSubmit] = useState("Create Trip")
+    const [collaborators, setCollaborators] = useState(currentTrip ? currentTrip.collaborators : [])
+    const allUsers = Object.values(useSelector(state => state.users))
+    const tripErrors = useSelector(state => state.errors.trips)
+    const [redirect, setRedirect] = useState(false)
+    const [newTrip, setNewTrip] = useState();
+    const [currCollaborator, setCurrCollaborator] = useState()
+    const [collabErrors, setCollabErrors] = useState(false)
+    const [submitErrors, setSubmitErrors] = useState(false)
+    const [modalTitle, setModalTitle] = useState("Create a New Trip")
+    const [images, setImages] = useState([]);
+    const [imageUrls, setImageUrls] = useState([]);
+    const fileRef = useRef(null);
   
-  let collaboratorIds = []
-
-  if (redirect) {
-      return <Redirect to={{pathname:`/trips/show`, trip: newTrip}}/>
-  }
-  
-  const author = currentUser.id
-
-  const handleFiles = async e => {
-    const files = e.target.files;
-    setImages(files);
-    if (files.length !== 0) {
-      let filesLoaded = 0;
-      const urls = [];
-      Array.from(files).forEach((file, index) => {
-        const fileReader = new FileReader();
-        fileReader.readAsDataURL(file);
-        fileReader.onload = () => {
-          urls[index] = fileReader.result;
-          if (++filesLoaded === files.length) 
-            setImageUrls(urls);
+    useEffect(() => {
+      // debugger
+        dispatch(userActions.fetchAllUsers())
+        if (currentTrip) {
+          setModalTitle("Edit Trip")
         }
-      });
+        
+        // setCollaborators([])
+    }, [])
+  //  console.log(events)
+
+    let collaboratorIds = []
+
+    if (redirect) {
+        return <Redirect to={{pathname:`/trips/show`, trip: newTrip}}/>
     }
-    else setImageUrls([]);
-  }
+    
+    const author = currentUser.id
 
+    const handleFiles = async e => {
+      const files = e.target.files;
+      setImages(files);
+      if (files.length !== 0) {
+        let filesLoaded = 0;
+        const urls = [];
+        Array.from(files).forEach((file, index) => {
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(file);
+          fileReader.onload = () => {
+            urls[index] = fileReader.result;
+            if (++filesLoaded === files.length) 
+              setImageUrls(urls);
+          }
+        });
+      }
+      else setImageUrls([]);
+    }
 
-  const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
       const formData = new FormData(); 
       Array.from(images).forEach(image => formData.append("images", image));
       fileRef.current.value = null;
-
-      // let collaboratorIds = []
+      
+      let collaboratorIds = []
       allUsers.forEach(user => {
-          if (collaborators.includes(user.email)) {
-              collaboratorIds.push(user._id)
-          }
+        if (collaborators.includes(user.email)) {
+          collaboratorIds.push(user._id)
+        }
       })
-
       formData.append('title', title);
       formData.append('description', description);
       formData.append('startDate', startDate);
       formData.append('endDate', endDate);
-
+      
       let eventsArr = Object.keys(events)
       formData.append('events', JSON.stringify(eventsArr))
       formData.append('collaborators', JSON.stringify(collaboratorIds))
@@ -96,64 +100,48 @@ const TripFormModal = (props) => {
         
         if (!currentTrip){ 
            dispatch(composeTrips(formData))
-            .then( (res) => { 
-              if (res) {
-                setNewTrip(res)
-                dispatch(setCurrentTrip(res))
-                setRedirect(true)
-                setImages([]);
-                setImageUrls([]);
-                fileRef.current.value = null;
-                setShowCreateTripModal(false)
-              } else {
-                let errors = tripErrors
-                setSubmitErrors(true)
-              }
-            })
-      } else if (currentTrip) {
-        debugger  
+          .then( (res) => { 
+            if (res) {
+              setNewTrip(res)
+              // debugger 
+              dispatch(setCurrentTrip(res))
+              setRedirect(true)
+              setImages([]);
+              setImageUrls([]);
+              fileRef.current.value = null;
+              setShowCreateTripModal(false)
+            
+          } else {
+            let errors = tripErrors
 
+            // debugger
+            setSubmitErrors(true)
+          }}
+        )
+        } else if (currentTrip) {
+          // let data = {...currentTrip, ...formData}
+          // debugger
           let keys = Object.keys(currentTrip)
-
           for (let i = 0; i < keys.length; i++) {
             if (!(formData.has(keys[i]))) {
               formData.append(`${keys[i]}`, currentTrip[keys[i]])
             } 
+            // else {
+            //   formData.append(`${keys[i]}`, currentTrip[keys[i]])
+            // }
           }
-
           dispatch(updateTrip(formData))
-          .then( (res) => { 
+          .then ( (res) => { 
+            debugger
             dispatch(setCurrentTrip(res))
             setNewTrip(res)
             setShowCreateTripModal(false)
-
             setImages([]);
             setImageUrls([]);
-            fileRef.current.value = null;
-            setShowCreateTripModal(false)
-            })
-        } else {
-          let errors = tripErrors
-
-          // debugger
-          setSubmitErrors(true)
+            setRedirect(true)
+          })
         }
-      }
-    //   } else if (currentTrip) {
-    //     let data = {...currentTrip, ...formData}
-    //     // debugger
-    //     dispatch(updateTrip(data))
-    //     .then ( (res) => { 
-    //       // debugger
-    //       dispatch(setCurrentTrip(data))
-    //       setNewTrip(data)
-    //       setShowCreateTripModal(false)
-    //       setImages([]);
-    //       setImageUrls([]);
-    //       setRedirect(true)
-    //     })
-    //   }
-    // }
+    }
     
     const handleRemove = (e) => {
         e.preventDefault()
@@ -193,27 +181,21 @@ const TripFormModal = (props) => {
       setCollabErrors(false)
     }
 
-    const collaboratorEmail = (id) => {
-      if (id){
-        const collaboratorData = allUsers.find(user => user._id === id);
-        return collaboratorData.email
-      }
-    } 
-
-    const collaboratorsList = () => {
+    const CollaboratorsList = () => {
         return (
+          // <div className="friends_ul_container">
             <ul>
                 {collaborators.map(collaborator => {
+                    // debugger
                     return (
                         <div className="friendsemail_container">
-                          
-                          {/* <span>{collaboratorEmail(collaborator)}</span> */}
                           <span>{collaborator}</span>
                           <button className="removefriend_button" value={collaborator} onClick={e => handleRemove(e)}>Remove</button>
                         </div>
                         )
                     })}
             </ul>
+          // </div>
         )
     }
 
@@ -253,7 +235,7 @@ const TripFormModal = (props) => {
             {submitErrors && 
             <p className="submiterror">{tripErrors.description}</p>}
 
-            <div className="createtrip_container_start">
+            <div className="createtrip_date">
               <p className="tripformsubheader">Trip Start Date:</p>
               <input 
                 type="date" 
@@ -266,7 +248,7 @@ const TripFormModal = (props) => {
             {submitErrors && 
             <p className="submiterror">{tripErrors.startDate}</p>}
 
-            <div className="createtrip_container_end">
+            <div className="createtrip date">
               <p className="tripformsubheader">Trip End Date:</p>
               <input 
                 className="createtrip_input" 
@@ -281,11 +263,11 @@ const TripFormModal = (props) => {
             
 
             <div className='trip_image_container'>
-              <span>Trip Images:</span>
+              <span>Trip Images</span>
               <label className="images_input_label" for="images_input_profile">Choose Files</label>
                 <input 
                   className="images_input"
-                  id="images_input_trip"
+                  id="images_input_profile"
                   type="file" 
                   ref={fileRef}
                   accept=".jpg, .jpeg, .png" 
@@ -317,9 +299,11 @@ const TripFormModal = (props) => {
 
             </div>     
             <span className="errors">{collabErrors ? 'No user found with that email' : null}</span>       
-            <div className="createtrip_header">Who goes on a trip:</div> 
               <div className="friends_list_container">
-                <div>{collaboratorsList()}</div>
+                <div className="createtrip_header">Who goes on a trip:</div> 
+                
+                <div>{CollaboratorsList()}</div>
+
               </div>
               <button type="submit" className="continue_button" value={submit} onClick={e=> handleSubmit(e)}>Continue</button>
 
@@ -329,4 +313,4 @@ const TripFormModal = (props) => {
 )
 }
 
-export default TripFormModal
+export default TripFormModal;
