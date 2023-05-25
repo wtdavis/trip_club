@@ -118,7 +118,7 @@ router.patch('/:id', multipleMulterUpload("images"), requireUser, async (req, re
     const imageUrls = await multipleFilesUpload({files: req.files, public: true})
     let trip;
     
-    let tripData = {...trip, 
+    let tripData = { 
                     title: req.body.title, 
                     description: req.body.description,
                     startDate: new Date(req.body.startDate),
