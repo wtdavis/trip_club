@@ -60,6 +60,8 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+
+
 // Attach validateRegisterInput as a middleware before the route handler
 router.post('/register', singleMulterUpload("image"), validateRegisterInput, async (req, res, next) => {
   // Check to make sure nobody has already registered with a duplicate email or

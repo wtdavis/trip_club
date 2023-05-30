@@ -1,5 +1,6 @@
 import jwtFetch from './jwt';
 import { RECEIVE_USER_LOGOUT } from './session';
+import { fetchUserByEmail } from './users';
 
 const RECEIVE_TRIPS = "trips/RECEIVE_TRIPS";
 const RECEIVE_TRIP = "trips/RECEIVE_TRIP";
@@ -97,15 +98,55 @@ export const fetchTrip = id => async dispatch => {
 };
 
 
+export const addCollaborator = (trip, collaborator) => async (dispatch) => {
+    trip.collaborators = trip.collaborators.concat(collaborator)
+    let collabs = []
+    trip.collaborators.forEach(collaborator => {
+    if (collaborator instanceof(Object)) {
+     collabs = collabs.concat(collaborator._id) 
+    } else {
+      collabs = collabs.concat(collaborator)
+    }
+
+   })
+
+   trip.collaborators = collabs 
+   debugger
+
+   let data = new FormData()
+   let keys = Object.keys(trip)
+   debugger
+   for (let i=0;i<keys.length;i++){
+     if (trip[keys[i]] instanceof(Array)) {
+       data.append(`${keys[i]}`, JSON.stringify(trip[keys[i]]))
+      } else { 
+        data.append(`${keys[i]}`, trip[keys[i]])
+      }
+    }
+    dispatch(updateTrip(data))
+    .then(res => {return res})
+    debugger
+  // }, console.log("oops"))
+}
+
+export const removeCollaborator = (trip, collaborator) => async (dispatch) => {
+  let revisedCollaborators = [...trip.collaborators]
+  revisedCollaborators = revisedCollaborators.filter(collaborator)
+  trip.collaborators = revisedCollaborators
+  return dispatch(updateTrip(trip))
+}
+
 export const updateTrip = (formData) => async (dispatch) => {
+debugger
   let tripId = formData.get('_id')
+ 
   try {
     const res = await jwtFetch(`/api/trips/${tripId}`, {
       method: 'PATCH',
       body: formData
     })
     const updatedTrip = await res.json()
-    debugger
+    // debugger
     dispatch(receiveTrip(updatedTrip))
     return updatedTrip
   } catch(err) {

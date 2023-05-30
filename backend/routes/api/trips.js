@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
     try {
         const trips = await Trip.find()
                                 .populate('author','_id username')
-                                // .populate('events', 'title') not working
+                                .populate('collaborators', '_id username email') 
                                 .sort({ createdAt: -1 });
         return res.json(trips);
     }
@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Trip Show, works
+// Trip Show, works 
 router.get('/:id', async (req, res, next) => {
     try {
         const trip = await Trip.findById(req.params.id)
@@ -144,13 +144,17 @@ router.patch('/:id', multipleMulterUpload("images"), requireUser, async (req, re
     if (!req.user._id === trip.author._id) {
         throw new Error('Current user is not the trip author')
     } else {
-            const updatedTrip = await Trip.findOneAndUpdate({_id: trip._id}, {...tripData, imageUrls: trip.imageUrls.concat(imageUrls)}, {new: true})
+            const updatedTrip = await Trip.findOneAndUpdate({_id: trip._id},
+                 {...tripData, imageUrls: trip.imageUrls.concat(imageUrls)}, 
+                //  {collaborators: trip.collaborators.concat(JSON.parse(req.bodycollaborators))},
+                    {new: true})
+                   
             return res.json(updatedTrip)
             // updatedTrip = await Trip.updateOne({_id: trip._id}, {...tripData, events: req.body.events, collaborators: req.body.collaborators, imageUrls: imageUrls})
             // await updatedTrip.save()
             // return res.json(updatedTrip)       
     }
-})
+})  
 
 // Trip Delete, works
 router.delete('/:id', requireUser, async (req, res, next) => {

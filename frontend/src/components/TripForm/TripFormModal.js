@@ -154,9 +154,7 @@ const TripFormModal = (props) => {
                     setCollaborators(prevCollaborators => {
                         return prevCollaborators.filter(prevCollaborator => (prevCollaborator !== emailToRemove))
                     })
-                    // debugger
                 }
-                // debugger
             }
         })
     }
@@ -164,6 +162,7 @@ const TripFormModal = (props) => {
     const handleAdd = (e) => { 
         e.preventDefault()
         setCollabErrors(true)
+
         allUsers.forEach((user) => {
             if (currCollaborator === user.email) {
                 collaboratorIds = (collaboratorIds.concat(user._id))
@@ -189,7 +188,7 @@ const TripFormModal = (props) => {
                     // debugger
                     return (
                         <div className="friendsemail_container">
-                          <span>{collaborator}</span>
+                          <span>{collaborator.email}</span>
                           <button className="removefriend_button" value={collaborator} onClick={e => handleRemove(e)}>Remove</button>
                         </div>
                         )

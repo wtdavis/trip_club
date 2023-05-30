@@ -16,7 +16,12 @@ const usersReducer = (state={}, action) => {
 
     switch(action.type) {
         case RECEIVE_USERS:
-            nextState = {...state, ...action.users}
+            let users = {}
+            let payload = Object.values(action.users)
+            for (let i=0; i<payload.length; i++) {
+                users[payload[i]._id] = payload[i]
+            }
+            nextState = {...state, ...users}
             return nextState
         default:
             return state
@@ -30,5 +35,14 @@ export const fetchAllUsers = () => async (dispatch) => {
     dispatch(receiveUsers(data))
 }
 
+// export const fetchUserByEmail = (email) => async (dispatch) => {
+//     debugger
+//     try {
+//     const user = await jwtFetch(`/api/users/${encodeURI(email)}`)
+//     return user
+//     } catch (err) {
+//         console.log("failed to find user")
+//     }
+// }
 
 export default usersReducer

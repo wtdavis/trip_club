@@ -13,9 +13,11 @@ import EventItem from '../EventItem/EventItem';
 import { Modal } from '../../context/Modal';
 import TripFormModal from '../TripForm/TripFormModal';
 import NewTripFormModal from '../TripForm/NewTripFormModal';
+import { fetchAllUsers } from '../../store/users';
 
 const TripShow = (props) => {
   const history = useHistory();
+  const allUsers = useSelector(state => state.users)
   const dispatch = useDispatch()
   const currentTrip = useSelector(state => state.trips.current)
   const tripEvents = useSelector(state => state.events)
@@ -23,8 +25,11 @@ const TripShow = (props) => {
   const [dateList, setDateList] = useState([])
   const [eventList, setEventList] = useState([])
   const [showEditTripModal, setShowEditTripModal] = useState(false)
-  
-  
+  const [collab, setCollab] = useState("")
+  const [showCollab, setShowCollab] = useState(false)
+  const collaborators = useSelector(state => state.trips.current?.collaborators)
+
+// debugger
 
 const setStorageTrip = (trip) => {
   localStorage.setItem("currentTrip", trip)
@@ -52,8 +57,8 @@ const getStorageTrip = () => {
       dispatch(tripActions.setCurrentTrip(storageTrip))
     };
     dispatch(eventActions.clearEvents())
-       dispatch(eventActions.fetchTripEvents(trip._id))
-      
+    dispatch(eventActions.fetchTripEvents(trip._id))
+    dispatch(fetchAllUsers())
   }, [dispatch, currentTrip]
   )
   // debugger
@@ -101,11 +106,46 @@ const getStorageTrip = () => {
     return ele1 - ele2
   }
 
+
+
+  const handleCollabSubmit = (e) => {
+    let users = Object.values(allUsers)
+    // debugger
+    for (let i=0; i<users.length;i++) {
+      // debugger
+      if (allUsers[users[i]._id].email === collab){
+        // debugger
+        dispatch(tripActions.addCollaborator(currentTrip, users[i]._id))
+      }
+    }
+  }
   
 
-    let events;
-    let allEvents;
-    if (currentTrip && dateList.length){
+  const collaboratorAdd = () => {
+    return (
+      <form onSubmit={e => e.preventDefault()}>
+      <input type="text" onChange={e => setCollab(e.target.value)}>
+            </input>
+        <button onClick={e => {e.preventDefault(); handleCollabSubmit(e)}}>
+          Add Friend to Trip
+        </button>
+        </form>
+  
+    )
+}
+
+const collaboratorsList = () => {
+  
+  return (
+      <ul>
+        {collaborators?.map(collaborator => <li key={collaborator._id}>{collaborator._id}</li>)}
+      </ul>
+    )
+  }
+  
+  let events;
+  let allEvents;
+  if (currentTrip && dateList.length){
     allEvents = Object.values(tripEvents).filter(ele => ele.trip === currentTrip._id)
     allEvents = [...allEvents, ...dateList]
     events = allEvents.sort(compareDates)}
@@ -114,6 +154,9 @@ const getStorageTrip = () => {
       dispatch(tripActions.deleteTrip(currentTrip))
       history.push("/profile")
     }
+    
+    // {collaborators?.length && 
+    // collaboratorsList()}
 
 
     if (dateList.length && currentTrip) {return (
@@ -139,7 +182,9 @@ const getStorageTrip = () => {
             <p className='tripshowinfoitem' id='tripshowtripdescription'>{currentTrip.description}</p>
             <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{currentTrip.collaborators?.map(e => (<li>{e.username}</li>))}</ul>
             <p className='tripshowinfoitem' id='tripshowstartdate'> <span>Begins</span> {startDateString} <span>Ends</span> {endDateString}</p>
-
+            <div onClick={e => setShowCollab(true)}>Add A Friend</div>
+            {showCollab && 
+            collaboratorAdd()}
             <ul className="trip_show_images_ul">
               {currentTrip.imageUrls?.map(photo => {
                 return (              
