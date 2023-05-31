@@ -73,11 +73,12 @@ const NewTripFormModal = (props) => {
       Array.from(images).forEach(image => formData.append("images", image));
       fileRef.current.value = null;
 
-      allUsers.forEach(user => {
-          if (collaborators.includes(user.email)) {
-              collaboratorIds.push(user._id)
-          }
-      })
+      // let collaboratorIds = []
+      // allUsers.forEach(user => {
+      //     if (collaborators.includes(user.email)) {
+      //         collaboratorIds.push(user._id)
+      //     }
+      // })
       formData.append('title', title);
       formData.append('description', description);
       formData.append('startDate', startDate);
@@ -91,7 +92,6 @@ const NewTripFormModal = (props) => {
         .then( (res) => { 
           if (res) {
             setNewTrip(res)
-            // debugger 
             dispatch(setCurrentTrip(res))
             setRedirect(true)
             setImages([]);
@@ -101,17 +101,13 @@ const NewTripFormModal = (props) => {
           
         } else {
           let errors = tripErrors
-
-          // debugger
           setSubmitErrors(true)
         }}
       )
       } else if (currentTrip) {
         let data = {...currentTrip, ...formData}
-        // debugger
         dispatch(updateTrip(data))
         .then ( (res) => { 
-          // debugger
           dispatch(setCurrentTrip(data))
           setNewTrip(data)
           setShowCreateTripModal(false)
@@ -133,9 +129,7 @@ const NewTripFormModal = (props) => {
                     setCollaborators(prevCollaborators => {
                         return prevCollaborators.filter(prevCollaborator => (prevCollaborator !== emailToRemove))
                     })
-                    // debugger
                 }
-                // debugger
             }
         })
     }
@@ -145,11 +139,13 @@ const NewTripFormModal = (props) => {
         setCollabErrors(true)
         allUsers.forEach((user) => {
             if (currCollaborator === user.email) {
-                setCollaborators(collaborators.append(user._id))
-                collaboratorIds = (collaboratorIds.concat(user._id))
-                const newArr = collaborators.slice()
-                const anotherNewArr = newArr.concat(user.email)
-                setCollaborators(anotherNewArr)
+              debugger
+                collaborators.append(user._id)
+                setCollaborators(collaborators)
+                // collaboratorIds = (collaboratorIds.concat(user._id))
+                // const newArr = collaborators.slice()
+                // const anotherNewArr = newArr.concat(user.email)
+                // setCollaborators(collaborators)
                 setCollabErrors(false)
                 setCurrCollaborator('')
             }

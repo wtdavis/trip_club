@@ -7,6 +7,7 @@ import * as userActions from '../../store/users'
 import './TripForm.css'
 import { updateTrip } from "../../store/trips"
 import * as eventActions from "../../store/events"
+import Geocoding from "../GoogleMap/Geocoding"
 
 
 const TripFormModal = (props) => {
@@ -284,6 +285,10 @@ const TripFormModal = (props) => {
                   multiple 
                   onChange={handleFiles} 
                 />              
+            </div>
+
+            <div>
+              <Geocoding />
             </div>
             
 
