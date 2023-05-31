@@ -82,12 +82,24 @@ const TripFormModal = (props) => {
       Array.from(images).forEach(image => formData.append("images", image));
       fileRef.current.value = null;
       
-      let collaboratorIds = []
+      let arr = []
+
+      if (currentTrip) {
+        let collabs = currentTrip.collaborators
+        for (let i=0; i<collabs.length; i++){ 
+          arr = arr.concat(collabs[i]._id)
+        }
+      }
+
+      let collaboratorIds = arr
       allUsers.forEach(user => {
         if (collaborators.includes(user.email)) {
           collaboratorIds.push(user._id)
         }
       })
+      formData.append('collaborators', JSON.stringify(collaboratorIds))
+
+
       formData.append('title', title);
       formData.append('description', description);
       formData.append('startDate', startDate);
@@ -95,7 +107,6 @@ const TripFormModal = (props) => {
       
       let eventsArr = Object.keys(events)
       formData.append('events', JSON.stringify(eventsArr))
-      formData.append('collaborators', JSON.stringify(collaboratorIds))
       
         
         if (!currentTrip){ 
