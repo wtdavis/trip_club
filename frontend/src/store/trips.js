@@ -111,11 +111,11 @@ export const addCollaborator = (trip, collaborator) => async (dispatch) => {
    })
 
    trip.collaborators = collabs 
-   debugger
+  //  debugger
 
    let data = new FormData()
    let keys = Object.keys(trip)
-   debugger
+  //  debugger
    for (let i=0;i<keys.length;i++){
      if (trip[keys[i]] instanceof(Array)) {
        data.append(`${keys[i]}`, JSON.stringify(trip[keys[i]]))
@@ -124,9 +124,10 @@ export const addCollaborator = (trip, collaborator) => async (dispatch) => {
       }
     }
     dispatch(updateTrip(data))
-    .then(res => {return res})
-    debugger
-  // }, console.log("oops"))
+    .then(res => { 
+      debugger
+      dispatch(setCurrentTrip(res))
+    })
 }
 
 export const removeCollaborator = (trip, collaborator) => async (dispatch) => {

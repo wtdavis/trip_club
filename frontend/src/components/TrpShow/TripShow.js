@@ -39,6 +39,9 @@ const getStorageTrip = () => {
  return ( localStorage.getItem("currentTrip"))
 }
 
+
+
+
   useEffect(()=>{
     let storageTrip
     if (props?.location.trip === undefined && !currentTrip) {
@@ -51,6 +54,7 @@ const getStorageTrip = () => {
       setStorageTrip(JSON.stringify(storageTrip))
       dispatch(tripActions.setCurrentTrip(storageTrip))
     } else {
+      debugger
      storageTrip = currentTrip
       setTrip(storageTrip);
       setStorageTrip(JSON.stringify(storageTrip))
@@ -116,6 +120,10 @@ const getStorageTrip = () => {
       if (allUsers[users[i]._id].email === collab){
         // debugger
         dispatch(tripActions.addCollaborator(currentTrip, users[i]._id))
+        .then(res => {
+          debugger
+          dispatch(tripActions.setCurrentTrip(res))})
+
       }
     }
   }

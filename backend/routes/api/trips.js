@@ -145,9 +145,10 @@ router.patch('/:id', multipleMulterUpload("images"), requireUser, async (req, re
         throw new Error('Current user is not the trip author')
     } else {
             const updatedTrip = await Trip.findOneAndUpdate({_id: trip._id},
-                 {...tripData, imageUrls: trip.imageUrls.concat(imageUrls)}, 
-                //  {collaborators: trip.collaborators.concat(JSON.parse(req.bodycollaborators))},
-                    {new: true})
+                {...tripData, imageUrls: trip.imageUrls.concat(imageUrls),
+                collaborators: JSON.parse(req.body.collaborators)},
+                {new: true})
+                .populate('collaborators', '_id username email')    
                    
             return res.json(updatedTrip)
             // updatedTrip = await Trip.updateOne({_id: trip._id}, {...tripData, events: req.body.events, collaborators: req.body.collaborators, imageUrls: imageUrls})
