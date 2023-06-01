@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import './GoogleMap.css';
+import './Geocoding.css';
 
 const Geocoding = () => {
+  //
   const [geocodeData, setGeocodeData] = useState(null);
+  const [address, setAddress] = useState('1600 Amphitheatre Parkway, Mountain View, CA');
 
+  
   useEffect(() => {
     const fetchData = async() => {
       try{
         // let address = '22 Main st Boston MA';
-        let address = 'Boston MA';
         // let address = '1600 Amphitheatre Parkway, Mountain View, CA'
-        // debugger
         const apiKey = process.env.REACT_APP_MAPS_API_KEY; 
-
+        // setAddress('Boston MA');
+        // debugger
+        
         let url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`;
         const response = await fetch(url);
-
+        console.log(address)
         if (response.ok) {
+          // debugger
           const data = await response.json();
           setGeocodeData(data);
         } else {
@@ -43,6 +47,13 @@ const Geocoding = () => {
 
     return (
       <div>
+        <input
+          className="trip_address_input"
+          type='text'
+          value={address}
+          // onChange={e => {setAddress(e.target.value)}}
+          placeholder="Address"
+        />
         <p>Latitude: {lat}, Longitude: {lng}</p>
       </div>
     )}

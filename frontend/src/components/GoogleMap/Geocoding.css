@@ -1,0 +1,41 @@
+:root {
+  --dark-red: #4d1207;
+  --darker-blue: #12033c;  
+  --neutral: rgb(172, 172, 172);
+  --light-blue: #60a0ba;
+  --dark-blue: #8ab3e8;
+  --logo-blue: rgb(169, 188, 212);
+  --yellow: rgb(247, 202, 24);
+  --grey-color: #9da09d;
+  --red-brand-color: #F95E5C; 
+  --dark-black-color: #383838;
+
+  --orange-brand: #FFB067;
+  --yellow-brand: #FFED86;
+  --blue-brand: #A2DCE7;
+  --pink-brand: #F8CCDC;
+
+  --blue-sands-brand: #29B3FF;
+  --lightblue-sands-brand: #81EAFF;
+  --darkyellow-sands-brand: #FBC00E;
+  --yellow-sands-brand: #FFD774;
+
+  --grey-color: #9da09d;
+  --red-brand-color: #F95E5C;  
+  --font-size: 18px;
+  --dark-black-color: #383838; 
+}
+
+.trip_address_input {
+  border-bottom: none;
+  width: 100%;
+  height: 48px;
+  padding-left: 10px;
+  border: 1px solid var(--grey-color);
+  font-weight: 400;
+  font-size: var(--font-size);
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
