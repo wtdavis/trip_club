@@ -55,7 +55,7 @@ if (trips && currentUser) {
             <h1 className='header_message_h2'> Your Trips</h1>
           </div>
           
-          {tripsUser ? tripsUser.map(trip => (
+          {tripsUser ? Object.values(tripsUser).map(trip => (
             <>
               <TripItemCarousel 
               key={trip?._id}
