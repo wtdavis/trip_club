@@ -32,7 +32,7 @@ const ProfilePage = () => {
   
   useEffect(() => {
     dispatch(tripActions.fetchUserTrips(currentUser?._id));
-    debugger
+    // debugger
     return () => dispatch(tripActions.clearTripErrors());
   }, [currentUser, dispatch]);
   
