@@ -7,6 +7,7 @@ import * as userActions from '../../store/users'
 import './TripForm.css'
 import { updateTrip } from "../../store/trips"
 import * as eventActions from "../../store/events"
+import Geocoding from "../GoogleMap/Geocoding"
 
 
 const TripFormModal = (props) => {
@@ -36,6 +37,10 @@ const TripFormModal = (props) => {
     const [modalTitle, setModalTitle] = useState("Create a New Trip")
     const [images, setImages] = useState([]);
     const [imageUrls, setImageUrls] = useState([]);
+
+    // set location to App Academy office by default
+    const [lat, setLat] = useState(currentTrip ? currentTrip.lat : 40.73631643149453);
+    const [lng, setLng] = useState(currentTrip ? currentTrip.lng : -73.99376925185645);
     const fileRef = useRef(null);
   
     useEffect(() => {
@@ -48,6 +53,15 @@ const TripFormModal = (props) => {
         // setCollaborators([])
     }, [])
   //  console.log(events)
+
+  // function handleCoordinates handles coordinates update when passed to Geocoding
+    const handleCoordinates = (lat, lng) => {
+      setLat(lat);
+      setLng(lng);
+      console.log('Message from TripFormModal')
+      console.log(lat);
+      console.log(lng);
+    }
 
     let collaboratorIds = []
 
@@ -112,6 +126,9 @@ const TripFormModal = (props) => {
       formData.append('description', description);
       formData.append('startDate', startDate);
       formData.append('endDate', endDate);
+
+      formData.append('lat', lat);
+      formData.append('lng', lng);
       
       // let eventsArr = Object.keys(events)
       // formData.append('events', JSON.stringify(eventsArr))
@@ -286,6 +303,15 @@ const TripFormModal = (props) => {
                   onChange={handleFiles} 
                 />              
             </div>
+
+            <div>
+              <Geocoding coordinatesUpdate={handleCoordinates}/>
+            </div>
+            {submitErrors && 
+            <p className="submiterror">{tripErrors.lat}</p>}
+
+            {submitErrors && 
+            <p className="submiterror">{tripErrors.lng}</p>}
             
 
             <div className="createtrip friends_container">

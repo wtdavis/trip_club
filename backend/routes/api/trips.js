@@ -54,6 +54,8 @@ router.post('/', multipleMulterUpload("images"), requireUser, validateTripInput,
             description: req.body.description,
             startDate: new Date(req.body.startDate),
             endDate: new Date(req.body.endDate),
+            lat: req.body.lat,
+            lng: req.body.lng,
             imageUrls,
             // events: JSON.parse(req.body.events),
             collaborators: JSON.parse(req.body.collaborators)
@@ -135,6 +137,8 @@ router.patch('/:id', multipleMulterUpload("images"), requireUser, async (req, re
                     description: req.body.description,
                     startDate: new Date(req.body.startDate),
                     endDate: new Date(req.body.endDate),
+                    lat: req.body.lat,
+                    lng: req.body.lng,
                     events: JSON.parse(req.body.events),
                     imageUrls,
                     collaborators: JSON.parse(req.body.collaborators)

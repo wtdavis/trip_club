@@ -23,6 +23,14 @@ const validateTripInput = [
     .exists({checkFalsy: true})
     .withMessage('Trip must have an End Date'),
 
+    check('lat')
+    .exists({checkFalsy: true})
+    .withMessage('Trip must have an location'),
+
+    check('lng')
+    .exists({checkFalsy: true})
+    .withMessage('Trip must have an location'),
+
     handleValidationErrors
 ]
 

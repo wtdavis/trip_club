@@ -27,10 +27,12 @@ const tripSchema = new Schema({
     collaborators: [{type: Schema.Types.ObjectId,
                     ref: 'User'}],
     lat: {
-        type: Number,
+        type: Number
+        // default: 40.73631643149453
     },
     lng: {
         type: Number
+        // default: -73.99376925185645
     },
     imageUrls: {
         type: [String],

@@ -80,9 +80,6 @@ const manageCurrentTrip = (props) => {
 
   const eventseventsevents = [new Date(2023, 3, 30), {id: "50505", startTime: new Date(2023, 3, 20)}, new Date(2023, 3, 18), new Date(2023, 3, 25)]
 
-  let lng = -73.99376925185645;
-  let lat = 40.73631643149453;
-
   const startDateString = new Date(trip.startDate).toDateString()
   const endDateString = new Date(trip.endDate).toDateString()
 
@@ -126,6 +123,7 @@ const manageCurrentTrip = (props) => {
       if (allUsers[users[i]._id].email === collab){
         dispatch(tripActions.addCollaborator(currentTrip, users[i]._id))
         .then(res => {
+
           dispatch(tripActions.setCurrentTrip(res))})
 
       }
@@ -204,13 +202,13 @@ const collaboratorsList = () => {
                 return (              
                   <li className="trip_show_images_li"><img className="trip_show_images" src={photo} alt=""/></li>
                 )
-              })}
+              })}              
             </ul>
-          
-            <div className="tripshowpanelbuttons">
-          {/* <button className='tripshowpanelbutton' onClick={() => {setShowEditTripModal(true)}}>Edit Trip</button> */}
-          {/* <button className='tripshowpanelbutton' id="tripshowpaneldeletebutton" onClick={(e) => handleDeleteTrip(e)}>Delete Trip</button> */}
+
+            <div className='google_map_container'>
+              <GoogleMap lat={currentTrip.lat} lng={currentTrip.lng}/>
             </div>
+          
             <EventForm  id="eventform" currentTrip={currentTrip} trip={trip}/>
           </div>
         </div>
