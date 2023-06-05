@@ -1,4 +1,5 @@
 import jwtFetch from "./jwt"
+import { setCurrentTrip, updateTrip } from "./trips"
 
 
 const RECEIVE_EVENTS = 'events/receiveEvents'
@@ -54,6 +55,20 @@ export const updateEvent = (event) => {
     }
 
 
+    const formDatify = (trip) => {
+        let data = new FormData()
+        let keys = Object.keys(trip)
+        for (let i=0;i<keys.length;i++){
+            if (trip[keys[i]] instanceof(Array)) {
+                data.append(keys[i], JSON.stringify(trip[keys[i]]))
+            } else {
+                data.append(keys[i], trip[keys[i]])
+            }
+        }
+        return data
+      }
+
+
 export const updateTripEvent = (event) => async (dispatch) => {
     // debugger
     try {
@@ -62,22 +77,28 @@ export const updateTripEvent = (event) => async (dispatch) => {
             body: JSON.stringify(event)
         } )
         let data = await res.json()
+        debugger
         dispatch(receiveEvent(event))
     } catch (err) {
         return err
     }
 }
 
-export const createTripEvent = ({tripId, event}) => async (dispatch) => {
+export const createTripEvent = ({trip, event}) => async (dispatch) => {
     try{
-        let res = await jwtFetch (`/api/trips/${tripId}/events`, {
+        let res = await jwtFetch (`/api/trips/${trip._id}/events`, {
             method: 'POST',
             body: JSON.stringify(event)
         })
         let data = await res.json()
         dispatch(receiveEvent(data))
+        let newTrip = {...trip, events: trip.events.concat(data._id)}
+        dispatch(updateTrip(formDatify(newTrip)))
+        .then(res => {
+            setCurrentTrip(res)
+        })
         return(data)
-    }catch (err) {
+    } catch (err) {
         const resBody = await err.json();
         if (resBody.statusCode === 400) {
         dispatch(receiveEventErrors(resBody.errors));
@@ -104,12 +125,18 @@ export const fetchEvents = () => async dispatch => {
     dispatch(receiveEvents(data))
 }
 
-export const deleteEvent = (eventId) => async dispatch => {
+export const deleteEvent = ({trip, eventId}) => async dispatch => {
     let res = await jwtFetch(`/api/events/${eventId}`, {
         method: 'DELETE'
-    });
+    }); 
     let data = await res.json();
-    dispatch(removeEvent(eventId))
+    // dispatch(removeEvent(eventId))
+    trip.events.splice(trip.events.indexOf(eventId), 1)
+    let newTrip = {...trip, events: trip.events}
+    // debugger
+    dispatch(updateTrip(formDatify(newTrip)))
+    .then(res => {
+    })
 }
 
 const nullErrors = null;
@@ -125,7 +152,6 @@ export const eventsErrorsReducer = (state = nullErrors, action) => {
       return state;
   }
 };
-
 
 
 const initialState = {}

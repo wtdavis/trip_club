@@ -35,11 +35,17 @@ router.patch('/:id/edit', requireUser, async (req, res, next) => {
                     attendees: req.body.attendees,
                     title: req.body.title}
     try {
-        event = await Event.findById(req.params.id)
+        if (!req.user._id === req.body.author) {
+            throw new Error("Current user is not event's author")
+        } else {
+                event = await Event.findOneAndUpdate({_id: req.params.id}, {...event, ...eventData}, {new:true  })
+                return res.json(event)
+        }
+        // event = await Event.findById(req.params.id)
                                 // .populate('title')
     }
     catch(err) {
-        const error = new Error('Event not found');
+        const error = new Error(err);
         error.statusCode = 404;
         error.errors = { message: "No event found with that id" };
         return next(error);
@@ -67,7 +73,7 @@ router.delete('/:id', requireUser, async (req, res, next) => {
         return next(error);    
     }
 
-    if (!req.user._id === event.author._id) {
+    if (!req.user._id === event?.author._id) {
         throw new Error('Current user is not the event author')
     } else {
         await Event.deleteOne({_id: req.params.id})   

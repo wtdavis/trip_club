@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import Calendar from "react-calendar";
 import { createTripEvent, updateEvent, updateTripEvent } from "../../store/events";
 import "./EventForm.css"
+import { fetchTrip, setCurrentTrip } from "../../store/trips";
 
 function EventForm (props) {
     const {setShowEventEditModal, event} = props
@@ -13,11 +14,11 @@ function EventForm (props) {
     const [description, setDescription] = useState(event ? event.description : "")
     const [startTime, setStartTime] = useState(event ? event.startTime : null)
     const [endTime, setEndTime] = useState(event ? event.endTime : null)
-
     const [eventFormTitle, setEventFormTitle] = useState(event ? "Edit Event" : "Create a New Event!")
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        debugger            
+
         const formData = {
             author: currentUser._id,
             title: title,
@@ -30,11 +31,25 @@ function EventForm (props) {
         if (event){
             let data = {...event, ...formData}
             dispatch(updateTripEvent(data))
+            .then(res => dispatch(fetchTrip(currentTrip._id)))
+            .then(res => dispatch(setCurrentTrip(res)))
             setShowEventEditModal(false)
         } else {
-            dispatch(createTripEvent({tripId: currentTrip._id, event: formData}))
+            dispatch(createTripEvent({trip: currentTrip, event: formData}))
+            .then(res => {
+                // debugger
+            })
+            // dispatch(fetchTrip(currentTrip._id))
+            // .then(res => {
+            //     setCurrentTrip(res)
+            //     debugger
+            // })
+            
         }
+
     }
+
+
 return(
     <div className="eventformdiv">
         {props?.event &&  
