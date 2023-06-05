@@ -13,8 +13,9 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user);
   // const trips = useSelector(tripActions.getTrips); 
-  const trips = useSelector(state => Object.values(state.trips.all))
-  const tripsUser = trips.filter(trip => trip.author?._id == currentUser?._id);
+  const trips = useSelector(state => Object.values(state.trips.user))
+  // const tripsUser = trips.filter(trip => trip.author?._id == currentUser?._id);
+  const tripsUser = useSelector(state => state.trips.user)
   const events = useSelector(state => state.events)
   
   
@@ -23,7 +24,7 @@ const ProfilePage = () => {
     dispatch(clearEvents())
     dispatch(tripActions.clearCurrentTrip())
     // dispatch(tripActions.clearTrips)
-    dispatch(tripActions.fetchTrips());
+    // dispatch(tripActions.fetchTrips());
     dispatch(fetchEvents())
     dispatch(fetchAllUsers())
 
@@ -31,6 +32,7 @@ const ProfilePage = () => {
   
   useEffect(() => {
     dispatch(tripActions.fetchUserTrips(currentUser?._id));
+    debugger
     return () => dispatch(tripActions.clearTripErrors());
   }, [currentUser, dispatch]);
   

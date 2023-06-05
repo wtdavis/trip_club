@@ -13,8 +13,9 @@ const validateEventInput = require('../../validation/events')
 router.get('/', async (req, res) => {
     try {
         const trips = await Trip.find()
-                                .populate('author','_id username')
-                                .populate('collaborators', '_id username email') 
+                                .populate('author','_id username email')
+                                .populate('collaborators', '_id username email')
+                                .populate('events')
                                 .sort({ createdAt: -1 });
         return res.json(trips);
     }
@@ -27,8 +28,9 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res, next) => {
     try {
         const trip = await Trip.findById(req.params.id)
-                                        .populate('author', '_id username')
-                                        .populate('collaborators', 'username')
+                                        .populate('author', '_id username email')
+                                        .populate('collaborators', '_id username email')
+                                        .populate('events', '_id title description startTime endTime trip')
 
                                         // this populate doesn't work --> .populate('events', 'author trip lat lng startTime endTime descriptioin title')
 
@@ -55,7 +57,7 @@ router.post('/', multipleMulterUpload("images"), requireUser, validateTripInput,
             lat: req.body.lat,
             lng: req.body.lng,
             imageUrls,
-            events: JSON.parse(req.body.events),
+            // events: JSON.parse(req.body.events),
             collaborators: JSON.parse(req.body.collaborators)
         });
         let trip = await newTrip.save()
@@ -83,8 +85,9 @@ router.get('/author/:userId', async (req, res, next) => {
     try {
       const trips = await Trip.find({ author: user._id })
                                 .sort({ createdAt: -1 })
-                                // .populate("author", "_id username", "title", "description", "startDate", "endDate");
-                                .populate("author", "_id username");
+                                .populate("author", "_id username email")
+                                .populate('collaborators', '_id username email')
+                                .populate('events', '_id startTime endTime trip title description');
       return res.json(trips);
     }
     catch(err) {
@@ -105,10 +108,19 @@ router.get('/user/:userId', async (req, res, next) => {
         return next(error);
     }
     try {
+        
         const trips = await Trip.find({collaborators: user._id})
+                                // .concat(await Trip.find({author: user._id}))
                                 .sort({ startDate: -1 })
-                                .populate('title');
-        return res.json(trips);
+                                .populate('events', '_id title description startTime endTime')
+                                .populate('collaborators', '_id username email');
+
+        const myTrips = await Trip.find({author: user._id})
+                                // .sort({startDate: -1})
+                                .populate('events', '_id title description startTime endTime')
+                                .populate('collaborators', '_id username email');
+        const data = trips.concat(myTrips)
+        return res.json(data);
     }
     catch(err) {
         return res.json([]);
@@ -150,9 +162,10 @@ router.patch('/:id', multipleMulterUpload("images"), requireUser, async (req, re
     } else {
             const updatedTrip = await Trip.findOneAndUpdate({_id: trip._id},
                 {...tripData, imageUrls: trip.imageUrls.concat(imageUrls),
-                collaborators: JSON.parse(req.body.collaborators)},
+                collaborators: JSON.parse(req.body.collaborators), events: JSON.parse(req.body.events)},
                 {new: true})
-                .populate('collaborators', '_id username email')    
+                .populate('collaborators', '_id username email')
+                .populate('events', '_id title description startTime endTime trip')
                    
             return res.json(updatedTrip)
             // updatedTrip = await Trip.updateOne({_id: trip._id}, {...tripData, events: req.body.events, collaborators: req.body.collaborators, imageUrls: imageUrls})
@@ -177,7 +190,7 @@ router.delete('/:id', requireUser, async (req, res, next) => {
         return next(error);    
     }
     // debugger
-    if (!req.user._id === trip.author._id) {
+    if (!req.user._id === trip?.author._id) {
         throw new Error('Current user is not the trip author')
     } else {
         await Trip.deleteOne({_id: req.params.id})   

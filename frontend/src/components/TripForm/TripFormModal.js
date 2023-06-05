@@ -99,6 +99,7 @@ const TripFormModal = (props) => {
       let arr = []
 
       if (currentTrip) {
+       
         let collabs = currentTrip.collaborators
         for (let i=0; i<collabs.length; i++){ 
           arr = arr.concat(collabs[i]._id)
@@ -113,7 +114,14 @@ const TripFormModal = (props) => {
       })
       formData.append('collaborators', JSON.stringify(collaboratorIds))
 
-
+      let events = [];
+      if (currentTrip?.events) {
+        let currentEvents = currentTrip.events;
+        for (let i=0;i<currentEvents.length;i++) {
+          events = events.concat(currentEvents[i]._id)
+        }
+      }
+      formData.append('events', JSON.stringify(events))
       formData.append('title', title);
       formData.append('description', description);
       formData.append('startDate', startDate);
@@ -122,8 +130,8 @@ const TripFormModal = (props) => {
       formData.append('lat', lat);
       formData.append('lng', lng);
       
-      let eventsArr = Object.keys(events)
-      formData.append('events', JSON.stringify(eventsArr))
+      // let eventsArr = Object.keys(events)
+      // formData.append('events', JSON.stringify(eventsArr))
       
         
         if (!currentTrip){ 
@@ -131,7 +139,6 @@ const TripFormModal = (props) => {
           .then( (res) => { 
             if (res) {
               setNewTrip(res)
-              // debugger 
               dispatch(setCurrentTrip(res))
               setRedirect(true)
               setImages([]);
@@ -142,25 +149,19 @@ const TripFormModal = (props) => {
           } else {
             let errors = tripErrors
 
-            // debugger
             setSubmitErrors(true)
           }}
         )
         } else if (currentTrip) {
           // let data = {...currentTrip, ...formData}
-          // debugger
           let keys = Object.keys(currentTrip)
           for (let i = 0; i < keys.length; i++) {
             if (!(formData.has(keys[i]))) {
               formData.append(`${keys[i]}`, currentTrip[keys[i]])
             } 
-            // else {
-            //   formData.append(`${keys[i]}`, currentTrip[keys[i]])
-            // }
           }
           dispatch(updateTrip(formData))
           .then ( (res) => { 
-            debugger
             dispatch(setCurrentTrip(res))
             setNewTrip(res)
             setShowCreateTripModal(false)

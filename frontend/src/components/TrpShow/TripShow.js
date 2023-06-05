@@ -20,7 +20,7 @@ const TripShow = (props) => {
   const allUsers = useSelector(state => state.users)
   const dispatch = useDispatch()
   const currentTrip = useSelector(state => state.trips.current)
-  const tripEvents = useSelector(state => state.events)
+  const tripEvents = useSelector(state => state.trips.current?.events)
   const [trip, setTrip] = useState(false)
   const [dateList, setDateList] = useState([])
   const [eventList, setEventList] = useState([])
@@ -39,33 +39,40 @@ const getStorageTrip = () => {
  return ( localStorage.getItem("currentTrip"))
 }
 
+const manageCurrentTrip = (props) => {
+  let storageTrip = props || JSON.parse(getStorageTrip())
 
-
+  setStorageTrip(JSON.stringify(storageTrip))
+  setTrip(storageTrip)
+  dispatch(tripActions.setCurrentTrip(storageTrip))
+}
 
   useEffect(()=>{
     let storageTrip
     if (props?.location.trip === undefined && !currentTrip) {
-      storageTrip = JSON.parse(getStorageTrip())
-      setTrip(storageTrip)
-      dispatch(tripActions.setCurrentTrip(storageTrip))
+      manageCurrentTrip()
+      // storageTrip = JSON.parse(getStorageTrip())
+      // setTrip(storageTrip)
+      // dispatch(tripActions.setCurrentTrip(storageTrip))
     } else if (props?.location.trip !== undefined && !currentTrip) {
       storageTrip = props.location.trip
-      setTrip(storageTrip)
-      setStorageTrip(JSON.stringify(storageTrip))
-      dispatch(tripActions.setCurrentTrip(storageTrip))
+      manageCurrentTrip(storageTrip)
+      // setTrip(storageTrip)
+      // setStorageTrip(JSON.stringify(storageTrip))
+      // dispatch(tripActions.setCurrentTrip(storageTrip))
     } else {
-      debugger
      storageTrip = currentTrip
-      setTrip(storageTrip);
-      setStorageTrip(JSON.stringify(storageTrip))
-      dispatch(tripActions.setCurrentTrip(storageTrip))
+     manageCurrentTrip(storageTrip)
+
+      // setTrip(storageTrip);
+      // setStorageTrip(JSON.stringify(storageTrip))
+      // dispatch(tripActions.setCurrentTrip(storageTrip))
     };
     dispatch(eventActions.clearEvents())
     dispatch(eventActions.fetchTripEvents(trip._id))
     dispatch(fetchAllUsers())
   }, [dispatch, currentTrip]
   )
-  // debugger
 
   const users = useSelector(state => state.users);
   const currentUser = useSelector(state => state.session.user);
@@ -110,15 +117,13 @@ const getStorageTrip = () => {
 
 
   const handleCollabSubmit = (e) => {
+
     let users = Object.values(allUsers)
-    // debugger
     for (let i=0; i<users.length;i++) {
-      // debugger
       if (allUsers[users[i]._id].email === collab){
-        // debugger
         dispatch(tripActions.addCollaborator(currentTrip, users[i]._id))
         .then(res => {
-          // debugger
+
           dispatch(tripActions.setCurrentTrip(res))})
 
       }
@@ -153,7 +158,9 @@ const collaboratorsList = () => {
   if (currentTrip && dateList.length){
     allEvents = Object.values(tripEvents).filter(ele => ele.trip === currentTrip._id)
     allEvents = [...allEvents, ...dateList]
+    debugger
     events = allEvents.sort(compareDates)}
+    
     const handleDeleteTrip = (e) => {
       e.preventDefault();
       dispatch(tripActions.deleteTrip(currentTrip))

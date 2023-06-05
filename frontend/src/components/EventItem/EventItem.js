@@ -2,17 +2,27 @@ import { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import EventForm from '../EventForm/EventForm';
 import GoogleMap from '../GoogleMap'
+import { deleteEvent } from '../../store/events';
+import { useDispatch } from 'react-redux';
 
 function EventItem (props)  {
+  const dispatch = useDispatch()
   const event = props.event
   const currentTrip = props.currentTrip
   // debugger
   const [showEventEditModal, setShowEventEditModal] = useState(false)
   let lng = -73.99376925185645;
   let lat = 40.73631643149453;
-    
+
   let startTime = new Date(props.event.startTime).toDateString()
   let endTime = new Date(props.event.endTime).toDateString()
+
+  const handleDelete = () => {
+    // debugger
+    dispatch(deleteEvent({trip: currentTrip, eventId: event._id}))
+  }
+
+
     if (props.event instanceof Date){
     return (
         <div className="dateseperator">
@@ -27,7 +37,7 @@ function EventItem (props)  {
               <button className='Edit_Event_Link' onClick={e => {setShowEventEditModal(true)}}>
                 <i data-title="Edit Event" className="fa-solid fa-pencil fa-1x"></i>
               </button>
-              <button onClick={e => {setShowEventEditModal(true)}}>
+              <button onClick={e => handleDelete()}>
                 <i data-title="Delete Event" className="fa-solid fa-trash-can fa-1x"></i>
               </button>
             </div>

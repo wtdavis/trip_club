@@ -33,6 +33,7 @@ const receiveNewTrip = trip => ({
 });
 
 export const setCurrentTrip = trip => {
+  debugger
   return {
     type: SET_CURRENT_TRIP,
     trip
@@ -67,9 +68,19 @@ export const getTrips = state => {
   return state?.trips.all ? Object.values(state.trips.all) : [];
 };
 
-// export const getUserTrips = userId => state => {
-//   return state?.trips ? state.trips[userId] : null;
-// }
+
+const formDatify = (trip) => {
+  let data = new FormData()
+  let keys = Object.keys(trip)
+  for (let i=0;i<keys.length;i++){
+      if (trip[keys[i]] instanceof(Array)) {
+          data.append(keys[i], JSON.stringify(trip[keys[i]]))
+      } else {
+          data.append(keys[i], trip[keys[i]])
+      }
+  }
+  return data
+}
 
 export const fetchTrips = () => async dispatch => {
   try {
@@ -89,6 +100,7 @@ export const fetchTrip = id => async dispatch => {
     const res = await jwtFetch (`/api/trips/${id}`);
     const trip = await res.json();
     dispatch(receiveTrip(trip));
+    return trip
   } catch (err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
@@ -99,7 +111,9 @@ export const fetchTrip = id => async dispatch => {
 
 
 export const addCollaborator = (trip, collaborator) => async (dispatch) => {
+
     trip.collaborators = trip.collaborators.concat(collaborator)
+  
     let collabs = []
     trip.collaborators.forEach(collaborator => {
     if (collaborator instanceof(Object)) {
@@ -107,25 +121,13 @@ export const addCollaborator = (trip, collaborator) => async (dispatch) => {
     } else {
       collabs = collabs.concat(collaborator)
     }
-
    })
 
    trip.collaborators = collabs 
-  //  debugger
-
-   let data = new FormData()
-   let keys = Object.keys(trip)
-  //  debugger
-   for (let i=0;i<keys.length;i++){
-     if (trip[keys[i]] instanceof(Array)) {
-       data.append(`${keys[i]}`, JSON.stringify(trip[keys[i]]))
-      } else { 
-        data.append(`${keys[i]}`, trip[keys[i]])
-      }
-    }
+    let data = formDatify(trip)
     dispatch(updateTrip(data))
     .then(res => { 
-      // debugger
+
       dispatch(setCurrentTrip(res))
     })
 }
@@ -138,7 +140,7 @@ export const removeCollaborator = (trip, collaborator) => async (dispatch) => {
 }
 
 export const updateTrip = (formData) => async (dispatch) => {
-// debugger
+
   let tripId = formData.get('_id')
  
   try {
@@ -147,9 +149,10 @@ export const updateTrip = (formData) => async (dispatch) => {
       body: formData
     })
     const updatedTrip = await res.json()
-    // debugger
+    debugger
     dispatch(receiveTrip(updatedTrip))
-    return updatedTrip
+    dispatch(setCurrentTrip(updatedTrip))
+    return await updatedTrip
   } catch(err) {
     const resBody = await err.json();
     if (resBody.statusCode === 400) {
@@ -162,6 +165,7 @@ export const fetchUserTrips = id => async dispatch => {
   try {
     const res = await jwtFetch(`/api/trips/user/${id}`);
     const trips = await res.json();
+    debugger
     dispatch(receiveUserTrips(trips));
   } catch(err) {
     const resBody = await err.json();
@@ -222,6 +226,7 @@ const tripsReducer = (state = { all: {}, user: {}, new: undefined, current: null
     case RECEIVE_TRIPS:
       return { ...state, all: action.trips, new: undefined};
     case RECEIVE_USER_TRIPS:
+      debugger
       return { ...state, user: action.trips, new: undefined};
     case RECEIVE_NEW_TRIP:
       return { ...state, new: action.trip};
