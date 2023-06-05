@@ -125,7 +125,7 @@ export const addCollaborator = (trip, collaborator) => async (dispatch) => {
     }
     dispatch(updateTrip(data))
     .then(res => { 
-      debugger
+      // debugger
       dispatch(setCurrentTrip(res))
     })
 }
@@ -138,7 +138,7 @@ export const removeCollaborator = (trip, collaborator) => async (dispatch) => {
 }
 
 export const updateTrip = (formData) => async (dispatch) => {
-debugger
+// debugger
   let tripId = formData.get('_id')
  
   try {
@@ -180,7 +180,7 @@ export const deleteTrip = data => async dispatch => {
 }
 
 export const composeTrips = (formData) => async dispatch => {
-  debugger
+  // debugger
 
   let trip;
   try {

@@ -54,7 +54,7 @@ const getStorageTrip = () => {
       setStorageTrip(JSON.stringify(storageTrip))
       dispatch(tripActions.setCurrentTrip(storageTrip))
     } else {
-      debugger
+      // debugger
      storageTrip = currentTrip
       setTrip(storageTrip);
       setStorageTrip(JSON.stringify(storageTrip))
@@ -121,7 +121,7 @@ const getStorageTrip = () => {
         // debugger
         dispatch(tripActions.addCollaborator(currentTrip, users[i]._id))
         .then(res => {
-          debugger
+          // debugger
           dispatch(tripActions.setCurrentTrip(res))})
 
       }
