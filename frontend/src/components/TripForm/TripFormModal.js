@@ -41,7 +41,7 @@ const TripFormModal = (props) => {
     // set location to App Academy office by default
     const [lat, setLat] = useState(currentTrip ? currentTrip.lat : 40.73631643149453);
     const [lng, setLng] = useState(currentTrip ? currentTrip.lng : -73.99376925185645);
-    debugger
+    // debugger
     const fileRef = useRef(null);
   
     useEffect(() => {
