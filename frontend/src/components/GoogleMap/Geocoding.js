@@ -4,7 +4,7 @@ import './Geocoding.css';
 const Geocoding = ({ coordinatesUpdate }) => {
   //
   const [geocodeData, setGeocodeData] = useState(null);
-  const [address, setAddress] = useState('1600 Amphitheatre Parkway, Mountain View, CA');
+  const [address, setAddress] = useState('90 5th Ave, New York, NY 10011');
   const [updatedAddress, setUpdatedAddress] = useState('');
 
   const apiKey = process.env.REACT_APP_MAPS_API_KEY; 
@@ -38,7 +38,8 @@ const Geocoding = ({ coordinatesUpdate }) => {
     // }
   }, [address]);
 
-  const handleUpdatedAddress = () => {
+  const handleUpdatedAddress = async (e) => {
+    e.preventDefault()
     setAddress(updatedAddress)
   }
 
