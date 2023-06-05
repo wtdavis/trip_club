@@ -29,6 +29,8 @@ const TripShow = (props) => {
   const [showCollab, setShowCollab] = useState(false)
   const collaborators = useSelector(state => state.trips.current?.collaborators)
 
+  const [mapKey, setMapKey] = useState(0);
+
 // debugger
 
 const setStorageTrip = (trip) => {
@@ -73,6 +75,10 @@ const manageCurrentTrip = (props) => {
     dispatch(fetchAllUsers())
   }, [dispatch, currentTrip]
   )
+
+  useEffect(() => {
+    setMapKey(mapKey + 1);
+  }, [currentTrip.lat, currentTrip.lng]);
 
   const users = useSelector(state => state.users);
   const currentUser = useSelector(state => state.session.user);
@@ -158,7 +164,7 @@ const collaboratorsList = () => {
   if (currentTrip && dateList.length){
     allEvents = Object.values(tripEvents).filter(ele => ele.trip === currentTrip._id)
     allEvents = [...allEvents, ...dateList]
-    debugger
+    // debugger
     events = allEvents.sort(compareDates)}
     
     const handleDeleteTrip = (e) => {
@@ -206,7 +212,7 @@ const collaboratorsList = () => {
             </ul>
 
             <div className='google_map_container'>
-              <GoogleMap lat={currentTrip.lat} lng={currentTrip.lng}/>
+              <GoogleMap key={mapKey} lat={currentTrip.lat} lng={currentTrip.lng}/>
             </div>
           
             <EventForm  id="eventform" currentTrip={currentTrip} trip={trip}/>
