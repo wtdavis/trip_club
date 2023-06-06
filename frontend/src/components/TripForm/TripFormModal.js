@@ -41,6 +41,7 @@ const TripFormModal = (props) => {
     // set location to App Academy office by default
     const [lat, setLat] = useState(currentTrip ? currentTrip.lat : 40.73631643149453);
     const [lng, setLng] = useState(currentTrip ? currentTrip.lng : -73.99376925185645);
+    const [address, setAddress] = useState(currentTrip ? currentTrip.address : '90 5th Ave, New York, NY 10011');
     // debugger
     const fileRef = useRef(null);
   
@@ -55,13 +56,15 @@ const TripFormModal = (props) => {
     }, [])
   //  console.log(events)
 
-  // function handleCoordinates handles coordinates update when passed to Geocoding
-    const handleCoordinates = (lat, lng) => {
+  // function handleLocation handles coordinates update when passed to Geocoding
+    const handleLocation = (lat, lng, address) => {
       setLat(lat);
       setLng(lng);
+      setAddress(address);
       console.log('Message from TripFormModal')
       console.log(lat);
       console.log(lng);
+      console.log(address);
     }
 
     let collaboratorIds = []
@@ -130,6 +133,7 @@ const TripFormModal = (props) => {
 
       formData.append('lat', lat);
       formData.append('lng', lng);
+      formData.append('address', address);
       
       // let eventsArr = Object.keys(events)
       // formData.append('events', JSON.stringify(eventsArr))
@@ -306,13 +310,16 @@ const TripFormModal = (props) => {
             </div>
 
             <div>
-              <Geocoding coordinatesUpdate={handleCoordinates}/>
+              <Geocoding currentTrip={currentTrip} locationUpdate={handleLocation}/>
             </div>
             {submitErrors && 
             <p className="submiterror">{tripErrors.lat}</p>}
 
             {submitErrors && 
             <p className="submiterror">{tripErrors.lng}</p>}
+
+            {submitErrors && 
+            <p className="submiterror">{tripErrors.address}</p>}
             
 
             <div className="createtrip friends_container">

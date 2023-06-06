@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './Geocoding.css';
 
-const Geocoding = ({ coordinatesUpdate }) => {
-  //
+const Geocoding = ({ currentTrip, locationUpdate }) => {
+  // const currentTrip = (currentTrip ? currentTrip : null)
   const [geocodeData, setGeocodeData] = useState(null);
-  const [address, setAddress] = useState('90 5th Ave, New York, NY 10011');
-  const [updatedAddress, setUpdatedAddress] = useState('');
+  const [address, setAddress] = useState(currentTrip ? currentTrip.address : "");
+  const [updatedAddress, setUpdatedAddress] = useState(currentTrip ? currentTrip.address : "");
+
+  
+  // debugger
 
   const apiKey = process.env.REACT_APP_MAPS_API_KEY; 
   // let address = '22 Main st Boston MA';
@@ -16,8 +19,9 @@ const Geocoding = ({ coordinatesUpdate }) => {
       // debugger
       const fetchData = async() => {
         try{
-          
-          let url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`;
+          let searchAddress
+          address === '' ? searchAddress = '90 5th Ave, New York, NY 10011' : searchAddress = address
+          let url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(searchAddress)}&key=${apiKey}`;
           const response = await fetch(url);
           // console.log(address)
           if (response.ok) {
@@ -51,9 +55,10 @@ const Geocoding = ({ coordinatesUpdate }) => {
   
   const { results } = geocodeData;
   if (results && results.length > 0) {
-    const lat = results[0].geometry.location.lat;
-    const lng = results[0].geometry.location.lng;
-    coordinatesUpdate(lat, lng);
+    const latDB = results[0].geometry.location.lat;
+    const lngDB = results[0].geometry.location.lng;
+    const addressDB = results[0].formatted_address;
+    locationUpdate(latDB, lngDB, addressDB);
     console.log(geocodeData)
 
     return (
@@ -61,9 +66,9 @@ const Geocoding = ({ coordinatesUpdate }) => {
         <input
           className="trip_address_input"
           type='text'
-          value={updatedAddress}
           onChange={e => {setUpdatedAddress(e.target.value)}}
-          placeholder="Address"          
+          placeholder={address === '' ? "Address" : null}
+          value={updatedAddress}
         />
 
         <button 
@@ -72,11 +77,15 @@ const Geocoding = ({ coordinatesUpdate }) => {
         >
           Update Address
         </button>
-        <p>Latitude: {lat}, Longitude: {lng}</p>
+        <p>Latitude: {latDB}, Longitude: {lngDB}</p>
+        <p>Address: {addressDB}</p>
 
 
       </div>
-    )}
+    )
+  }
+  
+
 }
 
 export default Geocoding;
