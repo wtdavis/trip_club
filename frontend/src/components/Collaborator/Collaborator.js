@@ -1,29 +1,30 @@
 import { useDispatch } from "react-redux"
 import { fetchTrip, removeCollaborator } from "../../store/trips"
 
-function Collaborator (props) {
+const Collaborator = (props) => {
 const currentTrip = props.currentTrip
 const currentUser = props.user
 const dispatch = useDispatch()
 
-debugger
 
     const handleDelete = () => {
+        
         dispatch(removeCollaborator(currentTrip, currentUser))
     }
 
-        <li className="collaboratoritem">
-            <div>
-                {currentUser.email}
-            </div>
-             <i class="fa-solid fa-trash-can" onClick={handleDelete}>
-                </i>            
-        </li>
 
 
-
+    // <div className="collaboratoritem">
+    //     </div>
+    
     return (
-        
+        <div className="collaboratoritem">
+            <p>{currentUser.email}</p>
+            <p>{currentUser.username}</p>
+            <button onClick={handleDelete}>
+                <i class="fa-solid fa-trash-can"></i>
+            </button>
+        </div>
     )
 
 }

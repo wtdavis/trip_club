@@ -134,9 +134,11 @@ export const addCollaborator = (trip, collaborator) => async (dispatch) => {
 
 export const removeCollaborator = (trip, collaborator) => async (dispatch) => {
   let revisedCollaborators = [...trip.collaborators]
-  revisedCollaborators = revisedCollaborators.filter(collaborator)
+  revisedCollaborators = revisedCollaborators.filter((collab) => {return collaborator.email !== collab.email})
+  debugger
   trip.collaborators = revisedCollaborators
-  return dispatch(updateTrip(trip))
+
+  dispatch(updateTrip(formDatify(trip)))
 }
 
 export const updateTrip = (formData) => async (dispatch) => {

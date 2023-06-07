@@ -1,16 +1,18 @@
 import Collaborator from "./Collaborator"
 
-function CollabList (props) {
-    const currentTrip = props.currentTrip
-    // const users = props.users
-    const usersArr = Object.values(currentTrip?.collaborators)
+const CollabList = (props) => {
+    if (props.currentTrip ) {
+        const currentTrip = props.currentTrip
+        const usersArr = Object.values(currentTrip.collaborators)
+    } else {
+        const [usersArr, setUsersArr] = useState([])
+    }
     return (
-        <>
-                {usersArr.map((user) => { 
-                    {Collaborator({user: user, currentTrip: currentTrip})}
-                    }
-                )}
-        </>
+        <ul>    
+            {usersArr.map(user => {
+               return <li key={user._id}>{Collaborator({user: user, currentTrip: currentTrip})}</li>
+           })}
+        </ul>
     )
 }
 
