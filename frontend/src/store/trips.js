@@ -165,6 +165,7 @@ export const fetchUserTrips = id => async dispatch => {
   try {
     const res = await jwtFetch(`/api/trips/user/${id}`);
     const trips = await res.json();
+
     // debugger
     dispatch(receiveUserTrips(trips));
   } catch(err) {
@@ -226,8 +227,12 @@ const tripsReducer = (state = { all: {}, user: {}, new: undefined, current: null
     case RECEIVE_TRIPS:
       return { ...state, all: action.trips, new: undefined};
     case RECEIVE_USER_TRIPS:
-      // debugger
-      return { ...state, user: action.trips, new: undefined};
+      let userTrips = {};
+      for (let i=0;i<action.trips.length;i++) {
+        debugger
+        userTrips[action.trips[i]._id] = action.trips[i]
+      }
+      return { ...state, user: userTrips, new: undefined};
     case RECEIVE_NEW_TRIP:
       return { ...state, new: action.trip};
     case RECEIVE_USER_LOGOUT:
