@@ -33,7 +33,7 @@ const receiveNewTrip = trip => ({
 });
 
 export const setCurrentTrip = trip => {
-  debugger
+  // debugger
   return {
     type: SET_CURRENT_TRIP,
     trip
@@ -149,7 +149,7 @@ export const updateTrip = (formData) => async (dispatch) => {
       body: formData
     })
     const updatedTrip = await res.json()
-    debugger
+    // debugger
     dispatch(receiveTrip(updatedTrip))
     dispatch(setCurrentTrip(updatedTrip))
     return await updatedTrip
@@ -166,7 +166,7 @@ export const fetchUserTrips = id => async dispatch => {
     const res = await jwtFetch(`/api/trips/user/${id}`);
     const trips = await res.json();
 
-    debugger
+    // debugger
     dispatch(receiveUserTrips(trips));
   } catch(err) {
     const resBody = await err.json();

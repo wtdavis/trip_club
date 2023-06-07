@@ -14,6 +14,7 @@ import { Modal } from '../../context/Modal';
 import TripFormModal from '../TripForm/TripFormModal';
 import NewTripFormModal from '../TripForm/NewTripFormModal';
 import { fetchAllUsers } from '../../store/users';
+import CollabList from '../Collaborator/CollabList';
 
 const TripShow = (props) => {
   const history = useHistory();
@@ -192,7 +193,9 @@ const collaboratorsList = () => {
           </div>
 
             <p className='tripshowinfoitem' id='tripshowtripdescription'>{currentTrip.description}</p>
-            <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{currentTrip.collaborators?.map(e => (<li>{e.username}</li>))}</ul>
+            {/* <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{currentTrip.collaborators?.map(e => (<li>{e.username}</li>))}</ul> */}
+            <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{CollabList({currentTrip: currentTrip, users: allUsers})}</ul>
+
             <p className='tripshowinfoitem' id='tripshowstartdate'> <span>Begins</span> {startDateString} <span>Ends</span> {endDateString}</p>
             <div onClick={e => setShowCollab(true)}>Add A Friend</div>
             {showCollab && 

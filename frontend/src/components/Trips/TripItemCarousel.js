@@ -17,7 +17,7 @@ const TripItemCarousel = ({trip}) => {
     dispatch(tripActions.fetchTrip(trip._id))
   }
   const currentTrip = trip
-  const events = useSelector(state => state.trips.user[currentTrip._id])
+  const events = useSelector(state => state.trips.user[currentTrip._id].events)
   debugger
   const tripEvents = (events ? Object.values(events).filter(e => e.trip === currentTrip._id) : [])
   let lng = -73.99376925185645;
