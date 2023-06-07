@@ -8,6 +8,7 @@ import './TripForm.css'
 import { updateTrip } from "../../store/trips"
 import * as eventActions from "../../store/events"
 import Geocoding from "../GoogleMap/Geocoding"
+import CollabList from '../Collaborator/CollabList';
 
 
 const TripFormModal = (props) => {
@@ -27,6 +28,7 @@ const TripFormModal = (props) => {
     const [endDate, setEndDate] = useState(currentTrip ? currentTrip.endDate.split("T")[0] : new Date().toISOString().split("T")[0])
     const [submit, setSubmit] = useState("Create Trip")
     const [collaborators, setCollaborators] = useState(currentTrip ? currentTrip.collaborators : [])
+    debugger
     const allUsers = Object.values(useSelector(state => state.users))
     const tripErrors = useSelector(state => state.errors.trips)
     const [redirect, setRedirect] = useState(false)
@@ -233,6 +235,7 @@ const TripFormModal = (props) => {
     }
 
 
+
     
     return(
       <div className="createtrip_modal">
@@ -347,7 +350,8 @@ const TripFormModal = (props) => {
               <div className="friends_list_container">
                 <div className="createtrip_header">Who goes on a trip:</div> 
                 
-                <div>{CollaboratorsList()}</div>
+                {/* <div>{CollaboratorsList()}</div> */}
+                <div> {CollabList({currentTrip: null, collaborators: collaborators, setCollaborators: setCollaborators})}</div>
 
               </div>
               <button type="submit" className="continue_button" value={submit} onClick={e=> handleSubmit(e)}>Continue</button>
