@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
         const trips = await Trip.find()
                                 .populate('author','_id username email')
                                 .populate('collaborators', '_id username email')
-                                .populate('events', '_id title description trip startTime endTime')
+                                .populate('events', '_id title description trip startTime endTime lat lng address')
                                 .sort({ createdAt: -1 });
         return res.json(trips);
     }
@@ -30,7 +30,7 @@ router.get('/:id', async (req, res, next) => {
         const trip = await Trip.findById(req.params.id)
                                         .populate('author', '_id username email')
                                         .populate('collaborators', '_id username email')
-                                        .populate('events', '_id title description startTime endTime trip')
+                                        .populate('events', '_id title description startTime endTime trip lat lng address')
 
                                         // this populate doesn't work --> .populate('events', 'author trip lat lng startTime endTime descriptioin title')
 
@@ -88,7 +88,7 @@ router.get('/author/:userId', async (req, res, next) => {
                                 .sort({ createdAt: -1 })
                                 .populate("author", "_id username email")
                                 .populate('collaborators', '_id username email')
-                                .populate('events', '_id startTime endTime trip title description');
+                                .populate('events', '_id startTime endTime trip title description lat lng address');
       return res.json(trips);
     }
     catch(err) {
@@ -113,12 +113,12 @@ router.get('/user/:userId', async (req, res, next) => {
         const trips = await Trip.find({collaborators: user._id})
                                 // .concat(await Trip.find({author: user._id}))
                                 .sort({ startDate: -1 })
-                                .populate('events', '_id title description startTime endTime trip')
+                                .populate('events', '_id title description startTime endTime trip lat lng address')
                                 .populate('collaborators', '_id username email');
 
         const myTrips = await Trip.find({author: user._id})
                                 // .sort({startDate: -1})
-                                .populate('events', '_id title description startTime endTime trip')
+                                .populate('events', '_id title description startTime endTime trip lat lng address')
                                 .populate('collaborators', '_id username email');
         const data = trips.concat(myTrips)
         return res.json(data);
@@ -167,7 +167,7 @@ router.patch('/:id', multipleMulterUpload("images"), requireUser, async (req, re
                 collaborators: JSON.parse(req.body.collaborators), events: JSON.parse(req.body.events)},
                 {new: true})
                 .populate('collaborators', '_id username email')
-                .populate('events', '_id title description startTime endTime trip')
+                .populate('events', '_id title description startTime endTime trip lat lng address')
                    
             return res.json(updatedTrip)
             // updatedTrip = await Trip.updateOne({_id: trip._id}, {...tripData, events: req.body.events, collaborators: req.body.collaborators, imageUrls: imageUrls})

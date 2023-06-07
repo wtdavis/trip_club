@@ -28,7 +28,6 @@ const TripFormModal = (props) => {
     const [endDate, setEndDate] = useState(currentTrip ? currentTrip.endDate.split("T")[0] : new Date().toISOString().split("T")[0])
     const [submit, setSubmit] = useState("Create Trip")
     const [collaborators, setCollaborators] = useState(currentTrip ? currentTrip.collaborators : [])
-    debugger
     const allUsers = Object.values(useSelector(state => state.users))
     const tripErrors = useSelector(state => state.errors.trips)
     const [redirect, setRedirect] = useState(false)
