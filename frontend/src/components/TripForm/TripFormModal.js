@@ -310,7 +310,7 @@ const TripFormModal = (props) => {
             </div>
 
             <div>
-              <Geocoding currentTrip={currentTrip} locationUpdate={handleLocation}/>
+              <Geocoding currentCase={currentTrip} locationUpdate={handleLocation}/>
             </div>
             {submitErrors && 
             <p className="submiterror">{tripErrors.lat}</p>}
