@@ -18,6 +18,10 @@ const validateEventInput = [
     // .isFloat({min: -180, max: 180})
     // .withMessage('Longitude must be a number between -180 and 180'),
 
+    // check('address')
+    // .exists({checkFalsy: true})
+    // .withMessage('Trip must have an location'),
+
     // check('startTime')
     // .exists({ checkFalsy: true })
     // .withMessage('Event must have a start time'),
@@ -29,6 +33,8 @@ const validateEventInput = [
     // check('description')
     // .exists({ checkFalsy: true })
     // .withMessage('Event must have a title'),
+
+
 
     handleValidationErrors
 ]

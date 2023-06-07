@@ -2,20 +2,16 @@ import React, { useState, useEffect } from 'react';
 import './Geocoding.css';
 
 const Geocoding = ({ currentTrip, locationUpdate }) => {
-  // const currentTrip = (currentTrip ? currentTrip : null)
   const [geocodeData, setGeocodeData] = useState(null);
   const [address, setAddress] = useState(currentTrip ? currentTrip.address : "");
   const [updatedAddress, setUpdatedAddress] = useState(currentTrip ? currentTrip.address : "");
-
-  
-  // debugger
 
   const apiKey = process.env.REACT_APP_MAPS_API_KEY; 
   // let address = '22 Main st Boston MA';
   // let address = '1600 Amphitheatre Parkway, Mountain View, CA'
 
    
-    useEffect(() => {
+  useEffect(() => {
       // debugger
       const fetchData = async() => {
         try{
@@ -41,6 +37,30 @@ const Geocoding = ({ currentTrip, locationUpdate }) => {
     // if (updatedAddress !== '') {
     // }
   }, [address]);
+
+  useEffect(() => {
+    const loadPlacesLibrary = () => {
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
+      script.async = true;
+      script.defer = true;
+      document.body.appendChild(script);
+      script.onload = initAutocomplete;
+    };
+
+    const initAutocomplete = () => {
+      const input = document.getElementById('address-input');
+      const autocomplete = new window.google.maps.places.Autocomplete(input);
+      autocomplete.addListener('place_changed', () => {
+        const place = autocomplete.getPlace();
+        if (place && place.formatted_address) {
+          setUpdatedAddress(place.formatted_address);
+        }
+      });
+    };
+
+    loadPlacesLibrary();
+  }, []);
 
   const handleUpdatedAddress = async (e) => {
     e.preventDefault()

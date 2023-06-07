@@ -12,9 +12,14 @@ const eventSchema = new Schema({
     },
     lat: {
         type: Number
+        // default: 40.73631643149453
     },
     lng: {
         type: Number
+        // default: -73.99376925185645
+    },
+    address: {
+        type: String,
     },
     startTime: {
         type: Date,
