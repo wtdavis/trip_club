@@ -29,6 +29,7 @@ router.patch('/:id/edit', requireUser, async (req, res, next) => {
     let eventData = {...event,
                     lat: req.body.lat,
                     lng: req.body.lng,
+                    address: req.body.address,
                     startTime: req.body.startTime,
                     endTime: req.body.endTime,
                     description: req.body.description,

@@ -11,8 +11,8 @@ function EventItem (props)  {
   const currentTrip = props.currentTrip
   // debugger
   const [showEventEditModal, setShowEventEditModal] = useState(false)
-  let lng = -73.99376925185645;
-  let lat = 40.73631643149453;
+  // let lng = -73.99376925185645;
+  // let lat = 40.73631643149453;
 
   let startTime = new Date(props.event.startTime).toDateString()
   let endTime = new Date(props.event.endTime).toDateString()
@@ -54,7 +54,7 @@ function EventItem (props)  {
             </div>
 
             <div className='google-map-container'>
-              <GoogleMap lng={lng} lat={lat}/>
+              <GoogleMap lng={event.lng} lat={event.lat}/>
             </div>
 
 
