@@ -95,7 +95,8 @@ trips.push(
     events: [],
     collaborators: [users[1]._id, users[2]._id],
     lat: 39.6061,
-    lng: -106.3550
+    lng: -106.3550,
+    address: 'Main Vail, Vail, Eagle County, Colorado, 81657, USA'
   })
 );
 
@@ -108,8 +109,9 @@ trips.push(
     endDate: "05/05/2023",
     events: [],
     collaborators: [users[3]._id],
-    lat: -48.8584,
-    lng: 2.2945,
+    lat: 39.6061,
+    lng: -106.3550,
+    address: 'Main Vail, Vail, Eagle County, Colorado, 81657, USA'
   })
 )
 
@@ -122,8 +124,9 @@ trips.push(
     endDate: "03/10/2023" ,
     events: [],
     collaborators: [users[0]._id, users[4].id, users[5]._id],
-    lat: 27.9881,
-    lng: 86.9250
+    lat: 39.6061,
+    lng: -106.3550,
+    address: 'Main Vail, Vail, Eagle County, Colorado, 81657, USA'
   })
 )
 
@@ -133,8 +136,9 @@ events.push(
   new Event({
     author: users[0]._id,
     trip: trips[0]._id,
-    lat: 39.7392,
-    lng: -104.9903,
+    lat: 39.6061,
+    lng: -106.3550,
+    address: 'Main Vail, Vail, Eagle County, Colorado, 81657, USA',
     startTime: new Date(2023, 12, 1, 6, 30),
     endTime: new Date(2023, 12, 3, 8, 0),
     description: 'Land in Denver',
@@ -147,6 +151,7 @@ events.push(
     trip: trips[0]._id,
     lat: 39.6061,
     lng: -106.3550,
+    address: 'Main Vail, Vail, Eagle County, Colorado, 81657, USA',
     startTime: new Date(2023, 8, 2, 5, 15),
     endTime: new Date(2023, 8, 3, 7, 45),
     description: 'Skiing at the resort',
@@ -157,8 +162,9 @@ events.push(
   new Event({
     author: users[0]._id,
     trip: trips[0]._id,
-    lat: 39.7559,
-    lng: -104.9942,
+    lat: 39.6061,
+    lng: -106.3550,
+    address: 'Main Vail, Vail, Eagle County, Colorado, 81657, USA',
     startTime: new Date(2023, 9, 3, 6, 30),
     endTime: new Date(2023, 9, 7, 2, 10),
     description: 'Rockies vs Giants',
@@ -169,8 +175,9 @@ events.push(
   new Event({
     author: users[0]._id,
     trip: trips[1]._id,
-    lat: 132.0547383,
-    lng: -120.547283,
+    lat: 39.6061,
+    lng: -106.3550,
+    address: 'Main Vail, Vail, Eagle County, Colorado, 81657, USA',
     startTime: new Date(2024, 4, 15, 6, 30),
     endTime: new Date(2024, 4, 23, 8, 0),
     description: 'Going to have a ton of fun on Spring Break',
@@ -181,8 +188,9 @@ events.push(
   new Event({
     author: users[1]._id,
     trip: trips[1]._id,
-    lat: -48.8584,
-    lng: 2.2945,
+    lat: 39.6061,
+    lng: -106.3550,
+    address: 'Main Vail, Vail, Eagle County, Colorado, 81657, USA',
     startTime: new Date(2024, 3, 14, 6, 30),
     endTime: new Date(2024, 3, 14, 8, 30),
     description: "Eiffel Tower and Paris",
@@ -193,8 +201,9 @@ events.push(
     new Event({
       author: users[1]._id,
       trip: trips[1]._id,
-      lat: 43.9159,
-      lng: 17.6791,
+      lat: 39.6061,
+      lng: -106.3550,
+      address: 'Main Vail, Vail, Eagle County, Colorado, 81657, USA',
       startTime: new Date(2024, 3, 15, 10, 20),
       endTime: new Date(2024, 3, 15, 11, 30),
       description: "Bosnia",
@@ -205,8 +214,9 @@ events.push(
     new Event({
       author: users[3]._id,
       trip: trips[2]._id,
-      lat: 27.9881,
-      lng: 86.9250,
+      lat: 39.6061,
+      lng: -106.3550,
+      address: 'Main Vail, Vail, Eagle County, Colorado, 81657, USA',
       startTime: new Date(2024, 12, 28, 7, 0),
       endTime: new Date(2024, 12, 28, 10, 30),
       description: "Climbing Mt. Everest",
@@ -217,8 +227,9 @@ events.push(
     new Event({
       author: users[0]._id,
       trip: trips[1]._id,
-      lat: 27.1751, 
-      lng: 78.0421,
+      lat: 39.6061,
+      lng: -106.3550,
+      address: 'Main Vail, Vail, Eagle County, Colorado, 81657, USA',
       startTime: new Date(2024, 12, 30, 8, 10),
       endTime: new Date(2024, 12, 30, 9, 20),
       description: "I'm so excited!",
@@ -229,8 +240,9 @@ events.push(
     new Event({
       author: users[0]._id,
       trip: trips[1]._id,
-      lat: 19.0760,
-      lng: 72.877,
+      lat: 39.6061,
+      lng: -106.3550,
+      address: 'Main Vail, Vail, Eagle County, Colorado, 81657, USA',
       startTime: new Date(2024, 12, 31, 9, 0),
       endTime: new Date(2025, 1, 1, 2, 0),
       description: "Party like it's 1999",

@@ -73,12 +73,13 @@ const manageCurrentTrip = (props) => {
     dispatch(eventActions.clearEvents())
     dispatch(eventActions.fetchTripEvents(trip._id))
     dispatch(fetchAllUsers())
+
+    setMapKey(mapKey + 1);
   }, [dispatch, currentTrip]
   )
 
-  useEffect(() => {
-    setMapKey(mapKey + 1);
-  }, [currentTrip.lat, currentTrip.lng]);
+  // useEffect(() => {
+  // }, [currentTrip.lat, currentTrip.lng]);
 
   const users = useSelector(state => state.users);
   const currentUser = useSelector(state => state.session.user);

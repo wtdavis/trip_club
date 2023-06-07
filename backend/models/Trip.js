@@ -34,6 +34,9 @@ const tripSchema = new Schema({
         type: Number
         // default: -73.99376925185645
     },
+    address: {
+        type: String,
+    },
     imageUrls: {
         type: [String],
         required: false

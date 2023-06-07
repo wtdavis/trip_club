@@ -31,6 +31,10 @@ const validateTripInput = [
     .exists({checkFalsy: true})
     .withMessage('Trip must have an location'),
 
+    check('address')
+    .exists({checkFalsy: true})
+    .withMessage('Trip must have an location'),
+
     handleValidationErrors
 ]
 
