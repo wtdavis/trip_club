@@ -1,16 +1,31 @@
+import { useState } from "react";
 import Collaborator from "./Collaborator"
 
 const CollabList = (props) => {
-    if (props.currentTrip ) {
-        const currentTrip = props.currentTrip
-        const usersArr = Object.values(currentTrip.collaborators)
+    
+    // const [usersArr, setUsersArr] = useState([])
+    const setCollaborators = props.setCollaborators;    
+    let users = []
+    let currentTrip
+    if (props.currentTrip) {
+        currentTrip = props.currentTrip
+        users = Object.values(currentTrip.collaborators)
     } else {
-        const [usersArr, setUsersArr] = useState([])
+        const setCollaborators = props.setCollaborators
+        users = props.collaborators
+    }
+
+    // setUsersArr(users)
+
+    const collabRemove = (user) => {
+        let updatedUsers = users.filter(collab => collab.email !== user.email)
+        debugger
+        setCollaborators(updatedUsers)
     }
     return (
         <ul>    
-            {usersArr.map(user => {
-               return <li key={user._id}>{Collaborator({user: user, currentTrip: currentTrip})}</li>
+            {users.map(user => {
+               return <li key={user._id}>{Collaborator({user: user, currentTrip: currentTrip, collabRemove: collabRemove})}</li>
            })}
         </ul>
     )
