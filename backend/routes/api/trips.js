@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
         const trips = await Trip.find()
                                 .populate('author','_id username email')
                                 .populate('collaborators', '_id username email')
-                                .populate('events')
+                                .populate('events', '_id title description trip startTime endTime')
                                 .sort({ createdAt: -1 });
         return res.json(trips);
     }
@@ -113,12 +113,12 @@ router.get('/user/:userId', async (req, res, next) => {
         const trips = await Trip.find({collaborators: user._id})
                                 // .concat(await Trip.find({author: user._id}))
                                 .sort({ startDate: -1 })
-                                .populate('events', '_id title description startTime endTime')
+                                .populate('events', '_id title description startTime endTime trip')
                                 .populate('collaborators', '_id username email');
 
         const myTrips = await Trip.find({author: user._id})
                                 // .sort({startDate: -1})
-                                .populate('events', '_id title description startTime endTime')
+                                .populate('events', '_id title description startTime endTime trip')
                                 .populate('collaborators', '_id username email');
         const data = trips.concat(myTrips)
         return res.json(data);
@@ -234,7 +234,7 @@ router.get('/:tripId/events', async (req, res) => {
                             // .populate    
         return res.json(events)
     }
-    catch(err) {
+    catch(err) {    
         return res.json([])
     }
 })
