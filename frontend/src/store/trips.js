@@ -135,7 +135,7 @@ export const addCollaborator = (trip, collaborator) => async (dispatch) => {
 export const removeCollaborator = (trip, collaborator) => async (dispatch) => {
   let revisedCollaborators = [...trip.collaborators]
   revisedCollaborators = revisedCollaborators.filter((collab) => {return collaborator.email !== collab.email})
-  debugger
+  // debugger
   trip.collaborators = revisedCollaborators
 
   dispatch(updateTrip(formDatify(trip)))
@@ -231,7 +231,7 @@ const tripsReducer = (state = { all: {}, user: {}, new: undefined, current: null
     case RECEIVE_USER_TRIPS:
       let userTrips = {};
       for (let i=0;i<action.trips.length;i++) {
-        debugger
+        // debugger
         userTrips[action.trips[i]._id] = action.trips[i]
       }
       return { ...state, user: userTrips, new: undefined};
