@@ -25,8 +25,8 @@ const Collaborator = (props) => {
         
         return (
             <div className="collaboratoritem">
-                <p>{currentUser.email}</p>
-                <p>{currentUser.username}</p>
+                <p>{currentUser?.email}</p>
+                <p>{currentUser?.username}</p>
                 <button onClick={handleDelete}>
                     <i class="fa-solid fa-trash-can"></i>
                 </button>

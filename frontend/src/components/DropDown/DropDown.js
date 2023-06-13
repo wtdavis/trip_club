@@ -25,7 +25,7 @@ const DropDown = ({ user }) => {
     };
     document.addEventListener('click', closeMenu);
     return () => document.removeEventListener("click", closeMenu);
-  }, [menu]);
+  }, [menu, showCreateTripModal]);
 
   const logoutUser = e => {
     e.preventDefault();
@@ -62,7 +62,7 @@ const DropDown = ({ user }) => {
 
       {showCreateTripModal && (
         <Modal onClose={() => setShowCreateTripModal(false)}>
-          <TripFormModal setShowCreateTripModal={setShowCreateTripModal} />
+          <TripFormModal showCreateTripModal={showCreateTripModal} setShowCreateTripModal={setShowCreateTripModal} />
         </Modal>
       )}
     </>

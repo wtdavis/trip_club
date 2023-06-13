@@ -52,15 +52,18 @@ const TripFormModal = (props) => {
     const fileRef = useRef(null);
   
     useEffect(() => {
-      // debugger
         dispatch(userActions.fetchAllUsers())
         if (currentTrip) {
           setModalTitle("Edit Trip")
         }
-        
-        // setCollaborators([])
     }, [])
-  //  console.log(events)
+
+
+    const handleRedirect = (props) => {
+      if (props === true) {
+        return <Redirect to={{pathname:`/trips/show`, trip: newTrip}}/>
+      }
+    }
 
   // function handleLocation handles coordinates update when passed to Geocoding
     const handleLocation = (lat, lng, address) => {
@@ -83,9 +86,7 @@ const TripFormModal = (props) => {
 
     let collaboratorIds = []
 
-    if (redirect) {
-        return <Redirect to={{pathname:`/trips/show`, trip: newTrip}}/>
-    }
+    
     
     const author = currentUser.id
 
@@ -116,20 +117,12 @@ const TripFormModal = (props) => {
       
       let arr = []
 
-      if (currentTrip) {
-       
-        let collabs = currentTrip.collaborators
-        for (let i=0; i<collabs.length; i++){ 
-          arr = arr.concat(collabs[i]._id)
-        }
+      for (let i=0; i<collaborators.length; i++){ 
+        arr = arr.concat(collaborators[i]._id)
       }
 
       let collaboratorIds = arr
-      allUsers.forEach(user => {
-        if (collaborators.includes(user.email)) {
-          collaboratorIds.push(user._id)
-        }
-      })
+
       formData.append('collaborators', JSON.stringify(collaboratorIds))
 
       let events = [];
@@ -149,21 +142,20 @@ const TripFormModal = (props) => {
       formData.append('lng', lng);
       formData.append('address', address);
       
-      // let eventsArr = Object.keys(events)
-      // formData.append('events', JSON.stringify(eventsArr))
       
-        
         if (!currentTrip){ 
            dispatch(composeTrips(formData))
-          .then( (res) => { 
+          .then( (res) => {   
             if (res) {
-              setNewTrip(res)
-              dispatch(setCurrentTrip(res))
-              setRedirect(true)
+              debugger
+              setNewTrip(res);
+              dispatch(setCurrentTrip(res));
               setImages([]);
               setImageUrls([]);
               fileRef.current.value = null;
-              setShowCreateTripModal(false)
+              setRedirect(true)
+              setShowCreateTripModal(false);
+              handleRedirect(true)
             
           } else {
             let errors = tripErrors
@@ -181,12 +173,14 @@ const TripFormModal = (props) => {
           }
           dispatch(updateTrip(formData))
           .then ( (res) => { 
-            dispatch(setCurrentTrip(res))
-            setNewTrip(res)
-            setShowCreateTripModal(false)
+            debugger
+            dispatch(setCurrentTrip(res));
+            setNewTrip(res);
+            setShowCreateTripModal(false);
             setImages([]);
             setImageUrls([]);
             setRedirect(true)
+            handleRedirect(true)
           })
         }
     }
@@ -207,6 +201,7 @@ const TripFormModal = (props) => {
         })
     }
 
+
     const handleAdd = (e) => { 
         e.preventDefault()
         setCollabErrors(true)
@@ -223,32 +218,19 @@ const TripFormModal = (props) => {
         })
     }
     
+
     const handleChange = () => {
       setSubmitErrors(false);
       setCollabErrors(false)
     }
 
-    const CollaboratorsList = () => {
-        return (
-          // <div className="friends_ul_container">
-            <ul>
-                {collaborators.map(collaborator => {
-                    // debugger
-                    return (
-                        <div className="friendsemail_container">
-                          <span>{collaborator.email}</span>
-                          <button className="removefriend_button" value={collaborator} onClick={e => handleRemove(e)}>Remove</button>
-                        </div>
-                        )
-                    })}
-            </ul>
-          // </div>
-        )
-    }
-
-
-
     
+    
+      if (redirect) {
+        return <Redirect to={{pathname:`/trips/show`, trip: newTrip}}/>
+      }
+
+    if (!redirect) {
     return(
       <div className="createtrip_modal">
         <div onClick={() => setShowCreateTripModal(false)} className="close-button">
@@ -396,7 +378,8 @@ const TripFormModal = (props) => {
             {/* <input type="submit" className="tripformsubmit"  value={submit} onClick={e=> handleSubmit(e)}/> */}
         </form>
     </div>
-)
+)}
+
 }
 
 export default TripFormModal;
