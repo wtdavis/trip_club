@@ -198,7 +198,7 @@ const collaboratorsList = () => {
               </button>
             </div>
           </div>
-
+      
             <p className='tripshowinfoitem' id='tripshowtripdescription'>{currentTrip.description}</p>
             {/* <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{currentTrip.collaborators?.map(e => (<li>{e.username}</li>))}</ul> */}
             <div className='tripshowinfoitem' id='tripshowtripcollaborators'>{CollabList({currentTrip: currentTrip, users: allUsers})}</div>

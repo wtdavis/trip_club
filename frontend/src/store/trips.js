@@ -142,7 +142,7 @@ export const removeCollaborator = (trip, collaborator) => async (dispatch) => {
 }
 
 export const updateTrip = (formData) => async (dispatch) => {
-
+  
   let tripId = formData.get('_id')
  
   try {
@@ -168,7 +168,6 @@ export const fetchUserTrips = id => async dispatch => {
     const res = await jwtFetch(`/api/trips/user/${id}`);
     const trips = await res.json();
 
-    // debugger
     dispatch(receiveUserTrips(trips));
   } catch(err) {
     const resBody = await err.json();
@@ -179,7 +178,6 @@ export const fetchUserTrips = id => async dispatch => {
 };
 
 export const deleteTrip = data => async dispatch => {
-  // debugger
   const res = await jwtFetch(`/api/trips/${data._id}`, {
     method: 'DELETE'
   })
@@ -187,16 +185,13 @@ export const deleteTrip = data => async dispatch => {
 }
 
 export const composeTrips = (formData) => async dispatch => {
-  // debugger
 
   let trip;
   try {
     const res = await jwtFetch('/api/trips/', {
       method: 'POST',
       body: formData
-      // body: JSON.stringify(data)
     });
-    // debugger
     trip = await res.json();
     dispatch(receiveNewTrip(trip));
   } catch(err) {
@@ -231,7 +226,6 @@ const tripsReducer = (state = { all: {}, user: {}, new: undefined, current: null
     case RECEIVE_USER_TRIPS:
       let userTrips = {};
       for (let i=0;i<action.trips.length;i++) {
-        debugger
         userTrips[action.trips[i]._id] = action.trips[i]
       }
       return { ...state, user: userTrips, new: undefined};
@@ -244,13 +238,11 @@ const tripsReducer = (state = { all: {}, user: {}, new: undefined, current: null
     case CLEAR_CURRENT_TRIP:
       return {...state, current: null}
     case REMOVE_TRIP:
-      // debugger
       let nextState = { ...state };
       let idxOfDeletingTrip = nextState.all.indexOf(action.trip)
       if (idxOfDeletingTrip > -1) {
         nextState.all.splice(idxOfDeletingTrip, 1)
       }
-      // debugger
       return { ...nextState, current: null, edit: null, new: undefined }
     default:
       return state;
