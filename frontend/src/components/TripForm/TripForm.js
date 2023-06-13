@@ -123,7 +123,7 @@ function TripForm () {
     return(
         <div className="tripformdiv">
         <h3 className="tripformheader">Create a New Trip!</h3>
-        <form classname="tripformform" onSubmit={e => handleSubmit(e)}>
+        <form className="tripformform" onSubmit={e => handleSubmit(e)}>
        
             <p className="tripformsubheader">Name Your Trip:</p>
             <input type="text" className="tripforminput" value={title} onChange={e => setTitle(e.target.value)}/>

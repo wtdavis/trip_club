@@ -1,4 +1,5 @@
-import {useState, useRef, useEffect} from 'react';
+// import {useState, useRef, useEffect } from 'react';
+import {useState, useRef, useEffect, lazy, Suspense } from 'react';
 import { useDispatch, useSelector } from "react-redux"
 import { composeTrips, setCurrentTrip } from "../../store/trips"
 import { useParams } from "react-router-dom"
@@ -14,7 +15,9 @@ import CollabList from '../Collaborator/CollabList';
 const TripFormModal = (props) => {
   const {setShowCreateTripModal} = props;
   const currentTrip = (props.currentTrip ? props.currentTrip : null)
+  debugger
   const events = useSelector(state => state.events)
+  // const Geocoding = lazy(() => import('../GoogleMap/Geocoding'));
     
 
     
@@ -43,6 +46,8 @@ const TripFormModal = (props) => {
     const [lat, setLat] = useState(currentTrip ? currentTrip.lat : 40.73631643149453);
     const [lng, setLng] = useState(currentTrip ? currentTrip.lng : -73.99376925185645);
     const [address, setAddress] = useState(currentTrip ? currentTrip.address : '90 5th Ave, New York, NY 10011');
+    const [updatedAddress, setUpdatedAddress] = useState(currentTrip ? currentTrip.address : "");
+    
     // debugger
     const fileRef = useRef(null);
   
@@ -66,6 +71,14 @@ const TripFormModal = (props) => {
       console.log(lat);
       console.log(lng);
       console.log(address);
+    }
+
+    const handleUpdatedAddress = async (e) => {
+      e.preventDefault()
+
+      console.log(address)
+      setAddress(updatedAddress)
+      console.log(address)
     }
 
     let collaboratorIds = []
@@ -311,8 +324,33 @@ const TripFormModal = (props) => {
                 />              
             </div>
 
+            {/* <div>
+              <input
+                id="address_input"
+                className="trip_address_input"
+                type='text'
+                onChange={e => {setUpdatedAddress(e.target.value)}}
+                placeholder={address === '' ? "Address" : null}
+                // placeholder={currentTrip ? currentTrip.address : "Address"}
+                value={updatedAddress}
+              />
+
+              <button 
+                className="addaddress_button"
+                onClick={handleUpdatedAddress}
+              >
+                Update Address
+              </button>
+            </div> */}
+
             <div>
-              <Geocoding currentCase={currentTrip} locationUpdate={handleLocation}/>
+              <Geocoding currentTrip={currentTrip} locationUpdate={handleLocation}/> 
+              {/* <Geocoding currentCase={props.currentTrip ? props.currentTrip : null} locationUpdate={handleLocation}/>  : null */}
+              {/* <Geocoding locationUpdate={handleLocation}/>               */}
+
+              {/* <Suspense fallback={<div>Loading...</div>}>
+                <Geocoding locationUpdate={handleLocation}/> 
+              </Suspense> */}
             </div>
             {submitErrors && 
             <p className="submiterror">{tripErrors.lat}</p>}
