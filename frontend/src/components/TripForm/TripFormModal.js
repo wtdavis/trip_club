@@ -283,20 +283,15 @@ const TripFormModal = (props) => {
             {submitErrors && 
             <p className="submiterror">{tripErrors.description}</p>}
 
-            <div className="createtrip_date">
+            <div className="trip_date_container">
               <p className="tripformsubheader">Trip Start Date:</p>
               <input 
-                type="date" 
                 className="createtrip_input" 
+                type="date" 
                 value={startDate} 
                 onChange={e => {setStartDate(e.target.value); handleChange()}}
               />
-            </div>
 
-            {submitErrors && 
-            <p className="submiterror">{tripErrors.startDate}</p>}
-
-            <div className="createtrip date">
               <p className="tripformsubheader">Trip End Date:</p>
               <input 
                 className="createtrip_input" 
@@ -305,6 +300,9 @@ const TripFormModal = (props) => {
                 onChange={e => {setEndDate(e.target.value); handleChange()}}
               />
             </div>
+
+            {submitErrors && 
+            <p className="submiterror">{tripErrors.startDate}</p>}
 
             {submitErrors && 
             <p className="submiterror">{tripErrors.endDate}</p>}

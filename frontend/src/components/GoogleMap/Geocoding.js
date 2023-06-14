@@ -98,7 +98,7 @@ debugger
     console.log(geocodeData)
 
     return (
-      <div>
+      <div className="geocoding_container">
         <input
           id="address_input"
           className="trip_address_input"
@@ -111,16 +111,29 @@ debugger
           value={updatedAddress}
         />
 
-        <button 
-          className="addaddress_button"
-          onClick={handleUpdatedAddress}
-        >
-          Update Address
-        </button>
-        <p>Latitude: {latDB}, Longitude: {lngDB}</p>
-        <p>Address: {addressDB}</p>
-        <p>Latitude: {address === '' ? '': latDB} Longitude: {address === '' ? '': lngDB}</p>
+        <div class="flex_end">          
+          <button 
+            className="addaddress_button"
+            onClick={handleUpdatedAddress}
+          >
+            Update Address
+          </button>
+        </div>
 
+        <div>
+          {/* <p>Latitude: {latDB}, Longitude: {lngDB}</p> */}
+          {/* <p className="tripformsubheader">Address: {address === '' ? '': address}</p> */}
+          {/* <p className="tripformsubheader">Latitude: {address === '' ? '': latDB.toFixed(2)} Longitude: {address === '' ? '': lngDB.toFixed(2)}</p> */}
+
+          <p className="geolocation_info"> 
+            <span className="geolocation_header">Address: </span>
+              {address === '' ? '': address} 
+            <span className="geolocation_header">Latitude: </span>
+              {address === '' ? '': latDB.toFixed(2)} 
+            <span className="geolocation_header">Longitude: </span>
+              {address === '' ? '': lngDB.toFixed(2)}
+          </p>
+        </div>
 
 
       </div>
