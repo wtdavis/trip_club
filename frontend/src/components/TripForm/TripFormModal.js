@@ -364,6 +364,7 @@ const TripFormModal = (props) => {
               <p className="tripformsubheader">Add Friends:</p>
               
               <input 
+                id="createtrip_input_addfriends"
                 className="createtrip_input"
                 type='text'
                 value={currCollaborator}

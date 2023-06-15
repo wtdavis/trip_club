@@ -111,7 +111,7 @@ debugger
           value={updatedAddress}
         />
 
-        <div class="flex_end">          
+        <div class="addaddress_button_container">          
           <button 
             className="addaddress_button"
             onClick={handleUpdatedAddress}
