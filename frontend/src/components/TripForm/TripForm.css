@@ -232,13 +232,13 @@
   white-space: nowrap;
 }
 
-.addfriends_container {
+/* .addfriends_container {
   width: 100%;
   background-color: pink;
   padding: 10px 0;
   display: flex;
   justify-content: flex-end;
-}
+} */
 
 #createtrip_input_addfriends{
   width: 100%;

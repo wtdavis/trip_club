@@ -280,6 +280,15 @@ const TripFormModal = (props) => {
               onChange={e => {setDescription(e.target.value); handleChange()}}
               placeholder="Enter a Description"
             />
+
+<input 
+                // id="createtrip_input_addfriends"
+                className="createtrip_input"
+                type='text'
+                value={currCollaborator}
+                onChange={e => {setCurrCollaborator(e.target.value); handleChange()}}
+                placeholder="Friend's Email"
+              />
             {submitErrors && 
             <p className="submiterror">{tripErrors.description}</p>}
 
@@ -364,7 +373,7 @@ const TripFormModal = (props) => {
               <p className="tripformsubheader">Add Friends:</p>
               
               <input 
-                id="createtrip_input_addfriends"
+                // id="createtrip_input_addfriends"
                 className="createtrip_input"
                 type='text'
                 value={currCollaborator}

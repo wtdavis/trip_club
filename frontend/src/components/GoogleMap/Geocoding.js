@@ -14,11 +14,11 @@ debugger
   // let address = '22 Main st Boston MA';
   // let address = '1600 Amphitheatre Parkway, Mountain View, CA'
   // const inputRef = useRef();
-  const autoCompleteRef = useRef();
-  const options = {
-   fields: ["address_components", "geometry", "icon", "name", "formatted_address"],
-   types: ["establishment"]
-  };
+  // const autoCompleteRef = useRef();
+  // const options = {
+  //  fields: ["address_components", "geometry", "icon", "name", "formatted_address"],
+  //  types: ["establishment"]
+  // };
    
   // autoCompleteRef.current = new window.google.maps.places.Autocomplete(
   //   // autoCompleteRef.current = new google.maps.places.Autocomplete(
@@ -107,7 +107,7 @@ debugger
           placeholder={address === '' ? "Address" : null}
           // placeholder={currentTrip ? currentTrip.address : "Address"}
           // ref={inputRef}
-          ref={autoCompleteRef}          
+          // ref={autoCompleteRef}          
           value={updatedAddress}
         />
 
