@@ -9,7 +9,7 @@ import './Geocoding.css';
   const [geocodeData, setGeocodeData] = useState(null);
   const [address, setAddress] = useState(currentTrip ? currentTrip.address : "");
   const [updatedAddress, setUpdatedAddress] = useState(currentTrip ? currentTrip.address : "");
-debugger
+// debugger
   const apiKey = process.env.REACT_APP_MAPS_API_KEY; 
   // let address = '22 Main st Boston MA';
   // let address = '1600 Amphitheatre Parkway, Mountain View, CA'
@@ -98,42 +98,83 @@ debugger
     console.log(geocodeData)
 
     return (
+      // <div className="geocoding_container">
+      //   <input
+      //     id="address_input"
+      //     className="trip_address_input"
+      //     type='text'
+      //     onChange={e => {setUpdatedAddress(e.target.value)}}
+      //     placeholder={address === '' ? "Address" : null}
+      //     // placeholder={currentTrip ? currentTrip.address : "Address"}
+      //     // ref={inputRef}
+      //     // ref={autoCompleteRef}          
+      //     value={updatedAddress}
+      //   />
+
+      //   <div class="addaddress_button_container">          
+      //     <button 
+      //       className="addaddress_button"
+      //       onClick={handleUpdatedAddress}
+      //     >
+      //       Update Address
+      //     </button>
+      //   </div>
+
+      //   <div>
+      //     {/* <p>Latitude: {latDB}, Longitude: {lngDB}</p> */}
+      //     {/* <p className="tripformsubheader">Address: {address === '' ? '': address}</p> */}
+      //     {/* <p className="tripformsubheader">Latitude: {address === '' ? '': latDB.toFixed(2)} Longitude: {address === '' ? '': lngDB.toFixed(2)}</p> */}
+
+      //     <p className="geolocation_info"> 
+      //       <span className="geolocation_header">Address: </span>
+      //         {address === '' ? '': address} 
+      //       <span className="geolocation_header">Latitude: </span>
+      //         {address === '' ? '': latDB.toFixed(2)} 
+      //       <span className="geolocation_header">Longitude: </span>
+      //         {address === '' ? '': lngDB.toFixed(2)}
+      //     </p>
+      //   </div>
+
+
+      // </div>
+
       <div className="geocoding_container">
-        <input
-          id="address_input"
-          className="trip_address_input"
-          type='text'
-          onChange={e => {setUpdatedAddress(e.target.value)}}
-          placeholder={address === '' ? "Address" : null}
-          // placeholder={currentTrip ? currentTrip.address : "Address"}
-          // ref={inputRef}
-          // ref={autoCompleteRef}          
-          value={updatedAddress}
-        />
+        {/* <div> */}
+      <input
+        // id="address_input"
+        className="trip_address_input"
+        type='text'
+        onChange={e => {setUpdatedAddress(e.target.value)}}
+        placeholder={address === '' ? "Address" : null}
+        // placeholder={currentTrip ? currentTrip.address : "Address"}
+        // ref={inputRef}
+        // ref={autoCompleteRef}          
+        value={updatedAddress}
+      />
 
-        <div class="addaddress_button_container">          
-          <button 
-            className="addaddress_button"
-            onClick={handleUpdatedAddress}
-          >
-            Update Address
-          </button>
-        </div>
+      <div class="addaddress_button_container">          
+        <button 
+          className="addaddress_button"
+          onClick={handleUpdatedAddress}
+        >
+          Update Address
+        </button>
+      </div>
 
-        <div>
-          {/* <p>Latitude: {latDB}, Longitude: {lngDB}</p> */}
-          {/* <p className="tripformsubheader">Address: {address === '' ? '': address}</p> */}
-          {/* <p className="tripformsubheader">Latitude: {address === '' ? '': latDB.toFixed(2)} Longitude: {address === '' ? '': lngDB.toFixed(2)}</p> */}
+      <div>
+        {/* <p>Latitude: {latDB}, Longitude: {lngDB}</p> */}
+        {/* <p className="tripformsubheader">Address: {address === '' ? '': address}</p> */}
+        {/* <p className="tripformsubheader">Latitude: {address === '' ? '': latDB.toFixed(2)} Longitude: {address === '' ? '': lngDB.toFixed(2)}</p> */}
 
-          <p className="geolocation_info"> 
-            <span className="geolocation_header">Address: </span>
-              {address === '' ? '': address} 
-            <span className="geolocation_header">Latitude: </span>
-              {address === '' ? '': latDB.toFixed(2)} 
-            <span className="geolocation_header">Longitude: </span>
-              {address === '' ? '': lngDB.toFixed(2)}
-          </p>
-        </div>
+        <p className="geolocation_info"> 
+          <span className="geolocation_header">Address: </span>
+            {address === '' ? '': address} 
+          <span className="geolocation_header">Latitude: </span>
+            {address === '' ? '': latDB.toFixed(2)} 
+          <span className="geolocation_header">Longitude: </span>
+            {address === '' ? '': lngDB.toFixed(2)}
+        </p>
+      </div>
 
 
       </div>

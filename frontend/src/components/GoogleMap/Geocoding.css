@@ -26,10 +26,10 @@
   --dark-black-color: #383838; 
 }
 
-
 .trip_address_input {
   border-bottom: none;
-  width: 100%;
+  /* width: 100%; */
+  width: 600px;
   height: 48px;
   padding-left: 10px;
   border: 1px solid var(--grey-color);
@@ -94,7 +94,7 @@
 }
 
 .addaddress_button_container {
-  background-color: pink;
+  /* background-color: pink; */
   padding: 10px 0;
   display: flex;
   justify-content: flex-end;

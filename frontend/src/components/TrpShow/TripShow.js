@@ -142,12 +142,22 @@ const manageCurrentTrip = (props) => {
   const collaboratorAdd = () => {
     return (
       <form onSubmit={e => e.preventDefault()}>
-      <input type="text" onChange={e => setCollab(e.target.value)}>
-            </input>
-        <button onClick={e => {e.preventDefault(); handleCollabSubmit(e)}}>
-          Add Friend to Trip
-        </button>
-        </form>
+
+        <input 
+          className="createtrip_input"
+          type="text" 
+          onChange={e => setCollab(e.target.value)}
+          placeholder="Friend's Email"
+        />
+
+        <div className="addfriends_container">
+          <button 
+            className='addfriends_button'
+            onClick={e => {e.preventDefault(); handleCollabSubmit(e)}}>
+            Add Friend to Trip
+          </button>
+        </div>
+      </form>
   
     )
 }
@@ -199,14 +209,22 @@ const collaboratorsList = () => {
             </div>
           </div>
 
-            <p className='tripshowinfoitem' id='tripshowtripdescription'>{currentTrip.description}</p>
-            {/* <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{currentTrip.collaborators?.map(e => (<li>{e.username}</li>))}</ul> */}
-            <div className='tripshowinfoitem' id='tripshowtripcollaborators'>{CollabList({currentTrip: currentTrip, users: allUsers})}</div>
+          <div className='tripshow_description_container'><p className='tripshowinfoitem' id='tripshowtripdescription'>{currentTrip.description}</p></div>
+          {/* <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{currentTrip.collaborators?.map(e => (<li>{e.username}</li>))}</ul> */}
+          <div className='tripshowinfoitem' id='tripshowtripcollaborators'>
+            {CollabList({currentTrip: currentTrip, users: allUsers})}
+          </div>
 
-            <p className='tripshowinfoitem' id='tripshowstartdate'> <span>Begins</span> {startDateString} <span>Ends</span> {endDateString}</p>
-            <div onClick={e => setShowCollab(true)}>Add A Friend</div>
-            {showCollab && 
-            collaboratorAdd()}
+          <p className='tripshowinfoitem' id='tripshowstartdate'> <span>Begins</span> {startDateString} <span>Ends</span> {endDateString}</p>
+            
+            <div 
+              className='addfriend_container'
+              onClick={e => setShowCollab(true)}>
+              <span className='addfriend_span'>Add A Friend</span>
+            </div>
+
+            {showCollab && collaboratorAdd()}
+            
             <ul className="trip_show_images_ul">
               {currentTrip.imageUrls?.map(photo => {
                 return (              

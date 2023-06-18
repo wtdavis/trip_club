@@ -15,7 +15,7 @@ import CollabList from '../Collaborator/CollabList';
 const TripFormModal = (props) => {
   const {setShowCreateTripModal} = props;
   const currentTrip = (props.currentTrip ? props.currentTrip : null)
-  debugger
+  // debugger
   const events = useSelector(state => state.events)
   // const Geocoding = lazy(() => import('../GoogleMap/Geocoding'));
     
@@ -280,22 +280,14 @@ const TripFormModal = (props) => {
               onChange={e => {setDescription(e.target.value); handleChange()}}
               placeholder="Enter a Description"
             />
-
-<input 
-                // id="createtrip_input_addfriends"
-                className="createtrip_input"
-                type='text'
-                value={currCollaborator}
-                onChange={e => {setCurrCollaborator(e.target.value); handleChange()}}
-                placeholder="Friend's Email"
-              />
+            
             {submitErrors && 
             <p className="submiterror">{tripErrors.description}</p>}
 
             <div className="trip_date_container">
               <p className="tripformsubheader">Trip Start Date:</p>
               <input 
-                className="createtrip_input" 
+                className="createtrip_input date" 
                 type="date" 
                 value={startDate} 
                 onChange={e => {setStartDate(e.target.value); handleChange()}}
@@ -303,7 +295,7 @@ const TripFormModal = (props) => {
 
               <p className="tripformsubheader">Trip End Date:</p>
               <input 
-                className="createtrip_input" 
+                className="createtrip_input date" 
                 type="date" 
                 value={endDate} 
                 onChange={e => {setEndDate(e.target.value); handleChange()}}
@@ -370,7 +362,7 @@ const TripFormModal = (props) => {
             
 
             <div className="createtrip friends_container">
-              <p className="tripformsubheader">Add Friends:</p>
+              {/* <p className="tripformsubheader">Add Friends:</p> */}
               
               <input 
                 // id="createtrip_input_addfriends"

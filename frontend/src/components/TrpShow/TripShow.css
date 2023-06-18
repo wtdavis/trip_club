@@ -175,4 +175,64 @@
   }
 }
 
+.tripshow_description_container{
+    margin-top: 10px;
+}
+
+.createtrip_input {
+    border-bottom: none;
+    /* width: 100%; */
+    width: 440px;
+    height: 48px;
+    padding-left: 10px;
+    border: 1px solid var(--grey-color);
+    font-weight: 400;
+    font-size: var(--font-size);
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.addfriends_button {
+    cursor: pointer;
+    height: 48px;
+    font-size: var(--font-size);
+    font-weight: 800;
+    /* width: 500px; */
+    border-radius: 8px;
+    margin-top: 18px;
+    color: black;
+    -webkit-transition: all .5s ease-in-out;
+    moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .4s ease-in-out;
+
+    background-image: linear-gradient(to right, var(--blue-sands-brand), var(--lightblue-sands-brand), var(--yellow-sands-brand), var(--darkyellow-sands-brand));
+    box-shadow: 0 2px 10px 0 rgba(129, 234, 255, 0.5);
+    background-size: 300% 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: right;
+    float: right;
+}
+
+.addfriends_button:hover {
+    transform: scale(1.005); 
+    background-position: 100% 0;
+    -webkit-transition: all .5s ease-in-out;
+    moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+    box-shadow: 0 2px 10px 0 rgba(251, 192, 14, 0.5);
+}
+
+.addfriend_span {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.addfriend_container {
+    
+}
 
