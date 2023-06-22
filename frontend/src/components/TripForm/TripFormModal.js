@@ -73,13 +73,13 @@ const TripFormModal = (props) => {
       console.log(address);
     }
 
-    const handleUpdatedAddress = async (e) => {
-      e.preventDefault()
+    // const handleUpdatedAddress = async (e) => {
+    //   e.preventDefault()
 
-      console.log(address)
-      setAddress(updatedAddress)
-      console.log(address)
-    }
+    //   console.log(address)
+    //   setAddress(updatedAddress)
+    //   console.log(address)
+    // }
 
     let collaboratorIds = []
 
@@ -130,6 +130,7 @@ const TripFormModal = (props) => {
           collaboratorIds.push(user._id)
         }
       })
+      collaboratorIds.push(currentUser._id)
       formData.append('collaborators', JSON.stringify(collaboratorIds))
 
       let events = [];
