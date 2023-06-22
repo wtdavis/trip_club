@@ -124,11 +124,29 @@ const manageCurrentTrip = (props) => {
 
 
 
+  // const handleCollabSubmit = (e) => {
+
+  //   let users = Object.values(allUsers)
+  //   for (let i=0; i<users.length;i++) {
+  //     if (allUsers[users[i]._id].email === collab){
+  //       dispatch(tripActions.addCollaborator(currentTrip, users[i]._id))
+  //       .then(res => {
+
+  //         dispatch(tripActions.setCurrentTrip(res))})
+
+  //     }
+  //   }
+  // }
+  
   const handleCollabSubmit = (e) => {
 
     let users = Object.values(allUsers)
     for (let i=0; i<users.length;i++) {
-      if (allUsers[users[i]._id].email === collab){
+      if (
+        // check if email exists in database 
+        // and the currentTrip doesn't already have this email
+        allUsers[users[i]._id].email === collab && 
+        !currentTrip.collaborators.some(collaborator => collaborator.email === collab)){
         dispatch(tripActions.addCollaborator(currentTrip, users[i]._id))
         .then(res => {
 
@@ -138,7 +156,6 @@ const manageCurrentTrip = (props) => {
     }
   }
   
-
   const collaboratorAdd = () => {
     return (
       <form 
@@ -214,7 +231,7 @@ const collaboratorsList = () => {
           <div className='tripshow_description_container'><p className='tripshowinfoitem' id='tripshowtripdescription'>{currentTrip.description}</p></div>
           {/* <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{currentTrip.collaborators?.map(e => (<li>{e.username}</li>))}</ul> */}
           
-          <p className='tripshowinfoitem' id='tripshowstartdate'> <span>Begins</span> {startDateString} <span>Ends</span> {endDateString}</p>
+          <p className='tripshowinfoitem' id='tripshowstartdate'> <span>Begins:</span> {startDateString} <span>Ends:</span> {endDateString}</p>
             
             <div 
               className='addfriend_container'
