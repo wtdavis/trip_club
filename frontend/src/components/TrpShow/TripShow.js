@@ -141,7 +141,9 @@ const manageCurrentTrip = (props) => {
 
   const collaboratorAdd = () => {
     return (
-      <form onSubmit={e => e.preventDefault()}>
+      <form 
+        className='addfreinds_form'
+        onSubmit={e => e.preventDefault()}>
 
         <input 
           className="createtrip_input"
@@ -211,10 +213,7 @@ const collaboratorsList = () => {
 
           <div className='tripshow_description_container'><p className='tripshowinfoitem' id='tripshowtripdescription'>{currentTrip.description}</p></div>
           {/* <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{currentTrip.collaborators?.map(e => (<li>{e.username}</li>))}</ul> */}
-          <div className='tripshowinfoitem' id='tripshowtripcollaborators'>
-            {CollabList({currentTrip: currentTrip, users: allUsers})}
-          </div>
-
+          
           <p className='tripshowinfoitem' id='tripshowstartdate'> <span>Begins</span> {startDateString} <span>Ends</span> {endDateString}</p>
             
             <div 
@@ -223,7 +222,14 @@ const collaboratorsList = () => {
               <span className='addfriend_span'>Add A Friend</span>
             </div>
 
-            {showCollab && collaboratorAdd()}
+              {showCollab && collaboratorAdd()}
+              
+            <div 
+              className='tripshowinfoitem' 
+              id='tripshowtripcollaborators'>
+              {CollabList({currentTrip: currentTrip, users: allUsers})}
+            </div>
+            
             
             <ul className="trip_show_images_ul">
               {currentTrip.imageUrls?.map(photo => {

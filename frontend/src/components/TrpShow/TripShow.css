@@ -181,8 +181,8 @@
 
 .createtrip_input {
     border-bottom: none;
-    /* width: 100%; */
-    width: 440px;
+    width: 100%;
+    /* width: 440px; */
     height: 48px;
     padding-left: 10px;
     border: 1px solid var(--grey-color);
@@ -232,7 +232,16 @@
     font-size: 18px;
 }
 
-.addfriend_container {
-    
+.addfriend_container:hover {
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+    transform: scale(1.02);
 }
 
+#tripshowtripcollaborators{
+    display: block;
+}
+
+.addfreinds_form {
+    margin-bottom: 80px;
+}

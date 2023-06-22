@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Collaborator from "./Collaborator"
+import './CollabList.css'
+
 
 const CollabList = (props) => {
     
@@ -25,7 +27,15 @@ const CollabList = (props) => {
     return (
         <ul>    
             {users.map(user => {
-               return <li key={user._id}>{Collaborator({user: user, currentTrip: currentTrip, collabRemove: collabRemove})}</li>
+               return (
+                <div className="collaboratoritem">
+                    <li 
+                        className="collaboratoritem_li"
+                        key={user._id}>
+                        {Collaborator({user: user, currentTrip: currentTrip, collabRemove: collabRemove})}
+                    </li>
+                </div>
+               )
            })}
         </ul>
     )
