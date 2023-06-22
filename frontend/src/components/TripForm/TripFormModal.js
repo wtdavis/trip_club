@@ -67,10 +67,10 @@ const TripFormModal = (props) => {
       setLat(lat);
       setLng(lng);
       setAddress(address);
-      console.log('Message from TripFormModal')
-      console.log(lat);
-      console.log(lng);
-      console.log(address);
+      // console.log('Message from TripFormModal')
+      // console.log(lat);
+      // console.log(lng);
+      // console.log(address);
     }
 
     // const handleUpdatedAddress = async (e) => {
@@ -208,21 +208,27 @@ const TripFormModal = (props) => {
         })
     }
 
-    const handleAdd = (e) => { 
-        e.preventDefault()
-        setCollabErrors(true)
+    // const handleAdd = (e) => { 
+    //     e.preventDefault()
+    //     setCollabErrors(true)
 
-        allUsers.forEach((user) => {
-            if (currCollaborator === user.email) {
-                collaboratorIds = (collaboratorIds.concat(user._id))
-                const newArr = collaborators.slice()
-                const anotherNewArr = newArr.concat(user.email)
-                setCollaborators(anotherNewArr)
-                setCollabErrors(false)
-                setCurrCollaborator('')
-            }
-        })
-    }
+    //     allUsers.forEach((user) => {
+    //       //currCollaborator is an email from Friend's email input
+    //         if (currCollaborator === user.email) {
+    //             collaboratorIds = (collaboratorIds.concat(user._id))
+    //             // newArr is a copy of collaborators. 
+    //             // collaborators is an object with id, username, email  
+    //             // If a trip is new collaborators=[]
+    //             console.log(collaborators)
+    //             console.log(collaborators)
+    //             const newArr = collaborators.slice()
+    //             const anotherNewArr = newArr.concat(user.email)
+    //             setCollaborators(anotherNewArr)
+    //             setCollabErrors(false)
+    //             setCurrCollaborator('')
+    //         }
+    //     })
+    // }
     
     const handleChange = () => {
       setSubmitErrors(false);
@@ -362,11 +368,9 @@ const TripFormModal = (props) => {
             <p className="submiterror">{tripErrors.address}</p>}
             
 
-            <div className="createtrip friends_container">
-              {/* <p className="tripformsubheader">Add Friends:</p> */}
+            {/* <div className="createtrip friends_container">
               
               <input 
-                // id="createtrip_input_addfriends"
                 className="createtrip_input"
                 type='text'
                 value={currCollaborator}
@@ -388,10 +392,11 @@ const TripFormModal = (props) => {
               <div className="friends_list_container">
                 <div className="createtrip_header">Who goes on a trip:</div> 
                 
-                {/* <div>{CollaboratorsList()}</div> */}
                 <div> {CollabList({currentTrip: null, collaborators: collaborators, setCollaborators: setCollaborators})}</div>
 
-              </div>
+              </div> */}
+
+
               <button type="submit" className="continue_button" value={submit} onClick={e=> handleSubmit(e)}>Continue</button>
 
             {/* <input type="submit" className="tripformsubmit"  value={submit} onClick={e=> handleSubmit(e)}/> */}

@@ -27,10 +27,10 @@ function EventForm (props) {
         setLat(lat);
         setLng(lng);
         setAddress(address);
-        console.log('Message from EditForm')
-        console.log(lat);
-        console.log(lng);
-        console.log(address);
+        // console.log('Message from EditForm')
+        // console.log(lat);
+        // console.log(lng);
+        // console.log(address);
     }
 
     const handleSubmit = (e) => {
