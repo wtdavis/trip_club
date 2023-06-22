@@ -1,3 +1,10 @@
+.collaboratoritem{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
 .collaboratoritem_li {
   /* display: inline; */
   display: grid;
@@ -5,5 +12,5 @@
   grid-template-columns: 2fr 1fr 1fr; 
   gap: 10px;
   text-align: left;
-  width: 60%;
+  width: 70%;
 }

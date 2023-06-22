@@ -30,7 +30,9 @@ const Collaborator = (props) => {
                     <p>{currentUser.email}</p>
                     <p>{currentUser.username}</p>
                     <button onClick={handleDelete}>
-                        <i className="fa-solid fa-trash-can"></i>
+                        <i data-title="Remove" className="fa-solid fa-trash-can"></i>
+
+                        {/* <i className="fa-solid fa-trash-can"></i> */}
                     </button>
                 {/* </div> */}
             </>
