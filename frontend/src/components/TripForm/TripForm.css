@@ -179,31 +179,32 @@
 .trip_image_container {
   position: relative;
   right: -11px;
-  display: inline-block;
+  /* display: inline-block; */
+  display: flex;
   color: rgb(152, 151, 151);
   font-weight: 400;
   font-size: 18px;
   margin-top: 10px;
   margin-bottom: 10px;
-}
-
-.trip_image_container span {
-  margin-right: 10px;
-  color: black;
-  font-weight: 700;
-  font-size: 18px;
-  white-space: nowrap;
   align-items: center;
   justify-content: center;
 }
 
-.images_input {
-  position: absolute;
-  left: -9999px;
-  width: 50px;
+.trip_image_container span,
+.trip_image_container p {
+  margin-right: 10px;
+  margin-left: 10px;
+  color: black;
+  font-weight: 700;
+  font-size: 18px;
 }
 
-.trip_image_container label {
+.images_input {
+  position: absolute;
+  left: -9999px;  
+}
+
+.trip_image_container label{
   display: inline-block;
   padding: 10px 15px;
   background-image: linear-gradient(to right, var( --yellow-sands-brand), var(--darkyellow-sands-brand));

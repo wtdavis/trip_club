@@ -87,7 +87,8 @@ const TripFormModal = (props) => {
         return <Redirect to={{pathname:`/trips/show`, trip: newTrip}}/>
     }
     
-    const author = currentUser.id
+    // const author = currentUser.id
+    
 
     const handleFiles = async e => {
       const files = e.target.files;
@@ -235,23 +236,21 @@ const TripFormModal = (props) => {
       setCollabErrors(false)
     }
 
-    const CollaboratorsList = () => {
-        return (
-          // <div className="friends_ul_container">
-            <ul>
-                {collaborators.map(collaborator => {
-                    // debugger
-                    return (
-                        <div className="friendsemail_container">
-                          <span>{collaborator.email}</span>
-                          <button className="removefriend_button" value={collaborator} onClick={e => handleRemove(e)}>Remove</button>
-                        </div>
-                        )
-                    })}
-            </ul>
-          // </div>
-        )
-    }
+
+    // const CollaboratorsList = () => {
+    //     return (
+    //         <ul>
+    //             {collaborators.map(collaborator => {
+    //                 return (
+    //                     <div className="friendsemail_container">
+    //                       <span>{collaborator.email}</span>
+    //                       <button className="removefriend_button" value={collaborator} onClick={e => handleRemove(e)}>Remove</button>
+    //                     </div>
+    //                     )
+    //                 })}
+    //         </ul>
+    //     )
+    // }
 
 
 
@@ -327,7 +326,9 @@ const TripFormModal = (props) => {
                   accept=".jpg, .jpeg, .png" 
                   multiple 
                   onChange={handleFiles} 
-                />              
+                />   
+                <p className="images_selected">Images Selected: {imageUrls.length > 0 ? imageUrls.length : null}</p>
+                         
             </div>
 
             {/* <div>
