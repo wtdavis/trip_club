@@ -98,7 +98,7 @@
   font-weight: 800;
   width: 500px;
   border-radius: 8px;
-  margin-top: 18px;
+  /* margin-top: 18px; */
   color: black;
   -webkit-transition: all .5s ease-in-out;
   moz-transition: all .5s ease-in-out;

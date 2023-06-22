@@ -169,6 +169,9 @@ import './Geocoding.css';
         <p className="geolocation_info"> 
           <span className="geolocation_header">Address: </span>
             {address === '' ? '': address} 
+        </p>
+
+        <p className="geolocation_info"> 
           <span className="geolocation_header">Latitude: </span>
             {address === '' ? '': latDB.toFixed(2)} 
           <span className="geolocation_header">Longitude: </span>

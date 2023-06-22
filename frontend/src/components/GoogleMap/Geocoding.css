@@ -28,8 +28,8 @@
 
 .trip_address_input {
   border-bottom: none;
-  /* width: 100%; */
-  width: 600px;
+  width: 100%;
+  /* width: 600px; */
   height: 48px;
   padding-left: 10px;
   border: 1px solid var(--grey-color);
@@ -75,14 +75,15 @@
 }
 
 .geolocation_info {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  /* margin-bottom: 5px; */
   font-weight: 500;
   font-size: 18px;
   white-space: nowrap;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .geolocation_header {
