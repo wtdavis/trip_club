@@ -168,8 +168,6 @@ const TripFormModal = (props) => {
               setShowCreateTripModal(false)
             
           } else {
-            let errors = tripErrors
-
             setSubmitErrors(true)
           }}
         )

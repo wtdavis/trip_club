@@ -27,8 +27,10 @@ const TripShow = (props) => {
   const [eventList, setEventList] = useState([])
   const [showEditTripModal, setShowEditTripModal] = useState(false)
   const [collab, setCollab] = useState("")
+  const [collabError, setCollabError] = useState(false)
   const [showCollab, setShowCollab] = useState(false)
   const collaborators = useSelector(state => state.trips.current?.collaborators)
+  const tripErrors = useSelector(state => state.errors.trips)
 
   const [mapKey, setMapKey] = useState(0);
 
@@ -142,37 +144,42 @@ const manageCurrentTrip = (props) => {
 
     let users = Object.values(allUsers)
     for (let i=0; i<users.length;i++) {
-      if (
+      // check if the currentTrip already has this email
+      if (currentTrip?.collaborators.some(collaborator => collaborator.email === collab)) {
+        setCollabError(true)
+      }
+      else if (
         // check if email exists in database 
-        // and the currentTrip doesn't already have this email
-        allUsers[users[i]._id].email === collab && 
-        !currentTrip.collaborators.some(collaborator => collaborator.email === collab)){
-        dispatch(tripActions.addCollaborator(currentTrip, users[i]._id))
-        .then(res => {
-
-          dispatch(tripActions.setCurrentTrip(res))})
-
+        allUsers[users[i]._id].email === collab){
+          dispatch(tripActions.addCollaborator(currentTrip, users[i]._id))
+          .then(res => {
+            dispatch(tripActions.setCurrentTrip(res))
+          }) 
+          setCollabError(false)       
       }
     }
   }
-  
+
   const collaboratorAdd = () => {
     return (
       <form 
         className='addfreinds_form'
-        onSubmit={e => e.preventDefault()}>
+        onSubmit={e => e.preventDefault()}
+        >
 
         <input 
           className="createtrip_input"
           type="text" 
-          onChange={e => setCollab(e.target.value)}
+          onChange={e => setCollab(e.target.value) && setCollabError(false)}
           placeholder="Friend's Email"
         />
 
         <div className="addfriends_container">
           <button 
             className='addfriends_button'
-            onClick={e => {e.preventDefault(); handleCollabSubmit(e)}}>
+            onClick={e => {e.preventDefault(); handleCollabSubmit(e)}}
+            // onChange={setCollabError(false)}
+          >
             Add Friend to Trip
           </button>
         </div>
@@ -238,8 +245,9 @@ const collaboratorsList = () => {
               onClick={e => setShowCollab(true)}>
               <span className='addfriend_span'>Add A Friend</span>
             </div>
+            {collabError ? <p className="submiterror">This friend is already going to the trip</p> : null}
 
-              {showCollab && collaboratorAdd()}
+            {showCollab && collaboratorAdd()}
               
             <div 
               className='tripshowinfoitem' 
