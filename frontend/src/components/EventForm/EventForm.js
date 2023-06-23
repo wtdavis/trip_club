@@ -17,6 +17,7 @@ function EventForm (props) {
     const [startTime, setStartTime] = useState(event ? event.startTime : null)
     const [endTime, setEndTime] = useState(event ? event.endTime : null)
     const [eventFormTitle, setEventFormTitle] = useState(event ? "Edit Event" : "Create a New Event!")
+    const [eventContinueButton, setEventContinueButton] = useState(event ? "Edit Event" : "Create Event")
     // set location to App Academy office by default
     const [lat, setLat] = useState(event ? event.lat : 40.73631643149453);
     const [lng, setLng] = useState(event ? event.lng : -73.99376925185645);
@@ -130,7 +131,8 @@ return(
                 // value={submit} 
                 onClick={e=> handleSubmit(e)}
             >
-                Create Event
+                {eventContinueButton}
+                {/* Create Event */}
             </button>
         </form>
     </div>

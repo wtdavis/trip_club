@@ -124,22 +124,6 @@ const manageCurrentTrip = (props) => {
     return ele1 - ele2
   }
 
-
-
-  // const handleCollabSubmit = (e) => {
-
-  //   let users = Object.values(allUsers)
-  //   for (let i=0; i<users.length;i++) {
-  //     if (allUsers[users[i]._id].email === collab){
-  //       dispatch(tripActions.addCollaborator(currentTrip, users[i]._id))
-  //       .then(res => {
-
-  //         dispatch(tripActions.setCurrentTrip(res))})
-
-  //     }
-  //   }
-  // }
-  
   const handleCollabSubmit = (e) => {
 
     let users = Object.values(allUsers)
@@ -170,7 +154,8 @@ const manageCurrentTrip = (props) => {
         <input 
           className="createtrip_input"
           type="text" 
-          onChange={e => setCollab(e.target.value) && setCollabError(false)}
+          // onChange={e => setCollab(e.target.value) && setCollabError(false)}
+          onChange={e => setCollab(e.target.value)}
           placeholder="Friend's Email"
         />
 
@@ -178,7 +163,6 @@ const manageCurrentTrip = (props) => {
           <button 
             className='addfriends_button'
             onClick={e => {e.preventDefault(); handleCollabSubmit(e)}}
-            // onChange={setCollabError(false)}
           >
             Add Friend to Trip
           </button>
