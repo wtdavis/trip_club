@@ -27,8 +27,10 @@ const TripShow = (props) => {
   const [eventList, setEventList] = useState([])
   const [showEditTripModal, setShowEditTripModal] = useState(false)
   const [collab, setCollab] = useState("")
+  const [collabError, setCollabError] = useState(false)
   const [showCollab, setShowCollab] = useState(false)
   const collaborators = useSelector(state => state.trips.current?.collaborators)
+  const tripErrors = useSelector(state => state.errors.trips)
 
   const [mapKey, setMapKey] = useState(0);
 
@@ -122,32 +124,50 @@ const manageCurrentTrip = (props) => {
     return ele1 - ele2
   }
 
-
-
   const handleCollabSubmit = (e) => {
 
     let users = Object.values(allUsers)
     for (let i=0; i<users.length;i++) {
-      if (allUsers[users[i]._id].email === collab){
-        dispatch(tripActions.addCollaborator(currentTrip, users[i]._id))
-        .then(res => {
-
-          dispatch(tripActions.setCurrentTrip(res))})
-
+      // check if the currentTrip already has this email
+      if (currentTrip?.collaborators.some(collaborator => collaborator.email === collab)) {
+        setCollabError(true)
+      }
+      else if (
+        // check if email exists in database 
+        allUsers[users[i]._id].email === collab){
+          dispatch(tripActions.addCollaborator(currentTrip, users[i]._id))
+          .then(res => {
+            dispatch(tripActions.setCurrentTrip(res))
+          }) 
+          setCollabError(false)       
       }
     }
   }
-  
 
   const collaboratorAdd = () => {
     return (
-      <form onSubmit={e => e.preventDefault()}>
-      <input type="text" onChange={e => setCollab(e.target.value)}>
-            </input>
-        <button onClick={e => {e.preventDefault(); handleCollabSubmit(e)}}>
-          Add Friend to Trip
-        </button>
-        </form>
+      <form 
+        className='addfreinds_form'
+        onSubmit={e => e.preventDefault()}
+        >
+
+        <input 
+          className="createtrip_input"
+          type="text" 
+          // onChange={e => setCollab(e.target.value) && setCollabError(false)}
+          onChange={e => setCollab(e.target.value)}
+          placeholder="Friend's Email"
+        />
+
+        <div className="addfriends_container">
+          <button 
+            className='addfriends_button'
+            onClick={e => {e.preventDefault(); handleCollabSubmit(e)}}
+          >
+            Add Friend to Trip
+          </button>
+        </div>
+      </form>
   
     )
 }
@@ -198,15 +218,28 @@ const collaboratorsList = () => {
               </button>
             </div>
           </div>
-      
-            <p className='tripshowinfoitem' id='tripshowtripdescription'>{currentTrip.description}</p>
-            {/* <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{currentTrip.collaborators?.map(e => (<li>{e.username}</li>))}</ul> */}
-            <div className='tripshowinfoitem' id='tripshowtripcollaborators'>{CollabList({currentTrip: currentTrip, users: allUsers})}</div>
 
-            <p className='tripshowinfoitem' id='tripshowstartdate'> <span>Begins</span> {startDateString} <span>Ends</span> {endDateString}</p>
-            <div onClick={e => setShowCollab(true)}>Add A Friend</div>
-            {showCollab && 
-            collaboratorAdd()}
+          <div className='tripshow_description_container'><p className='tripshowinfoitem' id='tripshowtripdescription'>{currentTrip.description}</p></div>
+          {/* <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{currentTrip.collaborators?.map(e => (<li>{e.username}</li>))}</ul> */}
+          
+          <p className='tripshowinfoitem' id='tripshowstartdate'> <span>Begins:</span> {startDateString} <span>Ends:</span> {endDateString}</p>
+            
+            <div 
+              className='addfriend_container'
+              onClick={e => setShowCollab(true)}>
+              <span className='addfriend_span'>Add A Friend</span>
+            </div>
+            {collabError ? <p className="submiterror">This friend is already going to the trip</p> : null}
+
+            {showCollab && collaboratorAdd()}
+              
+            <div 
+              className='tripshowinfoitem' 
+              id='tripshowtripcollaborators'>
+              {CollabList({currentTrip: currentTrip, users: allUsers})}
+            </div>
+            
+            
             <ul className="trip_show_images_ul">
               {currentTrip.imageUrls?.map(photo => {
                 return (              

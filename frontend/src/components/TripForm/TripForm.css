@@ -44,7 +44,7 @@
 .createtrip_header {
   font-weight: 800;
   font-size: 20px;
-  margin-top: 25px;
+  /* margin-top: 25px; */
   margin-bottom: 10px;
   display: flex;
   justify-content: center;
@@ -61,7 +61,8 @@
 
 .createtrip_input {
   border-bottom: none;
-  width: 100%;
+  /* width: 100%; */
+  width: 600px;
   height: 48px;
   padding-left: 10px;
   border: 1px solid var(--grey-color);
@@ -94,6 +95,10 @@
   right: -4px;
 }
 
+.createtrip_input.date{
+  width: 100%;
+}
+
 .tripformsubheader {
   text-align: center;
   font-weight: 700;
@@ -102,14 +107,14 @@
   margin-right: 10px;
 }
 
-.continue_button, .addfriends_button {
+.continue_button {
   cursor: pointer;
   height: 48px;
   font-size: var(--font-size);
   font-weight: 800;
   width: 500px;
   border-radius: 8px;
-  margin-top: 18px;
+  /* margin-top: 18px; */
   color: black;
   -webkit-transition: all .5s ease-in-out;
   moz-transition: all .5s ease-in-out;
@@ -121,8 +126,7 @@
   background-size: 300% 100%;
 }
 
-.continue_button:hover,
-.addfriends_button:hover{
+.continue_button:hover {
   transform: scale(1.005); 
   background-position: 100% 0;
   -webkit-transition: all .5s ease-in-out;
@@ -175,31 +179,32 @@
 .trip_image_container {
   position: relative;
   right: -11px;
-  display: inline-block;
+  /* display: inline-block; */
+  display: flex;
   color: rgb(152, 151, 151);
   font-weight: 400;
   font-size: 18px;
   margin-top: 10px;
   margin-bottom: 10px;
-}
-
-.trip_image_container span {
-  margin-right: 10px;
-  color: black;
-  font-weight: 700;
-  font-size: 18px;
-  white-space: nowrap;
   align-items: center;
   justify-content: center;
 }
 
-.images_input {
-  position: absolute;
-  left: -9999px;
-  width: 50px;
+.trip_image_container span,
+.trip_image_container p {
+  margin-right: 10px;
+  margin-left: 10px;
+  color: black;
+  font-weight: 700;
+  font-size: 18px;
 }
 
-.trip_image_container label {
+.images_input {
+  position: absolute;
+  left: -9999px;  
+}
+
+.trip_image_container label{
   display: inline-block;
   padding: 10px 15px;
   background-image: linear-gradient(to right, var( --yellow-sands-brand), var(--darkyellow-sands-brand));
@@ -216,4 +221,64 @@
   box-shadow: #383838;
   box-shadow: 0 2px 10px 0 rgba(169, 171, 171, 0.5);
 
+}
+
+.trip_date_container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.tripformsubheader {
+  margin-left: 10px;
+  margin-right: 5px;
+  font-weight: 700;
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+/* .addfriends_container {
+  width: 100%;
+  background-color: pink;
+  padding: 10px 0;
+  display: flex;
+  justify-content: flex-end;
+} */
+
+#createtrip_input_addfriends{
+  width: 100%;
+}
+
+.addfriends_button {
+  cursor: pointer;
+  height: 48px;
+  font-size: var(--font-size);
+  font-weight: 800;
+  /* width: 500px; */
+  border-radius: 8px;
+  margin-top: 18px;
+  color: black;
+  -webkit-transition: all .5s ease-in-out;
+  moz-transition: all .5s ease-in-out;
+  -o-transition: all .5s ease-in-out;
+  transition: all .4s ease-in-out;
+
+  background-image: linear-gradient(to right, var(--blue-sands-brand), var(--lightblue-sands-brand), var(--yellow-sands-brand), var(--darkyellow-sands-brand));
+  box-shadow: 0 2px 10px 0 rgba(129, 234, 255, 0.5);
+  background-size: 300% 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: right;
+  float: right;
+}
+
+.addfriends_button:hover {
+  transform: scale(1.005); 
+  background-position: 100% 0;
+  -webkit-transition: all .5s ease-in-out;
+  moz-transition: all .5s ease-in-out;
+  -o-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+  box-shadow: 0 2px 10px 0 rgba(251, 192, 14, 0.5);
 }

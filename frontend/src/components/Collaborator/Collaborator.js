@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux"
 import { fetchTrip, removeCollaborator } from "../../store/trips"
+import './Collaborator.css'
 
 const Collaborator = (props) => {
     const collabRemove = props.collabRemove
@@ -24,13 +25,19 @@ const Collaborator = (props) => {
         //     </div>
         
         return (
-            <div className="collaboratoritem">
-                <p>{currentUser?.email}</p>
-                <p>{currentUser?.username}</p>
-                <button onClick={handleDelete}>
-                    <i class="fa-solid fa-trash-can"></i>
-                </button>
-            </div>
+
+            <>
+                {/* <div className="collaboratoritem"> */}
+                    <p>{currentUser.email}</p>
+                    <p>{currentUser.username}</p>
+                    <button onClick={handleDelete}>
+                        <i data-title="Remove" className="fa-solid fa-trash-can"></i>
+
+                        {/* <i className="fa-solid fa-trash-can"></i> */}
+                    </button>
+                {/* </div> */}
+            </>
+
         )
 
     }

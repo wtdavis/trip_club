@@ -64,7 +64,7 @@ function LoginForm () {
 
 
       <div id="demo-button-div">
-        <button className="demo-button" onClick={handleDemo}>Continue with Demo User</button>
+        <button className="demo_button" onClick={handleDemo}>Continue with Demo User</button>
       </div>
     </form>
 

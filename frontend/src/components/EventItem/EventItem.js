@@ -47,10 +47,8 @@ function EventItem (props)  {
             {/* <p className="eventitemitem">{startTime}</p>
             <p className="eventitemitem">{endTime}</p> */}
             <div className="eventitemitem_container">
-
-              <span className="eventitemitem date">{startTime}</span>
-              -
-              <span className="eventitemitem">{endTime}</span>
+              <span className="eventitemitem_date"><span>Begins: </span> {startTime === 'Wed Dec 31 1969' ? null : startTime}</span>
+              <span className="eventitemitem_date"><span>   Ends: </span> {endTime === 'Wed Dec 31 1969' ? null : endTime}</span>
             </div>
 
             <div className='google-map-container'>

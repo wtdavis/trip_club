@@ -77,7 +77,7 @@ export const updateTripEvent = (event) => async (dispatch) => {
             body: JSON.stringify(event)
         } )
         let data = await res.json()
-        debugger
+        // debugger
         dispatch(receiveEvent(event))
     } catch (err) {
         return err

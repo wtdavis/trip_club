@@ -15,7 +15,7 @@ import CollabList from '../Collaborator/CollabList';
 const TripFormModal = (props) => {
   const {setShowCreateTripModal} = props;
   const currentTrip = (props.currentTrip ? props.currentTrip : null)
-  debugger
+  // debugger
   const events = useSelector(state => state.events)
   // const Geocoding = lazy(() => import('../GoogleMap/Geocoding'));
     
@@ -70,25 +70,26 @@ const TripFormModal = (props) => {
       setLat(lat);
       setLng(lng);
       setAddress(address);
-      console.log('Message from TripFormModal')
-      console.log(lat);
-      console.log(lng);
-      console.log(address);
+      // console.log('Message from TripFormModal')
+      // console.log(lat);
+      // console.log(lng);
+      // console.log(address);
     }
 
-    const handleUpdatedAddress = async (e) => {
-      e.preventDefault()
+    // const handleUpdatedAddress = async (e) => {
+    //   e.preventDefault()
 
-      console.log(address)
-      setAddress(updatedAddress)
-      console.log(address)
-    }
+    //   console.log(address)
+    //   setAddress(updatedAddress)
+    //   console.log(address)
+    // }
 
     let collaboratorIds = []
 
     
     
-    const author = currentUser.id
+    // const author = currentUser.id
+    
 
     const handleFiles = async e => {
       const files = e.target.files;
@@ -122,6 +123,13 @@ const TripFormModal = (props) => {
       }
 
       let collaboratorIds = arr
+
+      allUsers.forEach(user => {
+        if (collaborators.includes(user.email)) {
+          collaboratorIds.push(user._id)
+        }
+      })
+      collaboratorIds.push(currentUser._id)
 
       formData.append('collaborators', JSON.stringify(collaboratorIds))
 
@@ -158,8 +166,6 @@ const TripFormModal = (props) => {
               handleRedirect(true)
             
           } else {
-            let errors = tripErrors
-
             setSubmitErrors(true)
           }}
         )
@@ -202,27 +208,54 @@ const TripFormModal = (props) => {
     }
 
 
-    const handleAdd = (e) => { 
-        e.preventDefault()
-        setCollabErrors(true)
+    // const handleAdd = (e) => { 
+    //     e.preventDefault()
+    //     setCollabErrors(true)
 
-        allUsers.forEach((user) => {
-            if (currCollaborator === user.email) {
-                collaboratorIds = (collaboratorIds.concat(user._id))
-                const newArr = collaborators.slice()
-                const anotherNewArr = newArr.concat(user.email)
-                setCollaborators(anotherNewArr)
-                setCollabErrors(false)
-                setCurrCollaborator('')
-            }
-        })
-    }
+    //     allUsers.forEach((user) => {
+    //       //currCollaborator is an email from Friend's email input
+    //         if (currCollaborator === user.email) {
+    //             collaboratorIds = (collaboratorIds.concat(user._id))
+    //             // newArr is a copy of collaborators. 
+    //             // collaborators is an object with id, username, email  
+    //             // If a trip is new collaborators=[]
+    //             console.log(collaborators)
+    //             console.log(collaborators)
+    //             const newArr = collaborators.slice()
+    //             const anotherNewArr = newArr.concat(user.email)
+    //             setCollaborators(anotherNewArr)
+    //             setCollabErrors(false)
+    //             setCurrCollaborator('')
+    //         }
+    //     })
+    // }
+
     
 
     const handleChange = () => {
       setSubmitErrors(false);
       setCollabErrors(false)
     }
+
+
+
+    // const CollaboratorsList = () => {
+    //     return (
+    //         <ul>
+    //             {collaborators.map(collaborator => {
+    //                 return (
+    //                     <div className="friendsemail_container">
+    //                       <span>{collaborator.email}</span>
+    //                       <button className="removefriend_button" value={collaborator} onClick={e => handleRemove(e)}>Remove</button>
+    //                     </div>
+    //                     )
+    //                 })}
+    //         </ul>
+    //     )
+    // }
+
+
+
 
     
     
@@ -262,31 +295,30 @@ const TripFormModal = (props) => {
               onChange={e => {setDescription(e.target.value); handleChange()}}
               placeholder="Enter a Description"
             />
+            
             {submitErrors && 
             <p className="submiterror">{tripErrors.description}</p>}
 
-            <div className="createtrip_date">
+            <div className="trip_date_container">
               <p className="tripformsubheader">Trip Start Date:</p>
               <input 
+                className="createtrip_input date" 
                 type="date" 
-                className="createtrip_input" 
                 value={startDate} 
                 onChange={e => {setStartDate(e.target.value); handleChange()}}
               />
-            </div>
 
-            {submitErrors && 
-            <p className="submiterror">{tripErrors.startDate}</p>}
-
-            <div className="createtrip date">
               <p className="tripformsubheader">Trip End Date:</p>
               <input 
-                className="createtrip_input" 
+                className="createtrip_input date" 
                 type="date" 
                 value={endDate} 
                 onChange={e => {setEndDate(e.target.value); handleChange()}}
               />
             </div>
+
+            {submitErrors && 
+            <p className="submiterror">{tripErrors.startDate}</p>}
 
             {submitErrors && 
             <p className="submiterror">{tripErrors.endDate}</p>}
@@ -303,7 +335,9 @@ const TripFormModal = (props) => {
                   accept=".jpg, .jpeg, .png" 
                   multiple 
                   onChange={handleFiles} 
-                />              
+                />   
+                <p className="images_selected">Images Selected: {imageUrls.length > 0 ? imageUrls.length : null}</p>
+                         
             </div>
 
             {/* <div>
@@ -344,8 +378,7 @@ const TripFormModal = (props) => {
             <p className="submiterror">{tripErrors.address}</p>}
             
 
-            <div className="createtrip friends_container">
-              <p className="tripformsubheader">Add Friends:</p>
+            {/* <div className="createtrip friends_container">
               
               <input 
                 className="createtrip_input"
@@ -369,10 +402,11 @@ const TripFormModal = (props) => {
               <div className="friends_list_container">
                 <div className="createtrip_header">Who goes on a trip:</div> 
                 
-                {/* <div>{CollaboratorsList()}</div> */}
                 <div> {CollabList({currentTrip: null, collaborators: collaborators, setCollaborators: setCollaborators})}</div>
 
-              </div>
+              </div> */}
+
+
               <button type="submit" className="continue_button" value={submit} onClick={e=> handleSubmit(e)}>Continue</button>
 
             {/* <input type="submit" className="tripformsubmit"  value={submit} onClick={e=> handleSubmit(e)}/> */}

@@ -17,6 +17,7 @@ function EventForm (props) {
     const [startTime, setStartTime] = useState(event ? event.startTime : null)
     const [endTime, setEndTime] = useState(event ? event.endTime : null)
     const [eventFormTitle, setEventFormTitle] = useState(event ? "Edit Event" : "Create a New Event!")
+    const [eventContinueButton, setEventContinueButton] = useState(event ? "Edit Event" : "Create Event")
     // set location to App Academy office by default
     const [lat, setLat] = useState(event ? event.lat : 40.73631643149453);
     const [lng, setLng] = useState(event ? event.lng : -73.99376925185645);
@@ -27,10 +28,10 @@ function EventForm (props) {
         setLat(lat);
         setLng(lng);
         setAddress(address);
-        console.log('Message from EditForm')
-        console.log(lat);
-        console.log(lng);
-        console.log(address);
+        // console.log('Message from EditForm')
+        // console.log(lat);
+        // console.log(lng);
+        // console.log(address);
     }
 
     const handleSubmit = (e) => {
@@ -69,6 +70,27 @@ function EventForm (props) {
 
     }
 
+    const formattedDate = (timeVariable) => {
+        const date = new Date(timeVariable)
+        return(
+            date.toLocaleDateString("en-US", {
+                month: "2-digit",
+                day: "2-digit",
+                year: "numeric"
+        }))
+    }
+
+    const formattedTime = (timeVariable) => {
+        const date = new Date(timeVariable)
+        return(
+            date.toLocaleDateString("en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true
+        }))
+    }
+
+
 
 return(
     <div className="eventformdiv">
@@ -102,9 +124,20 @@ return(
                 <input 
                     className="createevent_input" 
                     type="datetime-local" 
+                    // type={startTime !== null ? 'text' : 'datetime-local'}
                     value={startTime }
                     onChange={e => setStartTime(e.target.value)}
-                />
+                    // placeholder={startTime !== null ? startTime : ''}
+                    // onBlur={e => {
+                    //     e.target.type = 'text';
+                    //     e.target.placeholder = startTime !== null ? startTime : 'time';
+                    // }}
+                    // onFocus={e => {
+                    //     e.target.type = 'datetime-local';
+                    //     e.target.placeholder = 'time';
+                    // }}
+                    // placeholder={startTime !== null ? `${formattedDate(startTime)} ${formattedTime(startTime)}` : "YOYOYO"}
+                    />
             </div>
             
             <div className="event_date_container">
@@ -120,7 +153,7 @@ return(
             {/* <Calendar/> */}
 
             <div>
-              <Geocoding locationUpdate={handleLocation}/>
+              <Geocoding locationUpdate={handleLocation} event={event}/>
             </div>
 
             <br/>
@@ -130,7 +163,8 @@ return(
                 // value={submit} 
                 onClick={e=> handleSubmit(e)}
             >
-                Create Event
+                {eventContinueButton}
+                {/* Create Event */}
             </button>
         </form>
     </div>

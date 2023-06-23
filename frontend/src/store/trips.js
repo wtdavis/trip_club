@@ -112,8 +112,7 @@ export const fetchTrip = id => async dispatch => {
 
 export const addCollaborator = (trip, collaborator) => async (dispatch) => {
 
-    trip.collaborators = trip.collaborators.concat(collaborator)
-  
+    trip.collaborators = trip.collaborators.concat(collaborator)  
     let collabs = []
     trip.collaborators.forEach(collaborator => {
     if (collaborator instanceof(Object)) {

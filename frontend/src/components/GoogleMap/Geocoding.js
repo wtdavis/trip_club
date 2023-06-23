@@ -3,22 +3,22 @@ import { useSelector } from "react-redux";
 import './Geocoding.css';
 
 // const Geocoding = ({ locationUpdate }) => {
-  const Geocoding = ({ currentTrip, locationUpdate }) => {
+  const Geocoding = ({ currentTrip, locationUpdate, event }) => {
   // const currentTrip = useSelector(state => state.trips.current)
 
   const [geocodeData, setGeocodeData] = useState(null);
-  const [address, setAddress] = useState(currentTrip ? currentTrip.address : "");
-  const [updatedAddress, setUpdatedAddress] = useState(currentTrip ? currentTrip.address : "");
-debugger
+  const [address, setAddress] = useState(currentTrip ? currentTrip.address : event ? event.address : "");
+  const [updatedAddress, setUpdatedAddress] = useState(currentTrip ? currentTrip.address : event ? event.address : "");
+// debugger
   const apiKey = process.env.REACT_APP_MAPS_API_KEY; 
   // let address = '22 Main st Boston MA';
   // let address = '1600 Amphitheatre Parkway, Mountain View, CA'
   // const inputRef = useRef();
-  const autoCompleteRef = useRef();
-  const options = {
-   fields: ["address_components", "geometry", "icon", "name", "formatted_address"],
-   types: ["establishment"]
-  };
+  // const autoCompleteRef = useRef();
+  // const options = {
+  //  fields: ["address_components", "geometry", "icon", "name", "formatted_address"],
+  //  types: ["establishment"]
+  // };
    
   // autoCompleteRef.current = new window.google.maps.places.Autocomplete(
   //   // autoCompleteRef.current = new google.maps.places.Autocomplete(
@@ -98,29 +98,86 @@ debugger
     console.log(geocodeData)
 
     return (
-      <div>
-        <input
-          id="address_input"
-          className="trip_address_input"
-          type='text'
-          onChange={e => {setUpdatedAddress(e.target.value)}}
-          placeholder={address === '' ? "Address" : null}
-          // placeholder={currentTrip ? currentTrip.address : "Address"}
-          // ref={inputRef}
-          ref={autoCompleteRef}          
-          value={updatedAddress}
-        />
+      // <div className="geocoding_container">
+      //   <input
+      //     id="address_input"
+      //     className="trip_address_input"
+      //     type='text'
+      //     onChange={e => {setUpdatedAddress(e.target.value)}}
+      //     placeholder={address === '' ? "Address" : null}
+      //     // placeholder={currentTrip ? currentTrip.address : "Address"}
+      //     // ref={inputRef}
+      //     // ref={autoCompleteRef}          
+      //     value={updatedAddress}
+      //   />
 
+      //   <div class="addaddress_button_container">          
+      //     <button 
+      //       className="addaddress_button"
+      //       onClick={handleUpdatedAddress}
+      //     >
+      //       Update Address
+      //     </button>
+      //   </div>
+
+      //   <div>
+      //     {/* <p>Latitude: {latDB}, Longitude: {lngDB}</p> */}
+      //     {/* <p className="tripformsubheader">Address: {address === '' ? '': address}</p> */}
+      //     {/* <p className="tripformsubheader">Latitude: {address === '' ? '': latDB.toFixed(2)} Longitude: {address === '' ? '': lngDB.toFixed(2)}</p> */}
+
+      //     <p className="geolocation_info"> 
+      //       <span className="geolocation_header">Address: </span>
+      //         {address === '' ? '': address} 
+      //       <span className="geolocation_header">Latitude: </span>
+      //         {address === '' ? '': latDB.toFixed(2)} 
+      //       <span className="geolocation_header">Longitude: </span>
+      //         {address === '' ? '': lngDB.toFixed(2)}
+      //     </p>
+      //   </div>
+
+
+      // </div>
+
+      <div className="geocoding_container">
+        {/* <div> */}
+      <input
+        // id="address_input"
+        className="trip_address_input"
+        type='text'
+        onChange={e => {setUpdatedAddress(e.target.value)}}
+        placeholder={address === '' ? "Address" : null}
+        // placeholder={currentTrip ? currentTrip.address : "Address"}
+        // ref={inputRef}
+        // ref={autoCompleteRef}          
+        value={updatedAddress}
+      />
+
+      <div class="addaddress_button_container">          
         <button 
           className="addaddress_button"
           onClick={handleUpdatedAddress}
         >
           Update Address
         </button>
-        <p>Latitude: {latDB}, Longitude: {lngDB}</p>
-        <p>Address: {addressDB}</p>
-        <p>Latitude: {address === '' ? '': latDB} Longitude: {address === '' ? '': lngDB}</p>
+      </div>
 
+      <div>
+        {/* <p>Latitude: {latDB}, Longitude: {lngDB}</p> */}
+        {/* <p className="tripformsubheader">Address: {address === '' ? '': address}</p> */}
+        {/* <p className="tripformsubheader">Latitude: {address === '' ? '': latDB.toFixed(2)} Longitude: {address === '' ? '': lngDB.toFixed(2)}</p> */}
+
+        <p className="geolocation_info"> 
+          <span className="geolocation_header">Address: </span>
+            {address === '' ? '': address} 
+        </p>
+
+        <p className="geolocation_info"> 
+          <span className="geolocation_header">Latitude: </span>
+            {address === '' ? '': latDB.toFixed(2)} 
+          <span className="geolocation_header">Longitude: </span>
+            {address === '' ? '': lngDB.toFixed(2)}
+        </p>
+      </div>
 
 
       </div>
