@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from "react-redux";
 import './Geocoding.css';
 
-  const Geocoding = ({ currentTrip, locationUpdate, event, resetAddress }) => {
+  const Geocoding = ({ currentTrip, locationUpdate, event, resetAddress, setResetAddress }) => {
   // const currentTrip = useSelector(state => state.trips.current)
 
   const [geocodeData, setGeocodeData] = useState(null);
@@ -34,6 +34,7 @@ import './Geocoding.css';
     if (resetAddress) {
       setAddress('');
       setUpdatedAddress('');
+      setResetAddress(false)
     }
   }, [resetAddress]);
   
@@ -114,7 +115,6 @@ import './Geocoding.css';
     
     console.log(latDB, lngDB, addressDB);
     console.log(geocodeData)
-
     return (
       // <div className="geocoding_container">
       //   <input

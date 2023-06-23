@@ -170,7 +170,7 @@ return(
             {/* <Calendar/> */}
 
             <div>
-              <Geocoding locationUpdate={handleLocation} event={event} resetAddress={resetAddress}/>
+              <Geocoding locationUpdate={handleLocation} event={event} resetAddress={resetAddress} setResetAddress={setResetAddress}/>
             </div>
 
             <br/>
