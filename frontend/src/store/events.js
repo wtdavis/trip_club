@@ -132,10 +132,19 @@ export const deleteEvent = ({trip, eventId}) => async dispatch => {
     }); 
     let data = await res.json();
     // dispatch(removeEvent(eventId))
-    trip.events.splice(trip.events.indexOf(eventId), 1)
-    let newTrip = {...trip, events: trip.events}
+    // trip.events.splice(trip.events.indexOf(eventId), 1)
+    let tripEvents = []
+    debugger
+    if (res.ok){
+        for (let i=0; i<trip.events.length; i++) {
+            tripEvents = tripEvents.concat(trip.events[i]._id)
+        }
+    }
+    let newTrip = {...trip, events: tripEvents}
+    debugger
     dispatch(updateTrip(formDatify(newTrip)))
     .then(res => {
+        // dispatch(setCurrentTrip(res))
     })
 }
 
