@@ -20,8 +20,8 @@ const TripItemCarousel = ({trip}) => {
   const events = useSelector(state => state.trips.user[currentTrip._id].events)
   // debugger
   const tripEvents = (events ? Object.values(events).filter(e => e.trip === currentTrip._id) : [])
-  let lng = -73.99376925185645;
-  let lat = 40.73631643149453;
+  // let lng = -73.99376925185645;
+  // let lat = 40.73631643149453;
 
   const handleShow = (e) => {
     e.preventDefault();
@@ -51,7 +51,7 @@ const TripItemCarousel = ({trip}) => {
           </div>
 
           <div className='google_map_container'>
-              <GoogleMap lng={lng} lat={lat}/>
+              <GoogleMap lng={currentTrip.lng} lat={currentTrip.lat}/>
             </div>
 
 
