@@ -37,12 +37,13 @@
 }
 
 .tripshowtrippanel {
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     width: 45%;
     border: 2px solid var(--neutral );
     border-radius: 15px;
-    padding-bottom: 50px;
+    padding-bottom: 70px;
+    padding-left: 120px;
      
 }
 
