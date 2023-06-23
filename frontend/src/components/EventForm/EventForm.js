@@ -121,7 +121,7 @@ return(
             {/* <Calendar/> */}
 
             <div>
-              <Geocoding locationUpdate={handleLocation}/>
+              <Geocoding locationUpdate={handleLocation} event={event}/>
             </div>
 
             <br/>

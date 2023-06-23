@@ -3,12 +3,12 @@ import { useSelector } from "react-redux";
 import './Geocoding.css';
 
 // const Geocoding = ({ locationUpdate }) => {
-  const Geocoding = ({ currentTrip, locationUpdate }) => {
+  const Geocoding = ({ currentTrip, locationUpdate, event }) => {
   // const currentTrip = useSelector(state => state.trips.current)
 
   const [geocodeData, setGeocodeData] = useState(null);
-  const [address, setAddress] = useState(currentTrip ? currentTrip.address : "");
-  const [updatedAddress, setUpdatedAddress] = useState(currentTrip ? currentTrip.address : "");
+  const [address, setAddress] = useState(currentTrip ? currentTrip.address : event ? event.address : "");
+  const [updatedAddress, setUpdatedAddress] = useState(currentTrip ? currentTrip.address : event ? event.address : "");
 // debugger
   const apiKey = process.env.REACT_APP_MAPS_API_KEY; 
   // let address = '22 Main st Boston MA';
