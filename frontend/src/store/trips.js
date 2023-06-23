@@ -69,7 +69,7 @@ export const getTrips = state => {
 };
 
 
-const formDatify = (trip) => {
+export const formDatify = (trip) => {
   let data = new FormData()
   let keys = Object.keys(trip)
   for (let i=0;i<keys.length;i++){

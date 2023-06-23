@@ -54,22 +54,13 @@ const manageCurrentTrip = (props) => {
     let storageTrip
     if (props?.location.trip === undefined && !currentTrip) {
       manageCurrentTrip()
-      // storageTrip = JSON.parse(getStorageTrip())
-      // setTrip(storageTrip)
-      // dispatch(tripActions.setCurrentTrip(storageTrip))
     } else if (props?.location.trip !== undefined && !currentTrip) {
       storageTrip = props.location.trip
       manageCurrentTrip(storageTrip)
-      // setTrip(storageTrip)
-      // setStorageTrip(JSON.stringify(storageTrip))
-      // dispatch(tripActions.setCurrentTrip(storageTrip))
     } else {
      storageTrip = currentTrip
      manageCurrentTrip(storageTrip)
 
-      // setTrip(storageTrip);
-      // setStorageTrip(JSON.stringify(storageTrip))
-      // dispatch(tripActions.setCurrentTrip(storageTrip))
     };
     dispatch(eventActions.clearEvents())
     dispatch(eventActions.fetchTripEvents(trip._id))
@@ -79,12 +70,8 @@ const manageCurrentTrip = (props) => {
   }, [dispatch, currentTrip]
   )
 
-  // useEffect(() => {
-  // }, [currentTrip.lat, currentTrip.lng]);
-
   const users = useSelector(state => state.users);
   const currentUser = useSelector(state => state.session.user);
-
 
   const eventseventsevents = [new Date(2023, 3, 30), {id: "50505", startTime: new Date(2023, 3, 20)}, new Date(2023, 3, 18), new Date(2023, 3, 25)]
 
@@ -152,21 +139,20 @@ const manageCurrentTrip = (props) => {
     )
 }
 
-const collaboratorsList = () => {
+// const collaboratorsList = () => {
   
-  return (
-      <ul>
-        {collaborators?.map(collaborator => <li key={collaborator._id}>{collaborator._id}</li>)}
-      </ul>
-    )
-  }
+//   return (
+//       <ul>
+//         {collaborators?.map(collaborator => <li key={collaborator._id}>{collaborator._id}</li>)}
+//       </ul>
+//     )
+//   }
   
   let events;
   let allEvents;
   if (currentTrip && dateList.length){
     allEvents = Object.values(tripEvents).filter(ele => ele.trip === currentTrip._id)
     allEvents = [...allEvents, ...dateList]
-    // debugger
     events = allEvents.sort(compareDates)}
     
     const handleDeleteTrip = (e) => {
@@ -175,8 +161,6 @@ const collaboratorsList = () => {
       history.push("/profile")
     }
     
-    // {collaborators?.length && 
-    // collaboratorsList()}
 
 
     if (dateList.length && currentTrip) {return (
@@ -200,7 +184,6 @@ const collaboratorsList = () => {
           </div>
       
             <p className='tripshowinfoitem' id='tripshowtripdescription'>{currentTrip.description}</p>
-            {/* <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{currentTrip.collaborators?.map(e => (<li>{e.username}</li>))}</ul> */}
             <div className='tripshowinfoitem' id='tripshowtripcollaborators'>{CollabList({currentTrip: currentTrip, users: allUsers})}</div>
 
             <p className='tripshowinfoitem' id='tripshowstartdate'> <span>Begins</span> {startDateString} <span>Ends</span> {endDateString}</p>

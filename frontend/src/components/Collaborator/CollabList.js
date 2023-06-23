@@ -2,30 +2,29 @@ import { useState } from "react";
 import Collaborator from "./Collaborator"
 
 const CollabList = (props) => {
-    
+    const listType = props.type
     // const [usersArr, setUsersArr] = useState([])
     const setCollaborators = props.setCollaborators;    
-    let users = []
+    let collaborators = []
     let currentTrip
     if (props.currentTrip) {
         currentTrip = props.currentTrip
-        users = Object.values(currentTrip.collaborators)
-    } else {
+        collaborators = Object.values(currentTrip.collaborators)
+    } else if (props.type === "event") {
         // const setCollaborators = props.setCollaborators
-        users = props.collaborators
+        collaborators = props.collaborators
     }
   
-    // setUsersArr(users)
 
     const collabRemove = (user) => {
-        let updatedUsers = users.filter(collab => collab.email !== user.email)
+        let updatedUsers = collaborators.filter(collab => collab.email !== user.email)
         setCollaborators(updatedUsers)
-        debugger
     }
+    // debugger
 
     return (
         <ul>    
-            {users.map(user => {
+            {collaborators.map(user => {
                return <li key={user?._id}>{Collaborator({user: user, currentTrip: currentTrip, collabRemove: collabRemove})}</li>
            })}
         </ul>

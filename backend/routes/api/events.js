@@ -34,6 +34,7 @@ router.patch('/:id/edit', requireUser, async (req, res, next) => {
                     endTime: req.body.endTime,
                     description: req.body.description,
                     attendees: req.body.attendees,
+                    collaborators: req.body.collaborators,
                     title: req.body.title}
     try {
         if (!req.user._id === req.body.author) {

@@ -2,17 +2,19 @@ import { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import EventForm from '../EventForm/EventForm';
 import GoogleMap from '../GoogleMap'
-import { deleteEvent } from '../../store/events';
+import { addEventCollaborator, deleteEvent } from '../../store/events';
 import { useDispatch } from 'react-redux';
+import CollabList from '../Collaborator/CollabList';
 
 function EventItem (props)  {
   const dispatch = useDispatch()
   const event = props.event
   const currentTrip = props.currentTrip
+  const collaborators = props.event.collaborators
   // debugger
   const [showEventEditModal, setShowEventEditModal] = useState(false)
-  // let lng = -73.99376925185645;
-  // let lat = 40.73631643149453;
+  const [collab, setCollab] = useState("")
+
 
   let startTime = new Date(props.event.startTime).toDateString()
   let endTime = new Date(props.event.endTime).toDateString()
@@ -20,6 +22,20 @@ function EventItem (props)  {
   const handleDelete = () => {
     // debugger
     dispatch(deleteEvent({trip: currentTrip, eventId: event._id}))
+  }
+
+  const handleAddCollab = () => {
+    let allCollabs = Object.values(currentTrip.collaborators)
+    
+    for (let i=0;i<allCollabs.length;i++) {
+      let temp = allCollabs[i]
+       debugger
+      if (temp.username === collab) {
+        debugger
+        dispatch(addEventCollaborator(temp, event))
+        setCollab("")
+      }
+     }
   }
 
 
@@ -44,15 +60,17 @@ function EventItem (props)  {
           </div>
 
             <p className="eventitemitem description">{props.event.description}</p>
-            {/* <p className="eventitemitem">{startTime}</p>
-            <p className="eventitemitem">{endTime}</p> */}
             <div className="eventitemitem_container">
 
               <span className="eventitemitem date">{startTime}</span>
               -
               <span className="eventitemitem">{endTime}</span>
             </div>
-
+            <CollabList type="event" collaborators={collaborators}/>
+            <label for="eventitemcollabinput"> Invite A friend
+              <input id="eventitemcollabinput" type="text" onChange={e => setCollab(e.target.value)} value={collab}/>
+              <button onClick={e => handleAddCollab()}>Add</button>
+            </label>  
             <div className='google-map-container'>
               <GoogleMap lng={event.lng} lat={event.lat}/>
             </div>

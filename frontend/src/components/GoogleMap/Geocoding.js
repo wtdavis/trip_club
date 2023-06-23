@@ -9,7 +9,6 @@ import './Geocoding.css';
   const [geocodeData, setGeocodeData] = useState(null);
   const [address, setAddress] = useState(currentTrip ? currentTrip.address : "");
   const [updatedAddress, setUpdatedAddress] = useState(currentTrip ? currentTrip.address : "");
-debugger
   const apiKey = process.env.REACT_APP_MAPS_API_KEY; 
   // let address = '22 Main st Boston MA';
   // let address = '1600 Amphitheatre Parkway, Mountain View, CA'

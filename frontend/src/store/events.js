@@ -139,6 +139,21 @@ export const deleteEvent = ({trip, eventId}) => async dispatch => {
     })
 }
 
+export const addEventCollaborator = (collab, event) => async (dispatch) => {
+    let updatedEvent = {...event, collaborators: event.collaborators.concat(collab._id)}
+    debugger
+    let res = jwtFetch(`api/events/${event._id}/edit`, {
+                method: 'PATCH', 
+                body: updatedEvent})
+            debugger
+    let data = await res.json()
+    // dispatch()
+}
+
+export const removeEventCollaborator = (collab, eventId) => {
+    
+}
+
 const nullErrors = null;
 
 export const eventsErrorsReducer = (state = nullErrors, action) => {

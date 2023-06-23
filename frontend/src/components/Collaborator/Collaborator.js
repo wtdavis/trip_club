@@ -13,15 +13,7 @@ const Collaborator = (props) => {
                 dispatch(removeCollaborator(currentTrip, currentUser))
             } else { 
                 collabRemove(currentUser)
-
-        }
-
-    }
-
-
-
-        // <div className="collaboratoritem">
-        //     </div>
+        }}
         
         return (
             <div className="collaboratoritem">
