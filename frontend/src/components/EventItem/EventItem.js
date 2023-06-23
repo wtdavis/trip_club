@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 function EventItem (props)  {
   const dispatch = useDispatch()
   const event = props.event
+  // debugger
   const currentTrip = props.currentTrip
   // debugger
   const [showEventEditModal, setShowEventEditModal] = useState(false)
