@@ -25,6 +25,7 @@ const Collaborator = (props) => {
         //     </div>
         
         return (
+
             <>
                 {/* <div className="collaboratoritem"> */}
                     <p>{currentUser.email}</p>
@@ -36,6 +37,7 @@ const Collaborator = (props) => {
                     </button>
                 {/* </div> */}
             </>
+
         )
 
     }

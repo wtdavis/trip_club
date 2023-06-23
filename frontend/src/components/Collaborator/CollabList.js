@@ -13,20 +13,22 @@ const CollabList = (props) => {
         currentTrip = props.currentTrip
         users = Object.values(currentTrip.collaborators)
     } else {
-        const setCollaborators = props.setCollaborators
+        // const setCollaborators = props.setCollaborators
         users = props.collaborators
     }
-
+  
     // setUsersArr(users)
 
     const collabRemove = (user) => {
         let updatedUsers = users.filter(collab => collab.email !== user.email)
-        debugger
         setCollaborators(updatedUsers)
+        debugger
     }
+
     return (
         <ul>    
             {users.map(user => {
+
                return (
                 <div className="collaboratoritem">
                     <li 
@@ -36,6 +38,7 @@ const CollabList = (props) => {
                     </li>
                 </div>
                )
+
            })}
         </ul>
     )
