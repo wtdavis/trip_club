@@ -62,9 +62,11 @@ router.post('/', multipleMulterUpload("images"), requireUser, validateTripInput,
             collaborators: JSON.parse(req.body.collaborators)
         });
         let trip = await newTrip.save()
-        
-        trip = await trip.populate("author", "_id username profileImageUrl");
-        return res.json(trip)
+        let returnTrip = await Trip.findById(trip._id)
+                            .populate("author", "_id username profileImageUrl")
+                            .populate("collaborators", "_id username email profileImagrUrl")
+                            .populate("events")
+        return res.json(returnTrip)
     }
     catch(err){
         next(err)

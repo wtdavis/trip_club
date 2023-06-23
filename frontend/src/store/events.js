@@ -126,6 +126,7 @@ export const fetchEvents = () => async dispatch => {
 }
 
 export const deleteEvent = ({trip, eventId}) => async dispatch => {
+    debugger
     let res = await jwtFetch(`/api/events/${eventId}`, {
         method: 'DELETE'
     }); 
@@ -133,7 +134,6 @@ export const deleteEvent = ({trip, eventId}) => async dispatch => {
     // dispatch(removeEvent(eventId))
     trip.events.splice(trip.events.indexOf(eventId), 1)
     let newTrip = {...trip, events: trip.events}
-    // debugger
     dispatch(updateTrip(formDatify(newTrip)))
     .then(res => {
     })
