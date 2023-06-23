@@ -70,6 +70,27 @@ function EventForm (props) {
 
     }
 
+    const formattedDate = (timeVariable) => {
+        const date = new Date(timeVariable)
+        return(
+            date.toLocaleDateString("en-US", {
+                month: "2-digit",
+                day: "2-digit",
+                year: "numeric"
+        }))
+    }
+
+    const formattedTime = (timeVariable) => {
+        const date = new Date(timeVariable)
+        return(
+            date.toLocaleDateString("en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true
+        }))
+    }
+
+
 
 return(
     <div className="eventformdiv">
@@ -103,9 +124,20 @@ return(
                 <input 
                     className="createevent_input" 
                     type="datetime-local" 
+                    // type={startTime !== null ? 'text' : 'datetime-local'}
                     value={startTime }
                     onChange={e => setStartTime(e.target.value)}
-                />
+                    // placeholder={startTime !== null ? startTime : ''}
+                    // onBlur={e => {
+                    //     e.target.type = 'text';
+                    //     e.target.placeholder = startTime !== null ? startTime : 'time';
+                    // }}
+                    // onFocus={e => {
+                    //     e.target.type = 'datetime-local';
+                    //     e.target.placeholder = 'time';
+                    // }}
+                    // placeholder={startTime !== null ? `${formattedDate(startTime)} ${formattedTime(startTime)}` : "YOYOYO"}
+                    />
             </div>
             
             <div className="event_date_container">
