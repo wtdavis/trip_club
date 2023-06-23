@@ -10,7 +10,6 @@ import "./EventForm.css"
 function EventForm (props) {
     let {setShowEventEditModal, event} = props
     const [resetAddress, setResetAddress] = useState(false);
-    const [resetStartTime, setResetStartTime] = useState(false);
     
     const currentTrip = props.currentTrip
     const dispatch = useDispatch()    
