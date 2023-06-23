@@ -17,8 +17,8 @@ function EventForm (props) {
     const currentUser = useSelector(state => state.session.user)
     const [title, setTitle] = useState(event ? event.title : "")
     const [description, setDescription] = useState(event ? event.description : "")
-    const [startTime, setStartTime] = useState(event ? event.startTime : null)
-    const [endTime, setEndTime] = useState(event ? event.endTime : null)
+    const [startTime, setStartTime] = useState(event ? event.startTime : currentTrip.startDate)
+    const [endTime, setEndTime] = useState(event ? event.startTime : currentTrip.endDate)
     const [eventFormTitle, setEventFormTitle] = useState(event ? "Edit Event" : "Create a New Event!")
     const [eventContinueButton, setEventContinueButton] = useState(event ? "Edit Event" : "Create Event")
     // set location to App Academy office by default
@@ -26,11 +26,6 @@ function EventForm (props) {
     const [lng, setLng] = useState(event ? event.lng : -73.99376925185645);
     const [address, setAddress] = useState(event ? event.address : '90 5th Ave, New York, NY 10011');
 
-    useEffect(() => {
-        if (resetStartTime) {
-            setStartTime(null);
-        }
-      }, [resetStartTime]);
 
     // function handleLocation handles coordinates update when passed to Geocoding
     const handleLocation = (lat, lng, address) => {
@@ -79,10 +74,9 @@ function EventForm (props) {
         }
         setTitle('');
         setDescription('');
-        setStartTime(null);
-        debugger
-        setEndTime(null);
-        setResetStartTime(true);
+        setStartTime(currentTrip.startDate);
+        // debugger
+        setEndTime(currentTrip.endDate);
         setResetAddress(true);
     }
 
