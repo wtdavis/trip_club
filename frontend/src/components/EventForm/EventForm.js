@@ -90,6 +90,10 @@ function EventForm (props) {
         }))
     }
 
+    console.log('HELLLLLLLLOYPYOYOYO')
+    // console.log(`${formattedDate(startTime)} ${formattedTime(startTime)}`)
+    console.log(`${formattedTime(startTime)}`)
+
 
 
 return(
@@ -123,20 +127,23 @@ return(
                 <p className="eventformsubheader">Start Date:</p>
                 <input 
                     className="createevent_input" 
-                    type="datetime-local" 
+                    // type="datetime-local" 
                     // type={startTime !== null ? 'text' : 'datetime-local'}
-                    value={startTime }
+                    // value={startTime }
+                    value={formattedTime(startTime) }
+                    
                     onChange={e => setStartTime(e.target.value)}
                     // placeholder={startTime !== null ? startTime : ''}
-                    // onBlur={e => {
-                    //     e.target.type = 'text';
-                    //     e.target.placeholder = startTime !== null ? startTime : 'time';
-                    // }}
-                    // onFocus={e => {
-                    //     e.target.type = 'datetime-local';
-                    //     e.target.placeholder = 'time';
-                    // }}
-                    // placeholder={startTime !== null ? `${formattedDate(startTime)} ${formattedTime(startTime)}` : "YOYOYO"}
+                    onBlur={e => {
+                        // e.target.type = 'datetime-local';
+                        e.target.value = formattedTime(startTime);
+                    }}
+                    onFocus={e => {
+                        e.target.type = 'datetime-local';
+                        
+                    }}
+                    
+                    // placeholder={startTime !== null ? `${formattedTime(startTime)}` : "YOYOYO"}
                     />
             </div>
             
