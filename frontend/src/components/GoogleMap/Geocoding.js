@@ -2,14 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from "react-redux";
 import './Geocoding.css';
 
-// const Geocoding = ({ locationUpdate }) => {
-  const Geocoding = ({ currentTrip, locationUpdate, event }) => {
+  const Geocoding = ({ currentTrip, locationUpdate, event, resetAddress }) => {
   // const currentTrip = useSelector(state => state.trips.current)
 
   const [geocodeData, setGeocodeData] = useState(null);
-  const [address, setAddress] = useState(currentTrip ? currentTrip.address : event ? event.address : "");
-  const [updatedAddress, setUpdatedAddress] = useState(currentTrip ? currentTrip.address : event ? event.address : "");
-// debugger
+  const [address, setAddress] = useState(event ? event.address : currentTrip ? currentTrip.address : "");
+  const [updatedAddress, setUpdatedAddress] = useState(event ? event.address : currentTrip ? currentTrip.address : "");
   const apiKey = process.env.REACT_APP_MAPS_API_KEY; 
   // let address = '22 Main st Boston MA';
   // let address = '1600 Amphitheatre Parkway, Mountain View, CA'
@@ -26,6 +24,18 @@ import './Geocoding.css';
   //   //  inputRef.current,
   //   options
   // );
+
+  
+  // this useEffect keeps track of resetAddress. 
+  // When resetAddress === true (when "Create a New Event!" handles submit)
+  // address is updated to '' 
+  // when "Create a New Event!" handles submit
+  useEffect(() => {
+    if (resetAddress) {
+      setAddress('');
+      setUpdatedAddress('');
+    }
+  }, [resetAddress]);
   
   useEffect(() => {
       // debugger
@@ -79,6 +89,13 @@ import './Geocoding.css';
   const handleUpdatedAddress = async (e) => {
     e.preventDefault()
     setAddress(updatedAddress)
+    // const latDB = results[0].geometry.location.lat;
+    // const lngDB = results[0].geometry.location.lng;
+    // const addressDB = results[0].formatted_address;
+    // locationUpdate(latDB, lngDB, addressDB);
+    
+
+    // setAddress('')
   }
 
   if (!geocodeData) {
@@ -94,6 +111,7 @@ import './Geocoding.css';
     const lngDB = results[0].geometry.location.lng;
     const addressDB = results[0].formatted_address;
     locationUpdate(latDB, lngDB, addressDB);
+    
     console.log(latDB, lngDB, addressDB);
     console.log(geocodeData)
 

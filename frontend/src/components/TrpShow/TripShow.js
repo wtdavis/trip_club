@@ -198,7 +198,7 @@ const collaboratorsList = () => {
     // {collaborators?.length && 
     // collaboratorsList()}
 
-
+    // debugger
     if (dateList.length && currentTrip) {return (
       <div className='tripshowpage'>
 
