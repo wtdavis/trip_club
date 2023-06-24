@@ -24,7 +24,6 @@ MongoDB has the following schemas:
 - User
 - Trip
 - Event
-- Search
 
 User schema:
 ```javascript
@@ -40,6 +39,12 @@ const userSchema = new Schema({
   hashedPassword: {
     type: String,
     required: true
+  },
+  trips: [Schema.Types.ObjectId],
+  events: [Schema.Types.ObjectId],
+  profileImageUrl: {
+    type: String,
+    required: true
   }
 }, {
   timestamps: true
@@ -48,15 +53,16 @@ const userSchema = new Schema({
 
 ## Frontend
 ```javascript
-<>
+    <>
       <Navigation />
       <Switch>
-        <AuthRoute exact path="/" component={SplashPage} />
-        <AuthRoute exact path="/login" component={LoginForm} />
-        <AuthRoute exact path="/signup" component={SignupForm} />
+        <Route exact path="/" component={SplashPage} />
+        <Route exact path={'/contact'}><ContactUs /></Route> 
 
-        <ProtectedRoute exact path="/profile" component={Profile} />
-        <ProtectedRoute exact path="/trips" component={Trips} />       
+        <ProtectedRoute exact path="/trips/show" component={(props) => <TripShow {...props}/>}/> 
+
+        <ProtectedRoute exact path="/profile"><ProfilePage /></ProtectedRoute>
+        <ProtectedRoute exact path="/trips/:tripId/edit" component={TripEditForm} />
         <ProtectedRoute exact path="/trips/new" component={TripForm} />
       </Switch>
     </>
