@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as  tripActions from '../../store/trips';
 import TripItemCarousel from '../Trips/TripItemCarousel';
@@ -6,10 +6,12 @@ import './ProfilePage.css'
 import { clearEvents, fetchEvents } from '../../store/events';
 import { fetchAllUsers } from '../../store/users';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
-
+import { Modal } from '../../context/Modal';
+import TripFormModal from '../TripForm/TripFormModal';
 
 
 const ProfilePage = () => {
+  const [showCreateTripModal, setShowCreateTripModal] = useState(false);
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user);
   // const trips = useSelector(tripActions.getTrips); 
@@ -43,7 +45,14 @@ if (trips && currentUser) {
   if (trips.length == 0) {
     return (
       <div className='trips_div'>     
-        <div>You have no Trips</div>
+        <div>Let's create your first trip!</div>
+        <li className='profile_dropdown_navlink'> <button onClick={()=> setShowCreateTripModal(true)}>Create!</button></li>
+
+        {showCreateTripModal && (
+        <Modal onClose={() => setShowCreateTripModal(false)}>
+          <TripFormModal showCreateTripModal={showCreateTripModal} setShowCreateTripModal={setShowCreateTripModal} />
+        </Modal>
+      )}
       </div> 
 
   )} else if (trips.length > 0){
