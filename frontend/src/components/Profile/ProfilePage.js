@@ -44,12 +44,12 @@ const ProfilePage = () => {
 if (trips && currentUser) {
   if (trips.length == 0) {
     return (
-      <div className='trips_div'>     
-        <div className='new_user_container'>
-          <p>Welcome to the TRIP CLUB!</p>
-          <p>Let's create your first trip!</p>
+      <div className='new_user_container'>     
+        <div className='new_user_message_container'>
+          <p>Welcome to the <span>TRIP CLUB!</span></p>
+          <p>Let's create your first trip</p>
         </div>
-        <button className="create_button" onClick={()=> setShowCreateTripModal(true)}>Create!</button>
+        <button className="create_button" onClick={()=> setShowCreateTripModal(true)}>Create My First Trip!</button>
 
         {showCreateTripModal && (
         <Modal onClose={() => setShowCreateTripModal(false)}>
