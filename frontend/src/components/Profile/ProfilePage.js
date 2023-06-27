@@ -45,8 +45,11 @@ if (trips && currentUser) {
   if (trips.length == 0) {
     return (
       <div className='trips_div'>     
-        <div>Let's create your first trip!</div>
-        <li className='profile_dropdown_navlink'> <button onClick={()=> setShowCreateTripModal(true)}>Create!</button></li>
+        <div className='new_user_container'>
+          <p>Welcome to the TRIP CLUB!</p>
+          <p>Let's create your first trip!</p>
+        </div>
+        <button className="create_button" onClick={()=> setShowCreateTripModal(true)}>Create!</button>
 
         {showCreateTripModal && (
         <Modal onClose={() => setShowCreateTripModal(false)}>
