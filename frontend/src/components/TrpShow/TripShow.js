@@ -222,7 +222,8 @@ const collaboratorsList = () => {
           <div className='tripshow_description_container'><p className='tripshowinfoitem' id='tripshowtripdescription'>{currentTrip.description}</p></div>
           {/* <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{currentTrip.collaborators?.map(e => (<li>{e.username}</li>))}</ul> */}
           
-          <p className='tripshowinfoitem' id='tripshowstartdate'> <span>Begins:</span> {startDateString} <span>Ends:</span> {endDateString}</p>
+          <p className='tripshowinfoitem' id='tripshowstartdate'> <span>Begins:</span> {startDateString}</p>
+          <p className='tripshowinfoitem' id='tripshowstartdate'><span>Ends:</span> {endDateString}</p>
             
             <div 
               className='addfriend_container'

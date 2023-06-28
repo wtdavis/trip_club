@@ -24,7 +24,6 @@
   transform: scale(1.005); 
   box-shadow: 1px 1px 2px 1px #8a8888;
   border-radius: 8px;
-  cursor: pointer;
 }
 
 .left_column .right_column {
@@ -57,6 +56,12 @@
 .trip_title{
   font-size: 20px;
   font-weight: 700;
+  /* width: max-content; */
+}
+
+.trip_title:hover,
+.event_titles:hover {
+  cursor: pointer;
 }
 
 .horizontal_line {

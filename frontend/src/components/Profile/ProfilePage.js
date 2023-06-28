@@ -64,7 +64,7 @@ if (trips && currentUser) {
 
         <div className='trips_div'>
           <div className='header_message'>
-            <h1 className='header_message_h2'> Your Trips</h1>
+            <h1 className='header_message_h2'>Your Trips</h1>
           </div>
           
           {tripsUser ? Object.values(tripsUser).map(trip => (
