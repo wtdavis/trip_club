@@ -119,9 +119,9 @@ router.post('/login', singleMulterUpload(""), validateLoginInput, async (req, re
   passport.authenticate('local', async function(err, user) {
     if (err) return next(err);
     if (!user) {
-      const err = new Error('Invalid credentials');
+      const err = new Error('Incorrect email or password');
       err.statusCode = 400;
-      err.errors = { email: "Invalid credentials" };
+      err.errors = { email: "Incorrect email or password" };
       return next(err);
     }
     // Generate the JWT

@@ -60,14 +60,15 @@ const LoginFormModal = (props) => {
 
       <form className="login-form" onSubmit={handleSubmit}>
         
-        <div className="email-div">
+        <div className="errors">{errors?.email}</div>
+        
+        <div className="email_div">
           <input className="email-login-input" type="text"
             value={email}
             onChange={update('email')}
             placeholder="Email"
           />
         </div>
-        <div className="errors">{errors?.email}</div>
 
         
         <div className="password-div">

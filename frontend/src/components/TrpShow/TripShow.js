@@ -12,7 +12,6 @@ import EventForm from '../EventForm/EventForm';
 import EventItem from '../EventItem/EventItem';
 import { Modal } from '../../context/Modal';
 import TripFormModal from '../TripForm/TripFormModal';
-import NewTripFormModal from '../TripForm/NewTripFormModal';
 import { fetchAllUsers } from '../../store/users';
 import CollabList from '../Collaborator/CollabList';
 
