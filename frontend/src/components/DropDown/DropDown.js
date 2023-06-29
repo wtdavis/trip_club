@@ -41,7 +41,8 @@ const DropDown = ({ user }) => {
 
       {menu && (
         <ul className="profile_dropdown" onClick={() => setMenu(false)}>
-          <li className='profile_dropdown_navlink' id="profile_dropdown_navlink_username">{user.username}</li>
+          {/* <li className='profile_dropdown_navlink' id="profile_dropdown_navlink_username">{user.username}</li> */}
+          <li id="profile_dropdown_navlink_username">{user.username}</li>
           <li className='dropdown_divider'></li>
           <li className='profile_dropdown_navlink'>
             <Link to={'/profile'}>

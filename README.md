@@ -51,6 +51,47 @@ const userSchema = new Schema({
 });
 ```
 
+Trip validation:
+```javascript
+const { check } = require('express-validator');
+const handleValidationErrors = require('./handleValidationErrors')
+
+const validateTripInput = [
+    check('title')
+    .exists({ checkFalsy: true })
+    .isLength( { min: 4, max: 40})
+    .withMessage('Title must be between 4 and 40 characters'),
+
+    check('description')
+    .isLength( { min: 0, max: 140})
+    .withMessage('Description must be at most 140 characters'),
+
+    check('startDate')
+    .exists({checkFalsy: true})
+    .withMessage('Trip must have a Start Date'),
+
+    check('endDate')
+    .exists({checkFalsy: true})
+    .withMessage('Trip must have an End Date'),
+
+    check('lat')
+    .exists({checkFalsy: true})
+    .withMessage('Trip must have an location'),
+
+    check('lng')
+    .exists({checkFalsy: true})
+    .withMessage('Trip must have an location'),
+
+    check('address')
+    .exists({checkFalsy: true})
+    .withMessage('Trip must have an location'),
+
+    handleValidationErrors
+]
+
+module.exports = validateTripInput
+```
+
 ## Frontend
 ```javascript
     <>
@@ -60,12 +101,100 @@ const userSchema = new Schema({
         <Route exact path={'/contact'}><ContactUs /></Route> 
 
         <ProtectedRoute exact path="/trips/show" component={(props) => <TripShow {...props}/>}/> 
-
         <ProtectedRoute exact path="/profile"><ProfilePage /></ProtectedRoute>
         <ProtectedRoute exact path="/trips/:tripId/edit" component={TripEditForm} />
         <ProtectedRoute exact path="/trips/new" component={TripForm} />
+
       </Switch>
     </>
+```
+
+Trip index page
+```javascript
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+import * as  tripActions from '../../store/trips';
+import { fetchAllUsers } from '../../store/users';
+import { clearEvents, fetchEvents } from '../../store/events';
+import TripItemCarousel from '../Trips/TripItemCarousel';
+import TripFormModal from '../TripForm/TripFormModal';
+import { Modal } from '../../context/Modal';
+import './ProfilePage.css'
+
+
+const ProfilePage = () => {
+  const [showCreateTripModal, setShowCreateTripModal] = useState(false);
+  const dispatch = useDispatch();
+  const currentUser = useSelector(state => state.session.user);
+  const trips = useSelector(state => Object.values(state.trips.user))
+  const tripsUser = useSelector(state => state.trips.user)
+  const events = useSelector(state => state.events)
+  
+  
+  
+  useEffect(() => {
+    dispatch(clearEvents())
+    dispatch(tripActions.clearCurrentTrip())
+    dispatch(fetchEvents())
+    dispatch(fetchAllUsers())
+
+  }, [dispatch]);
+  
+  useEffect(() => {
+    dispatch(tripActions.fetchUserTrips(currentUser?._id));
+    return () => dispatch(tripActions.clearTripErrors());
+  }, [currentUser, dispatch]);
+
+  if (trips && currentUser) {
+    if (trips.length == 0) {
+      return (
+        <div className='new_user_container'>     
+          <div className='new_user_message_container'>
+            <p>Welcome to the <span>TRIP CLUB!</span></p>
+            <p>Let's create your first trip</p>
+          </div>
+          <button className="create_button" onClick={()=> setShowCreateTripModal(true)}>Create My First Trip!</button>
+
+          {showCreateTripModal && (
+          <Modal onClose={() => setShowCreateTripModal(false)}>
+            <TripFormModal showCreateTripModal={showCreateTripModal} setShowCreateTripModal={setShowCreateTripModal} />
+          </Modal>
+        )}
+        </div> 
+
+    )} else if (trips.length > 0){
+      return (
+        <div className='trips_container'>
+
+          <div className='trips_div'>
+            <div className='header_message'>
+              <h1 className='header_message_h2'>Your Trips</h1>
+            </div>
+            
+            {tripsUser ? Object.values(tripsUser).map(trip => (
+              <>
+                <TripItemCarousel 
+                key={trip?._id}
+                trip={trip} 
+                />
+                <hr className="horizontal_line"></hr>
+              </>
+            )) : 
+              <></>
+            }
+
+          </div>
+        </div>
+        
+      );
+    }
+
+  } else {
+    return <Redirect to="/"/>
+  }
+}
+export default ProfilePage;
 ```
  
 # Workflow

@@ -91,6 +91,10 @@
   width: 500px;
 }
 
+.email_div {
+  margin-bottom: 10px;
+}
+
 .continue_button, .demo_button {
   cursor: pointer;
   height: 48px;

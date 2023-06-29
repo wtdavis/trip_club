@@ -109,12 +109,11 @@
   box-shadow: 1px 1px 2px 1px #8a8888;  
 }
 
-#profile_dropdown_navlink_username:hover{
-  background-image: none;
-  transition: none;
-  -webkit-transition:none !important;
-  -moz-transition:none !important;
-  -o-transition:none !important;
-  transition:none !important;
+#profile_dropdown_navlink_username {
+  /* cursor: none; */
+  text-align: right;
+  margin: 20px;
+  padding-right: 2px;
 }
+
 

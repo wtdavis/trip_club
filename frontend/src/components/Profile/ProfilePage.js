@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as  tripActions from '../../store/trips';
 import TripItemCarousel from '../Trips/TripItemCarousel';
@@ -6,10 +6,12 @@ import './ProfilePage.css'
 import { clearEvents, fetchEvents } from '../../store/events';
 import { fetchAllUsers } from '../../store/users';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
-
+import { Modal } from '../../context/Modal';
+import TripFormModal from '../TripForm/TripFormModal';
 
 
 const ProfilePage = () => {
+  const [showCreateTripModal, setShowCreateTripModal] = useState(false);
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session.user);
   // const trips = useSelector(tripActions.getTrips); 
@@ -42,8 +44,18 @@ const ProfilePage = () => {
 if (trips && currentUser) {
   if (trips.length == 0) {
     return (
-      <div className='trips_div'>     
-        <div>You have no Trips</div>
+      <div className='new_user_container'>     
+        <div className='new_user_message_container'>
+          <p>Welcome to the <span>TRIP CLUB!</span></p>
+          <p>Let's create your first trip</p>
+        </div>
+        <button className="create_button" onClick={()=> setShowCreateTripModal(true)}>Create My First Trip!</button>
+
+        {showCreateTripModal && (
+        <Modal onClose={() => setShowCreateTripModal(false)}>
+          <TripFormModal showCreateTripModal={showCreateTripModal} setShowCreateTripModal={setShowCreateTripModal} />
+        </Modal>
+      )}
       </div> 
 
   )} else if (trips.length > 0){
@@ -52,7 +64,7 @@ if (trips && currentUser) {
 
         <div className='trips_div'>
           <div className='header_message'>
-            <h1 className='header_message_h2'> Your Trips</h1>
+            <h1 className='header_message_h2'>Your Trips</h1>
           </div>
           
           {tripsUser ? Object.values(tripsUser).map(trip => (

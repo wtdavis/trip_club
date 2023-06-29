@@ -44,7 +44,7 @@ const TripItemCarousel = ({trip}) => {
 
         <div className='right_column' onClick={handleCLick}>
           <div className="trip_link" onClick={handleShow} >
-            <ul>
+            <ul className='event_titles'>
               {tripEvents.map(event => (<li key={event._id}>{event.title}</li>))}
             </ul>      
 

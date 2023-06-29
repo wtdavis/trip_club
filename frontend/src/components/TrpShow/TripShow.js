@@ -12,7 +12,6 @@ import EventForm from '../EventForm/EventForm';
 import EventItem from '../EventItem/EventItem';
 import { Modal } from '../../context/Modal';
 import TripFormModal from '../TripForm/TripFormModal';
-import NewTripFormModal from '../TripForm/NewTripFormModal';
 import { fetchAllUsers } from '../../store/users';
 import CollabList from '../Collaborator/CollabList';
 
@@ -28,6 +27,7 @@ const TripShow = (props) => {
   const [showEditTripModal, setShowEditTripModal] = useState(false)
   const [collab, setCollab] = useState("")
   const [collabError, setCollabError] = useState(false)
+  const [noCollabError, setNoCollabError] = useState(false) //nocollabError no such user exists in database
   const [showCollab, setShowCollab] = useState(false)
   const collaborators = useSelector(state => state.trips.current?.collaborators)
   const tripErrors = useSelector(state => state.errors.trips)
@@ -141,6 +141,10 @@ const manageCurrentTrip = (props) => {
           }) 
           setCollabError(false)       
       }
+      else {
+        setNoCollabError(true)     
+
+      }
     }
   }
 
@@ -222,7 +226,8 @@ const collaboratorsList = () => {
           <div className='tripshow_description_container'><p className='tripshowinfoitem' id='tripshowtripdescription'>{currentTrip.description}</p></div>
           {/* <ul className='tripshowinfoitem' id='tripshowtripcollaborators'>{currentTrip.collaborators?.map(e => (<li>{e.username}</li>))}</ul> */}
           
-          <p className='tripshowinfoitem' id='tripshowstartdate'> <span>Begins:</span> {startDateString} <span>Ends:</span> {endDateString}</p>
+          <p className='tripshowinfoitem' id='tripshowstartdate'> <span>Begins:</span> {startDateString}</p>
+          <p className='tripshowinfoitem' id='tripshowstartdate'><span>Ends:</span> {endDateString}</p>
             
             <div 
               className='addfriend_container'
@@ -230,6 +235,7 @@ const collaboratorsList = () => {
               <span className='addfriend_span'>Add A Friend</span>
             </div>
             {collabError ? <p className="submiterror">This friend is already going to the trip</p> : null}
+            {noCollabError ? <p className="submiterror">User is not found</p> : null}
 
             {showCollab && collaboratorAdd()}
               

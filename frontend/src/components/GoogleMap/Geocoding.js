@@ -113,8 +113,8 @@ import './Geocoding.css';
     const addressDB = results[0].formatted_address;
     locationUpdate(latDB, lngDB, addressDB);
     
-    console.log(latDB, lngDB, addressDB);
-    console.log(geocodeData)
+    // console.log(latDB, lngDB, addressDB);
+    // console.log(geocodeData)
     return (
       // <div className="geocoding_container">
       //   <input

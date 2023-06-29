@@ -6,7 +6,7 @@ function Carousel(tripImages) {
   
   const [currentIndex, setCurrentIndex] = useState(0);
   let images = tripImages.tripImages;
-  console.log(images);
+  // console.log(images);
   let slides = [];
   
   if (images.length === 0) {

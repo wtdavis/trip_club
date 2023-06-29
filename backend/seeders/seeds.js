@@ -259,7 +259,7 @@ trips[2].events.push(events[6], events[7], events[8])
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => {
-    console.log('Connected to MongoDB successfully');
+    // console.log('Connected to MongoDB successfully');
     insertSeeds();
   })
   .catch(err => {
@@ -269,7 +269,7 @@ mongoose
 
 // Reset and seed db
 const insertSeeds = () => {
-  console.log("Resetting db and seeding users, trips, and events...");
+  // console.log("Resetting db and seeding users, trips, and events...");
 
   User.collection.drop()
                  .then(() => Trip.collection.drop())
@@ -278,7 +278,7 @@ const insertSeeds = () => {
                  .then(() => Event.insertMany(events))
                  .then(() => Trip.insertMany(trips))
                  .then(() => {
-                   console.log("Done!");
+                  //  console.log("Done!");
                    mongoose.disconnect();
                  })
                  .catch(err => {
