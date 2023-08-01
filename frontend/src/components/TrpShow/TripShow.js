@@ -124,26 +124,25 @@ const manageCurrentTrip = (props) => {
     return ele1 - ele2
   }
 
+  
   const handleCollabSubmit = (e) => {
+    setCollabError(false) 
+    setNoCollabError(false) 
 
     let users = Object.values(allUsers)
-    for (let i=0; i<users.length;i++) {
-      // check if the currentTrip already has this email
-      if (currentTrip?.collaborators.some(collaborator => collaborator.email === collab)) {
-        setCollabError(true)
-      }
-      else if (
-        // check if email exists in database 
-        allUsers[users[i]._id].email === collab){
-          dispatch(tripActions.addCollaborator(currentTrip, users[i]._id))
-          .then(res => {
-            dispatch(tripActions.setCurrentTrip(res))
-          }) 
-          setCollabError(false)       
-      }
-      else {
-        setNoCollabError(true)     
-
+    if (currentTrip?.collaborators.some(collaborator => collaborator.email === collab)) {
+      setCollabError(true)
+    } else {
+      // if the submitted email is not among registered users show an error message
+      // otherwise add the submitted email and corresponding user to currentTrip collaborators
+      if (users.every(user => user.email !== collab)) {
+        setNoCollabError(true)
+      } else {
+        const userIndex = users.findIndex(user => user.email === collab)
+        dispatch(tripActions.addCollaborator(currentTrip, users[userIndex]._id))
+            .then(res => {
+              dispatch(tripActions.setCurrentTrip(res))
+            }) 
       }
     }
   }
