@@ -4,7 +4,13 @@ Welcome to the Trip Club wiki!
 
 # About
 
-Trip Club is an trip planner app. The app allows friends to collaborate while planning a trip. A user can create a trip, add events and add friends who will go on a trip. Friends can vote up or down for events. This way all participants will get to experience only the best events. 
+Trip Club is an trip planner app. The app allows friends to collaborate while planning a trip. A user can create a trip, add events and add friends who will go on a trip. Friends can vote up or down for events. This way all participants will get to experience only the best events.
+
+Splash page:
+![gif of splash page](frontend/src/assets/production_readme_gif/splash_page2.gif)
+
+User experience:
+![gif of user experience](frontend/src/assets/production_readme_gif/trip_index3.gif)
 
 # Technologies Used
 ## MERN Stack
