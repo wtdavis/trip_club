@@ -98,11 +98,18 @@ header.site_header.notsplash_page {
   font-size: 35px;
   font-weight: 800;
   letter-spacing: 1px;
+  display: flex;
+  align-items: center;
 }
 
 .logo_name.notsplash_page{
   color:white;
+  display: flex;
+  align-items: center;
+}
 
+.logo_name img {
+  width: 100px;
 }
 
 
