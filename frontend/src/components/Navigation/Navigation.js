@@ -43,7 +43,10 @@ function Navigation () {
         <header className="site_header">
           <NavLink className="nav_title" exact to="/" >
             <div className = "logo-box">
-              <div className="logo_name">trip club</div>
+              <div className="logo_name">
+                <img className="logo_name" src={require("../../assets/logo/logo.png")} alt=""/>
+                <p>trip club</p>
+              </div>
             </div>
           </NavLink>
   
@@ -69,7 +72,10 @@ function Navigation () {
         <header className="site_header notsplash_page">
           <NavLink className="nav-title" exact to="/" >
             <div className = "logo-box">
-              <div className="logo_name notsplash_page">trip club</div>
+              <div className="logo_name notsplash_page">
+                <img className="logo_name" src={require("../../assets/logo/logo.png")} alt=""/>
+                <p>trip club</p>
+              </div>
             </div>
           </NavLink>
 
