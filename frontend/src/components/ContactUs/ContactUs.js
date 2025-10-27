@@ -54,7 +54,7 @@ const ContactUs = () => {
                 </a>
               </div>
               <div>
-                <a className = 'linkedin-link' target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/olga-borovikova/">
+                <a className = 'linkedin-link' target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/olgabessonova-/">
                   <i className="fa-brands fa-linkedin-in fa-2x"></i>
                 </a>
               </div>
@@ -94,5 +94,6 @@ const ContactUs = () => {
 
   )
 };
+
 
 export default ContactUs;
